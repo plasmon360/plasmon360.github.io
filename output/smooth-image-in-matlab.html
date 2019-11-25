@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="In matlab, sometimes I prefer to plot a image for mesh data instead of surf and use view(2) (view(2) gives the top view of the surface plot). However, imagesc(x,y,z) shading &#39;interp&#39; does not work. This problem can be solved by using: pcolor(x,y,z …" />
+<meta name="keywords" content="graphs, Matlab">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Smooth image in matlab"/>
+<meta property="og:description" content="In matlab, sometimes I prefer to plot a image for mesh data instead of surf and use view(2) (view(2) gives the top view of the surface plot). However, imagesc(x,y,z) shading &#39;interp&#39; does not work. This problem can be solved by using: pcolor(x,y,z …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/smooth-image-in-matlab.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2010-01-10 01:25:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Matlab"/>
+<meta property="article:tag" content="graphs"/>
+<meta property="article:tag" content="Matlab"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Smooth image in matlab</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="smooth-image-in-matlab">Smooth image in matlab</h1>
+    <p>
+          Posted on Sun 10 January 2010 in <a href="/category/matlab.html">Matlab</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>In matlab, sometimes I prefer to plot a image for mesh data instead of surf and use view(2) (view(2) gives the top view of the surface plot). However,<br>
+<code lang="matlab">imagesc(x,y,z) shading 'interp'</code><br>
+does not work. This problem can be solved by using:<br>
+<code lang="matlab">pcolor(x,y,z) shading 'interp' set(gca,'TickDir','out')</code></p>
+<p>.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/graphs.html">graphs</a>
+      <a href="/tag/matlab.html">Matlab</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

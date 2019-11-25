@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="[latexpage] I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as TMM. So I wrote a python version of LD.m LD.m is a matlab file …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Python code for generating plasmonic metal dielectric functions"/>
+<meta property="og:description" content="[latexpage] I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as TMM. So I wrote a python version of LD.m LD.m is a matlab file …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/python-code-for-generating-plasmonic-metal-dielectric-functions.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-09-10 08:54:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Publications"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Python code for generating plasmonic metal dielectric functions</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="python-code-for-generating-plasmonic-metal-dielectric-functions">Python code for generating plasmonic metal dielectric functions</h1>
+    <p>
+          Posted on Thu 10 September 2015 in <a href="/category/publications.html">Publications</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>[latexpage]<br>
+I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as <a href="https://pypi.python.org/pypi/tmm">TMM</a>. So I wrote a python version of LD.m</p>
+<p><a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water">LD.m</a> is a matlab file written by Bora Ung that produces dielectric functions of metals either for Lortenz and Loretnz drude models. The dielectric functions are given as follows:</p>
+<p>\$\epsilon(\omega)=1-\frac{f_1\omega_p'\^2}{(\omega\^2+i\Gamma_1'\omega)}+\sum_{j=2}\^{n}\frac{f_j\omega_p'\^2}{(\omega_{o,j}'\^2-\omega\^2-i\Gamma_j'\omega)}\$.</p>
+<p>The first part of the function is the Drude part and the second part is the Lorentz part. The parameters for these models are taken from Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998).</p>
+<p>You can find my module (LD.py) and its documentation <a href="https://github.com/plasmon360/LD_python">at my github account</a>.</p>
+<p>A typical example is shown below:</p>
+<p>[cc lang='python']<br>
+from LD import LD # Make sure the file is accessible to PYTHONPATH or in the same directory of file which is trying to import<br>
+import numpy as np<br>
+lamda = np.linspace(300E-9,1000E-9,100) # Creates a wavelength vector from 300 nm to 1000 nm of length 100<br>
+gold = LD(lamda, material = 'Au',model = 'LD') # Creates gold object with dielectric function of LD model<br>
+print gold.epsilon_real # prints the real part of the epislion<br>
+print gold.epsilon_imag # prints the imag part of the epsilon<br>
+print gold.n # prints the real part of the refractive index<br>
+print gold.k # prints the imag part of the refactive index<br>
+gold.plot_epsilon() # plots wavelength vs real epilon and imag epsilon<br>
+gold.plot_n_k() # plots wavelength vs n and k .<br>
+[/cc]</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

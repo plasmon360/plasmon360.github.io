@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="One can insert a gnuplot plot on any of the wordpress post/page by installing gnuplot plugin version 1.1 for wordpress available here. NOTE: I am not sure whether this plugin can plot from a data file. If you any of you readers can do it, please let me …" />
+<meta name="keywords" content="gnuplot, graphs, wordpress">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Plot on your wordpress pages/posts using gnuplot plugin"/>
+<meta property="og:description" content="One can insert a gnuplot plot on any of the wordpress post/page by installing gnuplot plugin version 1.1 for wordpress available here. NOTE: I am not sure whether this plugin can plot from a data file. If you any of you readers can do it, please let me …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/plot-on-your-wordpress-pagesposts-using-gnuplot-plugin.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2010-01-13 10:12:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Publications"/>
+<meta property="article:tag" content="gnuplot"/>
+<meta property="article:tag" content="graphs"/>
+<meta property="article:tag" content="wordpress"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Plot on your wordpress pages/posts using gnuplot plugin</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="plot-on-your-wordpress-pagesposts-using-gnuplot-plugin">Plot on your wordpress pages/posts using gnuplot plugin</h1>
+    <p>
+          Posted on Wed 13 January 2010 in <a href="/category/publications.html">Publications</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>One can insert a gnuplot plot on any of the wordpress post/page by installing gnuplot plugin version 1.1 for wordpress available <a href="http://www.clker.com/blog/2008/07/18/gnuplot-wordpress-plugin-v11/">here.</a></p>
+<p>NOTE: I am not sure whether this plugin can plot from a data file. If you any of you readers can do it, please let me know.</p>
+<p>As of today, the search of this plugin on wordpress only shows version 1 of this plugin. However version 1.1 is more advanced as it does need gnuplot installed on your webserver.</p>
+<p>To install this plugin:</p>
+<ol>
+<li>Copy the file ( <a href="http://www.clker.com/blog/wp-content/uploads/2008/07/gnuplot.phptxt">gnuplot plugin</a> ) in you wp-content/plugins directory, and rename to .php instead of .phptxt.</li>
+<li>Create wp-content/cache directory, and make sure it is write able to the webserver</li>
+<li>Activate the plugin from the plugins tab inside wordpress</li>
+</ol>
+<p>One can get a gnuplot plot like this:</p>
+<p>[gplot]<br>
+set size 1,0.7<br>
+set dummy u,v<br>
+unset key<br>
+set parametric<br>
+set view 60, 30, 1.1, 1.33<br>
+set isosamples 50, 20<br>
+set title "Interlocking Tori - PM3D surface with depth sorting"<br>
+set urange [ -3.14159 : 3.14159 ] noreverse nowriteback<br>
+set vrange [ -3.14159 : 3.14159 ] noreverse nowriteback<br>
+set pm3d depthorder<br>
+splot cos(u)+.5*cos(u)*cos(v),sin(u)+.5*sin(u)*cos(v),.5*sin(v) with pm3d,\<br>
+1+cos(u)+.5*cos(u)*cos(v),.5*sin(v),sin(u)+.5*sin(u)*cos(v) with pm3d<br>
+[/gplot]</p>
+<p>by inserting following code</p>
+<p>[cc lang="gnuplot"]</p>
+<p>[gplot]<br>
+set size 1,0.7<br>
+set dummy u,v<br>
+unset key<br>
+set parametric<br>
+set view 60, 30, 1.1, 1.33<br>
+set isosamples 50, 20<br>
+set title "Interlocking Tori - PM3D surface with depth sorting"<br>
+set urange [ -3.14159 : 3.14159 ] noreverse nowriteback<br>
+set vrange [ -3.14159 : 3.14159 ] noreverse nowriteback<br>
+set pm3d depthorder<br>
+splot cos(u)+.5*cos(u)*cos(v),sin(u)+.5*sin(u)*cos(v),.5*sin(v) with pm3d,\<br>
+1+cos(u)+.5*cos(u)*cos(v),.5*sin(v),sin(u)+.5*sin(u)*cos(v) with pm3d<br>
+[/gplot]</p>
+<p>[/cc]</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/gnuplot.html">gnuplot</a>
+      <a href="/tag/graphs.html">graphs</a>
+      <a href="/tag/wordpress.html">wordpress</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
