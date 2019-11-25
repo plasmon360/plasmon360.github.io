@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="[latexpage] A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the …" />
+<meta name="keywords" content="electromagnetism, octave, Plasmonics">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Surface plasmon dispersion relation for thin metal films"/>
+<meta property="og:description" content="[latexpage] A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="plasmon360.github.io/surface-plasmon-dispersion-relation-for-thin-metal-films.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2011-12-07 21:12:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="plasmon360.github.io/author/juluribk.html">
+<meta property="article:section" content="Plasmonics"/>
+<meta property="article:tag" content="electromagnetism"/>
+<meta property="article:tag" content="octave"/>
+<meta property="article:tag" content="Plasmonics"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Surface plasmon dispersion relation for thin metal films</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="plasmon360.github.io">
+        <img src="plasmon360.github.io/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="plasmon360.github.io"></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="surface-plasmon-dispersion-relation-for-thin-metal-films">Surface plasmon dispersion relation for thin metal films</h1>
+    <p>
+          Posted on Wed 07 December 2011 in <a href="plasmon360.github.io/category/plasmonics.html">Plasmonics</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>[latexpage]</p>
+<p>A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the same wavevector due to excitation and interaction of surface plasmons on both sides of the film. One mode (L+) is at higher energy and other (L-) is at a lower energy. The high energy has anti-symmetric field distribution whereas the low energy one has symmetric field distribution. The dispersion relations of these modes can be obtained by applying appropriate boundary conditions and solving Maxwell equations (<a href="http://paper.gentilemathieu.free.fr/_L1988Raether%20Surface%20Plasmons.pdf">page 25 of Raether book on Surface plasmons</a>).</p>
+<p>The dispersion relations (energy of different modes as function of complex wavevector, \$k_x\^{'}(\omega)+ik_x\^{''}(\omega)\$) are given by the solutions of :</p>
+<p>\$\omega\^+: L+= \epsilon_1k_{z2}+\epsilon_2k_{z1} \tanh\left [ \frac{-ik_{z1}d}{2}\right ]=0\$</p>
+<p>\$\omega\^-: L-= \epsilon_1k_{z2}+\epsilon_2k_{z1} \coth\left [ \frac{-ik_{z1}d}{2}\right ]=0\$,</p>
+<p>Where \$\epsilon_1\$ and \$\epsilon_2\$ represent the dielectric functions of dielectric and metal respectively, \$d\$ is the thickness of metal film, \$\omega\^+\$ is frequency of high energy mode, \$\omega\^-\$ is frequency of low energy mode, \$k_{z1,z2}=\sqrt{\epsilon_{1,2}\left[ \frac{\omega}{c}\right ]\^2-(k_x\^{'}(\omega)+ik_x\^{''}(\omega))\^2}\$.</p>
+<p>What does solving these equations mean? if one considers one mode, say \$L+\$ mode, for a certain \$\omega\^+\$, there exists a particular \$k_x\^{'}\$ and \$k_x\^{''}\$ that will make the above left hand side of L+ equation equal to zero. How do we get those special \$k\$? Unfortunately, there is no exact solution to this, to solve them, one has to use numerical techniques such as Nelder-Mead minimization algorithm that does unconstrained minimization. The algorithm works cleverly by searching for \$k_{z1,z2}\$ at a particular \$\omega\$, such that \$L+\$ and \$L-\$ will be minimum (in this case as close to zero as possible).</p>
+<p>I have used "fmins" function in octave to solve these dispersion relations. Fmins function in octave can be obtained by installing <a href="http://octave.sourceforge.net/optim/">octave-optmin package</a>. On Ubuntu use "sudo apt-get install octave-optim" in your terminal. Documentation of fmins function is given <a href="http://octave.sourceforge.net/optim/function/fmins.html">here</a>.</p>
+<p>The numerical solution of dispersion relation for a sample configuration is shown below and qualitatively matches with a figure 5 in this <a href="http://arxiv.org/pdf/cond-mat/0611257">paper.</a> I have not plotted the dispersion relation with imaginary part of wave-vector to simplify the case.</p>
+<p>[caption id="attachment_912" align="aligncenter" width="300" caption="Numerical solution to thin films surface plasmon dispersion obtained by unconstrained minimization algorithm"]<a href="http://juluribk.com/wp-content/uploads/2011/12/dmd_analytical_web1.png"><img alt="" class="size-medium wp-image-912" height="300" src="http://juluribk.com/wp-content/uploads/2011/12/dmd_analytical_web1-300x300.png" title="Numerical solution to thin films surface plasmon dispersion" width="300"></a>[/caption]</p>
+<p>Below is the octave code written for octave3.2 and <strong>has not been checked in matlab</strong>.</p>
+<p>[cc lang='matlab']<br>
+%% Octave script to solve the dispersion relations of surface<br>
+%% plasmons propagating on a thin film embedded in dielectric media.<br>
+%% Written by Bala Krishna Juluri (www.juluribk.com), Dec-6-2011.<br>
+%% Requires octave-optim package and octave3.2 or greater.</p>
+<p>%% A note on units. The code is written in normalized units.<br>
+%% All length units are normalized to lambda_p (frequency corresponding to plasma frequency).<br>
+%%By normalizing to lambda_p, the dispersion curves become independent of material.</p>
+<p>clear all;<br>
+close all;<br>
+c=1;% velocity of light in vacuum in normalized units.<br>
+wp=1;% plasma frequency of metal in normalized units, this will also make kp=1, as kp=wp/c;<br>
+d=0.3;% thickness of metal film in normalized units.<br>
+% One normalized length unit is equal to 212.99 nm for silver and 377 nm for gold. This is because,<br>
+% 1) for silver, plasma frequency is 8.85e15 1/sec , so the plasma wavelength = 212.99 nm<br>
+% 2) for copper, plasma frequency is 5e15 1/sec, so the plasma wavelength = 377 nm<br>
+% so if d (thickness of the film) is 0.3 in normalized units, it means that in real units,<br>
+%% it is equal to 0.3*212.99nm of silver or 0.3*377nm for gold.</p>
+<p>epsd=1;# dielectric of surrounding.<br>
+tol=1e-10;# Relative size of simplex for fmins function</p>
+<p>%creates a non-unifom density of points of w<br>
+a=linspace(0.01,3,100);b=1-exp(-a); w=b/max(b)*1.25; % creates a non-uniform density of frequencies<br>
+%%from 0 to \~1.3 at which real and complex wavevectors will be calculated.</p>
+<p>%%finds the solutions using fmins<br>
+for j=1:length(w)<br>
+epsm=1-(wp/w(j))\^2; # The code uses Drude model for material and assumes no losses. plasma_frequency (omega_p) =1,</p>
+<p>#Define first mode<br>
+Lp=@(kx)abs(epsm*(sqrt(epsd*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))+epsd*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*tanh(-0.5*i*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*d));<br>
+#solve for first mode using Nelder-Mead technique<br>
+[kx_Lp(j,:)] = fmins(Lp,[1.5; 0.25],[0,tol]); # 1.5 and 0.25 are the initial quesses for kx(1) and kx(2)</p>
+<p>#Define other mode<br>
+Lm=@(kx)abs(epsm*(sqrt(epsd*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))+epsd*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*coth(-0.5*i*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*d));<br>
+#solve for other mode using Nelder-Mead technique<br>
+[kx_Lm(j,:)] = fmins(Lm,[1.5; 0.25],[0,tol]);# 1.5 and 0.25 are the initial quesses for kx(1) and kx(2)<br>
+end</p>
+<p>%Plotting and printing section<br>
+putenv("GNUTERM",'wxt')<br>
+plot(abs(kx_Lp(:,1)),w,'ro',abs(kx_Lm(:,1)),w,'rs');<br>
+xlabel('Real(kx) /k_p')<br>
+ylabel('w/w_p')<br>
+legend('L+','L-','location','SouthEast')<br>
+title('Analytical solution to metal thin-film surface plasmon dispersion relation')<br>
+xlim([0,3]);<br>
+print('dmd_analytical_web.png','-dpng','-r200','-S600,600');<br>
+[/cc]</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="plasmon360.github.io/tag/electromagnetism.html">electromagnetism</a>
+      <a href="plasmon360.github.io/tag/octave.html">octave</a>
+      <a href="plasmon360.github.io/tag/plasmonics.html">Plasmonics</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "plasmon360.github.io",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Bala Juluri's Blog - Matlab</title><link href="plasmon360.github.io/" rel="alternate"></link><link href="plasmon360.github.io/feeds/matlab.atom.xml" rel="self"></link><id>plasmon360.github.io/</id><updated>2012-02-24T11:33:00-08:00</updated><subtitle>Ramblings</subtitle><entry><title>Spaces in strings in matlab/octave</title><link href="plasmon360.github.io/spaces-in-strings-in-matlaboctave.html" rel="alternate"></link><published>2012-02-24T11:33:00-08:00</published><updated>2012-02-24T11:33:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2012-02-24:plasmon360.github.io/spaces-in-strings-in-matlaboctave.html</id><summary type="html">&lt;p&gt;To get spaces in the strings to work in matlab or octave, use&lt;/p&gt;
+&lt;p&gt;t1={'test test'}&lt;/p&gt;
+&lt;p&gt;Result is&lt;br&gt;
+t1 =&lt;br&gt;
+{&lt;br&gt;
+[1,1] = test test&lt;br&gt;
+}&lt;/p&gt;
+&lt;p&gt;t2=strcat({'test test '},{'blah blah'})&lt;/p&gt;
+&lt;p&gt;Result is&lt;br&gt;
+t2 =&lt;br&gt;
+{&lt;br&gt;
+[1,1] = test test blah blah&lt;br&gt;
+}&lt;/p&gt;
+&lt;p&gt;you can use this string in your figures by&lt;br&gt;
+plot([1:4 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To get spaces in the strings to work in matlab or octave, use&lt;/p&gt;
+&lt;p&gt;t1={'test test'}&lt;/p&gt;
+&lt;p&gt;Result is&lt;br&gt;
+t1 =&lt;br&gt;
+{&lt;br&gt;
+[1,1] = test test&lt;br&gt;
+}&lt;/p&gt;
+&lt;p&gt;t2=strcat({'test test '},{'blah blah'})&lt;/p&gt;
+&lt;p&gt;Result is&lt;br&gt;
+t2 =&lt;br&gt;
+{&lt;br&gt;
+[1,1] = test test blah blah&lt;br&gt;
+}&lt;/p&gt;
+&lt;p&gt;you can use this string in your figures by&lt;br&gt;
+plot([1:4])&lt;br&gt;
+title(t2{})&lt;/p&gt;</content><category term="Matlab"></category><category term="Matlab"></category><category term="octave"></category></entry><entry><title>Smooth image in matlab</title><link href="plasmon360.github.io/smooth-image-in-matlab.html" rel="alternate"></link><published>2010-01-10T01:25:00-08:00</published><updated>2010-01-10T01:25:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-10:plasmon360.github.io/smooth-image-in-matlab.html</id><summary type="html">&lt;p&gt;In matlab, sometimes I prefer to plot a image for mesh data instead of surf and use view(2) (view(2) gives the top view of the surface plot). However,&lt;br&gt;
+&lt;code lang="matlab"&gt;imagesc(x,y,z) shading 'interp'&lt;/code&gt;&lt;br&gt;
+does not work. This problem can be solved by using:&lt;br&gt;
+&lt;code lang="matlab"&gt;pcolor(x,y,z …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;In matlab, sometimes I prefer to plot a image for mesh data instead of surf and use view(2) (view(2) gives the top view of the surface plot). However,&lt;br&gt;
+&lt;code lang="matlab"&gt;imagesc(x,y,z) shading 'interp'&lt;/code&gt;&lt;br&gt;
+does not work. This problem can be solved by using:&lt;br&gt;
+&lt;code lang="matlab"&gt;pcolor(x,y,z) shading 'interp' set(gca,'TickDir','out')&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;.&lt;/p&gt;</content><category term="Matlab"></category><category term="graphs"></category><category term="Matlab"></category></entry></feed>

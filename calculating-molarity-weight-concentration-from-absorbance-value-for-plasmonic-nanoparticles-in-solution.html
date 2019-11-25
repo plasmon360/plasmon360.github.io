@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="It is common to measure the peak absorbance of the plasmonic nanoparticles in solution and then get the following: Molarity (moles/liter) Number of particles per ml Weight concentration (ug/ml) I wrote a small python function to extract these parameters. The following inputs are needed for the function d_nm …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Calculating molarity, weight concentration from absorbance value for plasmonic nanoparticles in solution"/>
+<meta property="og:description" content="It is common to measure the peak absorbance of the plasmonic nanoparticles in solution and then get the following: Molarity (moles/liter) Number of particles per ml Weight concentration (ug/ml) I wrote a small python function to extract these parameters. The following inputs are needed for the function d_nm …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="plasmon360.github.io/calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-06-20 10:50:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="plasmon360.github.io/author/juluribk.html">
+<meta property="article:section" content="Publications"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Calculating molarity, weight concentration from absorbance value for plasmonic nanoparticles in solution</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="plasmon360.github.io">
+        <img src="plasmon360.github.io/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="plasmon360.github.io"></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution">Calculating molarity, weight concentration from absorbance value for plasmonic nanoparticles in solution</h1>
+    <p>
+          Posted on Wed 20 June 2018 in <a href="plasmon360.github.io/category/publications.html">Publications</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>It is common to measure the peak absorbance of the plasmonic nanoparticles in solution and then get the following:</p>
+<ol>
+<li>Molarity (moles/liter)</li>
+<li>Number of particles per ml</li>
+<li>Weight concentration (ug/ml)</li>
+</ol>
+<p>I wrote a small python function to extract these parameters.  The following inputs are needed for the function</p>
+<ol>
+<li>d_nm :   diameter of the particle in nanoparticle</li>
+<li>od :  peak OD measured from the absorbance plot</li>
+<li>path_length_cm :  cuvette length in centimeter</li>
+<li>density_g_per_cm3 :  for gold it is 19.28, for silver it is 10.49</li>
+<li>molar_Extinction_perM_percm :  Molar extinction coefficient extracted from <a href="https://www.sigmaaldrich.com/technical-documents/articles/materials-science/nanomaterials/gold-nanoparticles.html">here</a>.</li>
+<li>This can extracted from measuring absorbance at different concentrations and then fitting a linear line. the slope will be molar extinction coefficient</li>
+</ol>
+<p>Here is the code.
+<iframe src="https://trinket.io/embed/python/f1353652f2?start=result" width="100%" height="656" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "plasmon360.github.io",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
