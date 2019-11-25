@@ -3,30 +3,31 @@
 <head>
         <meta charset="utf-8" />
         <title>Bala Juluri's Blog - Plasmonics</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link rel="stylesheet" href="plasmon360.github.io/theme/css/main.css" />
+        <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom Feed" />
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="/">Bala Juluri's Blog </a></h1>
+                <h1><a href="plasmon360.github.io/">Bala Juluri's Blog </a></h1>
                 <nav><ul>
-                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="plasmon360.github.io/category/plasmonics.html">Plasmonics</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/coupled-dipole-approximation-in-python.html">Coupled Dipole Approximation in Python</a></h1>
+                    <h1 class="entry-title"><a href="plasmon360.github.io/coupled-dipole-approximation-in-python.html">Coupled Dipole Approximation in Python</a></h1>
 <footer class="post-info">
         <abbr class="published" title="2016-07-20T09:39:00-07:00">
                 Published: Wed 20 July 2016
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+                By                         <a class="url fn" href="plasmon360.github.io/author/juluribk.html">juluribk</a>
         </address>
-<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
-<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/python.html">python</a> </p>
+<p>In <a href="plasmon360.github.io/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="plasmon360.github.io/tag/electromagnetism.html">electromagnetism</a> <a href="plasmon360.github.io/tag/plasmonics.html">Plasmonics</a> <a href="plasmon360.github.io/tag/python.html">python</a> </p>
 </footer><!-- /.post-info --><p>[latexpage]</p>
 <p>Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like in<a href="http://www.ddscat.org/">DDSCAT</a>software), where a big particle (also known as target) is broken into lot of interacting dipoles arranged in cubic lattice. CDA can also be used to calculate the optical properties (scattering and absorption) of random particle distributions (like in L. Zhao et al. J. Phys. Chem. B,  107,  30, 7343,2003 ) and assuming each particle to be small enough that it behaves like a dipole.</p>
 <p>I have implement cda in python ([see source code link at the bottom of this post]{style="color: #ff0000;"}) and use it to calculate the optical properties of nanoparticles that are arranged randomly in cuboid or on a rectangular grid. Once the incident electric field direction (k vector), polarization, positions and radii of particles are given, the code calculates the extinction, scattering and absorption cross-sections. It is important to note that the nano particles should be small enough so that they can act as dipole with quasi-static polarizability.</p>
@@ -175,6 +176,7 @@ E_{2inc}\\<br>
                 <div class="social">
                         <h2>social</h2>
                         <ul>
+                            <li><a href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
                             <li><a href="#">You can add links in your config file</a></li>
                             <li><a href="#">Another social link</a></li>
