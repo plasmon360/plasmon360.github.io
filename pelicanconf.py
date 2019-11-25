@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Bala Juluri'
 SITENAME = "Bala Juluri's Blog"
+SITESUBTITLE = "Ramblings"
 SITEURL = ''
-
 PATH = 'content'
 
 TIMEZONE = 'America/Los_Angeles'
@@ -31,5 +31,6 @@ SOCIAL = (('You can add links in your config file', '#'),
 
 DEFAULT_PAGINATION = 10
 
+THEME = "Flex"
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

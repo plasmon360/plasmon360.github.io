@@ -1,39 +1,104 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Coupled Dipole Approximation in Python</title>
-        <link rel="stylesheet" href="plasmon360.github.io/theme/css/main.css" />
-        <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom Feed" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="[latexpage] Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like inDDSCATsoftware), where a big particle (also known as target) is broken into lot of interacting dipoles arranged …" />
+<meta name="keywords" content="electromagnetism, Plasmonics, python">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Coupled Dipole Approximation in Python"/>
+<meta property="og:description" content="[latexpage] Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like inDDSCATsoftware), where a big particle (also known as target) is broken into lot of interacting dipoles arranged …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/coupled-dipole-approximation-in-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-07-20 09:39:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Plasmonics"/>
+<meta property="article:tag" content="electromagnetism"/>
+<meta property="article:tag" content="Plasmonics"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Coupled Dipole Approximation in Python</title>
+
 </head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="plasmon360.github.io/">Bala Juluri's Blog </a></h1>
-                <nav><ul>
-                    <li class="active"><a href="plasmon360.github.io/category/plasmonics.html">Plasmonics</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="plasmon360.github.io/coupled-dipole-approximation-in-python.html" rel="bookmark"
-           title="Permalink to Coupled Dipole Approximation in Python">Coupled Dipole Approximation in Python</a></h1>
-    </header>
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
 
-    <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2016-07-20T09:39:00-07:00">
-                Published: Wed 20 July 2016
-        </abbr>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="plasmon360.github.io/author/juluribk.html">juluribk</a>
-        </address>
-<p>In <a href="plasmon360.github.io/category/plasmonics.html">Plasmonics</a>.</p>
-<p>tags: <a href="plasmon360.github.io/tag/electromagnetism.html">electromagnetism</a> <a href="plasmon360.github.io/tag/plasmonics.html">Plasmonics</a> <a href="plasmon360.github.io/tag/python.html">python</a> </p>
-</footer><!-- /.post-info -->      <p>[latexpage]</p>
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="coupled-dipole-approximation-in-python">Coupled Dipole Approximation in Python</h1>
+    <p>
+          Posted on Wed 20 July 2016 in <a href="/category/plasmonics.html">Plasmonics</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>[latexpage]</p>
 <p>Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like in<a href="http://www.ddscat.org/">DDSCAT</a>software), where a big particle (also known as target) is broken into lot of interacting dipoles arranged in cubic lattice. CDA can also be used to calculate the optical properties (scattering and absorption) of random particle distributions (like in L. Zhao et al. J. Phys. Chem. B,  107,  30, 7343,2003 ) and assuming each particle to be small enough that it behaves like a dipole.</p>
 <p>I have implement cda in python ([see source code link at the bottom of this post]{style="color: #ff0000;"}) and use it to calculate the optical properties of nanoparticles that are arranged randomly in cuboid or on a rectangular grid. Once the incident electric field direction (k vector), polarization, positions and radii of particles are given, the code calculates the extinction, scattering and absorption cross-sections. It is important to note that the nano particles should be small enough so that they can act as dipole with quasi-static polarizability.</p>
 <p>[gallery columns="2" size="medium" ids="1679,1680,1681,1678"]</p>
@@ -167,38 +232,40 @@ E_{2inc}\\<br>
 <p>We can extend the same concept to N dipoles, just the matrices in this case become bigger (A is 3N x 3N matrix, P in 3N and E is 3N column matrixes) and we need numerical iterative methods to solve. For solving the AP=E, I use Scipy's <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicgstab.html#scipy.sparse.linalg.bicgstab">biConjugate gradient stabilized method</a> .</p>
 <p>Once we know these self-consistent dipole moments, we can calculate the scattering and absorption cross-sections using extinction theorem (see equation 8 and 9 in Bruce T. Draine and Piotr J. Flatau, "Discrete-Dipole Approximation For Scattering Calculations," J. Opt. Soc. Am. A 11, 1491-1499 (1994)).</p>
 <h3 id="see-source-code-at-github-here" style="text-align: center;">[<a href="https://github.com/plasmon360/CDA_PYTHON">[See source code at GitHub here]{style="color: #ff0000; text-decoration: underline;"}</a>]{style="text-decoration: underline;"}</h3>
-    </div><!-- /.entry-content -->
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/electromagnetism.html">electromagnetism</a>
+      <a href="/tag/plasmonics.html">Plasmonics</a>
+      <a href="/tag/python.html">python</a>
+    </p>
+  </div>
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
 
 </body>
 </html>
