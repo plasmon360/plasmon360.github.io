@@ -133,4 +133,899 @@ E_{2inc}\\&lt;br&gt;
 &lt;p&gt;We can calcualte A from the positions of dipoles, their polarizability and wavevector, we know E from the incident electric fields, but we do not know \$\vec{P}_1\$ and \$\vec{P}_2\$ and that is what we find by solving P in AP = E matrix equation.&lt;/p&gt;
 &lt;p&gt;We can extend the same concept to N dipoles, just the matrices in this case become bigger (A is 3N x 3N matrix, P in 3N and E is 3N column matrixes) and we need numerical iterative methods to solve. For solving the AP=E, I use Scipy's &lt;a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicgstab.html#scipy.sparse.linalg.bicgstab"&gt;biConjugate gradient stabilized method&lt;/a&gt; .&lt;/p&gt;
 &lt;p&gt;Once we know these self-consistent dipole moments, we can calculate the scattering and absorption cross-sections using extinction theorem (see equation 8 and 9 in Bruce T. Draine and Piotr J. Flatau, "Discrete-Dipole Approximation For Scattering Calculations," J. Opt. Soc. Am. A 11, 1491-1499 (1994)).&lt;/p&gt;
-&lt;h3 id="see-source-code-at-github-here" style="text-align: center;"&gt;[&lt;a href="https://github.com/plasmon360/CDA_PYTHON"&gt;[See source code at GitHub here]{style="color: #ff0000; text-decoration: underline;"}&lt;/a&gt;]{style="text-decoration: underline;"}&lt;/h3&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="Plasmonics"></category><category term="python"></category></entry></feed>
+&lt;h3 id="see-source-code-at-github-here" style="text-align: center;"&gt;[&lt;a href="https://github.com/plasmon360/CDA_PYTHON"&gt;[See source code at GitHub here]{style="color: #ff0000; text-decoration: underline;"}&lt;/a&gt;]{style="text-decoration: underline;"}&lt;/h3&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="Plasmonics"></category><category term="python"></category></entry><entry><title>Fitting Complex Metal Dielectric Functions with Differential Evolution Method</title><link href="plasmon360.github.io/fitting-complex-metal-dielectric-functions-with-differential-evolution-method.html" rel="alternate"></link><published>2016-04-13T21:59:00-07:00</published><updated>2016-04-13T21:59:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2016-04-13:plasmon360.github.io/fitting-complex-metal-dielectric-functions-with-differential-evolution-method.html</id><summary type="html">&lt;p&gt;
+&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"&gt;// &lt;![CDATA[&lt;/p&gt;
+
+&lt;p&gt;// ]]&gt;&lt;/script&gt;
+&lt;/p&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+The real and imaginary part of dielectric permittivity of the metals is important to simulate the optical properties of metal films and nanoparticles. Permittivity data is obtained experimentally by ellipsometry and is fitted with analytical models. The most common model for fitting experimental data is with Drude-Lorentz …&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;
+&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"&gt;// &lt;![CDATA[&lt;/p&gt;
+
+&lt;p&gt;// ]]&gt;&lt;/script&gt;
+&lt;/p&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+The real and imaginary part of dielectric permittivity of the metals is important to simulate the optical properties of metal films and nanoparticles. Permittivity data is obtained experimentally by ellipsometry and is fitted with analytical models. The most common model for fitting experimental data is with Drude-Lorentz model shown below.
+
+\$\$\\epsilon(\\omega)=1-\\frac{f\_1\\omega\_p\^2}{(\\omega\^2+i\\Gamma\_1\\omega)}+\\sum\_{j=2}\^{n}\\frac{f\_j\\omega\_p\^2}{(\\omega\_{o,j}\^2-\\omega\^2-i\\Gamma\_j\\omega)}\$\$
+
+The first term is the Drude part. It represents the response of electron in the Fermi sea/conduction band when it sees external oscillating electric field (these transitions are called as intraband transitions). The Drude term has the plasma frequency (\$\\omega\_p\$, oscillator strengh (\$f\_1\$) and damping term (\$\\Gamma\_1\$). The rest of the terms represent the Lorentz oscillators with specific resonance frequencies (\$\\omega\_{o,j}\$), oscillator strengths (\$f\_{j}\$) and damping terms(\$\\Gamma\_j\$) associated with them. They represent electron excitation from one band to another following an external oscillating electric field at certain resonance frequencies (these transitions are called as interband transitions).
+
+Just out of curiosity, I wanted to do this fitting by myself for a long time now. So I attempted to fit the data with the commonly used fitting method, the least squares method, which involves minimization of the square of the error between the model and experimental data, while changing the parameters. However I was not getting good fitting results even with several attempts, this may be due to the following problems with this method:
+
+-   The fits were very sensitive to the initial guess values of the parameters (oscillator strengths, damping terms, etc).
+-   The method is a local minimization technique. What that means is that the least square algorithm (Levenberg - Marquardt ) is changing the parameters in parameter space and searching for the minimum of sum of squares of difference between model and data. While doing this it can get trapped in a local minimum and report the parameters at that point as if it was as global minimum.  
+   For more information on the problems of least-square method. See the last section of the article [here](http://www.itl.nist.gov/div898/handbook/pmd/section1/pmd141.htm).
+
+To avoid these problems, researchers use global optimization techniques. See, [Rakic et al.](https://www.osapublishing.org/ao/abstract.cfm?uri=ao-37-22-5271%20) and [Djurisic et al.](%20http://iopscience.iop.org/article/10.1088/1464-4258/2/5/318/meta). Rakic et al. used simulated annealing method , whic is a global optimization method and does a great job fitting experimental data. I wanted to use [Scipy's simulated annealing method](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.anneal.html) to fit the dielectric functions, but found that simulated annealing algorithm is deprecated in scipy 0.14 and they suggest using basin-hopping or differential evolution (DE) algorithms instead.
+
+I gave DE method a try because I didnot see any research article using DE algorithm for fitting dielectric data. If any of the readers find an article that uses DE to fit complex dielectric function, please point me to the article. DE algorithm is a stochastic method that does not involve finding a gradient but rather involves mutation and recombination of random population of solutions. I dont completely understand the guts of the algorithm, but you can find more information [here](https://en.wikipedia.org/wiki/Differential_evolution).
+
+Below is my code of how I do the fitting of gold dielectric function with python and lmfit module. lmfit is a python module that provides a better and convinient fitting and optimization interface for Scipy optimize/minimze methods. The default minimization technique for lmfit is least square (Levenberg-marquardt) methood, so it needs to be changed to differential evolution.
+
+These are my results:  
+[![dielectric functions fitting by differential evolution method](http://juluribk.com/wp-content/uploads/2016/04/download.png){.aligncenter .size-full .wp-image-1614 width="839" height="337"}](http://juluribk.com/wp-content/uploads/2016/04/download.png)
+
+[You can download my ipython notebook at the bottom of this post.]{style="color: #ff0000;"}
+
+You can use this method for fitting other dielectric data, but have to tweak the bounds a little bit. If you use my implementation for your fitting your experimental data, please let me know or even better cite it as:
+
+Juluri B.K. "Differential Evolution algorithm to fit Metal Dielectric Functions" &lt;http://juluribk.com/?p=1597&gt;.
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+In the following code, I get the gold's experimental dielectric data from [Refractiveindex.info](http://refractiveindex.info/).
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+In \[12\]:
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="input_area"&gt;
+
+&lt;div class="highlight hl-ipython2"&gt;
+
+    import urllib2 # To make a request and gather data,
+
+    # Query the website
+
+    response = urllib2.urlopen('http://refractiveindex.info/database/main/Au/Babar.yml')
+
+    # Alternative Experimental data sources
+    # response = urllib2.urlopen('http://refractiveindex.info/database/main/Au/McPeak.yml')
+    # response = urllib2.urlopen('http://refractiveindex.info/database/main/Au/Lemarchand-3.96nm.yml')
+
+    # Read the response. Response is in YAML format. Will use PyYAML parser,
+    yaml_data = response.read()
+    import yaml
+    data =  yaml.load(yaml_data)
+
+    # Lets see what is inside the data,
+    print"Keys in the data:" , data.keys() 
+
+    # Lets print the reference for this data,
+    print "Reference : ", data['REFERENCES']
+
+    if 'COMMENTS' in data.keys():
+        print "Comments : ", data['COMMENTS']
+
+    # Data seems to be stored in 'DATA', if needed uncomment the following line
+    #print(data['DATA'])
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+
+&lt;div class="output"&gt;
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+
+    Keys in the data: ['REFERENCES', 'DATA']
+    Reference :  S. Babar and J. H. Weaver. Optical constants of Cu, Ag, and Au revisited, &lt;a href="http://dx.doi.org/10.1364/AO.54.000477"&gt;&lt;i&gt;Appl. Opt.&lt;/i&gt; &lt;b&gt;54&lt;/b&gt;, 477-481 (2015)&lt;/a&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+Data string contains real and imaginary part of the refractive index (not dielectric permitivitty). I clean up the real and imaginary part of the refractive data and convert them to dielectric permittivities
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+In \[14\]:
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="input_area"&gt;
+
+&lt;div class="highlight hl-ipython2"&gt;
+
+    # Some clean up needed. The required data string holding wavelength, n and k, is in the form of dictionary item 
+    # with key 'data', which is inside a list\n",
+
+    cleaned_nk = data['DATA'][0]['data'] 
+
+    # Use StringIO to convert String buffer as a file like class\n",
+    import numpy as np
+    from StringIO import StringIO
+
+    # Read the data into as numpy vectors\n",
+    wave_micron, n, k  = np.genfromtxt(StringIO(cleaned_nk), unpack=True)
+
+    wave_exp = wave_micron * 1000 # Convert wavelength from microns to nm
+    eps_exp = (n + 1j* k)**2  # Convert n,k into dielectric function
+
+    # Lets convert wavelengh in nm to eV and assign it to 'w' 
+    h = 4.135667516E-15 # plancks's constant in eV-sec
+    c = 299792458E9 # speed of light in vacuum in nm/sec
+    w_exp = h*c/wave_exp;  # Convert wavleength in nm to eV
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+I define a function that will plot experimental dielectric data. It will also plot fitted models if the data is provided.
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+In \[6\]:
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="input_area"&gt;
+
+&lt;div class="highlight hl-ipython2"&gt;
+
+    def plot_fit(w_exp,eps_exp, w_for_fit = None,eps_fit_result = None):
+        '''
+        This functions plots the experimental dielectric function as function of wavelength.
+        If fitted model data is available it will also plot it
+        '''
+
+        %matplotlib inline
+        import matplotlib.pyplot as plt
+        from matplotlib.ticker import ScalarFormatter
+        from matplotlib import rcParams
+
+        rcParams.update({'font.size': 18}) # Increase the font size
+        rcParams['mathtext.default']='regular' # make the mathtext the same size of normal text for better readbility
+
+        # Plot the real part of the dielectric function
+        fig,ax = plt.subplots(1,2,figsize = (12,5))
+        ax[0].scatter(w_exp, abs(eps_exp.real), marker = 'o',facecolor = 'none', edgecolor = 'g')
+
+        ax[0].set_xlabel('Energy (eV)')
+        ax[0].set_ylabel(r'|$\epsilon^\prime$|')
+
+
+        # Plot the imaginary part of the dielectric function
+        ax[1].scatter(w_exp, eps_exp.imag, marker = 'o',facecolor = 'none', edgecolor = 'g')
+        ax[1].set_ylabel(r'$\epsilon ^ {\prime \prime}$')
+        ax[1].set_xlabel('Energy (eV)')
+
+        # If the fit data is available we will plot it with the actual plots
+        if (w_for_fit is not None and eps_fit_result is not None):
+            ax[0].plot(w_for_fit, abs(eps_fit_result.real),'-r')
+            ax[1].plot(w_for_fit,eps_fit_result.imag,'-r')
+
+
+        # Set the grid, log and axis formatter
+        for axis in ax:
+            axis.grid('on')
+            axis.set_xscale('log')
+            axis.set_yscale('log')
+            axis.set_xlim([min(w_exp),max(w_exp)])
+            for x_yaxis in [axis.xaxis, axis.yaxis]:
+                x_yaxis.set_major_formatter(ScalarFormatter())
+
+        fig.tight_layout()
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+Lets plot the experimental data to see the data. Data seems to be from 0.1ev to 10eV. There seems to be three transitions (are all of them interband?) above 1eV
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+In \[7\]:
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="input_area"&gt;
+
+&lt;div class="highlight hl-ipython2"&gt;
+
+    plot_fit(w_exp,eps_exp)
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+
+ [![dielectric\_no\_fit](http://juluribk.com/wp-content/uploads/2016/04/dielectric_no_fit.png){.aligncenter .size-full .wp-image-1706 width="839" height="337"}](http://juluribk.com/wp-content/uploads/2016/04/dielectric_no_fit.png) [  
+](http://juluribk.com/wp-content/uploads/2016/04/download_with_fit.png)
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+Lets define a Drude-Lorentz model. This will be the model we will try to fit the experimental data with. The model has one Drude term and five Lorentz oscillators
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+In \[15\]:
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="input_area"&gt;
+
+&lt;div class="highlight hl-ipython2"&gt;
+
+    def drude_lorentz_model(params, w):
+        '''
+        This is functional representation of drude lorentz model with the first term being Drude
+        and the rest terms being lorentz oscillators
+        '''
+
+        # Get the plasma frequency
+        omega_p = params['Omega_p'].value
+
+
+        # Get the Drude parms
+        f0 = params['f0'].value
+        gamma0 = params['Gamma0'].value
+
+        # Get the first Lorentz term parameters,
+        f1 = params['f1'].value
+        gamma1 = params['Gamma1'].value
+        omega1 = params['Omega1'].value
+
+        # Get the second Lorentz term parameters
+        f2 = params['f2'].value
+        gamma2 = params['Gamma2'].value
+        omega2 = params['Omega2'].value
+
+        # Get the third Lorentz term parameters
+        f3 = params['f3'].value
+        gamma3 = params['Gamma3'].value
+        omega3 = params['Omega3'].value
+
+        # Get the fourth Lorentz term parameters
+        f4 = params['f4'].value
+        gamma4 = params['Gamma4'].value
+        omega4 = params['Omega4'].value
+
+        # Get the fifth Lorentz term parameters
+        f5 = params['f5'].value
+        gamma5 = params['Gamma5'].value
+        omega5 = params['Omega5'].value
+
+        # Drude component
+        epsilon_D = 1 - (f0 * omega_p ** 2 / (w ** 2 + 1j * (gamma0) * w))
+
+        # Lorentz first oscillator
+        epsilon_L1 = (f1 * omega_p ** 2) / (omega1 ** 2 - w ** 2 - 1j * gamma1 * w)
+
+        # Lorentz SEcond oscillator 
+        epsilon_L2 = (f2 * omega_p ** 2) / (omega2 ** 2 - w ** 2 - 1j * gamma2 * w)
+
+        # Lorentz Third oscillator 
+        epsilon_L3 = (f3 * omega_p ** 2) / (omega3 ** 2 - w ** 2 - 1j * gamma3 * w)
+
+        # Lorentz Fourth oscillator 
+        epsilon_L4 = (f4 * omega_p ** 2) / (omega4 ** 2 - w ** 2 - 1j * gamma4 * w)
+
+        # Lorentz Fifth oscillator 
+        epsilon_L5 = (f5 * omega_p ** 2) / (omega5 ** 2 - w ** 2 - 1j * gamma5 * w)
+
+        # Sum all the terms
+        epsilon = epsilon_D + epsilon_L1 +epsilon_L2 +  epsilon_L3 +  epsilon_L4 +  epsilon_L5
+
+        return epsilon
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+Lets define a callable function which returns a residual. This function will be used by our minimization algorithm. It is important to note how the residual is calculated as it is little bit different than normal fitting examples shown in lmfit, because we are minimizing complex data.
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+In \[9\]:
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="input_area"&gt;
+
+&lt;div class="highlight hl-ipython2"&gt;
+
+    def complex_residuals(params, model, w, exp_data):
+        '''
+        This is the residual function that we will try to minimize.
+        It takes the params dict that has the parameters that need to be found. 
+       '''
+        if model == 'Drude':
+            # Our Drude model
+            epsilon= drude_model(params,w)
+        elif model == 'Drude-Lorentz':
+            # Our Drude model
+            epsilon= drude_lorentz_model(params,w)
+
+        # Lets calculate our complex residual as the way it is done in page 5264
+        # Rakic, a D.,et al (1998). Optical properties of metallic films for vertical-cavity optoelectronic devices. Applied Optics, 37(22), 5271–83.
+        residual = (abs((epsilon.real - exp_data.real)/exp_data.real) + abs((epsilon.imag - exp_data.imag)/exp_data.imag))**2
+
+        # if the residual is being used for least square optimizaiton we should have used
+        # residual = (abs((epsilon.real - exp_data.real)/exp_data.real) + abs((epsilon.imag - exp_data.imag)/exp_data.imag))
+        # least square method does the square of the residual in its algorithm. see http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.optimize.leastsq.html
+
+        return residual
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+This is where differential evolution will be used to make a fit to the data. Differential evolution algorithm requires bounds for each parameter. I gave resonable bounds based on looking at the experimental data and hope to see what the algorithm does. It seem to do a resonable job and much better job than least squares method. **The fitting results will vary a little bit each time we run this cell. So run the cell couple of times to see if things change for better.**
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+In \[17\]:
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="input_area"&gt;
+
+&lt;div class="highlight hl-ipython2"&gt;
+
+    # Note that lmfit should be Version &gt; 0.9.0. We will check this
+    import lmfit
+    from distutils.version import StrictVersion
+    assert StrictVersion(lmfit.__version__) &gt; StrictVersion("0.9.0")
+
+    from lmfit import minimize, Parameters, printfuncs
+
+    # Choose the model we want to fit it with 
+    model = 'Drude-Lorentz'
+
+    params = Parameters()
+    params.add('Omega_p', value = 9, min = 8.5 , max = 10) # Omega_p has a value in eV, we will add a starting guess here
+
+    # Drude Term
+    params.add('f0', value=0.5, min = 1E-10, max = 1) # f  has no units,  we will add a starting guess here 
+    params.add('Gamma0', value= 0.03 , min = 1E-10, max = 0.1 ) # Gamma is damping term and has units in eV, we will add a starting guess here
+
+    # Lorentz first Oscillator term
+    params.add('f1', value=0.5, min = 1E-10, max = 1) # f  has no units,  we will add a starting guess here 
+    params.add('Gamma1', value= 0.5, min = 1E-10 ,  max = 2) # Gamma is damping term and has units in eV, we will add a starting guess here
+    params.add('Omega1', value = 5 , min = 5 , max = 10) # Omega_o is oscillator central frequency term  and has units in eV. we will add a starting guess here
+
+    # Lorentz Second Oscillator term
+    params.add('f2', value=0.5, min = 1E-10, max = 1) # f  has no units,  we will add a starting guess here 
+    params.add('Gamma2', value= 0.5, min = 0.01,  max = 2 ) # Gamma is damping term and has units in eV, we will add a starting guess here
+    params.add('Omega2', value = 3 , min = 2.5 , max = 3.5) # Omega_o is oscillator central frequency term  and has units in eV. we will add a starting guess here
+
+    # Lorentz Third Oscillator term
+    params.add('f3', value=0.5, min = 1E-10, max = 1) # f  has no units,  we will add a starting guess here 
+    params.add('Gamma3', value= 1, min = 0.01 , max = 2) # Gamma is damping term and has units in eV, we will add a starting guess here
+    params.add('Omega3', value = 4 , min = 3.5, max = 4.5 ) # Omega_o is oscillator central frequency term  and has units in eV. we will add a starting guess here
+
+    # Lorentz Fourth Oscillator term
+    params.add('f4', value=0.5, min = 1E-10, max = 1) # f  has no units,  we will add a starting guess here 
+    params.add('Gamma4', value= 1, min = 0.01 , max = 2) # Gamma is damping term and has units in eV, we will add a starting guess here
+    params.add('Omega4', value = 5 , min = 4.5, max = 5.5 ) # Omega_o is oscillator central frequency term  and has units in eV. we will add a starting guess here
+
+    # Lorentz Fifth Oscillator term
+    params.add('f5', value=0.5, min = 1E-10, max = 1) # f  has no units,  we will add a starting guess here 
+    params.add('Gamma5', value= 1, min = 0.01 , max = 2) # Gamma is damping term and has units in eV, we will add a starting guess here
+    params.add('Omega5', value = 6 , min = 5.5, max = 6.5 ) # Omega_o is oscillator central frequency term  and has units in eV. we will add a starting guess here
+
+
+
+    # Lets fit to all the data.
+    w_for_fit = w_exp
+    eps_for_fit = eps_exp
+
+    # if we were to fit only a part of the data such as fit only below 2 ev
+    #w_for_fit = w_exp[w_exp&lt;2]
+    #eps_for_fit = eps_exp[w_exp&lt;2]
+
+
+    # Call the minimize function with required parameters and use differential evolution as a method 
+    minimizer_results = minimize(complex_residuals, params, args=(model, w_for_fit, eps_for_fit), method = 'differential_evolution', strategy='best1bin',
+                                 popsize=50, tol=0.01, mutation=(0, 1), recombination=0.9, seed=None, callback=None, disp=True, polish=True, init='latinhypercube')
+
+    # If we were to fit ith with least squares methods
+    # minimizer_results = minimize(complex_residuals, params, args=(model, w_for_fit, eps_for_fit), method = 'leastsq')
+
+    #lets see whether the fit exited successfully?
+    print "Print exited successfully? :  ", minimizer_results.success
+
+    #lets see the termination status
+    print "Termination Status: ", minimizer_results.message
+
+    # lets print the fit report. We dont need lengthy Correlation table
+    printfuncs.report_fit(minimizer_results, show_correl=False)
+
+    # Caluclate the epsilon based on the fit results
+    eps_fit_result = np.array([drude_lorentz_model(minimizer_results.params, i) for i in w_for_fit])
+
+    # Lets plot the fit data
+    plot_fit(w_exp,eps_exp, w_for_fit,eps_fit_result)
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+
+&lt;div class="output"&gt;
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+
+    differential_evolution step 1: f(x)= 182.623
+    differential_evolution step 2: f(x)= 182.623
+    differential_evolution step 3: f(x)= 182.623
+    differential_evolution step 4: f(x)= 50.6673
+    differential_evolution step 5: f(x)= 20.0853
+    differential_evolution step 6: f(x)= 20.0853
+    .
+    .
+    .
+    differential_evolution step 59: f(x)= 1.19969
+    differential_evolution step 60: f(x)= 1.19968
+    differential_evolution step 61: f(x)= 1.1984
+    differential_evolution step 62: f(x)= 1.19704
+    differential_evolution step 63: f(x)= 1.19592
+    differential_evolution step 64: f(x)= 1.19556
+    differential_evolution step 65: f(x)= 1.19137
+    differential_evolution step 66: f(x)= 1.18851
+    differential_evolution step 67: f(x)= 1.18354
+    differential_evolution step 68: f(x)= 1.18286
+    Print exited successfully? :   True
+    Termination Status:  Optimization terminated successfully.
+    [[Fit Statistics]]
+        # function evals   = 66984
+        # data points      = 69
+        # variables        = 18
+        chi-square         = 1.137
+        reduced chi-square = 0.022
+        Akaike info crit   = -226.448
+        Bayesian info crit = -186.234
+    [[Variables]]
+        Omega_p:   9.97441670 (init= 9)
+        f0:        0.68683341 (init= 0.5)
+        Gamma0:    0.01987236 (init= 0.03)
+        f1:        0.98709783 (init= 0.5)
+        Gamma1:    1.4876e-05 (init= 0.5)
+        Omega1:    8.02150038 (init= 5)
+        f2:        0.07682351 (init= 0.5)
+        Gamma2:    0.65934600 (init= 0.5)
+        Omega2:    2.91927926 (init= 3)
+        f3:        0.16124225 (init= 0.5)
+        Gamma3:    1.12448236 (init= 1)
+        Omega3:    3.70495567 (init= 4)
+        f4:        0.15690286 (init= 0.5)
+        Gamma4:    1.18873234 (init= 1)
+        Omega4:    4.50000000 (init= 5)
+        f5:        0.23132574 (init= 0.5)
+        Gamma5:    1.88224399 (init= 1)
+        Omega5:    5.71650394 (init= 6)
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_area"&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+
+&lt;div class="input"&gt;
+
+&lt;div class="prompt input_prompt"&gt;
+
+&lt;/div&gt;
+
+&lt;div class="inner_cell"&gt;
+
+![download\_with\_fit](http://juluribk.com/wp-content/uploads/2016/04/download_with_fit.png){.aligncenter .size-large .wp-image-1707 width="780" height="313"}
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+
+&lt;div class="inner_cell"&gt;
+
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+
+Differential evolution algorithm gives a very reasonable fit as shown above. Code gives the final dielectric parameters for the model and the fit parameters.
+
+[[[Source code of above Ipython notebook](https://gist.github.com/plasmon360/71d4f6fc559e71362e09bb64dd6a1fa3)]{style="color: #ff0000;"}]{style="text-decoration: underline;"} {#source-code-of-above-ipython-notebook style="text-align: center;"}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;</content><category term="Plasmonics"></category></entry><entry><title>Plasmonic Materials in MEEP &gt; 1.2</title><link href="plasmon360.github.io/plasmonic-materials-in-meep-1-2.html" rel="alternate"></link><published>2015-06-13T16:59:00-07:00</published><updated>2015-06-13T16:59:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-06-13:plasmon360.github.io/plasmonic-materials-in-meep-1-2.html</id><summary type="html">&lt;p&gt;&lt;a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP"&gt;Here is&lt;/a&gt;how I was implementing plasmonic materials in meep1.1 scheme code. Unlike Meep 1. 1, Meep &amp;gt;= 1. 2 changed the way materials are defined. Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . [Please note that one can still …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP"&gt;Here is&lt;/a&gt;how I was implementing plasmonic materials in meep1.1 scheme code. Unlike Meep 1. 1, Meep &amp;gt;= 1. 2 changed the way materials are defined. Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . [Please note that one can still use the material definition written from Meep &amp;lt;1.2 for Meep &amp;gt;=1.2 but not vice versa]{style="color: #ff0000;"}.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Installation of Meep 1.2 on ubuntu&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can follow instructions given in &lt;a href="http://juluribk.com/2013/07/20/installing-meep-1-2-on-ubuntu/" title="Installing Meep 1.2 on ubuntu"&gt;my previous post&lt;/a&gt; to compile Meep 1.2 from the source code, but the procedure is outdated and one can use the recently pre-compiled meep packages (which is much easier)&lt;/p&gt;
+&lt;p&gt;1) Updated computer to at least "The Utopic Unicorn" (Ubuntu 14.10). Meep 1.2 is compiled for this versions and above. U can see instructions here &lt;a href="http://www.ubuntu.com/download/desktop/upgrade"&gt;how to update ubuntu distribution&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;2) Install meep 1.2 (for serial version) by "sudo apt-get install meep h5utils"&lt;br&gt;
+3) check it by "meep --version" and quit the program by "(exit)"&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Modifying the material definition type&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For meep 1.1, I used the following code to define silver material with lorentian model from Rakic et al with 100 nm length unit:&lt;/p&gt;
+&lt;p&gt;[cc lang="scheme"]&lt;br&gt;
+(define myAg (make dielectric (epsilon 1)&lt;br&gt;
+(polarizations&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.065815) (gamma 0.31343) (sigma 7.9247))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.36142) (gamma 0.036456) (sigma 0.50133))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.66017) (gamma 0.0052426) (sigma 0.013329))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.73259) (gamma 0.07388) (sigma 0.82655))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 1.6365) (gamma 0.19511) (sigma 1.1133))&lt;br&gt;
+)))&lt;/p&gt;
+&lt;p&gt;[/cc]&lt;/p&gt;
+&lt;p&gt;This was generated by my octave/matlab code (see the material_polarization_generator.m) in the &lt;a href="http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip"&gt;project file&lt;/a&gt;.  One can use the this file to generate code for other plasmonic materials.&lt;/p&gt;
+&lt;p&gt;For Meep 1.2, I did the following changes to the above code&lt;/p&gt;
+&lt;p&gt;changed the word "polarizations" to "E-susceptibilities"&lt;/p&gt;
+&lt;p&gt;changed the work "polarizability" to "lorentzian-susceptibility"&lt;/p&gt;
+&lt;p&gt;changed the word "omega" to "frequency"&lt;/p&gt;
+&lt;p&gt;So the meep1.2 code looks like this:&lt;/p&gt;
+&lt;p&gt;[cc lang="scheme"]&lt;/p&gt;
+&lt;p&gt;(define myAg (make dielectric (epsilon 1)&lt;br&gt;
+(E-susceptibilities&lt;br&gt;
+(make lorentzian-susceptibility&lt;br&gt;
+(frequency 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))&lt;br&gt;
+(make lorentzian-susceptibility&lt;br&gt;
+(frequency 0.065815) (gamma 0.31343) (sigma 7.9247))&lt;br&gt;
+(make lorentzian-susceptibility&lt;br&gt;
+(frequency 0.36142) (gamma 0.036456) (sigma 0.50133))&lt;br&gt;
+(make lorentzian-susceptibility&lt;br&gt;
+(frequency 0.66017) (gamma 0.0052426) (sigma 0.013329))&lt;br&gt;
+(make lorentzian-susceptibility&lt;br&gt;
+(frequency 0.73259) (gamma 0.07388) (sigma 0.82655))&lt;br&gt;
+(make lorentzian-susceptibility&lt;br&gt;
+(frequency 1.6365) (gamma 0.19511) (sigma 1.1133))&lt;br&gt;
+)))&lt;/p&gt;
+&lt;p&gt;[/cc]&lt;/p&gt;
+&lt;p&gt;This seems to work fine for me. I used this new code to calculate the reflection from a thin silver film (like the way i did in my previous post) and it matches with the analytical calculation.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="MEEP"></category><category term="octave"></category><category term="Plasmonics"></category></entry><entry><title>Surface plasmon dispersion relation for thin metal films</title><link href="plasmon360.github.io/surface-plasmon-dispersion-relation-for-thin-metal-films.html" rel="alternate"></link><published>2011-12-07T21:12:00-08:00</published><updated>2011-12-07T21:12:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2011-12-07:plasmon360.github.io/surface-plasmon-dispersion-relation-for-thin-metal-films.html</id><summary type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
+&lt;p&gt;A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
+&lt;p&gt;A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the same wavevector due to excitation and interaction of surface plasmons on both sides of the film. One mode (L+) is at higher energy and other (L-) is at a lower energy. The high energy has anti-symmetric field distribution whereas the low energy one has symmetric field distribution. The dispersion relations of these modes can be obtained by applying appropriate boundary conditions and solving Maxwell equations (&lt;a href="http://paper.gentilemathieu.free.fr/_L1988Raether%20Surface%20Plasmons.pdf"&gt;page 25 of Raether book on Surface plasmons&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;The dispersion relations (energy of different modes as function of complex wavevector, \$k_x\^{'}(\omega)+ik_x\^{''}(\omega)\$) are given by the solutions of :&lt;/p&gt;
+&lt;p&gt;\$\omega\^+: L+= \epsilon_1k_{z2}+\epsilon_2k_{z1} \tanh\left [ \frac{-ik_{z1}d}{2}\right ]=0\$&lt;/p&gt;
+&lt;p&gt;\$\omega\^-: L-= \epsilon_1k_{z2}+\epsilon_2k_{z1} \coth\left [ \frac{-ik_{z1}d}{2}\right ]=0\$,&lt;/p&gt;
+&lt;p&gt;Where \$\epsilon_1\$ and \$\epsilon_2\$ represent the dielectric functions of dielectric and metal respectively, \$d\$ is the thickness of metal film, \$\omega\^+\$ is frequency of high energy mode, \$\omega\^-\$ is frequency of low energy mode, \$k_{z1,z2}=\sqrt{\epsilon_{1,2}\left[ \frac{\omega}{c}\right ]\^2-(k_x\^{'}(\omega)+ik_x\^{''}(\omega))\^2}\$.&lt;/p&gt;
+&lt;p&gt;What does solving these equations mean? if one considers one mode, say \$L+\$ mode, for a certain \$\omega\^+\$, there exists a particular \$k_x\^{'}\$ and \$k_x\^{''}\$ that will make the above left hand side of L+ equation equal to zero. How do we get those special \$k\$? Unfortunately, there is no exact solution to this, to solve them, one has to use numerical techniques such as Nelder-Mead minimization algorithm that does unconstrained minimization. The algorithm works cleverly by searching for \$k_{z1,z2}\$ at a particular \$\omega\$, such that \$L+\$ and \$L-\$ will be minimum (in this case as close to zero as possible).&lt;/p&gt;
+&lt;p&gt;I have used "fmins" function in octave to solve these dispersion relations. Fmins function in octave can be obtained by installing &lt;a href="http://octave.sourceforge.net/optim/"&gt;octave-optmin package&lt;/a&gt;. On Ubuntu use "sudo apt-get install octave-optim" in your terminal. Documentation of fmins function is given &lt;a href="http://octave.sourceforge.net/optim/function/fmins.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The numerical solution of dispersion relation for a sample configuration is shown below and qualitatively matches with a figure 5 in this &lt;a href="http://arxiv.org/pdf/cond-mat/0611257"&gt;paper.&lt;/a&gt; I have not plotted the dispersion relation with imaginary part of wave-vector to simplify the case.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_912" align="aligncenter" width="300" caption="Numerical solution to thin films surface plasmon dispersion obtained by unconstrained minimization algorithm"]&lt;a href="http://juluribk.com/wp-content/uploads/2011/12/dmd_analytical_web1.png"&gt;&lt;img alt="" class="size-medium wp-image-912" height="300" src="http://juluribk.com/wp-content/uploads/2011/12/dmd_analytical_web1-300x300.png" title="Numerical solution to thin films surface plasmon dispersion" width="300"&gt;&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;p&gt;Below is the octave code written for octave3.2 and &lt;strong&gt;has not been checked in matlab&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;[cc lang='matlab']&lt;br&gt;
+%% Octave script to solve the dispersion relations of surface&lt;br&gt;
+%% plasmons propagating on a thin film embedded in dielectric media.&lt;br&gt;
+%% Written by Bala Krishna Juluri (www.juluribk.com), Dec-6-2011.&lt;br&gt;
+%% Requires octave-optim package and octave3.2 or greater.&lt;/p&gt;
+&lt;p&gt;%% A note on units. The code is written in normalized units.&lt;br&gt;
+%% All length units are normalized to lambda_p (frequency corresponding to plasma frequency).&lt;br&gt;
+%%By normalizing to lambda_p, the dispersion curves become independent of material.&lt;/p&gt;
+&lt;p&gt;clear all;&lt;br&gt;
+close all;&lt;br&gt;
+c=1;% velocity of light in vacuum in normalized units.&lt;br&gt;
+wp=1;% plasma frequency of metal in normalized units, this will also make kp=1, as kp=wp/c;&lt;br&gt;
+d=0.3;% thickness of metal film in normalized units.&lt;br&gt;
+% One normalized length unit is equal to 212.99 nm for silver and 377 nm for gold. This is because,&lt;br&gt;
+% 1) for silver, plasma frequency is 8.85e15 1/sec , so the plasma wavelength = 212.99 nm&lt;br&gt;
+% 2) for copper, plasma frequency is 5e15 1/sec, so the plasma wavelength = 377 nm&lt;br&gt;
+% so if d (thickness of the film) is 0.3 in normalized units, it means that in real units,&lt;br&gt;
+%% it is equal to 0.3*212.99nm of silver or 0.3*377nm for gold.&lt;/p&gt;
+&lt;p&gt;epsd=1;# dielectric of surrounding.&lt;br&gt;
+tol=1e-10;# Relative size of simplex for fmins function&lt;/p&gt;
+&lt;p&gt;%creates a non-unifom density of points of w&lt;br&gt;
+a=linspace(0.01,3,100);b=1-exp(-a); w=b/max(b)*1.25; % creates a non-uniform density of frequencies&lt;br&gt;
+%%from 0 to \~1.3 at which real and complex wavevectors will be calculated.&lt;/p&gt;
+&lt;p&gt;%%finds the solutions using fmins&lt;br&gt;
+for j=1:length(w)&lt;br&gt;
+epsm=1-(wp/w(j))\^2; # The code uses Drude model for material and assumes no losses. plasma_frequency (omega_p) =1,&lt;/p&gt;
+&lt;p&gt;#Define first mode&lt;br&gt;
+Lp=@(kx)abs(epsm*(sqrt(epsd*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))+epsd*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*tanh(-0.5*i*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*d));&lt;br&gt;
+#solve for first mode using Nelder-Mead technique&lt;br&gt;
+[kx_Lp(j,:)] = fmins(Lp,[1.5; 0.25],[0,tol]); # 1.5 and 0.25 are the initial quesses for kx(1) and kx(2)&lt;/p&gt;
+&lt;p&gt;#Define other mode&lt;br&gt;
+Lm=@(kx)abs(epsm*(sqrt(epsd*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))+epsd*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*coth(-0.5*i*(sqrt(epsm*(w(j)/c)\^2-(kx(1)+i*kx(2))\^2))*d));&lt;br&gt;
+#solve for other mode using Nelder-Mead technique&lt;br&gt;
+[kx_Lm(j,:)] = fmins(Lm,[1.5; 0.25],[0,tol]);# 1.5 and 0.25 are the initial quesses for kx(1) and kx(2)&lt;br&gt;
+end&lt;/p&gt;
+&lt;p&gt;%Plotting and printing section&lt;br&gt;
+putenv("GNUTERM",'wxt')&lt;br&gt;
+plot(abs(kx_Lp(:,1)),w,'ro',abs(kx_Lm(:,1)),w,'rs');&lt;br&gt;
+xlabel('Real(kx) /k_p')&lt;br&gt;
+ylabel('w/w_p')&lt;br&gt;
+legend('L+','L-','location','SouthEast')&lt;br&gt;
+title('Analytical solution to metal thin-film surface plasmon dispersion relation')&lt;br&gt;
+xlim([0,3]);&lt;br&gt;
+print('dmd_analytical_web.png','-dpng','-r200','-S600,600');&lt;br&gt;
+[/cc]&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="octave"></category><category term="Plasmonics"></category></entry><entry><title>Simulation of Localized surface plasmons</title><link href="plasmon360.github.io/simulation-of-localized-surface-plasmons.html" rel="alternate"></link><published>2010-01-11T12:09:00-08:00</published><updated>2010-01-11T12:09:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-11:plasmon360.github.io/simulation-of-localized-surface-plasmons.html</id><summary type="html">&lt;p&gt;
+&lt;center&gt;
+
+&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
+&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
+
+&lt;embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;" allowscriptaccess="always" allowfullscreen="true"&gt;
+&lt;/embed&gt;
+&lt;/object&gt;
+
+
+&lt;/center&gt;
+
+A cool simulation using FDTD showing the excitaion of Localized Surface Plasmons in metal nanorods. These simulations are done by [Prof. Maxim Sukhrev](https://webapp4.asu.edu/directory/person/1271759). The external electromagnetic wave excites plasmons (oscillation of electron sea in the particle) in the direction of polarization of incident …&lt;/p&gt;</summary><content type="html">&lt;p&gt;
+&lt;center&gt;
+
+&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
+&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
+
+&lt;embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;" allowscriptaccess="always" allowfullscreen="true"&gt;
+&lt;/embed&gt;
+&lt;/object&gt;
+
+
+&lt;/center&gt;
+
+A cool simulation using FDTD showing the excitaion of Localized Surface Plasmons in metal nanorods. These simulations are done by [Prof. Maxim Sukhrev](https://webapp4.asu.edu/directory/person/1271759). The external electromagnetic wave excites plasmons (oscillation of electron sea in the particle) in the direction of polarization of incident wave. At a certain resonance frequency of incoming light (which depends on the shape, size and environment), the particle exhibits large scattering and absorption. It also leads to large enhancements in electric field at the surface.
+
+&lt;/p&gt;
+To know more about localized surface plasmons, read my upcoming articles in my plasmonics information center.</content><category term="Plasmonics"></category><category term="FDTD"></category><category term="Plasmonics"></category></entry></feed>
