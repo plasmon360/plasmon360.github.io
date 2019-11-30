@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="plasmon360.github.io/theme/font-awesome/css/solid.css">
+
+
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel …" />
+<meta name="keywords" content="Instrumentation, python">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Controlling Rigol Dp832 with python"/>
+<meta property="og:description" content="DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="plasmon360.github.io/controlling-rigol-dp832-with-python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-05-08 17:08:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="plasmon360.github.io/author/juluribk.html">
+<meta property="article:section" content="Publications, Test Equipment"/>
+<meta property="article:tag" content="Instrumentation"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Controlling Rigol Dp832 with python</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="plasmon360.github.io">
+        <img src="plasmon360.github.io/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="plasmon360.github.io"></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="controlling-rigol-dp832-with-python">Controlling Rigol Dp832 with python</h1>
+    <p>
+          Posted on Fri 08 May 2015 in <a href="plasmon360.github.io/category/publications-test-equipment.html">Publications, Test Equipment</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel (two 30V and one 5V) power supply and is programmable through SCPI commands. The device can be controlled by USB and rs232 (optionally by LAN). SCPI commands can be sent to the instruments using VISA interface. I used Python and pyvisa module to communicate with it. I wrote a class with basic functionality. Currently it has a console application and turning on and off at a  particular bias and current value on a specified channel.</p>
+<p>You can add more methods to the class for advanced features. You can see those commands in the <a href="http://www.batronix.com/pdf/Rigol/ProgrammingGuide/DP800_ProgrammingGuide_EN.pdf">programming manual</a>.</p>
+<p>You can find my gist underneath or [<a href="https://gist.github.com/plasmon360/3204dc28deddeefe42d5">download from here.</a>]{style="text-decoration: underline; color: #ff0000;"}</p>
+<p>
+<script src="https://gist.github.com/plasmon360/3204dc28deddeefe42d5.js"></script>
+</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="plasmon360.github.io/tag/instrumentation.html">Instrumentation</a>
+      <a href="plasmon360.github.io/tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "plasmon360.github.io",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
