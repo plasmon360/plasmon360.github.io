@@ -25,15 +25,15 @@
 
 
 <meta name="author" content="juluribk" />
-<meta name="description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED. I want to quickly draw them and came up with a python module. You can download the module at my github repository. Here&#39;s an example on how to use this code. from Band_diagram …" />
+<meta name="description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module. Here&#39;s an example on how to use this code. from Band_diagram import metal, semiconductor, plot # Define the metals and …" />
 <meta name="keywords" content="">
 
 
 <meta property="og:site_name" content="Bala Juluri's Blog"/>
 <meta property="og:title" content="Creating Energy Band Diagrams for Solar cells and LED"/>
-<meta property="og:description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED. I want to quickly draw them and came up with a python module. You can download the module at my github repository. Here&#39;s an example on how to use this code. from Band_diagram …"/>
+<meta property="og:description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module. Here&#39;s an example on how to use this code. from Band_diagram import metal, semiconductor, plot # Define the metals and …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="plasmon360.github.io/creating-energy-band-diagrams-for-solar-cells-and-led.html"/>
+<meta property="og:url" content="plasmon360.github.io/Energy-band-diagrams-for-solar-cell-and-led.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2017-09-11 10:42:00-07:00"/>
 <meta property="article:modified_time" content=""/>
@@ -98,7 +98,7 @@
 <article class="single">
   <header>
       
-    <h1 id="creating-energy-band-diagrams-for-solar-cells-and-led">Creating Energy Band Diagrams for Solar cells and LED</h1>
+    <h1 id="Energy-band-diagrams-for-solar-cell-and-led">Creating Energy Band Diagrams for Solar cells and LED</h1>
     <p>
           Posted on Mon 11 September 2017 in <a href="plasmon360.github.io/category/publications.html">Publications</a>
 
@@ -108,13 +108,12 @@
 
 
   <div>
-    <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED. I want to quickly draw them and came up with a python module.</p>
-<p>You can download the module at my <a href="%20%20https://github.com/plasmon360/Energy-Band-diagram" title="github repository">github repository</a>.</p>
+    <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
 <p>Here's an example on how to use this code.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
 
-<span class="c1"># # Define the metals and semiconductors. Here wf is the work function of metals,</span>
-<span class="c1"># # cb is conduction band minimum and vb is valance band maximum wrt to vacuum level</span>
+<span class="c1"># Define the metals and semiconductors. Here wf is the work function of metals,</span>
+<span class="c1"># cb is conduction band minimum and vb is valance band maximum wrt to vacuum level</span>
 
 <span class="n">ITO</span> <span class="o">=</span> <span class="n">metal</span><span class="p">(</span><span class="n">wf</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;ITO&#39;</span><span class="p">)</span>  
 <span class="n">p_nio</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.85</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.49</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;P-NIO&#39;</span><span class="p">)</span>  
@@ -133,6 +132,7 @@
 
 <p>will result in
 <a href="http://juluribk.com/wp-content/uploads/2017/09/Stack1.png"><img alt="Energy Band diagram of organic solar cell" class="aligncenter size-full wp-image-1742" height="480" src="http://juluribk.com/wp-content/uploads/2017/09/Stack1.png" width="640"></a></p>
+<p>You can download it at my <a href="%20%20https://github.com/plasmon360/Energy-Band-diagram" title="github repository">github repository</a>.</p>
   </div>
   <div class="tag-cloud">
     <p>
