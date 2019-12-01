@@ -28,9 +28,20 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 # Social widget
 SOCIAL = (('You can add links in your config file', '#'),
           ('Another social link', '#'),)
-
+MENUITEMS = (('Archives', '/archives.html'),
+             ('Categories', '/categories.html'),
+             ('Tags', '/tags.html'),)
 DEFAULT_PAGINATION = 10
-
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums':'False', },
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
+MAIN_MENU = True
 THEME = "Flex"
+#PYGMENTS_STYLE = 'monokai'
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module. Here&#39;s an example on how to use this code. from Band_diagram import metal, semiconductor, plot # Define the metals and …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Creating Energy Band Diagrams for Solar cells and LED"/>
+<meta property="og:description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module. Here&#39;s an example on how to use this code. from Band_diagram import metal, semiconductor, plot # Define the metals and …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./Energy-band-diagrams-for-solar-cell-and-led.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-09-11 10:42:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/juluribk.html">
+<meta property="article:section" content="Publications"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Creating Energy Band Diagrams for Solar cells and LED</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="."></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="Energy-band-diagrams-for-solar-cell-and-led">Creating Energy Band Diagrams for Solar cells and LED</h1>
+    <p>
+          Posted on Mon 11 September 2017 in <a href="./category/publications.html">Publications</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
+<p>Here's an example on how to use this code.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
+
+<span class="c1"># Define the metals and semiconductors. Here wf is the work function of metals,</span>
+<span class="c1"># cb is conduction band minimum and vb is valance band maximum wrt to vacuum level</span>
+
+<span class="n">ITO</span> <span class="o">=</span> <span class="n">metal</span><span class="p">(</span><span class="n">wf</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;ITO&#39;</span><span class="p">)</span>  
+<span class="n">p_nio</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.85</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.49</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;P-NIO&#39;</span><span class="p">)</span>  
+<span class="n">p3HT</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;P3HT&#39;</span><span class="p">)</span>  
+<span class="n">PCBM</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">6.5</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;PCBM&#39;</span><span class="p">)</span>  
+<span class="n">ZnO</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.2</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">7.5</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ZnO&#39;</span><span class="p">)</span>  
+<span class="n">LiF_Al</span> <span class="o">=</span> <span class="n">metal</span><span class="p">(</span><span class="n">wf</span><span class="o">=-</span><span class="mf">3.7</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;LiF/Al&#39;</span><span class="p">)</span>
+
+<span class="c1">## Create the stack  </span>
+<span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">ITO</span><span class="p">,</span><span class="n">p_nio</span><span class="p">,</span><span class="n">p3HT</span><span class="p">,</span><span class="n">PCBM</span><span class="p">,</span><span class="n">ZnO</span><span class="p">,</span><span class="n">LiF_Al</span><span class="p">]</span>
+
+<span class="c1">## plot the stack and save it  </span>
+<span class="n">plot</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;Images/Stack1.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>will result in
+<a href="http://juluribk.com/wp-content/uploads/2017/09/Stack1.png"><img alt="Energy Band diagram of organic solar cell" class="aligncenter size-full wp-image-1742" height="480" src="http://juluribk.com/wp-content/uploads/2017/09/Stack1.png" width="640"></a></p>
+<p>You can download it at my <a href="%20%20https://github.com/plasmon360/Energy-Band-diagram" title="github repository">github repository</a>.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : ".",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
