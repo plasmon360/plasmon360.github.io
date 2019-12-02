@@ -34,7 +34,8 @@ MENUITEMS = (('Archives', '/archives.html'),
 DEFAULT_PAGINATION = 10
 MARKDOWN = {
     'extension_configs': {
-        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums':'False', },
+        'markdown_katex':{'no_inline_svg': 'True'},
+        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums':'False'},
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
     },
