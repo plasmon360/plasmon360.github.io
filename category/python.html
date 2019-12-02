@@ -33,7 +33,7 @@
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content=".."/>
 
-  <title>Bala Juluri's Blog &ndash;     Category Electronics
+  <title>Bala Juluri's Blog &ndash;     Category Python
 </title>
 
 </head>
@@ -92,20 +92,21 @@
 
 <article>
   <header>
-    <h2><a href="../did-i-turn-off-the-stove-esp8266.html#did-i-turn-off-the-stove-esp8266">Did I turn off the stove...ESP8266</a></h2>
+    <h2><a href="../dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">Dealing with plotting negative, zero and positive values in log scale</a></h2>
     <p>
-          Posted on Sat 08 October 2016 in <a href="../category/electronics.html">Electronics</a>
+          Posted on Wed 30 March 2016 in <a href="../category/python.html">Python</a>
 
 
-          &#8226;     Tagged with
 
-              <a href="../tag/esp8266.html">ESP8266</a>,              <a href="../tag/iot.html">IOT</a>
     </p>
   </header>
   <div>
-      <p>My wife and I leave the house after a good meal and after like 20 minutes in the car, I ask my wife…did we turn off the stove? My wife answers…you were the last one to cook. What to do now? Go back home and check it. Now …</p>
+      <p>Sometimes you have to show positive, zero and negative number in log scale. However you cannot take log of negative numbers and zero. But one could approximate it with a log transform modulus as stated <a href="http://blogs.sas.com/content/iml/2014/07/14/log-transformation-of-pos-neg.html">here</a>.</p>
+<p>In Python with numpy:</p>
+<div class="highlight python"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sign</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">log10</span>  
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as …</span></pre></div>
         <br>
-        <a class="btn" href="../did-i-turn-off-the-stove-esp8266.html#did-i-turn-off-the-stove-esp8266">    Continue reading
+        <a class="btn" href="../dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">    Continue reading
 </a>
   </div>
 </article>

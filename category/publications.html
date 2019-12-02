@@ -129,33 +129,11 @@
   <div>
       <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
 <p>Here's an example on how to use this code.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
+<div class="highlight python"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
 
 <span class="c1"># Define the metals and …</span></pre></div>
         <br>
         <a class="btn" href="../Energy-band-diagrams-for-solar-cell-and-led.html#Energy-band-diagrams-for-solar-cell-and-led">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="../dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">Dealing with plotting negative, zero and positive values in log scale</a></h2>
-    <p>
-          Posted on Wed 30 March 2016 in <a href="../category/publications.html">Publications</a>
-
-
-
-    </p>
-  </header>
-  <div>
-      <p>Sometimes you have to show positive, zero and negative number in log scale. However you cannot take log of negative numbers and zero. But one could approximate it with a log transform modulus as stated <a href="http://blogs.sas.com/content/iml/2014/07/14/log-transformation-of-pos-neg.html">here</a>.</p>
-<p>In Python with numpy:</p>
-<p>[cc lang='python']</p>
-<p>from numpy import sign, abs, log10<br>
-import …</p>
-        <br>
-        <a class="btn" href="../dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">    Continue reading
 </a>
   </div>
   <hr />
@@ -171,9 +149,19 @@ import …</p>
     </p>
   </header>
   <div>
-      <p>[latexpage]<br>
-I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as <a href="https://pypi.python.org/pypi/tmm">TMM</a>. So I wrote a python version of LD.m</p>
-<p><a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water">LD.m</a> is a matlab file …</p>
+      <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.css"
+    integrity="sha256-SSjvSe9BDSZMUczwnbB1ywCyIk2XaNly9nn6yRm6WJo="
+    crossorigin="anonymous">
+<style type="text/css">
+    .katex img {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: inherit;
+    }
+</style>
+<p>I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as <a href="https://pypi.python.org/pypi/tmm">TMM</a>. So I wrote a python version …</p>
         <br>
         <a class="btn" href="../python-code-for-generating-plasmonic-metal-dielectric-functions.html#python-code-for-generating-plasmonic-metal-dielectric-functions">    Continue reading
 </a>
@@ -299,6 +287,24 @@ a=[10,20,30,40,50,60];<br>
 <p>and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This …</p>
         <br>
         <a class="btn" href="../all-entries-of-array-except-certain-indices-in-octavematlab.html#all-entries-of-array-except-certain-indices-in-octavematlab">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="../scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html#scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep">Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep</a></h2>
+    <p>
+          Posted on Wed 01 June 2011 in <a href="../category/publications.html">Publications</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <p>Particles scatter and absorb electromagnetic radiation. One often needs to compare the amount of scattering/absorption/extinction for particles of different shapes, composition, sizes and incident light properties (polarization, frequency and angle). In this regard, the concept of cross-sections comes into picture. There are three types of cross-sections, 1) scattering …</p>
+        <br>
+        <a class="btn" href="../scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html#scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep">    Continue reading
 </a>
   </div>
 </article>

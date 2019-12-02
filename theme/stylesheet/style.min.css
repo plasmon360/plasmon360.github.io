@@ -115,7 +115,7 @@ aside div p {
 
 aside nav ul li {
     display: inline;
-    line-height: 1.6em;
+    line-height:rt 1.6em;
     font-size: 1.28em;
     text-transform: lowercase
 }
@@ -184,7 +184,8 @@ main article blockquote,main article pre {
     background-color: hsla(0,0%,50%,.05);
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    border-left: 8px solid hsla(0,0%,50%,.075);
+/*    remove boarder on the left
+ *    border-left: 8px solid hsla(0,0%,50%,.075);*/
     border-left-width: 10px
 }
 
@@ -195,8 +196,9 @@ main article blockquote {
 }
 
 main article pre {
+    margin-top:0;
     padding: 4px;
-    font-size: .9em;
+    font-size: 1rem;
     overflow-x: auto
 }
 
@@ -488,6 +490,383 @@ a.sc-flickr {
     margin-left: 5%
 }
 
+*,::after,::before {
+    box-sizing: border-box
+}
+
+.python pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.python::before {
+    content: "Python";
+    background-color: #d8e3eb;
+    color: #5482a3
+}
+
+.pyreq pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.pyreq::before {
+    content: "Python Requirements";
+    background-color: #ddd;
+    color: #777
+}
+
+.html pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.html::before {
+    content: "HTML";
+    background-color: #d7e8d9;
+    color: #599a60
+}
+
+.htmldjango pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.htmldjango::before {
+    content: "HTML";
+    background-color: #d7e8d9;
+    color: #599a60
+}
+
+.css pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.css::before {
+    content: "CSS";
+    background-color: #fad8d2;
+    color: #e6391a
+}
+
+.c pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.c::before {
+    content: "C";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.cpp pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.cpp::before {
+    content: "C++";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.basic pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.basic::before {
+    content: "BASIC";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.bash pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.bash::before {
+    content: "Shell";
+    background-color: #f3e2bb;
+    color: #c09022
+}
+.sh pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.sh::before {
+    content: "Shell";
+    background-color: #f3e2bb;
+    color: #c09022
+}
+
+.powershell pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.powershell::before {
+    content: "Windows PowerShell";
+    background-color: #f3e2bb;
+    color: #c09022
+}
+
+.doscon pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.doscon::before {
+    content: "Windows Console";
+    background-color: #f3e2bb;
+    color: #c09022
+}
+
+.pscon pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.pscon::before {
+    content: "PowerShell Console";
+    background-color: #f3e2bb;
+    color: #c09022
+}
+
+.javascript pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.javascript::before {
+    content: "JavaScript";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.java pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.java::before {
+    content: "Java";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.csharp pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.csharp::before {
+    content: "C#";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.ruby pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.ruby::before {
+    content: "Ruby";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.lisp pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.lisp::before {
+    content: "Lisp";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.matlab pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.matlab::before {
+    content: "Matlab";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.go pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.go::before {
+    content: "Go";
+    background-color: #d7e8d9;
+    color: #599a60
+}
+
+.json pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.json::before {
+    content: "JSON";
+    background-color: #e4d7e8;
+    color: #8b599a
+}
+
+.csv pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.csv::before {
+    content: "CSV";
+    background-color: #fad8d2;
+    color: #e6391a
+}
+
+.sql pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.sql::before {
+    content: "SQL";
+    background-color: #fad8d2;
+    color: #e6391a
+}
+
+.psql pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.psql::before {
+    content: "PostgreSQL Console";
+    background-color: #fad8d2;
+    color: #e6391a
+}
+
+.redis pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.redis::before {
+    content: "Redis";
+    background-color: #fad8d2;
+    color: #e6391a
+}
+
+.text pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.text::before {
+    content: "Text";
+    background-color: #ddd;
+    color: #777
+}
+
+.yaml pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.yaml::before {
+    content: "YAML";
+    background-color: #ddd;
+    color: #777
+}
+
+.dockerfile pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.dockerfile::before {
+    content: "Dockerfile";
+    background-color: #ddd;
+    color: #777
+}
+
+.ini pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.ini::before {
+    content: "Config File";
+    background-color: #ddd;
+    color: #777
+}
+
+.vim pre {
+    border-radius: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+.highlight.vim::before {
+    content: "VimL Script";
+    background-color: #ddd;
+    color: #777
+}.highlight::before {
+    font-size: 1.125rem;
+    color: #fff;
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #999;
+    padding: 0;
+    text-indent: 1em;
+    background: #ccc;
+    padding: 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px
+}
 @media screen and (min-width: 768px) {
     aside {
         width:25vw;

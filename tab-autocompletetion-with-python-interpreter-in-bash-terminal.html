@@ -112,41 +112,46 @@
   <div>
     <p>I want to tab autocomplete commands in my python interpreter within bash terminal. This is very useful when I import a module and just want to browse through the methods and autocomplete.</p>
 <p>Found two ways to do it. Thanks to stack overflow posts.</p>
-<p>Method 1 (<a href="http://stackoverflow.com/questions/2603798/ipython-tab-completion-not-working">as mentioned here</a>):</p>
+<h3>Method 1 (<a href="http://stackoverflow.com/questions/2603798/ipython-tab-completion-not-working">as mentioned here</a>):</h3>
 <p>This is easy. Install pyreadline (pip install pyreadline) and use ipython. This is a snapshot of it working.</p>
-<p><a href="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png"><img alt="iptyhon_autocompletion" class="aligncenter size-full wp-image-1731" height="322" src="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png" width="708"></a></p>
-<p>Method 2 ( <a href="https://docs.python.org/2/library/rlcompleter.html#module-rlcompleter">as mentioned here</a>):</p>
+<p><a href="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png"><img alt="iptyhon autocompletion" class="aligncenter size-full wp-image-1731" height="322" src="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png" width="708"></a></p>
+<h3>Method 2 ( <a href="https://docs.python.org/2/library/rlcompleter.html#module-rlcompleter">as mentioned here</a>):</h3>
 <p>This is for standard  python interpreter in bash terminal (such as in Ubuntu). This method requires readline and rlcompeter modules. Install these modules if you do not have them installed. This can be done with pip.</p>
-<p>Basically, the idea is to have a python interpreter look for the value of environment path variable "PYTHONSTARTUP". This variable should be set to a location for the file ("python_startup_file.py") with commands that enable tab autocompletion.</p>
-<p>In my home directory "/home/bjuluri" I make a file called "python_startup_file.py" by</p>
-<p>[cc lang ='bash']</p>
-<p>bjuluri@bjuluri-VirtualBox:\~\$ gedit python_startup_file.py</p>
-<p>[/cc]</p>
+<p>Basically, the idea is to have a python interpreter look for the value of environment path variable "PYTHONSTARTUP". This variable should be set to a location for the file ("python startup file.py") with commands that enable tab autocompletion.</p>
+<p>In my home directory "/home/bjuluri" I make a file called "python startup file.py" by</p>
+<div class="highlight bash"><pre><span></span>bjuluri@bjuluri-VirtualBox:<span class="se">\~\$</span> gedit python startup file.py
+</pre></div>
+
+
 <p>copy and paste following lines</p>
-<p>[cc lang = 'python']<br>
-try:<br>
-import readline<br>
-except ImportError:<br>
-print "Module readline not available."<br>
-else:<br>
-import rlcompleter<br>
-readline.parse_and_bind("tab: complete")<br>
-[/cc]</p>
+<div class="highlight python"><pre><span></span><span class="k">try</span><span class="p">:</span>  
+   <span class="kn">import</span> <span class="nn">readline</span>  
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  
+    <span class="k">print</span> <span class="s2">&quot;Module readline not available.&quot;</span>  
+<span class="k">else</span><span class="p">:</span>  
+    <span class="kn">import</span> <span class="nn">rlcompleter</span>  
+    <span class="n">readline</span><span class="o">.</span><span class="n">parse</span> <span class="ow">and</span> <span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tab: complete&quot;</span><span class="p">)</span>
+</pre></div>
+
+
 <p>Save and close the file.</p>
-<p>Now lets assign the an environmental variable "PYTHONSTARTUP" to the location of this "python_startup_file"</p>
+<p>Now lets assign the an environmental variable "PYTHONSTARTUP" to the location of this "python startup file"</p>
 <p>./bashrc is loaded whenever a bash terminal is fired. This file sits in the user's home directory, we will edit it and assign the environmental variable at the end of the file.</p>
-<p>[cc]</p>
-<p>nano .bashrc</p>
-<p>[/cc]</p>
+<div class="highlight bash"><pre><span></span>nano .bashrc
+</pre></div>
+
+
 <p>at the end of the file, copy and paste</p>
-<p>[cc lang = 'bash']</p>
-<p>export PYTHONSTARTUP="python_startup_file.py"</p>
-<p>[/cc]</p>
+<div class="highlight bash"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONSTARTUP</span><span class="o">=</span><span class="s2">&quot;python startup file.py&quot;</span>
+</pre></div>
+
+
 <p>Save the file and exit.</p>
 <p>reload the .bashrc file in terminal by either opening a new terminal or by typing the following in the current terminal.</p>
-<p>[cc]</p>
-<p>source .bashrc</p>
-<p>[/cc]</p>
+<div class="highlight bash"><pre><span></span><span class="nb">source</span> .bashrc
+</pre></div>
+
+
 <p>Once those commands run at the python startup, tab autocompletion with suggestions will be enabled in the interpreter.</p>
   </div>
   <div class="tag-cloud">
