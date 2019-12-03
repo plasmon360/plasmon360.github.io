@@ -14,4 +14,8 @@ It can be programmed to connect to wifi network and act as tcp server or tcp cli
 &lt;p&gt;Here is final implementation of the project.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="plasmon360.github.io/images/stove_status_implementation.jpg" title="Implementation"&gt;
 &lt;img alt="" src="plasmon360.github.io/images/stove_status_prototype_box.png.jpg" title="Final prototype"&gt;&lt;/p&gt;
-&lt;p&gt;The code for this project (server application on esp8266 serving GPIO4 status) can be seen &lt;a href="https://github.com/plasmon360/esp8266_c_examples/tree/master/examples/did_i_turn_off_my_stove"&gt;here at my github repository.&lt;/a&gt;&lt;/p&gt;</content><category term="Electronics"></category><category term="ESP8266"></category><category term="IOT"></category></entry></feed>
+&lt;div class ="alert alert-primary"&gt;
+&lt;p&gt;
+&lt;strong&gt;Code&lt;/strong&gt; for this project is available &lt;a href="https://github.com/plasmon360/esp8266_c_examples/tree/master/examples/did_i_turn_off_my_stove"&gt; at my gihub page&lt;/a&gt;
+&lt;/p&gt;
+&lt;/div&gt;</content><category term="Electronics"></category><category term="ESP8266"></category><category term="IOT"></category></entry></feed>
