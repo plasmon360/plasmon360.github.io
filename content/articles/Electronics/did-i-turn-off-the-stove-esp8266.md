@@ -36,4 +36,8 @@ Here is final implementation of the project.
 ![]({filename}/images/stove_status_prototype_box.png.jpg "Final prototype")
 
 
-The code for this project (server application on esp8266 serving GPIO4 status) can be seen [here at my github repository.](https://github.com/plasmon360/esp8266_c_examples/tree/master/examples/did_i_turn_off_my_stove)
+<div class ="alert alert-primary">
+<p>
+<strong>Code</strong> for this project is available <a href="https://github.com/plasmon360/esp8266_c_examples/tree/master/examples/did_i_turn_off_my_stove"> at my gihub page</a>
+</p>
+</div>
