@@ -122,7 +122,7 @@
 <p>3) check it by <code>meep --version</code> and quit the program by <code>(exit)</code></p>
 <p><strong>Modifying the material definition type</strong></p>
 <p>For meep 1.1, I used the following code to define silver material with lorentian model from Rakic et al with 100 nm length unit:</p>
-<div class="highlight scheme"><pre><span></span><span class="p">(</span><span class="k">define </span><span class="nv">myAg</span> <span class="p">(</span><span class="nf">make</span> <span class="nv">dielectric</span> <span class="p">(</span><span class="nf">epsilon</span> <span class="mi">1</span><span class="p">)</span>  
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="k">define </span><span class="nv">myAg</span> <span class="p">(</span><span class="nf">make</span> <span class="nv">dielectric</span> <span class="p">(</span><span class="nf">epsilon</span> <span class="mi">1</span><span class="p">)</span>  
 <span class="p">(</span><span class="nf">polarizations</span>  
 <span class="p">(</span><span class="nf">make</span> <span class="nv">polarizability</span>  
 <span class="p">(</span><span class="nf">omega</span> <span class="mi">1</span><span class="nv">e-20</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.0038715</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">4.4625</span><span class="nv">e+39</span><span class="p">))</span>  
@@ -146,7 +146,7 @@
 <p>changed the work <code>polarizability</code> to <code>lorentzian-susceptibility</code></p>
 <p>changed the word <code>omega</code> to <code>frequency</code></p>
 <p>So the meep1.2 code looks like this:</p>
-<div class="highlight scheme"><pre><span></span><span class="p">(</span><span class="k">define </span><span class="nv">myAg</span> <span class="p">(</span><span class="nf">make</span> <span class="nv">dielectric</span> <span class="p">(</span><span class="nf">epsilon</span> <span class="mi">1</span><span class="p">)</span>  
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="k">define </span><span class="nv">myAg</span> <span class="p">(</span><span class="nf">make</span> <span class="nv">dielectric</span> <span class="p">(</span><span class="nf">epsilon</span> <span class="mi">1</span><span class="p">)</span>  
 <span class="p">(</span><span class="nf">E-susceptibilities</span>  
 <span class="p">(</span><span class="nf">make</span> <span class="nv">lorentzian-susceptibility</span>  
 <span class="p">(</span><span class="nf">frequency</span> <span class="mi">1</span><span class="nv">e-20</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.0038715</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">4.4625</span><span class="nv">e+39</span><span class="p">))</span>  

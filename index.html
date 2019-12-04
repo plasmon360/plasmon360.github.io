@@ -93,7 +93,7 @@
   <header>
     <h2><a href="./calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution.html#calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution">Calculating molarity, weight concentration from absorbance value for plasmonic nanoparticles in solution</a></h2>
     <p>
-          Posted on Wed 20 June 2018 in <a href="./category/publications.html">Publications</a>
+          Posted on Wed 20 June 2018 in <a href="./category/plasmonics.html">Plasmonics</a>
 
 
 
@@ -119,16 +119,18 @@
   <header>
     <h2><a href="./Energy-band-diagrams-for-solar-cell-and-led.html#Energy-band-diagrams-for-solar-cell-and-led">Creating Energy Band Diagrams for Solar cells and LED</a></h2>
     <p>
-          Posted on Mon 11 September 2017 in <a href="./category/publications.html">Publications</a>
+          Posted on Mon 11 September 2017 in <a href="./category/misc.html">Misc</a>
 
 
+          &#8226;     Tagged with
 
+              <a href="./tag/python.html">Python</a>
     </p>
   </header>
   <div>
       <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
 <p>Here's an example on how to use this code.</p>
-<div class="highlight python"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
 
 <span class="c1"># Define the metals and …</span></pre></div>
         <br>
@@ -141,7 +143,7 @@
   <header>
     <h2><a href="./tab-autocompletetion-with-python-interpreter-in-bash-terminal.html#tab-autocompletetion-with-python-interpreter-in-bash-terminal">Tab autocompletetion with python interpreter in bash terminal</a></h2>
     <p>
-          Posted on Sat 29 October 2016 in <a href="./category/free-software.html">Free Software</a>
+          Posted on Sat 29 October 2016 in <a href="./category/misc.html">Misc</a>
 
 
           &#8226;     Tagged with
@@ -218,16 +220,18 @@ The real and imaginary part of dielectric permittivity of the metals is importan
   <header>
     <h2><a href="./dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">Dealing with plotting negative, zero and positive values in log scale</a></h2>
     <p>
-          Posted on Wed 30 March 2016 in <a href="./category/python.html">Python</a>
+          Posted on Wed 30 March 2016 in <a href="./category/misc.html">Misc</a>
 
 
+          &#8226;     Tagged with
 
+              <a href="./tag/python.html">Python</a>
     </p>
   </header>
   <div>
       <p>Sometimes you have to show positive, zero and negative number in log scale. However you cannot take log of negative numbers and zero. But one could approximate it with a log transform modulus as stated <a href="http://blogs.sas.com/content/iml/2014/07/14/log-transformation-of-pos-neg.html">here</a>.</p>
 <p>In Python with numpy:</p>
-<div class="highlight python"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sign</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">log10</span>  
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sign</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">log10</span>  
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as …</span></pre></div>
         <br>
         <a class="btn" href="./dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">    Continue reading
@@ -237,12 +241,14 @@ The real and imaginary part of dielectric permittivity of the metals is importan
 </article>
 <article>
   <header>
-    <h2><a href="./python-code-for-generating-plasmonic-metal-dielectric-functions.html#python-code-for-generating-plasmonic-metal-dielectric-functions">Python code for generating plasmonic metal dielectric functions</a></h2>
+    <h2><a href="./Generating-plasmonic-metal-dielectric-functions-in-Python.html#Generating-plasmonic-metal-dielectric-functions-in-Python">Generating plasmonic metal dielectric functions in Python</a></h2>
     <p>
-          Posted on Thu 10 September 2015 in <a href="./category/publications.html">Publications</a>
+          Posted on Thu 10 September 2015 in <a href="./category/plasmonics.html">Plasmonics</a>
 
 
+          &#8226;     Tagged with
 
+              <a href="./tag/python.html">Python</a>
     </p>
   </header>
   <div>
@@ -258,9 +264,10 @@ The real and imaginary part of dielectric permittivity of the metals is importan
       height: inherit;
     }
 </style>
-<p>I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as <a href="https://pypi.python.org/pypi/tmm">TMM</a>. So I wrote a python version …</p>
+<p>I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m.</p>
+<p><a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water">LD.m</a> is a matlab file written by Bora Ung …</p>
         <br>
-        <a class="btn" href="./python-code-for-generating-plasmonic-metal-dielectric-functions.html#python-code-for-generating-plasmonic-metal-dielectric-functions">    Continue reading
+        <a class="btn" href="./Generating-plasmonic-metal-dielectric-functions-in-Python.html#Generating-plasmonic-metal-dielectric-functions-in-Python">    Continue reading
 </a>
   </div>
   <hr />
@@ -269,10 +276,12 @@ The real and imaginary part of dielectric permittivity of the metals is importan
   <header>
     <h2><a href="./ddscat-on-amazon-ec2.html#ddscat-on-amazon-ec2">DDSCAT on amazon EC2</a></h2>
     <p>
-          Posted on Thu 03 September 2015 in <a href="./category/publications.html">Publications</a>
+          Posted on Thu 03 September 2015 in <a href="./category/plasmonics.html">Plasmonics</a>
 
 
+          &#8226;     Tagged with
 
+              <a href="./tag/ddscat.html">DDSCAT</a>
     </p>
   </header>
   <div>
@@ -310,14 +319,14 @@ The real and imaginary part of dielectric permittivity of the metals is importan
   <header>
     <h2><a href="./doorbell-with-nrf24l01-and-arduino.html#doorbell-with-nrf24l01-and-arduino">Doorbell with NRF24L01 and Arduino</a></h2>
     <p>
-          Posted on Fri 29 May 2015 in <a href="./category/publications.html">Publications</a>
+          Posted on Fri 29 May 2015 in <a href="./category/electronics.html">Electronics</a>
 
 
 
     </p>
   </header>
   <div>
-      <p>My current apartment does not have a doorbell (Its strange but it is true). I went ahead and built a doorbell using two arduino pro-minis and two NRF24L01 transceivers. The melody to be played when a guest presses a button is controlled by me. I have four melodies programmed in …</p>
+      <p>My current apartment does not have a doorbell (Its strange but it is true). I went ahead and built a doorbell using two arduino pro-minis and two NRF24L01 transceivers. The melody to be played when a guest presses a button can also be controlled. I have four melodies programmed in …</p>
         <br>
         <a class="btn" href="./doorbell-with-nrf24l01-and-arduino.html#doorbell-with-nrf24l01-and-arduino">    Continue reading
 </a>

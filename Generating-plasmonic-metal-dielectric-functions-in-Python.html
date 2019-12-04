@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content=".katex img { display: block; position: absolute; width: 100%; height: inherit; } I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m. LD.m is a matlab file written by Bora Ung …" />
+<meta name="keywords" content="Python">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Generating plasmonic metal dielectric functions in Python"/>
+<meta property="og:description" content=".katex img { display: block; position: absolute; width: 100%; height: inherit; } I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m. LD.m is a matlab file written by Bora Ung …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./Generating-plasmonic-metal-dielectric-functions-in-Python.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-09-10 08:54:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/juluribk.html">
+<meta property="article:section" content="Plasmonics"/>
+<meta property="article:tag" content="Python"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Generating plasmonic metal dielectric functions in Python</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="."></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="Generating-plasmonic-metal-dielectric-functions-in-Python">Generating plasmonic metal dielectric functions in Python</h1>
+    <p>
+          Posted on Thu 10 September 2015 in <a href="./category/plasmonics.html">Plasmonics</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.css"
+    integrity="sha256-SSjvSe9BDSZMUczwnbB1ywCyIk2XaNly9nn6yRm6WJo="
+    crossorigin="anonymous">
+<style type="text/css">
+    .katex img {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: inherit;
+    }
+</style>
+<p>I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m.</p>
+<p><a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water">LD.m</a> is a matlab file written by Bora Ung that produces dielectric functions of metals either for Lortenz and Loretnz drude models. </p>
+<p>The dielectric functions are given as follows:</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ϵ</mi><mo stretchy="false">(</mo><mi>ω</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mfrac><mrow><msub><mi>f</mi><mn>1</mn></msub><msubsup><mi>ω</mi><mi>p</mi><mrow><mo mathvariant="normal">′</mo><mn>2</mn></mrow></msubsup></mrow><mrow><mo stretchy="false">(</mo><msup><mi>ω</mi><mn>2</mn></msup><mo>+</mo><mi>i</mi><msubsup><mi mathvariant="normal">Γ</mi><mn>1</mn><mo mathvariant="normal">′</mo></msubsup><mi>ω</mi><mo stretchy="false">)</mo></mrow></mfrac><mo>+</mo><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>2</mn></mrow><mi>n</mi></msubsup><mfrac><mrow><msub><mi>f</mi><mi>j</mi></msub><msubsup><mi>ω</mi><mi>p</mi><mrow><mo mathvariant="normal">′</mo><mn>2</mn></mrow></msubsup></mrow><mrow><mo stretchy="false">(</mo><msubsup><mi>ω</mi><mrow><mi>o</mi><mo separator="true">,</mo><mi>j</mi></mrow><mrow><mo mathvariant="normal">′</mo><mn>2</mn></mrow></msubsup><mo>−</mo><msup><mi>ω</mi><mn>2</mn></msup><mo>−</mo><mi>i</mi><msubsup><mi mathvariant="normal">Γ</mi><mi>j</mi><mo mathvariant="normal">′</mo></msubsup><mi>ω</mi><mo stretchy="false">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\epsilon(\omega)=1-\frac{f_1\omega_p&#x27;^2}{(\omega^2+i\Gamma_1&#x27;\omega)}+\sum_{j=2}^{n}\frac{f_j\omega_p&#x27;^2}{(\omega_{o,j}&#x27;^2-\omega^2-i\Gamma_j&#x27;\omega)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">ϵ</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.7944em;vertical-align:-0.56306em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2313399999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mbin mtight">+</span><span class="mord mathdefault mtight">i</span><span class="mord mtight"><span class="mord mtight">Γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7416285714285715em;"><span style="top:-2.188485714285714em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span><span style="top:-2.8448em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.31151428571428574em;"><span></span></span></span></span></span></span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.60742em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31731428571428577em;"><span style="top:-2.357em;margin-left:-0.10764em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8913142857142857em;"><span style="top:-2.214em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">p</span></span></span><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.42488571428571426em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.56306em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.9277399999999998em;vertical-align:-0.6963999999999999em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2313399999999999em;"><span style="top:-2.6264200000000004em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8051142857142857em;"><span style="top:-2.177714285714286em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">o</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span style="top:-2.8448em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.46117142857142857em;"><span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7463142857142857em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mbin mtight">−</span><span class="mord mathdefault mtight">i</span><span class="mord mtight"><span class="mord mtight">Γ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7416285714285715em;"><span style="top:-2.177714285714286em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-2.8448em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.46117142857142857em;"><span></span></span></span></span></span></span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.60742em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.10764em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">ω</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8913142857142857em;"><span style="top:-2.214em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">p</span></span></span><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.42488571428571426em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.6963999999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>
+.</p>
+<p>The first part of the function is the Drude part and the second part is the Lorentz part. The parameters for these models are taken from <em>Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998).</em></p>
+<div class = "alert alert-primary">
+<strong> Note: </strong> You can find my module (LD.py) and its documentation <a href = "https://github.com/plasmon360/LD_python">at my github account</a>.
+</div>
+
+<p>A typical example on how to use this modules is shown below:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="c1"># Make sure the file is accessible to PYTHONPATH or in the same</span>
+<span class="c1"># directory of file which is trying to import</span>
+<span class="kn">from</span> <span class="nn">LD</span> <span class="kn">import</span> <span class="n">LD</span>
+
+<span class="c1"># Creates a wavelength vector from 300 nm to 1000 nm of length</span>
+<span class="c1"># 100</span>
+<span class="n">lamda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300E-9</span><span class="p">,</span> <span class="mf">1000E-9</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Creates gold object with dielectric function of LD model</span>
+<span class="n">gold</span> <span class="o">=</span> <span class="n">LD</span><span class="p">(</span><span class="n">lamda</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;LD&#39;</span><span class="p">)</span>
+
+<span class="c1"># prints the real part of the epislion</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">epsilon_real</span>
+
+<span class="c1"># prints the imag part of the epsilon</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">epsilon_imag</span>
+
+<span class="c1"># prints the real part of the refractive index</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">n</span>
+
+<span class="c1"># prints the imag part of the refactive index</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">k</span>
+
+<span class="c1"># plots wavelength vs real epilon and imag epsilon</span>
+<span class="n">gold</span><span class="o">.</span><span class="n">plot_epsilon</span><span class="p">()</span>
+
+<span class="c1"># plots wavelength vs n and k .</span>
+<span class="n">gold</span><span class="o">.</span><span class="n">plot_n_k</span><span class="p">()</span>
+</pre></div>
+
+
+<p>This is graph comparing the Au eps data obtained using LD.m and LD.python. The are exactly the same.</p>
+<p><img alt="" class="center" src="./images/LD_python_matlab_comp.png"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/python.html">Python</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : ".",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

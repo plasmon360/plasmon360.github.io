@@ -18,4 +18,426 @@ It can be programmed to connect to wifi network and act as tcp server or tcp cli
 &lt;p&gt;
 &lt;strong&gt;Code&lt;/strong&gt; for this project is available &lt;a href="https://github.com/plasmon360/esp8266_c_examples/tree/master/examples/did_i_turn_off_my_stove"&gt; at my gihub page&lt;/a&gt;
 &lt;/p&gt;
-&lt;/div&gt;</content><category term="Electronics"></category><category term="ESP8266"></category><category term="IOT"></category></entry></feed>
+&lt;/div&gt;</content><category term="Electronics"></category><category term="ESP8266"></category><category term="IOT"></category></entry><entry><title>Doorbell with NRF24L01 and Arduino</title><link href="plasmon360.github.io/doorbell-with-nrf24l01-and-arduino.html" rel="alternate"></link><published>2015-05-29T13:30:00-07:00</published><updated>2015-05-29T13:30:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-05-29:plasmon360.github.io/doorbell-with-nrf24l01-and-arduino.html</id><summary type="html">&lt;p&gt;My current apartment does not have a doorbell (Its strange but it is true). I went ahead and built a doorbell using two arduino pro-minis and two NRF24L01 transceivers. The melody to be played when a guest presses a button can also be controlled. I have four melodies programmed in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;My current apartment does not have a doorbell (Its strange but it is true). I went ahead and built a doorbell using two arduino pro-minis and two NRF24L01 transceivers. The melody to be played when a guest presses a button can also be controlled. I have four melodies programmed in.&lt;/p&gt;
+&lt;p&gt;Here it is in full action:&lt;/p&gt;
+&lt;iframe width="100%" height="100%" src="https://www.youtube.com/embed/wOZX-KPf5XA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Here are some details:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remote&lt;/strong&gt; &lt;/p&gt;
+&lt;p&gt;The schematic for the remote is shown below. The remote is configured to run on 2 AAA batteries and goes to sleep mode most of the time and then wakes up when a guest presses the button. This button press is transmitted to an NRF24L01 receiver on the doorbell by a NRF24L01 tranmisster. I decreased the overall current to 65 microA by removing the LED on the arduino pro mini and used &lt;a href="https://github.com/rocketscream/Low-Power"&gt;rocket&lt;/a&gt; library's sleep functions. This arduino pro mini was running at 3.3V and 8 MHz. Could have gone even further in current reduction by removing the board regulator, but I was happy with 65 microAmps. For AAA batteries, assuming 1000 mAh capacity, it should last around 20 months.&lt;/p&gt;
+&lt;p&gt;Here are some pictures of the remote. I enclosed it in a eye wear case, which turned out to be a nice enclosure.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/doorbell_remote1.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/doorbell_remote2.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/doorbell_remote3.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Doorbell&lt;/strong&gt;  &lt;/p&gt;
+&lt;p&gt;The schematic for the doorbell is shown below. This circuit is powered by 9V adapter from AC mains, which is  converted to a 5V and 3.3V by &lt;a href="http://www.ebay.com/itm/ICSA009A-Stable-Step-Down-Power-Supply-Module-3-3V-5V-for-MB-102-Breadboard-/221584526129"&gt;ICSA009&lt;/a&gt; breadboard adapter. I use 3.3V to power the arduino pro-mini and NRF2L01 receiver. Other than that, nothing fancy here, but I have four doorbell melodies on the arduino that can be chosen with a DIP switch. &lt;/p&gt;
+&lt;p&gt;Connecting buzzer directly to the arduino resulted in very less volume since arduino could source much current, so I connected it to 5V supply with 2N3409 transitor. &lt;a href="http://bryanduxbury.com/2012/01/20/one-transistor-audio-amplifier-for-arduino-projects/"&gt;The base of the transistor is controlled by an arduino pin in series with a 100 ohm resistor&lt;/a&gt;. I placed the whole breadboard into a food storage container as a case.&lt;/p&gt;
+&lt;p&gt;Here are some photos of the final prototype.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/doorbell_1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/doorbell_2.jpg"&gt;&lt;/p&gt;
+&lt;div class = "alert alert-primary"&gt;
+
+&lt;strong&gt; Note :&lt;/strong&gt; You can find my code at my &lt;a href = "https://github.com/plasmon360/Arduino_NRF24L01_Doorbell_project"&gt; github account&lt;/a&gt;.
+
+The same code should be uploaded to both remote and doorbell arduino's.
+&lt;/div&gt;</content><category term="Electronics"></category></entry><entry><title>Airtel tune on arduino</title><link href="plasmon360.github.io/airtel-tune-on-arduino.html" rel="alternate"></link><published>2015-05-21T19:54:00-07:00</published><updated>2015-05-21T19:54:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-05-21:plasmon360.github.io/airtel-tune-on-arduino.html</id><summary type="html">&lt;p&gt;For my doorbell project, I needed some melodies to be played on arduino. One can takes notes of a melody and write a corresponding arduino code.&lt;/p&gt;
+&lt;p&gt;I like airtel tune and wanted to play it with arduino. I got the notes from https://www.youtube.com/watch?v=3m5j5UIRqQc&lt;/p&gt;
+&lt;p&gt;Here …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For my doorbell project, I needed some melodies to be played on arduino. One can takes notes of a melody and write a corresponding arduino code.&lt;/p&gt;
+&lt;p&gt;I like airtel tune and wanted to play it with arduino. I got the notes from https://www.youtube.com/watch?v=3m5j5UIRqQc&lt;/p&gt;
+&lt;p&gt;Here is the final result, where I use it in my doorbell project.&lt;/p&gt;
+&lt;iframe width="420" height="315" src="https://www.youtube.com/embed/r5VJHr3noC0" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;My code is here:&lt;/p&gt;
+&lt;p&gt;
+&lt;script src="https://gist.github.com/plasmon360/ed5223a391370c61b4a3.js"&gt;&lt;/script&gt;
+&lt;/p&gt;</content><category term="Electronics"></category><category term="Arduino"></category></entry><entry><title>Controlling Rigol Dp832 with python</title><link href="plasmon360.github.io/controlling-rigol-dp832-with-python.html" rel="alternate"></link><published>2015-05-08T17:08:00-07:00</published><updated>2015-05-08T17:08:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-05-08:plasmon360.github.io/controlling-rigol-dp832-with-python.html</id><summary type="html">&lt;p&gt;DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. &lt;/p&gt;
+&lt;p&gt;I got my hands on a RIGOL DP832 which is three …&lt;/p&gt;</summary><content type="html">&lt;p&gt;DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. &lt;/p&gt;
+&lt;p&gt;I got my hands on a RIGOL DP832 which is three channel (two 30V and one 5V) power supply and is programmable through SCPI commands. The device can be controlled by USB and rs232 (optionally by LAN). SCPI commands can be sent to the instruments using VISA interface. I used Python and pyvisa module to communicate with it. I wrote a class with basic functionality. Currently it has a console application and turning on and off at a  particular bias and current value on a specified channel.&lt;/p&gt;
+&lt;p&gt;You can add more methods to the class for advanced features. You can see those commands in the &lt;a href="http://www.batronix.com/pdf/Rigol/ProgrammingGuide/DP800_ProgrammingGuide_EN.pdf"&gt;programming manual&lt;/a&gt;.&lt;/p&gt;
+&lt;div class = "alert alert-primary"&gt;
+&lt;strong&gt; Note: &lt;/strong&gt; Download this gist from &lt;a href = "https://gist.github.com/plasmon360/3204dc28deddeefe42d5"&gt; my gihub &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;Created on Sat Dec 21 13:57:32 2013&lt;/span&gt;
+
+&lt;span class="sd"&gt;@author: bjuluri&lt;/span&gt;
+&lt;span class="sd"&gt;Uses Pyvisa for commounication&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;visa&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Rigoldp832&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;usb_serial&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instrument_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_instruments_list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;usb_address&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;instrument_list&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;elem&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;USB&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="n"&gt;usb_serial&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;  &lt;span class="c1"&gt;# Search a instrument with USB and serial number in the instrument list&lt;/span&gt;
+
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;usb_address&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Not Connected&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;usb_address&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="p"&gt;[]:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;usb_address&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Connected&amp;quot;&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connected_with&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;USB&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="n"&gt;VisaIOError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Not Connected&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Pyvisa is not able to find the connections&amp;quot;&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;SYST:ERR?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; recieved. No error occured&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; recieved. An Error occured: &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;resets the instrument, registers,buffers&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*RST&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;close_instrument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;set_bias&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i_protection_level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:INST CH{channel}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:CURR {i}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:CURR:PROT {i_level}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i_level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i_protection_level&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:CURR:PROT:STAT ON&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:VOLT {0}&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;turn_off&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:OUTP CH{channel},OFF&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;turn_on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:OUTP CH{channel},ON&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;        opens a console to send commands. See the commands in the user manual.&lt;/span&gt;
+
+&lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;exit()&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Rigol DP832 console, Type exit() to leave&amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;answer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;answer&lt;/span&gt;
+            &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;cmd&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;exit()&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cmd&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Exiting the Rigol DP832 console&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Rigoldp832&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;usb_serial&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;your_Serial_number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;#To start a console&lt;/span&gt;
+    &lt;span class="c1"&gt;#r.console()&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# This will reset the instrument, apply a bias of 1 V wih 0.1A of protection current for 10 sec and then turn off&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reset&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_bias&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;i_protection_level&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;turn_on&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;turn_off&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close_instrument&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Electronics"></category><category term="Instrumentation"></category><category term="python"></category></entry><entry><title>Hacking Weighing Scale to Upload Weight to Plotly using Raspberry Pi</title><link href="plasmon360.github.io/hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi.html" rel="alternate"></link><published>2015-04-11T12:44:00-07:00</published><updated>2015-04-11T12:44:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-04-11:plasmon360.github.io/hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi.html</id><summary type="html">&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_hack_summary_img.png"&gt;&lt;/p&gt;
+&lt;p&gt;I have been interested in monitoring and keep track of my weight. In the past,
+I have used different phone apps to track my weight. They work reasonably well,
+but I was thinking of reading weight data directly from my weighing scale and
+upload the data to an online database …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_hack_summary_img.png"&gt;&lt;/p&gt;
+&lt;p&gt;I have been interested in monitoring and keep track of my weight. In the past,
+I have used different phone apps to track my weight. They work reasonably well,
+but I was thinking of reading weight data directly from my weighing scale and
+upload the data to an online database. &lt;/p&gt;
+&lt;p&gt;It meant that I needed a micro-controller connect to my house WIFI connection
+and upload that data to somewhere in the cloud. I have seen some projects
+online that use an arduino for this purpose. They use arduino to serially send
+information to computer. The information on the computer can be potentially
+sent to an online database. One could also upload data directly from arduino to
+internet using a wifi shield, but this makes it more expensive. I was therefore
+more inclined towards Raspberry pi because it connects to wifi easily and can
+read data from weighing scale. I was also inclined in programming in python on
+raspberry pi rather than C, which I am not very proficient.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Choice of weighing scale&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I looked around some projects online and &lt;a href="http://fivevolt.blogspot.com/2011/01/hacking-scale-to-add-zigbee-goodness.html"&gt;found a
+weighing scale&lt;/a&gt;
+that seemed easy to get data from by reading the LED signals. I bought the same
+model for around 20 bucks at my local target. The first thing I noticed after
+opening this scale was that it did not look similar to what was described at
+fivevolt blog. I did not see the four transistors and HC164 of which the author
+talks about in his blog. May be the manufacturer changed the design or they
+have different versions of it. I was disappointed.&lt;/p&gt;
+&lt;p&gt;The PCB on the weighing scale had a epoxy covered region, which I presume is
+the microcontroller and it is connected to a big chip on the board. I looked at
+the name of the big chip on the pcb board and I can barely read TM1628. A
+simple google search revealed that it was an LED controller for the led
+display. The led display has four grids (digits). Each of this digit is a 8
+segment display. TM1628 controls which grids and segments were to be lit or
+not (HI or LOW). So I can see 12 wires going from LED controller to LED
+display (four for controlling each grid and eight for the 7 segment display of each grid). I could figure out
+which wires correspond to which grid and which segment and tried to solder
+wires. But that meant I have to read 12 digital signals (Hi or Low) using
+raspberry pi GPIO. This also looks very ugly too. So I decided to take a
+different route instead.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; Understanding how data was being processed inside&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A close inspection revealed that the microcontroller onboard was sending
+instructions to TM1628 using SPI protocol. So I intercepted these SPI specific voltage pulses
+(3.3V) using Raspberry Pi as shown in figure below. &lt;/p&gt;
+&lt;p&gt;SPI bus consists of master
+and slave and has four lines in between them, which are MOSI, MISO, SCLK and SS
+(for more information see &lt;a href="https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi"&gt;here&lt;/a&gt;.  In this
+case, the TM1628 is the slave and the microcontroller on board is the master.
+The slave does not send any data to the microcontroller so there is no MISO
+line. SCLK is the clock signal. MOSI and SS line are referred as DIO and STB
+respectively in the TM1628 manual.&lt;/p&gt;
+&lt;p&gt;Schematic of the hacked weighing scale&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_schematic.png"&gt;&lt;/p&gt;
+&lt;p&gt;After intercepting the STB, SCLK and DIO with raspberry pi as shown in the
+above figure (used bitscope package to read these signals). A typical pattern looks
+like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_oscilloscope_1.png"&gt;&lt;/p&gt;
+&lt;p&gt;Each green line in the DIO contains data that is synced to STB and SCLK. When I
+zoom on the each green line I see the following:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_oscilloscope_2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Bits of data are being sent out in the DIO line at the rising edge of the clock
+signal.To decode these bytes.&lt;/p&gt;
+&lt;p&gt;When I just step on the weighing scale and get down, weighing scale displayed
+“0.0” for some time and then the display turns off. I was able to get the bytes
+for this action and start to decode according to the TM1628 manual. Below are
+the bytes being sent and the decoded information for the action of just
+stepping on and stepping of the weighing scale.&lt;/p&gt;
+&lt;p&gt;The order in which bytes are sent is shown below:
+&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_bytes_sent.png"&gt;&lt;/p&gt;
+&lt;p&gt;Command 1 and command 2 prepare the display. Command 3 helps in preparing the
+grid/digit. It can be seen from the above figure, once a grid is prepared, a
+character is being written to that grid/digit. This process starts from the
+first grid and ends at the fifth grid. This cycle repeats many times. The cycle
+repeats so fast that we think the display is not changing.  I used the
+following cheat sheets for decoding the above data bytes. &lt;/p&gt;
+&lt;p&gt;Following table is for command 3 where a certain grid/digit has to being chosen.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_grid_digit.png"&gt;&lt;/p&gt;
+&lt;p&gt;Following table shows the bytes for displaying a certain character on a certain
+grid/digit.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_segement_char.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt; Code to capture the data &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Once I understood the commands being sent and how to interpret them, I wrote a
+python code that uses &lt;a href="http://abyz.co.uk/rpi/pigpio/python.html"&gt;PIGPIO&lt;/a&gt; to
+read these commands. &lt;/p&gt;
+&lt;div class = "alert alert-primary"&gt; &lt;strong&gt;Note:&lt;/strong&gt; You can download the
+source code for this project at &lt;a href =
+"https://gist.github.com/plasmon360/ab314441efec4c7b4298"&gt; my github
+account&lt;/a&gt; &lt;/div&gt;
+
+&lt;p&gt;I also added the capability to select a user with a rotary switch and assign weight information. A user can be guest, myself or my wife.&lt;/p&gt;
+&lt;p&gt;Weight information is written to a file locally and also uploads the information to plotly for visualization.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Final product&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_final_product1.png"&gt;
+&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_final_product2.png"&gt;&lt;/p&gt;
+&lt;p&gt;Below is the youtube video of how the program works (without plotly
+integration)  &lt;/p&gt;
+&lt;iframe src="https://www.youtube.com/embed/KuFBi6P7Lm8"width="100%"
+height="100%" frameborder="0" allowfullscreen="allowfullscreen"&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Below is the plotly image showing the weight data collected over a year. I am still overweight.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/weighing_scale_plotly_image.png"&gt;&lt;/p&gt;</content><category term="Electronics"></category><category term="python"></category></entry><entry><title>Controlling Newport 1918 Power Meter with Python</title><link href="plasmon360.github.io/newport-1918-power-meter-with-python.html" rel="alternate"></link><published>2015-04-04T12:23:00-07:00</published><updated>2015-04-04T12:23:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-04-04:plasmon360.github.io/newport-1918-power-meter-with-python.html</id><summary type="html">&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/newport_1918_power_meter.jpg" title=""&gt;&lt;/p&gt;
+&lt;p&gt;Optical power meters in-conjunction with a detector are used to measure power from a laser source or monochromatic output. &lt;/p&gt;
+&lt;p&gt;At work, we use &lt;a href="http://www.newport.com/Optical-Power-Meter-High-Performance-Hand-Held-19/509478/1033/info.aspx" title="Newport 1918"&gt;Newport 1918&lt;/a&gt; power meter. This power meter comes with its own &lt;a href="http://www.newport.com/Optical-Power-Meter-High-Performance-Hand-Held-19/509478/1033/info.aspx#tab_Literature" title="software"&gt;software&lt;/a&gt;. However, I was interested in controlling this instrument with python. &lt;/p&gt;
+&lt;p&gt;I wrote a python module …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/newport_1918_power_meter.jpg" title=""&gt;&lt;/p&gt;
+&lt;p&gt;Optical power meters in-conjunction with a detector are used to measure power from a laser source or monochromatic output. &lt;/p&gt;
+&lt;p&gt;At work, we use &lt;a href="http://www.newport.com/Optical-Power-Meter-High-Performance-Hand-Held-19/509478/1033/info.aspx" title="Newport 1918"&gt;Newport 1918&lt;/a&gt; power meter. This power meter comes with its own &lt;a href="http://www.newport.com/Optical-Power-Meter-High-Performance-Hand-Held-19/509478/1033/info.aspx#tab_Literature" title="software"&gt;software&lt;/a&gt;. However, I was interested in controlling this instrument with python. &lt;/p&gt;
+&lt;p&gt;I wrote a python module for communicating with this instrument. This python module contains higher level functions to communicate with &lt;a href="http://www.newport.com/1918-R-HandHeld-Optical-Power-and-Energy-Meter/509478/1033/info.aspx#tab_Overview"&gt;Newport 1918 power meter&lt;/a&gt; on a Windows computer. It uses python library ctypes to access methods in the Newport's usbdll.dll driver.&lt;/p&gt;
+&lt;div class = "alert alert-primary"&gt;
+&lt;strong&gt;Note:&lt;/strong&gt; You can read the documentation and download the module from my &lt;a href = https://github.com/plasmon360/python_newport_1918_powermeter&gt;github account&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;p&gt;For connecting the hardware to the computer, see the &lt;a href="http://assets.newport.com/webDocuments-EN/images/RevA1918-RPowerMeterUsersManual.pdf"&gt;reference manual&lt;/a&gt;&lt;/p&gt;</content><category term="Electronics"></category></entry><entry><title>Controlling SP2150i monochromator with Python/PyVisa</title><link href="plasmon360.github.io/controlling-sp2150i-monochromator-with-pythonpyvisa.html" rel="alternate"></link><published>2014-09-19T18:28:00-07:00</published><updated>2014-09-19T18:28:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2014-09-19:plasmon360.github.io/controlling-sp2150i-monochromator-with-pythonpyvisa.html</id><summary type="html">&lt;p&gt;Monochromator is used in optics research where a narrow bandwidth of light is required to be illuminated on a sample. I work with Princeton Instruments Acton SP2150i and needed a python program to control it.&lt;/p&gt;
+&lt;p&gt;I found the manual &lt;a href="ftp://ftp.princetoninstruments.com/public/Manuals/Acton/SP-2150i.pdf"&gt;here&lt;/a&gt; and on page 9-10, I saw the serial commands for …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Monochromator is used in optics research where a narrow bandwidth of light is required to be illuminated on a sample. I work with Princeton Instruments Acton SP2150i and needed a python program to control it.&lt;/p&gt;
+&lt;p&gt;I found the manual &lt;a href="ftp://ftp.princetoninstruments.com/public/Manuals/Acton/SP-2150i.pdf"&gt;here&lt;/a&gt; and on page 9-10, I saw the serial commands for various functions (such as changing filters, moving the grating, etc).&lt;/p&gt;
+&lt;p&gt;To control the instrument with my windows computer, I followed these steps:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1) Connect a usb cable between SP2150 and a computer&lt;/strong&gt;&lt;br&gt;
+I used the port "USB" and not the "USB hub".&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2) Installing the monochromator drivers and Monocontrol software:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Turned on the monochromator and when prompted, I Installed Princeton Instruments VCP drivers (version 2.08.08). These drivers should be in Acton Monochromator Control Software installation Disk.  If the drivers are installed properly, you should see the monochromator as a Princeton Instruments Spectral device(COMx), in the device manager. x could be any number.
+&lt;img alt="" src="plasmon360.github.io/images/sp2150_device_manager.png" title=""&gt;&lt;/p&gt;
+&lt;p&gt;Before attempting to control the instrument with python/pyvisa, I checked if the computer can communicate with monochromator using  "MonoControl". See the installation instructions &lt;a href="ftp://ftp.princetoninstruments.com/public/Manuals/Acton/Monochromator_Control_Software_Manual.pdf"&gt;here&lt;/a&gt; . Monocontrol allows for control of monochromator which will open a windows like this:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="plasmon360.github.io/images/sp2150_monocontrol.png" title=""&gt;&lt;/p&gt;
+&lt;p&gt;If you cannot reach this stage, then there is some problem with drivers and need to be fixed before you can use python/pyvisa to control the instrument. Close this software if you want to use it with pyvisa.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3) Install NI-VISA runtime &lt;/strong&gt;&lt;br&gt;
+I downloaded the exe from National Instruments and installed it. This should provide the required visa32.dll&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4) Install python2.7 and Pyvisa &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;You can install pyvisa using Pip&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5) Python code&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I wrote a module that can be used to control the monochromator using pyvisa commands. The module provides a class definition and some high level functions. &lt;/p&gt;
+&lt;p&gt;For the line, &lt;code&gt;self.m=instrument('COM7', timeout = 10)&lt;/code&gt;, change 7 to the right com port number. The number should match the com port number shown in the device manager. &lt;/p&gt;
+&lt;p&gt;This module can be loaded into other python codes and the high level functions can be used to write even higher level functions (for example, see the code after &lt;code&gt;if __name__ == __main__":&lt;/code&gt;). &lt;/p&gt;
+&lt;p&gt;The specifics of the code are valid for the set of filters,turrets and gratings I use in my instrument, but the program can be used for other cases with slight modifications. &lt;/p&gt;
+&lt;div class = "alert alert-primary"&gt;
+&lt;p&gt; &lt;strong&gt;Note: &lt;/strong&gt;You can download the code from &lt;a href = "https://gist.github.com/plasmon360/c327e75bcea9f256634c44a36b9fa6b0"&gt; my github account &lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;@author: Bala Krishna Juluri&lt;/span&gt;
+&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;visa&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+&lt;span class="c1"&gt;#assumes connected with USB. Drivers are installed. Needs pyvisa for communication.&lt;/span&gt;
+&lt;span class="c1"&gt;# There is no need to use visa write command for SP2150. because all commands are ask type (you write something and get a confirmation back saying OK)&lt;/span&gt;
+&lt;span class="c1"&gt;# filter 1 is no filter&lt;/span&gt;
+&lt;span class="c1"&gt;# filter 2 is in 320 nm long pass filter&lt;/span&gt;
+&lt;span class="c1"&gt;# filter 3 is 590 long pass filter cutoff&lt;/span&gt;
+&lt;span class="c1"&gt;# filter 4 is 715 long pass filter&lt;/span&gt;
+&lt;span class="c1"&gt;# filter 5 is 1250 long pass filter&lt;/span&gt;
+&lt;span class="c1"&gt;#filter 6 is block&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SP2150i&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="c1"&gt;#self.m=instrument(get_instruments_list()[0])&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;get_instruments_list&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;COM7&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;#he default timeout is 5 sec, change the timeout if needed&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Check if monochromotor is connected to right COM port of instrument list (see control panel, hardward devices). Cannot connect to monochromator. Check connection. Check drivers&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_nm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;curr_nm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?NM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;curr_nm&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_nm_per_min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;curr_nm_min&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?NM/MIN&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;curr_nm_min&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_serial_model&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serial_no&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;SERIAL&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model_no&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MODEL&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;serial_no&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;model_no&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;goto_nm_max_speed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%0.2f&lt;/span&gt;&lt;span class="s1"&gt; GOTO&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_turret&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;turret&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?TURRET&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;turret&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?FILTER&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_grating&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grating&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?GRATING&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;grating&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;set_turret&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; TURRET&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;There is not turret with this input&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; FILTER&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Filter changed and waiting with additional delay...&amp;quot;&lt;/span&gt;
+            &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Additional delay, just in case.&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Done waiting&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;There is no filter with this input&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;set_grating&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;num&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; GRATING&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="c1"&gt;#time.sleep(5) # Additional delay, just in case&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;There is no grating with this input&amp;quot;&lt;/span&gt;
+
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;goto_nm_with_set_nm_per_min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;nm_per_min&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+       &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%0.2f&lt;/span&gt;&lt;span class="s1"&gt; NM/MIN&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;nm_per_min&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%0.2f&lt;/span&gt;&lt;span class="s1"&gt; &amp;gt;NM&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;nm&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;
+       &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+           &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MONO-?DONE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+           &lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+           &lt;span class="c1"&gt;#print &amp;quot;Current wavelength is &amp;quot;+ self.m.ask(&amp;#39;?NM&amp;#39;)&lt;/span&gt;
+           &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Scan done?: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;yes&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;
+       &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MONO-STOP&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+       &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?NM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;#This part of the codes uses the SP2150i class to do a wavelength scan&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;SP2150i&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_serial_model&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_grating&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_filter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_nm_per_min&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_nm&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_grating&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# can only take 1 or 2 as input&lt;/span&gt;
+
+    &lt;span class="n"&gt;start_wave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;500&lt;/span&gt;
+    &lt;span class="n"&gt;end_wave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;
+    &lt;span class="n"&gt;delta_wave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;
+    &lt;span class="n"&gt;speed_nm_per_min&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2000&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# this applies the 320 nm filter in the beginning&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;xrange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start_wave&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;end_wave&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;delta_wave&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;----------------------------&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Wavelength input is &lt;/span&gt;&lt;span class="si"&gt;%0.2f&lt;/span&gt;&lt;span class="s2"&gt; nm&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+        &lt;span class="n"&gt;wave&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;goto_nm_with_set_nm_per_min&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;speed_nm_per_min&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;370&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;delta_wave&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;370&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;660&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;delta_wave&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;660&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;775&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;delta_wave&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;775&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;1300&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;delta_wave&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="mi"&gt;1300&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Wavelength output is &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;wave&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; nm&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;----------------------------&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Resetting the monochromator to home position&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;goto_nm_max_speed&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;400&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Position to home at  &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_nm&lt;/span&gt;&lt;span class="p"&gt;()[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; nm&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; and filter has been reset to &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_filter&lt;/span&gt;&lt;span class="p"&gt;()[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Monochromator scan done. Have a nice day!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Electronics"></category></entry><entry><title>van der Pauw correction factor</title><link href="plasmon360.github.io/van-der-pauw-correction-factor.html" rel="alternate"></link><published>2012-01-08T15:27:00-08:00</published><updated>2012-01-08T15:27:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2012-01-08:plasmon360.github.io/van-der-pauw-correction-factor.html</id><summary type="html">&lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Van_der_Pauw_method"&gt;van der Pauw&lt;/a&gt; Method is a technique commonly used to measure the Resistivity and the Hall Coefficient of a sample. A correction factor goes into calculating the resistivity as described in &lt;a href="http://electron.mit.edu/~gsteele/vanderpauw/vanderpauw.pdf"&gt;van der Pauw paper&lt;/a&gt;. A iterative method is generally used to calculate the correction factor and this correction …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The &lt;a href="http://en.wikipedia.org/wiki/Van_der_Pauw_method"&gt;van der Pauw&lt;/a&gt; Method is a technique commonly used to measure the Resistivity and the Hall Coefficient of a sample. A correction factor goes into calculating the resistivity as described in &lt;a href="http://electron.mit.edu/~gsteele/vanderpauw/vanderpauw.pdf"&gt;van der Pauw paper&lt;/a&gt;. A iterative method is generally used to calculate the correction factor and this correction factor is plotted in Figure 5 of &lt;a href="http://electron.mit.edu/~gsteele/vanderpauw/vanderpauw.pdf"&gt;van der Pauw paper&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I reproduced the same figure below using &lt;code&gt;fsolve&lt;/code&gt; function in octave.  &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/Van_der_Paw_correction_factor-300x300.png"&gt;&lt;/p&gt;
+&lt;p&gt;This figure was produced by the octave code shown below. &lt;/p&gt;
+&lt;p&gt;The raw data can be &lt;a href="plasmon360.github.io/images/van_der_pauw_correction_factor.csv"&gt;downloaded from here&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;% This octave/matlab code calculates the correction factor,f as a function&lt;/span&gt;
+&lt;span class="c"&gt;% of Rmnop/Rnopm. This correcton factor will be used in calculation of sheet&lt;/span&gt;
+&lt;span class="c"&gt;% resistance/resistivity of thin films.&lt;/span&gt;
+
+&lt;span class="c"&gt;% Fore more details see the paper L. J. van der Pauw, A method of measuring&lt;/span&gt;
+&lt;span class="c"&gt;% the resistivity and hall coefficients of Lamellae of arbitrary shape,&lt;/span&gt;
+&lt;span class="c"&gt;% Philips Technical Review, Vol 26, 220.&lt;/span&gt;
+
+&lt;span class="n"&gt;clear&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt;
+&lt;span class="n"&gt;close&lt;/span&gt; &lt;span class="n"&gt;all&lt;/span&gt;
+&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt;  &lt;span class="nb"&gt;logspace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;length&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Lp&lt;/span&gt;&lt;span class="p"&gt;=@(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nb"&gt;cosh&lt;/span&gt;&lt;span class="p"&gt;(((&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nb"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fsolve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Lp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;semilogx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-o&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;R_{RM,OP}/R_{NO,PM}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Correction Factor (f)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;minor&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;van der Pauw Correction factors for resistivity measurements&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Van_der_Paw_correction_factor.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-dpng&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-r200&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-S600,600&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Electronics"></category></entry></feed>

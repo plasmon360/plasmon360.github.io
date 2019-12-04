@@ -92,43 +92,9 @@
 
 <article>
   <header>
-    <h2><a href="../spaces-in-strings-in-matlaboctave.html#spaces-in-strings-in-matlaboctave">Spaces in strings in matlab/octave</a></h2>
-    <p>
-          Posted on Fri 24 February 2012 in <a href="../category/matlab.html">Matlab</a>
-
-
-          &#8226;     Tagged with
-
-              <a href="../tag/matlab.html">Matlab</a>,              <a href="../tag/octave.html">octave</a>
-    </p>
-  </header>
-  <div>
-      <p>To get spaces in the strings to work in matlab or octave, use</p>
-<p>t1={'test test'}</p>
-<p>Result is<br>
-t1 =<br>
-{<br>
-[1,1] = test test<br>
-}</p>
-<p>t2=strcat({'test test '},{'blah blah'})</p>
-<p>Result is<br>
-t2 =<br>
-{<br>
-[1,1] = test test blah blah<br>
-}</p>
-<p>you can use this string in your figures by<br>
-plot([1:4 …</p>
-        <br>
-        <a class="btn" href="../spaces-in-strings-in-matlaboctave.html#spaces-in-strings-in-matlaboctave">    Continue reading
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
     <h2><a href="../all-entries-of-array-except-certain-indices-in-octavematlab.html#all-entries-of-array-except-certain-indices-in-octavematlab">All entries of array except certain indices in octave/matlab</a></h2>
     <p>
-          Posted on Wed 07 December 2011 in <a href="../category/publications.html">Publications</a>
+          Posted on Wed 07 December 2011 in <a href="../category/misc.html">Misc</a>
 
 
           &#8226;     Tagged with
@@ -139,10 +105,11 @@ plot([1:4 …</p>
   <div>
       <p>In Octave or Matlab, some times one needs to eliminate certain elements in an array.</p>
 <p>For example, if</p>
-<p>[cclN_matlab]<br>
-a=[10,20,30,40,50,60];<br>
-[/cclN_matlab]</p>
-<p>and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This …</p>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="p">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">];</span>
+</pre></div>
+
+
+<p>and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This can be …</p>
         <br>
         <a class="btn" href="../all-entries-of-array-except-certain-indices-in-octavematlab.html#all-entries-of-array-except-certain-indices-in-octavematlab">    Continue reading
 </a>
@@ -153,7 +120,7 @@ a=[10,20,30,40,50,60];<br>
   <header>
     <h2><a href="../plasmonic-materials-in-meep.html#plasmonic-materials-in-meep">Plasmonic materials in MEEP</a></h2>
     <p>
-          Posted on Wed 27 April 2011 in <a href="../category/plasmonics-researc.html">Plasmonics, Researc</a>
+          Posted on Wed 27 April 2011 in <a href="../category/plasmonics.html">Plasmonics</a>
 
 
           &#8226;     Tagged with
@@ -175,7 +142,7 @@ a=[10,20,30,40,50,60];<br>
   <header>
     <h2><a href="../adding-a-title-to-colobar-in-matlab.html#adding-a-title-to-colobar-in-matlab">Adding a title to colobar in Matlab</a></h2>
     <p>
-          Posted on Sun 21 March 2010 in <a href="../category/publications.html">Publications</a>
+          Posted on Sun 21 March 2010 in <a href="../category/misc.html">Misc</a>
 
 
           &#8226;     Tagged with
@@ -184,12 +151,19 @@ a=[10,20,30,40,50,60];<br>
     </p>
   </header>
   <div>
-      <p>To insert a title to the colorbar in matlab.  Use the following code(<a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788">Source</a>):<br>
-[cc lang='matlab']<br>
-load mandrill % Loads a data for the example<br>
-image(X) % Plots an image for the example<br>
-t=colorbar;% Inserts a colorbar. a handle is created<br>
-set(get(t,'ylabel'),'string','My colorbar title' …</p>
+      <p>To insert a title to the colorbar in matlab.  </p>
+<p>Use the following code (<a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788">Source</a>):  </p>
+<div class="highlight"><pre><span></span><span class="c">% Loads a data for the example </span>
+<span class="n">load</span> <span class="n">mandrill</span>
+
+<span class="c">% Plots an image for the example </span>
+<span class="n">image</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c">% Inserts a colorbar. a handle is created </span>
+<span class="n">t</span><span class="p">=</span><span class="n">colorbar</span><span class="p">;</span>
+
+<span class="c">% sets the ylabel property of the handle t. </span>
+<span class="n">set</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="n">t …</span></pre></div>
         <br>
         <a class="btn" href="../adding-a-title-to-colobar-in-matlab.html#adding-a-title-to-colobar-in-matlab">    Continue reading
 </a>
@@ -200,7 +174,7 @@ set(get(t,'ylabel'),'string','My colorbar title' …</p>
   <header>
     <h2><a href="../radiation-from-dipole.html#radiation-from-dipole">Radiation from an oscillating dipole</a></h2>
     <p>
-          Posted on Thu 14 January 2010 in <a href="../category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a>
+          Posted on Thu 14 January 2010 in <a href="../category/plasmonics.html">Plasmonics</a>
 
 
           &#8226;     Tagged with
@@ -220,7 +194,7 @@ set(get(t,'ylabel'),'string','My colorbar title' …</p>
   <header>
     <h2><a href="../smooth-image-in-matlab.html#smooth-image-in-matlab">Smooth image in matlab</a></h2>
     <p>
-          Posted on Sun 10 January 2010 in <a href="../category/matlab.html">Matlab</a>
+          Posted on Sun 10 January 2010 in <a href="../category/misc.html">Misc</a>
 
 
           &#8226;     Tagged with

@@ -315,7 +315,11 @@ a.btn {
 a.btn:hover {
     background-color: #ff5a09
 }
-
+.center
+{
+display: block;
+margin: 0 auto;
+}
 .center,.text-center {
     text-align: center
 }
