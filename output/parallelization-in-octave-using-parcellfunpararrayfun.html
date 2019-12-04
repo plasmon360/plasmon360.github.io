@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="My computer has many processors and I would like to run some octave scripts so that all the processors are being used. One can use octave function called &#34;pararrayfun&#34; for this purpose. This function is part of &#34;general&#34; package on octave-forge. On my ubuntu 11.10, I used &#34;sudo apt-get …" />
+<meta name="keywords" content="octave">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Parallelization in Octave using parcellfun/pararrayfun"/>
+<meta property="og:description" content="My computer has many processors and I would like to run some octave scripts so that all the processors are being used. One can use octave function called &#34;pararrayfun&#34; for this purpose. This function is part of &#34;general&#34; package on octave-forge. On my ubuntu 11.10, I used &#34;sudo apt-get …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/parallelization-in-octave-using-parcellfunpararrayfun.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2012-03-09 13:27:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Free Software"/>
+<meta property="article:tag" content="octave"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Parallelization in Octave using parcellfun/pararrayfun</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="parallelization-in-octave-using-parcellfunpararrayfun">Parallelization in Octave using parcellfun/pararrayfun</h1>
+    <p>
+          Posted on Fri 09 March 2012 in <a href="/category/free-software.html">Free Software</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>My computer has many processors and I would like to run some octave scripts so that all the processors are being used.<br>
+One can use octave function called "<a href="http://octave.sourceforge.net/general/function/pararrayfun.html">pararrayfun</a>" for this purpose. This function is part of "general" package on octave-forge.</p>
+<p>On my ubuntu 11.10, I used "sudo apt-get install octave-general" to install this package and ran the following script</p>
+<p>[cc lang='matlab']<br>
+1; # this is kept to Prevent Octave from thinking that this is a function file:</p>
+<p>close all;<br>
+clear all;</p>
+<p>function y=test(a,b)<br>
+y=sin(a)+cos(b)<br>
+endfunction</p>
+<p>num_process=8</p>
+<p>a_test_inputs=[0:3.14/20:3.14];<br>
+b_test_inputs=[0:3.14/20:3.14]*2;</p>
+<p>tic ();<br>
+tt_par= pararrayfun(num_process,@test,(a_test_inputs),(b_test_inputs));<br>
+parallel_elapsed_time = toc ()</p>
+<p>tic ();<br>
+tt_ser= test((a_test_inputs),(b_test_inputs));<br>
+serial_elapsed_time = toc ()</p>
+<p>plot(a_test_inputs,tt_par,'-o',a_test_inputs,tt_ser,'-s');<br>
+legend('Parallel result','Serial result');</p>
+<p>disp(sprintf('Elapsed time during serial computation is %e',serial_elapsed_time))<br>
+disp(sprintf('Elapsed time during parallel computation is %e',parallel_elapsed_time))</p>
+<p>[/cc]</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/octave.html">octave</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="[latexpage] The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user. Metals such …" />
+<meta name="keywords" content="electromagnetism, FDTD, Free Software, Matlab, MEEP, octave, photonics, Plasmonics, SERS">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="Plasmonic materials in MEEP"/>
+<meta property="og:description" content="[latexpage] The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user. Metals such …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/plasmonic-materials-in-meep.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2011-04-27 00:39:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Plasmonics"/>
+<meta property="article:tag" content="electromagnetism"/>
+<meta property="article:tag" content="FDTD"/>
+<meta property="article:tag" content="Free Software"/>
+<meta property="article:tag" content="Matlab"/>
+<meta property="article:tag" content="MEEP"/>
+<meta property="article:tag" content="octave"/>
+<meta property="article:tag" content="photonics"/>
+<meta property="article:tag" content="Plasmonics"/>
+<meta property="article:tag" content="SERS"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; Plasmonic materials in MEEP</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="plasmonic-materials-in-meep">Plasmonic materials in MEEP</h1>
+    <p>
+          Posted on Wed 27 April 2011 in <a href="/category/plasmonics.html">Plasmonics</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>[latexpage]</p>
+<p>The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.</p>
+<p>Metals such as gold and silver have both Drude and Lorentz components for the dielectric function. There are many forms of Lorentz-Drude expressions in literature with slight notation differences.</p>
+<p>I prefer the Lorentz-Drude expression mentioned in <a href="http://www.opticsinfobase.org/abstract.cfm?URI=ao-37-22-5271">Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998)</a> and is given by:</p>
+<p>\$\epsilon(\omega)=1-\frac{f_1\omega_p'\^2}{(\omega\^2+i\Gamma_1'\omega)}+\sum_{j=2}\^{n}\frac{f_j\omega_p'\^2}{(\omega_{o,j}'\^2-\omega\^2-i\Gamma_j'\omega)}\$.</p>
+<p>I took it as reference as they also give the parameters for metals such as Ag and Au and these models fit decently well to experimental data over a larger frequency range (0.1 eV to 6 eV).</p>
+<p>For Silver, the parameters are :</p>
+<p>\$\omega_p\$ = 9.01;% Plasma frequency in eV</p>
+<p>f = [0.845 0.065 0.124 0.011 0.840 5.646];% Oscillators' strengths</p>
+<p>\$\Gamma\$ = [0.048 3.886 0.452 0.065 0.916 2.419];% Damping frequency of each oscillator in eV</p>
+<p>\$\omega_o\$ = [0.000 0.816 4.481 8.185 9.083 20.29];% Resonant frequency of each oscillator in eV</p>
+<p>For Gold, the parameters are :</p>
+<p>\$\omega_p\$ = 9.03;% Plasma frequency in eV</p>
+<p>f = [0.760 0.024 0.010 0.071 0.601 4.384];% Oscillators' strengths</p>
+<p>\$\Gamma\$ = [0.053 0.241 0.345 0.870 2.494 2.214];% Damping frequency of each oscillator in eV</p>
+<p>\$\omega_o\$ = [0.000 0.415 0.830 2.969 4.304 13.32];% Resonant frequency of each oscillator in eV</p>
+<p>To convert these parameters usable for MEEP codes, one needs to do the following:</p>
+<p>1) Normalization:</p>
+<p>\$\omega_p'=\omega_p \times \textrm{norm}\$,</p>
+<p>\$\Gamma'=\Gamma \times \textrm{norm}\$,</p>
+<p>\$\omega_o'=\omega_o \times \textrm{norm}\$,</p>
+<p>where \$\textrm{norm}=\frac{ev2w}{\frac{2\pi c}{a}}\$, \$ev2w=\frac{2\pi}{4.135666e-15}\$ .</p>
+<p>Essentially, we are converting the units of \$\omega_p\$,\$\Gamma\$ and \$\omega_o\$ from eV to angular frequency, which is done by multiplying them with \$ev2w\$. Further, they need to be normalized to MEEP units, divide by \$\frac{2\pi c}{a}\$, where \$a\$ is the length unit in meters used in your MEEP code and obviously c is 299792458 m/s.</p>
+<p>2) Casting Lorentz-Drude model to MEEP's model</p>
+<p>Current version of MEEP (1.1.1), supports dispersive materials through Lorentz model and is given by:</p>
+<p>\$ \epsilon(\omega)=\epsilon_{\infty}+\sum_{j=1}\^{n}\frac{\sigma_{L,j}\omega_{L,j}\^2} {(\omega_{L,j}\^2-\omega\^2-i\Gamma_{L,j}\omega)}\$.</p>
+<p>The normalized parameters, \$\omega_p'\$,\$\Gamma'\$ and \$\omega_o'\$ from step 1, need to be cast into the MEEP's dispersive materials model by the following modifications:</p>
+<p>1) \$\omega_{L,1}=1e\^{-20}\$ (Any small number should be fine.)</p>
+<p>2) \$\omega_{L,j&gt;1}=\omega_{o,j&gt;1}'\$</p>
+<p>3) \$\sigma_{L,j}=\frac{f_j\omega_p'\^2}{\omega_{L,j}\^2}\$</p>
+<p>4) \$\epsilon_{\infty}=1\$</p>
+<p>5) \$\Gamma_{L,j}=\Gamma_j'\$</p>
+<p>Here is scheme code snippet for silver with a=100e-9m (100 nm) after normalization and casting them into MEEP's material model.</p>
+<p>[cc lang="scheme"]<br>
+(define myAg (make dielectric (epsilon 1)<br>
+(polarizations<br>
+(make polarizability<br>
+(omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))<br>
+(make polarizability<br>
+(omega 0.065815) (gamma 0.31343) (sigma 7.9247))<br>
+(make polarizability<br>
+(omega 0.36142) (gamma 0.036456) (sigma 0.50133))<br>
+(make polarizability<br>
+(omega 0.66017) (gamma 0.0052426) (sigma 0.013329))<br>
+(make polarizability<br>
+(omega 0.73259) (gamma 0.07388) (sigma 0.82655))<br>
+(make polarizability<br>
+(omega 1.6365) (gamma 0.19511) (sigma 1.1133))<br>
+)))</p>
+<p>[/cc]</p>
+<p>The first polarizability is the Drude component and the rest 5 polarzabilities represent the Lorentz components. I have used this snippet in a MEEP code that calculates the reflection from a thin film of silver (to be consistent, all my units in this MEEP code are also normalized to 100 nm). Later I compared the reflection spectra with an <a href="http://en.wikipedia.org/wiki/Fresnel_equations">analytical solution</a>. These results are shown below. The MEEP calculation results match very well the analytical solutions. One can also clearly see the Ag interband effects in UV regime. The results also match with an other <a href="http://upload.wikimedia.org/wikipedia/commons/9/9d/Image-Metal-reflectance.png">reference</a>.</p>
+<p>If anyone needs the codes that generate the scheme snippet for material polarization and calculation of reflectivity of thin metal films, please shoot me an email.</p>
+<p>[caption id="attachment_795" align="aligncenter" width="600"]<a href="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png"><img alt="" class="size-full wp-image-795" height="450" src="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png" title="Reflectivity comparision between MEEP and analytical model for Silver" width="600"></a> Reflectivity of Ag thin film (MEEP vs. analytical model)[/caption]</p>
+<p>[You can find my project file <a href="http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip">here</a>. Please read the readme.txt for further instructions.]{style="text-decoration: underline;"}</p>
+<p>[UPDATE:]{style="color: #ff0000;"} Aaron Webster used this code for a 1 × 1 × 1 pixel region and epilion was exported with the command meep-fields-analytic-chi1. He showed that the dielectric function seen by meep through using my snippet matches with the experimental dielectric function. You can find his report <a href="http://falsecolour.com/aw/meep_metals/meep-metals.pdf">here</a>. Thank you Aaron.</p>
+<p>Majid has written a python code to do the operation described above. Please find it <a href="http://msdresearch.blogspot.com/2012/02/understanding-meeps-dispersive-media.html">here</a></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/electromagnetism.html">electromagnetism</a>
+      <a href="/tag/fdtd.html">FDTD</a>
+      <a href="/tag/free-software.html">Free Software</a>
+      <a href="/tag/matlab.html">Matlab</a>
+      <a href="/tag/meep.html">MEEP</a>
+      <a href="/tag/octave.html">octave</a>
+      <a href="/tag/photonics.html">photonics</a>
+      <a href="/tag/plasmonics.html">Plasmonics</a>
+      <a href="/tag/sers.html">SERS</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

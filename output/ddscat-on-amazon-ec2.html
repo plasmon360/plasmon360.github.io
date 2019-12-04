@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="Amazon provides high performance computing capabilities through their EC2 service. You can find more information here They provide a 750 hr free instance with their a free-tier program. If you want more resources, you can pay for it. See the pricing, pricing seem very reasonable. I wanted to see …" />
+<meta name="keywords" content="DDSCAT">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="DDSCAT on amazon EC2"/>
+<meta property="og:description" content="Amazon provides high performance computing capabilities through their EC2 service. You can find more information here They provide a 750 hr free instance with their a free-tier program. If you want more resources, you can pay for it. See the pricing, pricing seem very reasonable. I wanted to see …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/ddscat-on-amazon-ec2.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2015-09-03 21:37:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Plasmonics"/>
+<meta property="article:tag" content="DDSCAT"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; DDSCAT on amazon EC2</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="ddscat-on-amazon-ec2">DDSCAT on amazon EC2</h1>
+    <p>
+          Posted on Thu 03 September 2015 in <a href="/category/plasmonics.html">Plasmonics</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Amazon provides high performance computing capabilities through their EC2 service. You can find more information <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">here</a></p>
+<p>They provide a 750 hr free instance with their a <a href="http://aws.amazon.com/free/">free-tier progra</a>m. If you want more resources, you can pay for it. See the <a href="https://aws.amazon.com/ec2/pricing/">pricing</a>, pricing seem very reasonable.</p>
+<p>I wanted to see how easy it was to install ddscat and run some examples files.</p>
+<p>Amazon allows to create an instance through their very easy-to-use web interface. I chose to install ubuntu amazon machine image on the instance.  While you are creating an instance you are allowed to create a key pair file and download it.  You will need that to connect to amazon instance through ssh client with this key</p>
+<p>Fire up  terminal on a linux box and browse to the folder you have the key pair and issue these commands</p>
+<div class="highlight"><pre><span></span>chmod <span class="m">400</span> your-key-pair.pem
+</pre></div>
+
+
+<p>Make ssh connection with a command like this</p>
+<div class="highlight"><pre><span></span>ssh -i your-key-pair.pem ubuntu@ec2-xx-xx-100-1.compute-1.amazonaws.com
+</pre></div>
+
+
+<p>here "ec2-xx-xx-100-1.compute-1.amazonaws.com" is your public dns address</p>
+<p>You should be able to log into the instance. If you get stuck, see detailed info at <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html">how to connect to the instance</a></p>
+<p>Update the package list from different repos with  </p>
+<div class="highlight"><pre><span></span>sudo apt-get update
+</pre></div>
+
+
+<p>install these packages  </p>
+<div class="highlight"><pre><span></span>sudo apt-get install gfortran gcc wget make
+</pre></div>
+
+
+<p>Make a directory for ddscat</p>
+<div class="highlight"><pre><span></span>mkdir ddscat<span class="se">\_</span>install  
+<span class="nb">cd</span> ddscat<span class="se">\_</span>install
+</pre></div>
+
+
+<p>Download the source files and examples</p>
+<div class="highlight"><pre><span></span>wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1<span class="se">\_</span><span class="m">150420</span>.tgz  
+wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1<span class="se">\_</span>examples<span class="se">\_</span><span class="m">150519</span>.tgz
+</pre></div>
+
+
+<p>Unzip them</p>
+<div class="highlight"><pre><span></span>tar -xzvf ddscat7.3.1<span class="se">\_</span><span class="m">150420</span>.tgz
+
+tar -xzvf ddscat7.3.1<span class="se">\_</span>examples<span class="se">\_</span><span class="m">150519</span>.tgz
+
+rm <span class="se">\*</span>.tgz
+</pre></div>
+
+
+<p>Go to the examples_exp folder</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /examples<span class="se">\_</span>exp
+</pre></div>
+
+
+<p>To compile ddscat executable and run the examples:  </p>
+<div class="highlight"><pre><span></span>./run<span class="se">\_</span>examples
+</pre></div>
+
+
+<p>ddscat executabe file should be created in the src folder, which you can use for your own ddscat test cases.</p>
+<p>To quit the ssh session, type<br>
+<code>exit</code> in the command prompt</p>
+<p>So as you see, the process is very simple.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/ddscat.html">DDSCAT</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

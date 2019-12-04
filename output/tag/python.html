@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+    <meta name="author" content="Bala Juluri" />
+    <meta name="description" content="" />
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:type" content="blog"/>
+<meta property="og:title" content="Bala Juluri's Blog"/>
+<meta property="og:description" content=""/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content=""/>
+
+  <title>Bala Juluri's Blog &ndash;     Tag Python
+</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href=""></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+
+
+<article>
+  <header>
+    <h2><a href="/Energy-band-diagrams-for-solar-cell-and-led.html#Energy-band-diagrams-for-solar-cell-and-led">Creating Energy Band Diagrams for Solar cells and LED</a></h2>
+    <p>
+          Posted on Mon 11 September 2017 in <a href="/category/misc.html">Misc</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="/tag/python.html">Python</a>
+    </p>
+  </header>
+  <div>
+      <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
+<p>Here's an example on how to use this code.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
+
+<span class="c1"># Define the metals and …</span></pre></div>
+        <br>
+        <a class="btn" href="/Energy-band-diagrams-for-solar-cell-and-led.html#Energy-band-diagrams-for-solar-cell-and-led">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/tab-autocompletetion-with-python-interpreter-in-bash-terminal.html#tab-autocompletetion-with-python-interpreter-in-bash-terminal">Tab autocompletetion with python interpreter in bash terminal</a></h2>
+    <p>
+          Posted on Sat 29 October 2016 in <a href="/category/misc.html">Misc</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="/tag/linux.html">Linux</a>,              <a href="/tag/python.html">python</a>
+    </p>
+  </header>
+  <div>
+      <p>I want to tab autocomplete commands in my python interpreter within bash terminal. This is very useful when I import a module and just want to browse through the methods and autocomplete.</p>
+<p>Found two ways to do it. Thanks to stack overflow posts.</p>
+<h3>Method 1 (<a href="http://stackoverflow.com/questions/2603798/ipython-tab-completion-not-working">as mentioned here</a>):</h3>
+<p>This is …</p>
+        <br>
+        <a class="btn" href="/tab-autocompletetion-with-python-interpreter-in-bash-terminal.html#tab-autocompletetion-with-python-interpreter-in-bash-terminal">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">Dealing with plotting negative, zero and positive values in log scale</a></h2>
+    <p>
+          Posted on Wed 30 March 2016 in <a href="/category/misc.html">Misc</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="/tag/python.html">Python</a>
+    </p>
+  </header>
+  <div>
+      <p>Sometimes you have to show positive, zero and negative number in log scale. However you cannot take log of negative numbers and zero. But one could approximate it with a log transform modulus as stated <a href="http://blogs.sas.com/content/iml/2014/07/14/log-transformation-of-pos-neg.html">here</a>.</p>
+<p>In Python with numpy:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sign</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">log10</span>  
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as …</span></pre></div>
+        <br>
+        <a class="btn" href="/dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html#dealing-with-plotting-negative-zero-and-positive-values-in-log-scale">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/Generating-plasmonic-metal-dielectric-functions-in-Python.html#Generating-plasmonic-metal-dielectric-functions-in-Python">Generating plasmonic metal dielectric functions in Python</a></h2>
+    <p>
+          Posted on Thu 10 September 2015 in <a href="/category/plasmonics.html">Plasmonics</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="/tag/python.html">Python</a>
+    </p>
+  </header>
+  <div>
+      <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.css"
+    integrity="sha256-SSjvSe9BDSZMUczwnbB1ywCyIk2XaNly9nn6yRm6WJo="
+    crossorigin="anonymous">
+<style type="text/css">
+    .katex img {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: inherit;
+    }
+</style>
+<p>I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m.</p>
+<p><a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water">LD.m</a> is a matlab file written by Bora Ung …</p>
+        <br>
+        <a class="btn" href="/Generating-plasmonic-metal-dielectric-functions-in-Python.html#Generating-plasmonic-metal-dielectric-functions-in-Python">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/controlling-rigol-dp832-with-python.html#controlling-rigol-dp832-with-python">Controlling Rigol Dp832 with python</a></h2>
+    <p>
+          Posted on Fri 08 May 2015 in <a href="/category/electronics.html">Electronics</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="/tag/instrumentation.html">Instrumentation</a>,              <a href="/tag/python.html">python</a>
+    </p>
+  </header>
+  <div>
+      <p>DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. </p>
+<p>I got my hands on a RIGOL DP832 which is three …</p>
+        <br>
+        <a class="btn" href="/controlling-rigol-dp832-with-python.html#controlling-rigol-dp832-with-python">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi.html#hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi">Hacking Weighing Scale to Upload Weight to Plotly using Raspberry Pi</a></h2>
+    <p>
+          Posted on Sat 11 April 2015 in <a href="/category/electronics.html">Electronics</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="/tag/python.html">python</a>
+    </p>
+  </header>
+  <div>
+      <p><img alt="" class="center" src="/images/weighing_scale_hack_summary_img.png"></p>
+<p>I have been interested in monitoring and keep track of my weight. In the past,
+I have used different phone apps to track my weight. They work reasonably well,
+but I was thinking of reading weight data directly from my weighing scale and
+upload the data to an online database …</p>
+        <br>
+        <a class="btn" href="/hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi.html#hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/python.html#python">Python</a></h2>
+    <p>
+          Posted on Sun 17 January 2010 in <a href="/category/misc.html">Misc</a>
+
+
+          &#8226;     Tagged with
+
+              <a href="/tag/python.html">Python</a>
+    </p>
+  </header>
+  <div>
+      <p><img alt="" class="center" src="http://imgs.xkcd.com/comics/python.png" title="Python"></p>
+<p>I am playing with Python for the first time. The syntax seems to be so natural. So many modules (numpy, scipy and matplotlib) for researchers/scientists. Cannot see any shortcoming at this point. Perhaps need more testing and implementation.</p>
+  </div>
+</article>
+
+  <div class="pagination">
+  </div>
+
+
+
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
