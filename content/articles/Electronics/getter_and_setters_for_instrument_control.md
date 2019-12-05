@@ -5,9 +5,9 @@ Category: Electronics
 Slug: Improving code with getters and setters in python 
 Status: published
 
-As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communication and control of [Princeton Instruments Acton SP2150i Monochromator]({filename}controlling-sp2150i-monochromator-with-pythonpyvisa.md).
+As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a [Princeton Instruments Acton SP2150i Monochromator]({filename}controlling-sp2150i-monochromator-with-pythonpyvisa.md).
 
-As I looked at the code, I noticed methods in the class such as `get_nm()` and `set_nm()`. When I was writing that code, I was not aware of the functionality of getters and setters in Python. Since then, I have been using getters and setters occasionally and thought everyone using python should be knowing about them.
+As I looked at the code, I noticed methods in the class such as `get_nm()` and `set_nm()`. I was not aware of the functionality of getters and setters in Python when I was writing that code. Since then, I have been using getters and setters occasionally and thought everyone using Python should be knowing about them.
 
 Lets simply the original code to only few methods and implement getters and setters functionality.
 
@@ -48,7 +48,9 @@ Lets simply the original code to only few methods and implement getters and sett
         # set the filter 
         a.set_filter(2) # this applies the 320 nm filter in the beginning
 
-There are many filters in the instrument and one get the current filter number or set a different filter number. `get_filter(self)` returns an attribute `self.filter` by calling `ask_for_values` pyvisa method. 
+There are many filters in the instrument and one can get the current filter number or set a different filter number. 
+
+The `get_filter(self)` method returns an attribute `self.filter` by calling `ask_for_values` pyvisa method. 
 
 `self.filter` holds the current filter value. `set_filter(num)` uses pyvisa's 'ask' method (think of ask here as writing to instrument) to set the filter to a different number. In this method I also check to make sure filter 'num' be always less than 6.
 
