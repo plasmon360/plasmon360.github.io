@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - electromagnetism</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/misc.html">Misc</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/coupled-dipole-approximation-in-python.html">Coupled Dipole Approximation in Python</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-07-20T09:39:00+00:00">
+                Published: Wed 20 July 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info --><p>Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like in<a href="http:gc/www.ddscat.org/">DDSCAT</a>software), where a big particle (also known as target) is broken into lot of interacting dipoles arranged in cubic lattice. CDA can also be used to calculate the optical properties (scattering and absorption) of random particle distributions (like in L. Zhao et al. J. Phys. Chem. B,  107,  30, 7343,2003 ) and assuming each particle to be small enough that it behaves like a dipole.</p>
+<p>I have implement cda in python ([see source code link at the bottom of this post]{style="color: #ff0000;"}) and use it to calculate the optical properties of nanoparticles that are arranged randomly in cuboid or on a rectangular grid. Once the incident electric field direction (k vector), polarization, positions and radii of particles are given, the code calculates the extinction, scattering and absorption cross-sections. It is important to note that the nano particles should be small enough so that they can act as dipole with quasi-static polarizability.</p>
+<p>[gallery columns="2" size="medium" ids="1679,1680,1681,1678"]</p>
+<p>If you are interested in the numerical part of the code, see below:</p>
+<p>The goal of CDA method is to calculate the self-consistent dipole moments of the dipoles that are interacting with each other. Once dipole moments are calculated, scattering and absorption cross-sections can be calculated. Most of the write up below is from Bruce T. Draine and Piotr J. Flatau, "Discrete-Dipole Approximation For Scattering Calculations," J. Opt. Soc. Am. A 11, 1491-1499 (1994)</p>
+<p>Let start for simplicity by assume two dipoles, dipole $<code>1</code>$ positioned at $<code>\vec{r}_1</code>$ and dipole $<code>1</code>$ positioned at $<code>\vec{r}_2</code>$.</p>
+<p>The dipole moment of this dipole $<code>1</code>$ is given by 
+$<code>\vec{p}_1 = p_{1x}\vec{i}+p_{1y}\vec{j}+p_{1z}\vec{k} = \alpha \vec{E}_1</code>$, where $<code>\vec{E}_1 = E_{1x}\vec{i}+E_{1y}\vec{j}+E_{1z}\vec{k}</code>$ is the local electric field at dipole $<code>i</code>$.</p>
+<p>Here,</p>
+<div class="highlight"><pre><span></span>\<span class="nv">alpha</span> <span class="o">=</span>  
+\<span class="nv">begin</span>{<span class="nv">bmatrix</span>}  
+\<span class="nv">alpha_</span>{<span class="mi">1</span><span class="nv">xx</span>}<span class="o">&amp;</span><span class="mi">0</span><span class="o">&amp;</span><span class="mi">0</span>\\  
+<span class="mi">0</span><span class="o">&amp;</span>\<span class="nv">alpha_</span>{<span class="mi">1</span><span class="nv">yy</span>}<span class="o">&amp;</span><span class="mi">0</span>\\  
+<span class="mi">0</span><span class="o">&amp;</span><span class="mi">0</span><span class="o">&amp;</span>\<span class="nv">alpha_</span>{<span class="mi">1</span><span class="nv">zz</span>}  
+\<span class="k">end</span>{<span class="nv">bmatrix</span>}  
+</pre></div>
+
+
+<p>is the isotropic polarizability tensor of the $<code>i</code>$ dipole.</p>
+<p>The polarizability of the dipole is generally known (generally assumed to follow Clausius-Mossotti relation), but we do not know the local electric field at the dipole $<code>i</code>$, because there are complex contributions from other dipoles (like dipole $<code>2</code>$).</p>
+<p>Lets write down the local electric field at dipole $<code>2</code>$, there will be a incident electric field which is given by $<code>\vec{E}_{2inc} = \vec{E}_o e^{i\vec{k}\vec{r}_2}</code>$ and electric field emanating from dipole $<code>1</code>$</p>
+<div class="highlight"><pre><span></span><span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">E</span><span class="err">}</span><span class="n">_2</span> <span class="o">=</span> <span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">E</span><span class="err">}</span><span class="n">_o</span> <span class="n">e</span><span class="o">^</span><span class="err">{</span><span class="n">i</span><span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">k</span><span class="err">}\</span><span class="n">vec</span><span class="err">{</span><span class="n">r</span><span class="err">}</span><span class="n">_2</span><span class="err">}</span> <span class="o">+</span> <span class="err">\</span><span class="n">frac</span><span class="err">{</span><span class="mi">1</span><span class="err">}{</span><span class="mi">4</span><span class="err">\</span><span class="n">pi</span><span class="err">\</span><span class="n">epsilon_o</span><span class="err">}\</span><span class="k">left</span> <span class="p">[</span> <span class="err">\</span><span class="n">frac</span><span class="err">{</span><span class="n">e</span><span class="o">^</span><span class="err">{</span><span class="n">ikr</span><span class="err">}}{</span><span class="n">r</span><span class="err">}</span> <span class="n">k</span><span class="o">^</span><span class="mi">2</span> <span class="err">\</span><span class="k">left</span><span class="p">(</span> <span class="err">\</span><span class="k">left</span> <span class="p">(</span> <span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">n</span><span class="err">}</span><span class="n">_</span><span class="err">{</span><span class="mi">21</span><span class="err">}</span> <span class="err">\</span><span class="n">times</span> <span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">p</span><span class="err">}</span><span class="n">_1</span> <span class="err">\</span><span class="k">right</span> <span class="p">)</span> <span class="err">\</span><span class="n">times</span> <span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">n</span><span class="err">}</span><span class="n">_</span><span class="err">{</span><span class="mi">21</span><span class="err">}</span> <span class="err">\</span><span class="k">right</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span><span class="o">^</span><span class="err">{</span><span class="n">ikr</span><span class="err">}\</span><span class="k">left</span><span class="p">[</span><span class="mi">3</span><span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">n</span><span class="err">}</span><span class="n">_</span><span class="err">{</span><span class="mi">21</span><span class="err">}</span><span class="p">(</span><span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">n</span><span class="err">}</span><span class="n">_</span><span class="err">{</span><span class="mi">21</span><span class="err">}\</span><span class="n">cdot</span> <span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">p</span><span class="err">}</span><span class="n">_1</span><span class="p">)</span><span class="o">-</span><span class="err">\</span><span class="n">vec</span><span class="err">{</span><span class="n">p</span><span class="err">}</span><span class="n">_1</span> <span class="err">\</span><span class="k">right</span> <span class="p">]</span> <span class="err">\</span><span class="k">left</span><span class="p">[</span><span class="err">\</span><span class="n">frac</span><span class="err">{</span><span class="mi">1</span><span class="err">}{</span><span class="n">r</span><span class="o">^</span><span class="mi">3</span><span class="err">}</span><span class="o">-</span><span class="err">\</span><span class="n">frac</span><span class="err">{</span><span class="n">ik</span><span class="err">}{</span><span class="n">r</span><span class="o">^</span><span class="mi">2</span><span class="err">}\</span><span class="k">right</span><span class="p">]</span><span class="err">\</span><span class="k">right</span> <span class="p">]</span>
+</pre></div>
+
+
+<p>Here $<code>r_{21}</code>$ = $<code>|\vec{r}_2 - \vec{r}_1|</code>$
+$<code>\vec{n}_{21} = n_{21x}\vec{i}+n_{21y}\vec{j}+n_{21z}\vec{k} = \frac{\vec{r}_2 - \vec{r}_1}{r_{21}}</code>$
+$<code>k</code>$ = $<code>|\vec{k}|</code>$ is the wavevector of the incident wave.</p>
+<p>For a constant $<code>k</code>$, at the distances near the dipole $<code>1</code>$, the second term dominates and this term is called the near field contribution and the first term dominates at the farther distances from the dipole and is called the far field contribution to the electric field.</p>
+<p>Then the above equation can be reduced to a matrix form as follows after some math.</p>
+<div class="highlight"><pre><span></span>\<span class="nv">tiny</span>
+\<span class="nv">begin</span>{<span class="nv">bmatrix</span>}
+<span class="nv">E_</span>{<span class="mi">2</span><span class="nv">x</span>}\\
+<span class="nv">E_</span>{<span class="mi">2</span><span class="nv">y</span>}\\
+<span class="nv">E_</span>{<span class="mi">2</span><span class="nv">z</span>}
+\<span class="k">end</span>{<span class="nv">bmatrix</span>}
+<span class="o">=</span>
+\<span class="nv">tiny</span>
+\<span class="nv">begin</span>{<span class="nv">bmatrix</span>}
+\<span class="nv">alpha_</span>{<span class="mi">2</span><span class="nv">xx</span>}<span class="o">&amp;</span><span class="nv">amp</span><span class="c1">;0&amp;amp;0\\</span>
+<span class="mi">0</span><span class="o">&amp;</span><span class="nv">amp</span><span class="c1">;\alpha_{2yy}&amp;amp;0\\</span>
+<span class="mi">0</span><span class="o">&amp;</span><span class="nv">amp</span><span class="c1">;0&amp;amp;\alpha_{2zz}</span>
+\<span class="k">end</span>{<span class="nv">bmatrix</span>} <span class="o">^</span>{<span class="o">-</span><span class="mi">1</span>}
+\<span class="nv">tiny</span>
+\<span class="nv">begin</span>{<span class="nv">bmatrix</span>}
+<span class="nv">P_</span>{<span class="mi">2</span><span class="nv">x</span>}\\
+<span class="nv">P_</span>{<span class="mi">2</span><span class="nv">y</span>}\\
+<span class="nv">P_</span>{<span class="mi">2</span><span class="nv">z</span>}
+\<span class="k">end</span>{<span class="nv">bmatrix</span>}
+<span class="o">=</span>
+\<span class="nv">tiny</span>
+\<span class="nv">begin</span>{<span class="nv">bmatrix</span>}
+<span class="nv">E_</span>{<span class="mi">2</span><span class="nv">x_</span>{<span class="nv">inc</span>}}\\
+<span class="nv">E_</span>{<span class="mi">2</span><span class="nv">y_</span>{<span class="nv">inc</span>}}\\
+<span class="nv">E_</span>{<span class="mi">2</span><span class="nv">z_</span>{<span class="nv">inc</span>}}
+\<span class="k">end</span>{<span class="nv">bmatrix</span>}
+<span class="o">+</span>
+\<span class="nv">tiny</span>
+\<span class="nv">begin</span>{<span class="nv">matrix</span>}
+<span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">(</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">y</span>}<span class="o">^</span><span class="mi">2</span> <span class="o">+</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>}<span class="o">^</span><span class="mi">2</span><span class="ss">)</span> <span class="o">+</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">x</span>}<span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="ss">))</span>  <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>} <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">y</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="o">-</span><span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">)</span>  <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">x</span>} <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="o">-</span><span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">)</span> \\
+<span class="nv">n_</span>{<span class="mi">21</span><span class="nv">x</span>} <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">y</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="o">-</span><span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">)</span>  <span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">(</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">x</span>}<span class="o">^</span><span class="mi">2</span> <span class="o">+</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>}<span class="o">^</span><span class="mi">2</span><span class="ss">)</span> <span class="o">+</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">y</span>}<span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="ss">))</span>  <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">y</span>} <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="o">-</span><span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">)</span> \\
+<span class="nv">n_</span>{<span class="mi">21</span><span class="nv">x</span>} <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="o">-</span><span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">)</span> <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">y</span>} <span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="o">-</span><span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">)</span>  <span class="nv">A_</span>{<span class="mi">12</span>}<span class="ss">(</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">y</span>}<span class="o">^</span><span class="mi">2</span> <span class="o">+</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">x</span>}<span class="o">^</span><span class="mi">2</span><span class="ss">)</span> <span class="o">+</span><span class="nv">B_</span>{<span class="mi">12</span>}<span class="ss">(</span><span class="mi">3</span><span class="nv">n_</span>{<span class="mi">21</span><span class="nv">z</span>}<span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="ss">))</span>
+\<span class="k">end</span>{<span class="nv">bmatrix</span>}
+
+\<span class="nv">tiny</span>
+\<span class="nv">begin</span>{<span class="nv">bmatrix</span>}
+<span class="nv">P_</span>{<span class="mi">1</span><span class="nv">x</span>}\\
+<span class="nv">P_</span>{<span class="mi">1</span><span class="nv">y</span>}\\
+<span class="nv">P_</span>{<span class="mi">1</span><span class="nv">z</span>}
+\<span class="k">end</span>{<span class="nv">bmatrix</span>}
+</pre></div>
+
+
+<p>where,
+$A_{12} = \frac{k^2}{4\pi\epsilon_o}\frac{e^{ikr_{21}}}{R_{21}}$ and $B_{12} = \left[\frac{1}{r_{21}^3}-\frac{ik}{r_{21}^2}\right]\frac{e^{ikr_{21}}}{4\pi\epsilon_o}$</p>
+<p>Similarly we write the electric field near the dipole $1$ as</p>
+<p>[
+\tiny
+\begin{bmatrix}
+E_{1x}\
+E_{1y}\
+E_{1z}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\alpha_{1xx}&amp;0&amp;0\
+0&amp;\alpha_{1yy}&amp;0\
+0&amp;0&amp;\alpha_{1zz}
+\end{bmatrix} ^{-1}
+\tiny
+\begin{bmatrix}
+P_{1x}\
+P_{1y}\
+P_{1z}
+\end{bmatrix}
+=
+\begin{bmatrix}
+E_{1x_{inc}}\
+E_{1y_{inc}}\
+E_{1z_{inc}}
+\end{bmatrix}
++
+]</p>
+<p>[
+\tiny
+\begin{bmatrix}
+A_{21}(n_{12y}^2 +n_{12z}^2) +B_{21}(3n_{12x}^2-1)) &amp; n_{12z} n_{12y}(3B_{21}-A_{21}) &amp; n_{12x} n_{12z}(3B_{21}-A_{21}) \
+n_{12x} n_{12y}(3B_{21}-A_{21}) &amp; A_{21}(n_{12x}^2 +n_{12z}^2) +B_{21}(3n_{12y}^2-1)) &amp; n_{12y} n_{12z}(3B_{21}-A_{21}) \
+n_{12x} n_{12z}(3B_{21}-A_{21})&amp; n_{121y} n_{12z}(3B_{21}-A_{21}) &amp; A_{21}(n_{12y}^2 +n_{12x}^2) +B_{21}(3n_{12z}^2-1))
+\end{bmatrix}
+\tiny
+\begin{bmatrix}
+P_{2x}\
+P_{2y}\
+P_{2z}
+\end{bmatrix}
+]</p>
+<p>These two equations can be combined in the form of AP = E matrix equation as follows:</p>
+<p>[
+\begin{bmatrix}
+\alpha1^{-1}&amp;\textbf{M12}&amp;\
+\textbf{M21}&amp;\alpha2^{-1}&amp;
+\end{bmatrix}
+\begin{bmatrix}
+\vec{P}<em 2>{1}\
+\vec{P}</em>\
+\end{bmatrix}</p>
+<p>=
+\begin{bmatrix}
+E_{1inc}\
+E_{2inc}\
+\end{bmatrix}
+]</p>
+<p>We can calcualte A from the positions of dipoles, their polarizability and wavevector, we know E from the incident electric fields, but we do not know $\vec{P}_1$ and $\vec{P}_2$ and that is what we find by solving P in AP = E matrix equation.</p>
+<p>We can extend the same concept to N dipoles, just the matrices in this case become bigger (A is 3N x 3N matrix, P in 3N and E is 3N column matrixes) and we need numerical iterative methods to solve. For solving the AP=E, I use Scipy's <a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicgstab.html#scipy.sparse.linalg.bicgstab">biConjugate gradient stabilized method</a> .</p>
+<p>Once we know these self-consistent dipole moments, we can calculate the scattering and absorption cross-sections using extinction theorem (see equation 8 and 9 in Bruce T. Draine and Piotr J. Flatau, "Discrete-Dipole Approximation For Scattering Calculations," J. Opt. Soc. Am. A 11, 1491-1499 (1994)).
+<h3 style="text-align: center;"><span style="text-decoration: underline;"><a href="https://github.com/plasmon360/CDA_PYTHON" target="_blank"><span style="color: #ff0000; text-decoration: underline;">See source code at GitHub here</span></a></span></h3></p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/plasmonic-materials-in-meep-1-2.html" rel="bookmark"
+                           title="Permalink to Plasmonic Materials in MEEP > 1.2">Plasmonic Materials in MEEP > 1.2</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-06-13T16:59:00+00:00">
+                Published: Sat 13 June 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p><a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP">Here is</a> how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep &gt;= 1. 2 changed the way materials are defined. </p>
+<p>Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . Please note that one can still use …</p>
+                <a class="readmore" href="/plasmonic-materials-in-meep-1-2.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/electric-field-at-localized-plasmon-resonance-using-meep.html" rel="bookmark"
+                           title="Permalink to Electric field at localized plasmon resonance using MEEP">Electric field at localized plasmon resonance using MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-01-22T15:00:00+00:00">
+                Published: Tue 22 January 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>This article is about simulating localized plasmon resonances in metal nanospheres using MEEP package. Generally, I am interested in solving three problems in LSPR systems:</p>
+<ol>
+<ol>
+1.  **Calculate the extinction, scattering, absorption spectra of metal nanoparticle**  
+   The procedure for doing this is very similar to the method I mentioned [here](http …</ol></ol>
+                <a class="readmore" href="/electric-field-at-localized-plasmon-resonance-using-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/surface-plasmon-dispersion-relation-for-thin-metal-films.html" rel="bookmark"
+                           title="Permalink to Surface plasmon dispersion relation for thin metal films">Surface plasmon dispersion relation for thin metal films</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-12-07T21:12:00+00:00">
+                Published: Wed 07 December 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/octave.html">octave</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>[latexpage]</p>
+<p>A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the …</p>
+                <a class="readmore" href="/surface-plasmon-dispersion-relation-for-thin-metal-films.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html" rel="bookmark"
+                           title="Permalink to Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep">Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-06-01T14:06:00+00:00">
+                Published: Wed 01 June 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>Particles scatter and absorb electromagnetic radiation. One often needs to compare the amount of scattering/absorption/extinction for particles of different shapes, composition, sizes and incident light properties (polarization, frequency and angle). In this regard, the concept of cross-sections comes into picture. There are three types of cross-sections, 1) scattering …</p>
+                <a class="readmore" href="/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/arbitrary-2d-shapes-in-meep.html" rel="bookmark"
+                           title="Permalink to Arbitrary 2d shapes in MEEP">Arbitrary 2d shapes in MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-05-10T22:52:00+00:00">
+                Published: Tue 10 May 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p><img alt="" class="center" src="/images/Arbirary_shapes-eps.png" title=""></p>
+<p><a href="http://ab-initio.mit.edu/wiki/index.php/Meep">In MEEP (1.1.1)</a>, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was …</p>
+                <a class="readmore" href="/arbitrary-2d-shapes-in-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/plasmonic-materials-in-meep.html" rel="bookmark"
+                           title="Permalink to Plasmonic materials in MEEP">Plasmonic materials in MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-04-27T00:39:00+00:00">
+                Published: Wed 27 April 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/matlab.html">Matlab</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/sers.html">SERS</a> </p>
+</footer><!-- /.post-info -->                <p>[latexpage]</p>
+<p>The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.</p>
+<p>Metals such …</p>
+                <a class="readmore" href="/plasmonic-materials-in-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html" rel="bookmark"
+                           title="Permalink to Charge density in metal nanoparticles at plasmon resonance">Charge density in metal nanoparticles at plasmon resonance</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-11-23T14:11:00+00:00">
+                Published: Tue 23 November 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>It is important to know the magnitude and distribution of electric field near the metallic nanoparticles at plasmon resonance. One can look at the electric field and say whether the plasmon mode is dipolar or higher order mode such as qudrapolar mode. At many times one is also interested to …</p>
+                <a class="readmore" href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ddscat-and-electric-field-at-plasmon-resonance.html" rel="bookmark"
+                           title="Permalink to DDSCAT and electric field at plasmon resonance">DDSCAT and electric field at plasmon resonance</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-05-26T21:10:00+00:00">
+                Published: Wed 26 May 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/ddscat.html">DDSCAT</a> <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>Discrete Dipole Approximation (DDA) is an important tool in plasmonics research. Using DDA, one can calculate scattering properties of nanoparticles at various wavelengths, polarizations and surrounding medium. The specialty of DDA is that one can calculate scattering properties of irregular shape particles (particles other than spheroids). DDA is based on …</p>
+                <a class="readmore" href="/ddscat-and-electric-field-at-plasmon-resonance.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html" rel="bookmark"
+                           title="Permalink to Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles">Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-05-11T21:37:00+00:00">
+                Published: Tue 11 May 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/nanohuborg.html">Nanohub.org</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/ddscat.html">DDSCAT</a> </p>
+</footer><!-- /.post-info -->                <p><img alt="" src="file:///C:/Users/Mengqian/AppData/Local/Temp/moz-screenshot-2.png"></p>
+<p>[caption id="attachment_551" align="alignleft" width="300" caption="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. "]<a href="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1.png"><img alt="" class="size-medium wp-image-551" height="215" src="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1-300x215.png" title="nmie_screenshot" width="300"></a>[/caption]</p>
+<p>Since 2009, I have been a regular user of Nanohub …</p>
+                <a class="readmore" href="/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/winspall-software-for-surface-plasmon-resonance-experiments.html" rel="bookmark"
+                           title="Permalink to WINSPALL software for surface plasmon resonance experiments">WINSPALL software for surface plasmon resonance experiments</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-03-10T23:12:00+00:00">
+                Published: Wed 10 March 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>One needs to fit the reflectivity curves obtained in surface plasmon resonance experiments with theoretical models. A free software (for non commercial use) called Winspall exactly does that.</p>
+<p>According to the developers, WINSPALL is a PC based software which computes the reflectivity of optical multilayer systems. It is based on …</p>
+                <a class="readmore" href="/winspall-software-for-surface-plasmon-resonance-experiments.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/radiation-from-dipole.html" rel="bookmark"
+                           title="Permalink to Radiation from an oscillating dipole">Radiation from an oscillating dipole</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-14T19:26:00+00:00">
+                Published: Thu 14 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/matlab.html">Matlab</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>The electric field from an oscillating dipole is given by:<img alt="" src="file:///C:/DOCUME%7E1/bxj139/LOCALS%7E1/Temp/moz-screenshot-1.jpg"><img alt="" class="aligncenter" height="52" src="http://upload.wikimedia.org/math/1/c/b/1cb95474b78138db05d3763ac2fcd75a.png" title="dipole_radiation" width="527">, where [tex]\hat{r}[/tex] is the position vector, [tex] \omega [/tex] is the frequency of dipole oscillation, [tex]\textbf{p}[/tex] is the dipole moment. The two terms in the electric field consists of 1) near field (area near …</p>
+                <a class="readmore" href="/radiation-from-dipole.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/books-on-electromagnetics.html" rel="bookmark"
+                           title="Permalink to Resources on Electromagnetics/Plasmonics/Nanophotonics">Resources on Electromagnetics/Plasmonics/Nanophotonics</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-12T11:01:00+00:00">
+                Published: Tue 12 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/books.html">books</a> <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/nanohuborg.html">Nanohub.org</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>These are some resources on Electromagnetics/plasmonics/nanophotonics</p>
+<p>I will maintain a list of free resources on electromagnetics, plasmonics, nanophotonics, optics and other related topics here. If any of you (readers) know any other free resources related to this topic, please let me know and I can add into these …</p>
+                <a class="readmore" href="/books-on-electromagnetics.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

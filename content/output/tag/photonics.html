@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - photonics</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/misc.html">Misc</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html">Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2011-06-01T14:06:00+00:00">
+                Published: Wed 01 June 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info --><p>Particles scatter and absorb electromagnetic radiation. One often needs to compare the amount of scattering/absorption/extinction for particles of different shapes, composition, sizes and incident light properties (polarization, frequency and angle). In this regard, the concept of cross-sections comes into picture. There are three types of cross-sections, 1) scattering 2) absorption and 3) extinction. All of them have units of area, \$m\^2\$, and provide a measure to quantify scattering/absorption process. Here using MEEP I calculate the crossections of silver nanowires and compare them with numerical solution (<a href="http://onlinelibrary.wiley.com/doi/10.1002/9783527618156.app4/pdf">code from Bohren and Hauffman book</a>).</p>
+<p>[caption id="attachment_862" align="aligncenter" width="400"]<a href="http://juluribk.com/wp-content/uploads/2011/06/cylinders_meepvsanalytical.png"><img alt="" class="size-full wp-image-862" height="300" src="http://juluribk.com/wp-content/uploads/2011/06/cylinders_meepvsanalytical.png" title="plasmonic cylinder cross-sections meep vs analytical" width="400"></a> Comparison of meep results with analytical results for silver nanowires[/caption]</p>
+<p>To achieve this, I wrote a meep code that performs a 2D simulation (x-y) with the cylinder axis along z axis with sources and monitors places as shown below. The source is a line source which travels along y direction and has polarization with electric field along x axis (along radius). I also use mirror-symmetries anti-symetry along X direction (which reduces the simulation time by half). PML layers are used on all sides. Calculation of cross-sections involves creating multiple 1-d flux monitors and running multiple simulations as shown below.</p>
+<p><a href="http://juluribk.com/wp-content/uploads/2011/06/silver_cylinder_gray_comp_no_fft.zip">Here is my project file.</a>. You would need ubuntu like system with meep and octave installed. Shell script will do all the work.</p>
+<p>I have also shared the <a href="https://github.com/juluribk/Meep_cylinder_scattering_project">project at github.</a></p>
+<p><a href="http://juluribk.com/wp-content/uploads/2011/06/Picture3.png"><img alt="" class="aligncenter size-medium wp-image-1014" height="252" src="http://juluribk.com/wp-content/uploads/2011/06/Picture3-300x252.png" title="simulation set up" width="300"></a><a href="http://juluribk.com/wp-content/uploads/2011/06/simulation_steps.png"><img alt="" class="aligncenter size-medium wp-image-1013" height="99" src="http://juluribk.com/wp-content/uploads/2011/06/simulation_steps-300x99.png" title="simulation_steps" width="300"></a></p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/arbitrary-2d-shapes-in-meep.html" rel="bookmark"
+                           title="Permalink to Arbitrary 2d shapes in MEEP">Arbitrary 2d shapes in MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-05-10T22:52:00+00:00">
+                Published: Tue 10 May 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p><img alt="" class="center" src="/images/Arbirary_shapes-eps.png" title=""></p>
+<p><a href="http://ab-initio.mit.edu/wiki/index.php/Meep">In MEEP (1.1.1)</a>, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was …</p>
+                <a class="readmore" href="/arbitrary-2d-shapes-in-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/plasmonic-materials-in-meep.html" rel="bookmark"
+                           title="Permalink to Plasmonic materials in MEEP">Plasmonic materials in MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-04-27T00:39:00+00:00">
+                Published: Wed 27 April 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/matlab.html">Matlab</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/sers.html">SERS</a> </p>
+</footer><!-- /.post-info -->                <p>[latexpage]</p>
+<p>The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.</p>
+<p>Metals such …</p>
+                <a class="readmore" href="/plasmonic-materials-in-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/electric-field-in-metal-nanoparticle-dimers.html" rel="bookmark"
+                           title="Permalink to Electric Field in Metal Nanoparticle Dimers">Electric Field in Metal Nanoparticle Dimers</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-04-09T15:32:00+00:00">
+                Published: Sat 09 April 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/molecular-machines.html">Molecular Machines</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/sers.html">SERS</a> </p>
+</footer><!-- /.post-info -->                <p>Metal nanoparticles exhibit localized surface plasmon resonance (LSPR). One can think of LSPR as resonance of electron sea oscillations driven by incident electric field. This is similar to the way a spring-mass system attains resonance under external periodic driving force.</p>
+<p>The result of this plasmon resonance is enhanced dipole moment …</p>
+                <a class="readmore" href="/electric-field-in-metal-nanoparticle-dimers.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html" rel="bookmark"
+                           title="Permalink to Charge density in metal nanoparticles at plasmon resonance">Charge density in metal nanoparticles at plasmon resonance</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-11-23T14:11:00+00:00">
+                Published: Tue 23 November 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>It is important to know the magnitude and distribution of electric field near the metallic nanoparticles at plasmon resonance. One can look at the electric field and say whether the plasmon mode is dipolar or higher order mode such as qudrapolar mode. At many times one is also interested to …</p>
+                <a class="readmore" href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/winspall-software-for-surface-plasmon-resonance-experiments.html" rel="bookmark"
+                           title="Permalink to WINSPALL software for surface plasmon resonance experiments">WINSPALL software for surface plasmon resonance experiments</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-03-10T23:12:00+00:00">
+                Published: Wed 10 March 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>One needs to fit the reflectivity curves obtained in surface plasmon resonance experiments with theoretical models. A free software (for non commercial use) called Winspall exactly does that.</p>
+<p>According to the developers, WINSPALL is a PC based software which computes the reflectivity of optical multilayer systems. It is based on …</p>
+                <a class="readmore" href="/winspall-software-for-surface-plasmon-resonance-experiments.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/books-on-electromagnetics.html" rel="bookmark"
+                           title="Permalink to Resources on Electromagnetics/Plasmonics/Nanophotonics">Resources on Electromagnetics/Plasmonics/Nanophotonics</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-12T11:01:00+00:00">
+                Published: Tue 12 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/books.html">books</a> <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/nanohuborg.html">Nanohub.org</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>These are some resources on Electromagnetics/plasmonics/nanophotonics</p>
+<p>I will maintain a list of free resources on electromagnetics, plasmonics, nanophotonics, optics and other related topics here. If any of you (readers) know any other free resources related to this topic, please let me know and I can add into these …</p>
+                <a class="readmore" href="/books-on-electromagnetics.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>All entries of array except certain indices in octave/matlab</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li class="active"><a href="/category/misc.html">Misc</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/all-entries-of-array-except-certain-indices-in-octavematlab.html" rel="bookmark"
+           title="Permalink to All entries of array except certain indices in octave/matlab">All entries of array except certain indices in octave/matlab</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-12-07T18:14:00+00:00">
+                Published: Wed 07 December 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/misc.html">Misc</a>.</p>
+<p>tags: <a href="/tag/matlab.html">Matlab</a> <a href="/tag/octave.html">octave</a> </p>
+</footer><!-- /.post-info -->      <p>In Octave or Matlab, some times one needs to eliminate certain elements in an array.</p>
+<p>For example, if</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="p">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">];</span>
+</pre></div>
+</td></tr></table>
+
+<p>and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This can be achieved by:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="p">=</span> <span class="n">a</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="o">~=</span><span class="mi">2</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">:</span><span class="k">end</span><span class="o">~=</span><span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</td></tr></table>
+
+<p>The result is:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="p">=</span> <span class="mi">10</span> <span class="mi">30</span> <span class="mi">50</span> <span class="mi">60</span>
+</pre></div>
+</td></tr></table>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

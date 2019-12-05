@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Controlling SP2150i monochromator with Python/PyVisa</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li class="active"><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/misc.html">Misc</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/controlling-sp2150i-monochromator-with-pythonpyvisa.html" rel="bookmark"
+           title="Permalink to Controlling SP2150i monochromator with Python/PyVisa">Controlling SP2150i monochromator with Python/PyVisa</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-09-19T18:28:00+00:00">
+                Published: Fri 19 September 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/electronics.html">Electronics</a>.</p>
+
+</footer><!-- /.post-info -->      <p>Monochromator is used in optics research where a narrow bandwidth of light is required to be illuminated on a sample. I work with Princeton Instruments Acton SP2150i and needed a python program to control it.</p>
+<p>I found the manual <a href="ftp://ftp.princetoninstruments.com/public/Manuals/Acton/SP-2150i.pdf">here</a> and on page 9-10, I saw the serial commands for various functions (such as changing filters, moving the grating, etc).</p>
+<p>To control the instrument with my windows computer, I followed these steps:</p>
+<p><strong>1) Connect a usb cable between SP2150 and a computer</strong><br>
+I used the port "USB" and not the "USB hub".</p>
+<p><strong>2) Installing the monochromator drivers and Monocontrol software:</strong></p>
+<p>Turned on the monochromator and when prompted, I Installed Princeton Instruments VCP drivers (version 2.08.08). These drivers should be in Acton Monochromator Control Software installation Disk.  If the drivers are installed properly, you should see the monochromator as a Princeton Instruments Spectral device(COMx), in the device manager. x could be any number.
+<img alt="" src="/images/sp2150_device_manager.png" title=""></p>
+<p>Before attempting to control the instrument with python/pyvisa, I checked if the computer can communicate with monochromator using  "MonoControl". See the installation instructions <a href="ftp://ftp.princetoninstruments.com/public/Manuals/Acton/Monochromator_Control_Software_Manual.pdf">here</a> . Monocontrol allows for control of monochromator which will open a windows like this:</p>
+<p><img alt="" src="/images/sp2150_monocontrol.png" title=""></p>
+<p>If you cannot reach this stage, then there is some problem with drivers and need to be fixed before you can use python/pyvisa to control the instrument. Close this software if you want to use it with pyvisa.</p>
+<p><strong>3) Install NI-VISA runtime </strong><br>
+I downloaded the exe from National Instruments and installed it. This should provide the required visa32.dll</p>
+<p><strong>4) Install python2.7 and Pyvisa </strong></p>
+<p>You can install pyvisa using Pip</p>
+<p><strong>5) Python code</strong></p>
+<p>I wrote a module that can be used to control the monochromator using pyvisa commands. The module provides a class definition and some high level functions. </p>
+<p>For the line, <code>self.m=instrument('COM7', timeout = 10)</code>, change 7 to the right com port number. The number should match the com port number shown in the device manager. </p>
+<p>This module can be loaded into other python codes and the high level functions can be used to write even higher level functions (for example, see the code after <code>if __name__ == __main__":</code>). </p>
+<p>The specifics of the code are valid for the set of filters,turrets and gratings I use in my instrument, but the program can be used for other cases with slight modifications. </p>
+<div class = "alert alert-primary">
+<p> <strong>Note: </strong>You can download the code from <a href = "https://gist.github.com/plasmon360/c327e75bcea9f256634c44a36b9fa6b0"> my github account </a></p>
+</div>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">@author: Bala Krishna Juluri</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">visa</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="c1">#assumes connected with USB. Drivers are installed. Needs pyvisa for communication.</span>
+<span class="c1"># There is no need to use visa write command for SP2150. because all commands are ask type (you write something and get a confirmation back saying OK)</span>
+<span class="c1"># filter 1 is no filter</span>
+<span class="c1"># filter 2 is in 320 nm long pass filter</span>
+<span class="c1"># filter 3 is 590 long pass filter cutoff</span>
+<span class="c1"># filter 4 is 715 long pass filter</span>
+<span class="c1"># filter 5 is 1250 long pass filter</span>
+<span class="c1">#filter 6 is block</span>
+
+<span class="k">class</span> <span class="nc">SP2150i</span><span class="p">():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">#self.m=instrument(get_instruments_list()[0])</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">get_instruments_list</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">=</span><span class="n">instrument</span><span class="p">(</span><span class="s1">&#39;COM7&#39;</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">#he default timeout is 5 sec, change the timeout if needed</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">&quot;Check if monochromotor is connected to right COM port of instrument list (see control panel, hardward devices). Cannot connect to monochromator. Check connection. Check drivers&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_nm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">curr_nm</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?NM&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">curr_nm</span>
+
+    <span class="k">def</span> <span class="nf">get_nm_per_min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">curr_nm_min</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?NM/MIN&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">curr_nm_min</span>
+
+    <span class="k">def</span> <span class="nf">get_serial_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serial_no</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;SERIAL&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_no</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;MODEL&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serial_no</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">model_no</span>
+
+    <span class="k">def</span> <span class="nf">goto_nm_max_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nm</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%0.2f</span><span class="s1"> GOTO&#39;</span> <span class="o">%</span> <span class="n">nm</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_turret</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">turret</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?TURRET&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">turret</span>
+
+    <span class="k">def</span> <span class="nf">get_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?FILTER&#39;</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span>
+
+    <span class="k">def</span> <span class="nf">get_grating</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grating</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?GRATING&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grating</span>
+
+    <span class="k">def</span> <span class="nf">set_turret</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span><span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; TURRET&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">&quot;There is not turret with this input&quot;</span>
+
+    <span class="k">def</span> <span class="nf">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span><span class="mi">6</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; FILTER&#39;</span><span class="p">)</span>
+            <span class="k">print</span> <span class="s2">&quot;Filter changed and waiting with additional delay...&quot;</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Additional delay, just in case.</span>
+            <span class="k">print</span> <span class="s2">&quot;Done waiting&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">&quot;There is no filter with this input&quot;</span>
+
+    <span class="k">def</span> <span class="nf">set_grating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num</span><span class="o">&lt;=</span><span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; GRATING&#39;</span><span class="p">)</span>
+            <span class="c1">#time.sleep(5) # Additional delay, just in case</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s2">&quot;There is no grating with this input&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">goto_nm_with_set_nm_per_min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nm</span><span class="p">,</span><span class="n">nm_per_min</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%0.2f</span><span class="s1"> NM/MIN&#39;</span> <span class="o">%</span> <span class="n">nm_per_min</span><span class="p">)</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%0.2f</span><span class="s1"> &gt;NM&#39;</span> <span class="o">%</span> <span class="n">nm</span><span class="p">)</span>
+       <span class="n">char</span><span class="o">=</span><span class="mi">0</span>
+       <span class="k">while</span> <span class="n">char</span><span class="o">!=</span><span class="mi">1</span><span class="p">:</span>
+           <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;MONO-?DONE&#39;</span><span class="p">)</span>
+           <span class="n">char</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+           <span class="c1">#print &quot;Current wavelength is &quot;+ self.m.ask(&#39;?NM&#39;)</span>
+           <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">)</span>
+       <span class="k">print</span> <span class="s2">&quot;Scan done?: &quot;</span><span class="o">+</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;No&#39;</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;MONO-STOP&#39;</span><span class="p">)</span>
+       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?NM&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1">#This part of the codes uses the SP2150i class to do a wavelength scan</span>
+    <span class="n">a</span><span class="o">=</span><span class="n">SP2150i</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">get_serial_model</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">get_grating</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">get_filter</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">get_nm_per_min</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">get_nm</span><span class="p">()</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">set_grating</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># can only take 1 or 2 as input</span>
+
+    <span class="n">start_wave</span><span class="o">=</span><span class="mi">500</span>
+    <span class="n">end_wave</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="n">delta_wave</span><span class="o">=</span><span class="mi">20</span>
+    <span class="n">speed_nm_per_min</span><span class="o">=</span><span class="mi">2000</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># this applies the 320 nm filter in the beginning</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">start_wave</span><span class="p">,</span><span class="n">end_wave</span><span class="p">,</span><span class="n">delta_wave</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&quot;----------------------------&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;Wavelength input is </span><span class="si">%0.2f</span><span class="s2"> nm&quot;</span> <span class="o">%</span> <span class="n">i</span>
+        <span class="n">wave</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">goto_nm_with_set_nm_per_min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">speed_nm_per_min</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">370</span> <span class="ow">and</span> <span class="n">i</span><span class="o">+</span><span class="n">delta_wave</span> <span class="o">&gt;=</span> <span class="mi">370</span><span class="p">:</span>
+            <span class="n">a</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">660</span> <span class="ow">and</span> <span class="n">i</span><span class="o">+</span><span class="n">delta_wave</span> <span class="o">&gt;=</span> <span class="mi">660</span><span class="p">:</span>
+            <span class="n">a</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">775</span> <span class="ow">and</span> <span class="n">i</span><span class="o">+</span><span class="n">delta_wave</span> <span class="o">&gt;=</span> <span class="mi">775</span><span class="p">:</span>
+            <span class="n">a</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">1300</span> <span class="ow">and</span> <span class="n">i</span><span class="o">+</span><span class="n">delta_wave</span> <span class="o">&gt;=</span> <span class="mi">1300</span><span class="p">:</span>
+            <span class="n">a</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">print</span> <span class="s2">&quot;Wavelength output is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">wave</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span> <span class="s2">&quot; nm&quot;</span>
+        <span class="k">print</span> <span class="s2">&quot;----------------------------&quot;</span>
+
+    <span class="k">print</span> <span class="s2">&quot;Resetting the monochromator to home position&quot;</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">goto_nm_max_speed</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;Position to home at  &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get_nm</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; nm&quot;</span><span class="o">+</span> <span class="s1">&#39; and filter has been reset to &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get_filter</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">print</span> <span class="s2">&quot;Monochromator scan done. Have a nice day!&quot;</span>
+</pre></div>
+</td></tr></table>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

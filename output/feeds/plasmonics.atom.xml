@@ -1,139 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Bala Juluri's Blog - Plasmonics</title><link href="plasmon360.github.io/" rel="alternate"></link><link href="plasmon360.github.io/feeds/plasmonics.atom.xml" rel="self"></link><id>plasmon360.github.io/</id><updated>2016-07-20T09:39:00-07:00</updated><subtitle>Ramblings</subtitle><entry><title>Coupled Dipole Approximation in Python</title><link href="plasmon360.github.io/coupled-dipole-approximation-in-python.html" rel="alternate"></link><published>2016-07-20T09:39:00-07:00</published><updated>2016-07-20T09:39:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2016-07-20:plasmon360.github.io/coupled-dipole-approximation-in-python.html</id><summary type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
-&lt;p&gt;Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like in&lt;a href="http://www.ddscat.org/"&gt;DDSCAT&lt;/a&gt;software), where a big particle (also known as target) is broken into lot of interacting dipoles arranged …&lt;/p&gt;</summary><content type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
-&lt;p&gt;Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like in&lt;a href="http://www.ddscat.org/"&gt;DDSCAT&lt;/a&gt;software), where a big particle (also known as target) is broken into lot of interacting dipoles arranged in cubic lattice. CDA can also be used to calculate the optical properties (scattering and absorption) of random particle distributions (like in L. Zhao et al. J. Phys. Chem. B,  107,  30, 7343,2003 ) and assuming each particle to be small enough that it behaves like a dipole.&lt;/p&gt;
-&lt;p&gt;I have implement cda in python ([see source code link at the bottom of this post]{style="color: #ff0000;"}) and use it to calculate the optical properties of nanoparticles that are arranged randomly in cuboid or on a rectangular grid. Once the incident electric field direction (k vector), polarization, positions and radii of particles are given, the code calculates the extinction, scattering and absorption cross-sections. It is important to note that the nano particles should be small enough so that they can act as dipole with quasi-static polarizability.&lt;/p&gt;
-&lt;p&gt;[gallery columns="2" size="medium" ids="1679,1680,1681,1678"]&lt;/p&gt;
-&lt;p&gt;If you are interested in the numerical part of the code, see below:&lt;/p&gt;
-&lt;p&gt;The goal of CDA method is to calculate the self-consistent dipole moments of the dipoles that are interacting with each other. Once dipole moments are calculated, scattering and absorption cross-sections can be calculated. Most of the write up below is from Bruce T. Draine and Piotr J. Flatau, "Discrete-Dipole Approximation For Scattering Calculations," J. Opt. Soc. Am. A 11, 1491-1499 (1994)&lt;/p&gt;
-&lt;p&gt;Let start for simplicity by assume two dipoles, dipole \$1\$ positioned at \$\vec{r}_1\$ and dipole \$1\$ positioned at \$\vec{r}_2\$.&lt;/p&gt;
-&lt;p&gt;The dipole moment of this dipole \$1\$ is given by \$\vec{p}_1 = p_{1x}\vec{i}+p_{1y}\vec{j}+p_1z\vec{k} = \alpha \vec{E}_1\$, where \$\vec{E}_1 = E_{1x}\vec{i}+E_{1y}\vec{j}+E_{1z}\vec{k}\$ is the local electric field at dipole \$i\$.&lt;/p&gt;
-&lt;p&gt;Here,&lt;/p&gt;
-&lt;p&gt;\[&lt;br&gt;
-\alpha =&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-\alpha_{1xx}&amp;amp;0&amp;amp;0\\&lt;br&gt;
-0&amp;amp;\alpha_{1yy}&amp;amp;0\\&lt;br&gt;
-0&amp;amp;0&amp;amp;\alpha_{1zz}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-\] is the isotropic polarizability tensor of the \$i\$ dipole.&lt;/p&gt;
-&lt;p&gt;The polarizability of the dipole is generally known (generally assumed to follow Clausius-Mossotti relation), but we do not know the local electric field at the dipole \$i\$, because there are complex contributions from other dipoles (like dipole \$2\$).&lt;/p&gt;
-&lt;p&gt;Lets write down the local electric field at dipole \$2\$, there will be a incident electric field which is given by \$\vec{E}_{2inc} = \vec{E}_o e\^{i\vec{k}\vec{r}_2}\$ and electric field emanating from dipole \$1\$&lt;/p&gt;
-&lt;p&gt;\[&lt;br&gt;
-\vec{E}_2 = \vec{E}_o e\^{i\vec{k}\vec{r}_2} + \frac{1}{4\pi\epsilon_o}\left [ \frac{e\^{ikr}}{r} k\^2 \left( \left ( \vec{n}_{21} \times \vec{p}_1 \right ) \times \vec{n}_{21} \right) + e\^{ikr}\left[3\vec{n}_{21}(\vec{n}_{21}\cdot \vec{p}_1)-\vec{p}_1 \right ] \left[\frac{1}{r\^3}-\frac{ik}{r\^2}\right]\right ]&lt;br&gt;
-\]&lt;/p&gt;
-&lt;p&gt;Here \$r_{21}\$ = \$|\vec{r}_2 - \vec{r}_1|\$&lt;br&gt;
-\$\vec{n}_{21} = n_{21x}\vec{i}+n_{21y}\vec{j}+n_{21z}\vec{k} = \frac{\vec{r}_2 - \vec{r}_1}{r_{21}}\$&lt;br&gt;
-\$k\$ = \$|\vec{k}|\$ is the wavevector of the incident wave.&lt;/p&gt;
-&lt;p&gt;For a constant \$k\$, at the distances near the dipole \$1\$, the second term dominates and this term is called the near field contribution and the first term dominates at the farther distances from the dipole and is called the far field contribution to the electric field.&lt;/p&gt;
-&lt;p&gt;Then the above equation can be reduced to a matrix form as follows after some math.&lt;/p&gt;
-&lt;p&gt;\[&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-E_{2x}\\&lt;br&gt;
-E_{2y}\\&lt;br&gt;
-E_{2z}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-=&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-\alpha_{2xx}&amp;amp;0&amp;amp;0\\&lt;br&gt;
-0&amp;amp;\alpha_{2yy}&amp;amp;0\\&lt;br&gt;
-0&amp;amp;0&amp;amp;\alpha_{2zz}&lt;br&gt;
-\end{bmatrix} \^{-1}&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-P_{2x}\\&lt;br&gt;
-P_{2y}\\&lt;br&gt;
-P_{2z}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-=&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-E_{2x_{inc}}\\&lt;br&gt;
-E_{2y_{inc}}\\&lt;br&gt;
-E_{2z_{inc}}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-+&lt;br&gt;
-\]&lt;/p&gt;
-&lt;p&gt;\[&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{matrix}&lt;br&gt;
-A_{12}(n_{21y}\^2 +n_{21z}\^2) +B_{12}(3n_{21x}\^2-1)) &amp;amp; n_{21z} n_{21y}(3B_{12}-A_{12}) &amp;amp; n_{21x} n_{21z}(3B_{12}-A_{12}) \\&lt;br&gt;
-n_{21x} n_{21y}(3B_{12}-A_{12}) &amp;amp; A_{12}(n_{21x}\^2 +n_{21z}\^2) +B_{12}(3n_{21y}\^2-1)) &amp;amp; n_{21y} n_{21z}(3B_{12}-A_{12}) \\&lt;br&gt;
-n_{21x} n_{21z}(3B_{12}-A_{12})&amp;amp; n_{21y} n_{21z}(3B_{12}-A_{12}) &amp;amp; A_{12}(n_{21y}\^2 +n_{21x}\^2) +B_{12}(3n_{21z}\^2-1))&lt;br&gt;
-\end{bmatrix}&lt;/p&gt;
-&lt;p&gt;\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-P_{1x}\\&lt;br&gt;
-P_{1y}\\&lt;br&gt;
-P_{1z}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-\]&lt;/p&gt;
-&lt;p&gt;where,&lt;br&gt;
-\$A_{12} = \frac{k\^2}{4\pi\epsilon_o}\frac{e\^{ikr_{21}}}{R_{21}}\$ and \$B_{12} = \left[\frac{1}{r_{21}\^3}-\frac{ik}{r_{21}\^2}\right]\frac{e\^{ikr_{21}}}{4\pi\epsilon_o}\$&lt;/p&gt;
-&lt;p&gt;Similarly we write the electric field near the dipole \$1\$ as&lt;/p&gt;
-&lt;p&gt;\[&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-E_{1x}\\&lt;br&gt;
-E_{1y}\\&lt;br&gt;
-E_{1z}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-=&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-\alpha_{1xx}&amp;amp;0&amp;amp;0\\&lt;br&gt;
-0&amp;amp;\alpha_{1yy}&amp;amp;0\\&lt;br&gt;
-0&amp;amp;0&amp;amp;\alpha_{1zz}&lt;br&gt;
-\end{bmatrix} \^{-1}&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-P_{1x}\\&lt;br&gt;
-P_{1y}\\&lt;br&gt;
-P_{1z}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-=&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-E_{1x_{inc}}\\&lt;br&gt;
-E_{1y_{inc}}\\&lt;br&gt;
-E_{1z_{inc}}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-+&lt;br&gt;
-\]&lt;/p&gt;
-&lt;p&gt;\[&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-A_{21}(n_{12y}\^2 +n_{12z}\^2) +B_{21}(3n_{12x}\^2-1)) &amp;amp; n_{12z} n_{12y}(3B_{21}-A_{21}) &amp;amp; n_{12x} n_{12z}(3B_{21}-A_{21}) \\&lt;br&gt;
-n_{12x} n_{12y}(3B_{21}-A_{21}) &amp;amp; A_{21}(n_{12x}\^2 +n_{12z}\^2) +B_{21}(3n_{12y}\^2-1)) &amp;amp; n_{12y} n_{12z}(3B_{21}-A_{21}) \\&lt;br&gt;
-n_{12x} n_{12z}(3B_{21}-A_{21})&amp;amp; n_{121y} n_{12z}(3B_{21}-A_{21}) &amp;amp; A_{21}(n_{12y}\^2 +n_{12x}\^2) +B_{21}(3n_{12z}\^2-1))&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-\tiny&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-P_{2x}\\&lt;br&gt;
-P_{2y}\\&lt;br&gt;
-P_{2z}&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-\]&lt;/p&gt;
-&lt;p&gt;These two equations can be combined in the form of AP = E matrix equation as follows:&lt;/p&gt;
-&lt;p&gt;\[&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-\alpha1\^{-1}&amp;amp;\textbf{M12}&amp;amp;\\&lt;br&gt;
-\textbf{M21}&amp;amp;\alpha2\^{-1}&amp;amp;&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-\vec{P}_{1}\\&lt;br&gt;
-\vec{P}_{2}\\&lt;br&gt;
-\end{bmatrix}&lt;/p&gt;
-&lt;p&gt;=&lt;br&gt;
-\begin{bmatrix}&lt;br&gt;
-E_{1inc}\\&lt;br&gt;
-E_{2inc}\\&lt;br&gt;
-\end{bmatrix}&lt;br&gt;
-\]&lt;/p&gt;
-&lt;p&gt;We can calcualte A from the positions of dipoles, their polarizability and wavevector, we know E from the incident electric fields, but we do not know \$\vec{P}_1\$ and \$\vec{P}_2\$ and that is what we find by solving P in AP = E matrix equation.&lt;/p&gt;
-&lt;p&gt;We can extend the same concept to N dipoles, just the matrices in this case become bigger (A is 3N x 3N matrix, P in 3N and E is 3N column matrixes) and we need numerical iterative methods to solve. For solving the AP=E, I use Scipy's &lt;a href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.sparse.linalg.bicgstab.html#scipy.sparse.linalg.bicgstab"&gt;biConjugate gradient stabilized method&lt;/a&gt; .&lt;/p&gt;
-&lt;p&gt;Once we know these self-consistent dipole moments, we can calculate the scattering and absorption cross-sections using extinction theorem (see equation 8 and 9 in Bruce T. Draine and Piotr J. Flatau, "Discrete-Dipole Approximation For Scattering Calculations," J. Opt. Soc. Am. A 11, 1491-1499 (1994)).&lt;/p&gt;
-&lt;h3 id="see-source-code-at-github-here" style="text-align: center;"&gt;[&lt;a href="https://github.com/plasmon360/CDA_PYTHON"&gt;[See source code at GitHub here]{style="color: #ff0000; text-decoration: underline;"}&lt;/a&gt;]{style="text-decoration: underline;"}&lt;/h3&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="Plasmonics"></category><category term="python"></category></entry><entry><title>Fitting Complex Metal Dielectric Functions with Differential Evolution Method</title><link href="plasmon360.github.io/fitting-complex-metal-dielectric-functions-with-differential-evolution-method.html" rel="alternate"></link><published>2016-04-13T21:59:00-07:00</published><updated>2016-04-13T21:59:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2016-04-13:plasmon360.github.io/fitting-complex-metal-dielectric-functions-with-differential-evolution-method.html</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Bala Juluri's Blog - Plasmonics</title><link href="plasmon360.github.io/" rel="alternate"></link><link href="plasmon360.github.io/feeds/plasmonics.atom.xml" rel="self"></link><id>plasmon360.github.io/</id><updated>2018-06-20T10:50:00-07:00</updated><subtitle>Ramblings</subtitle><entry><title>Calculating molarity, weight concentration from absorbance value for plasmonic nanoparticles in solution</title><link href="plasmon360.github.io/calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution.html" rel="alternate"></link><published>2018-06-20T10:50:00-07:00</published><updated>2018-06-20T10:50:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2018-06-20:plasmon360.github.io/calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution.html</id><summary type="html">&lt;p&gt;It is common to measure the peak absorbance of the plasmonic nanoparticles in solution and then get the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Molarity (moles/liter)&lt;/li&gt;
+&lt;li&gt;Number of particles per ml&lt;/li&gt;
+&lt;li&gt;Weight concentration (ug/ml)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I wrote a small python function to extract these parameters.  The following inputs are needed for the function&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;d_nm …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;It is common to measure the peak absorbance of the plasmonic nanoparticles in solution and then get the following:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Molarity (moles/liter)&lt;/li&gt;
+&lt;li&gt;Number of particles per ml&lt;/li&gt;
+&lt;li&gt;Weight concentration (ug/ml)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I wrote a small python function to extract these parameters.  The following inputs are needed for the function&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;d_nm :   diameter of the particle in nanoparticle&lt;/li&gt;
+&lt;li&gt;od :  peak OD measured from the absorbance plot&lt;/li&gt;
+&lt;li&gt;path_length_cm :  cuvette length in centimeter&lt;/li&gt;
+&lt;li&gt;density_g_per_cm3 :  for gold it is 19.28, for silver it is 10.49&lt;/li&gt;
+&lt;li&gt;molar_Extinction_perM_percm :  Molar extinction coefficient extracted from &lt;a href="https://www.sigmaaldrich.com/technical-documents/articles/materials-science/nanomaterials/gold-nanoparticles.html"&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;This can extracted from measuring absorbance at different concentrations and then fitting a linear line. the slope will be molar extinction coefficient&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here is the code.
+&lt;iframe src="https://trinket.io/embed/python/f1353652f2?start=result" width="100%" height="656" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen&gt;&lt;/iframe&gt;&lt;/p&gt;</content><category term="Plasmonics"></category></entry><entry><title>Fitting Complex Metal Dielectric Functions with Differential Evolution Method</title><link href="plasmon360.github.io/fitting-complex-metal-dielectric-functions-with-differential-evolution-method.html" rel="alternate"></link><published>2016-04-13T21:59:00-07:00</published><updated>2016-04-13T21:59:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2016-04-13:plasmon360.github.io/fitting-complex-metal-dielectric-functions-with-differential-evolution-method.html</id><summary type="html">&lt;p&gt;
 &lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"&gt;// &lt;![CDATA[&lt;/p&gt;
 
 &lt;p&gt;// ]]&gt;&lt;/script&gt;
@@ -895,55 +785,211 @@ Differential evolution algorithm gives a very reasonable fit as shown above. Cod
 
 &lt;/div&gt;
 
-&lt;/div&gt;</content><category term="Plasmonics"></category></entry><entry><title>Plasmonic Materials in MEEP &gt; 1.2</title><link href="plasmon360.github.io/plasmonic-materials-in-meep-1-2.html" rel="alternate"></link><published>2015-06-13T16:59:00-07:00</published><updated>2015-06-13T16:59:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-06-13:plasmon360.github.io/plasmonic-materials-in-meep-1-2.html</id><summary type="html">&lt;p&gt;&lt;a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP"&gt;Here is&lt;/a&gt;how I was implementing plasmonic materials in meep1.1 scheme code. Unlike Meep 1. 1, Meep &amp;gt;= 1. 2 changed the way materials are defined. Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . [Please note that one can still …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP"&gt;Here is&lt;/a&gt;how I was implementing plasmonic materials in meep1.1 scheme code. Unlike Meep 1. 1, Meep &amp;gt;= 1. 2 changed the way materials are defined. Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . [Please note that one can still use the material definition written from Meep &amp;lt;1.2 for Meep &amp;gt;=1.2 but not vice versa]{style="color: #ff0000;"}.&lt;/p&gt;
+&lt;/div&gt;</content><category term="Plasmonics"></category></entry><entry><title>Generating plasmonic metal dielectric functions in Python</title><link href="plasmon360.github.io/Generating-plasmonic-metal-dielectric-functions-in-Python.html" rel="alternate"></link><published>2015-09-10T08:54:00-07:00</published><updated>2015-09-10T08:54:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-09-10:plasmon360.github.io/Generating-plasmonic-metal-dielectric-functions-in-Python.html</id><summary type="html">&lt;link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.css"
+    integrity="sha256-SSjvSe9BDSZMUczwnbB1ywCyIk2XaNly9nn6yRm6WJo="
+    crossorigin="anonymous"&gt;
+&lt;style type="text/css"&gt;
+    .katex img {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: inherit;
+    }
+&lt;/style&gt;
+&lt;p&gt;I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water"&gt;LD.m&lt;/a&gt; is a matlab file written by Bora Ung …&lt;/p&gt;</summary><content type="html">&lt;link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.css"
+    integrity="sha256-SSjvSe9BDSZMUczwnbB1ywCyIk2XaNly9nn6yRm6WJo="
+    crossorigin="anonymous"&gt;
+&lt;style type="text/css"&gt;
+    .katex img {
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: inherit;
+    }
+&lt;/style&gt;
+&lt;p&gt;I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water"&gt;LD.m&lt;/a&gt; is a matlab file written by Bora Ung that produces dielectric functions of metals either for Lortenz and Loretnz drude models. &lt;/p&gt;
+&lt;p&gt;The dielectric functions are given as follows:&lt;/p&gt;
+&lt;p&gt;&lt;span class="katex"&gt;&lt;span class="katex-mathml"&gt;&lt;math&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;ϵ&lt;/mi&gt;&lt;mo stretchy="false"&gt;(&lt;/mo&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mo stretchy="false"&gt;)&lt;/mo&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/msub&gt;&lt;msubsup&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mrow&gt;&lt;mo mathvariant="normal"&gt;′&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msubsup&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;mo stretchy="false"&gt;(&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;msubsup&gt;&lt;mi mathvariant="normal"&gt;Γ&lt;/mi&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;mo mathvariant="normal"&gt;′&lt;/mo&gt;&lt;/msubsup&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mo stretchy="false"&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;msubsup&gt;&lt;mo&gt;∑&lt;/mo&gt;&lt;mrow&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/msubsup&gt;&lt;mfrac&gt;&lt;mrow&gt;&lt;msub&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/msub&gt;&lt;msubsup&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mi&gt;p&lt;/mi&gt;&lt;mrow&gt;&lt;mo mathvariant="normal"&gt;′&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msubsup&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;mo stretchy="false"&gt;(&lt;/mo&gt;&lt;msubsup&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mrow&gt;&lt;mi&gt;o&lt;/mi&gt;&lt;mo separator="true"&gt;,&lt;/mo&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;/mrow&gt;&lt;mrow&gt;&lt;mo mathvariant="normal"&gt;′&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msubsup&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;msup&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;mo&gt;−&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;msubsup&gt;&lt;mi mathvariant="normal"&gt;Γ&lt;/mi&gt;&lt;mi&gt;j&lt;/mi&gt;&lt;mo mathvariant="normal"&gt;′&lt;/mo&gt;&lt;/msubsup&gt;&lt;mi&gt;ω&lt;/mi&gt;&lt;mo stretchy="false"&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;/mfrac&gt;&lt;/mrow&gt;&lt;annotation encoding="application/x-tex"&gt;\epsilon(\omega)=1-\frac{f_1\omega_p&amp;#x27;^2}{(\omega^2+i\Gamma_1&amp;#x27;\omega)}+\sum_{j=2}^{n}\frac{f_j\omega_p&amp;#x27;^2}{(\omega_{o,j}&amp;#x27;^2-\omega^2-i\Gamma_j&amp;#x27;\omega)}&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class="katex-html" aria-hidden="true"&gt;&lt;span class="base"&gt;&lt;span class="strut" style="height:1em;vertical-align:-0.25em;"&gt;&lt;/span&gt;&lt;span class="mord mathdefault"&gt;ϵ&lt;/span&gt;&lt;span class="mopen"&gt;(&lt;/span&gt;&lt;span class="mord mathdefault" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="mclose"&gt;)&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.2777777777777778em;"&gt;&lt;/span&gt;&lt;span class="mrel"&gt;=&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.2777777777777778em;"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="base"&gt;&lt;span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"&gt;&lt;/span&gt;&lt;span class="mord"&gt;1&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.2222222222222222em;"&gt;&lt;/span&gt;&lt;span class="mbin"&gt;−&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.2222222222222222em;"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="base"&gt;&lt;span class="strut" style="height:1.7944em;vertical-align:-0.56306em;"&gt;&lt;/span&gt;&lt;span class="mord"&gt;&lt;span class="mopen nulldelimiter"&gt;&lt;/span&gt;&lt;span class="mfrac"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:1.2313399999999999em;"&gt;&lt;span style="top:-2.655em;"&gt;&lt;span class="pstrut" style="height:3em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size6 size3 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mopen mtight"&gt;(&lt;/span&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.7463142857142857em;"&gt;&lt;span style="top:-2.786em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mbin mtight"&gt;+&lt;/span&gt;&lt;span class="mord mathdefault mtight"&gt;i&lt;/span&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;Γ&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.7416285714285715em;"&gt;&lt;span style="top:-2.188485714285714em;margin-left:0em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-2.8448em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;′&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.31151428571428574em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="mclose mtight"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-3.23em;"&gt;&lt;span class="pstrut" style="height:3em;"&gt;&lt;/span&gt;&lt;span class="frac-line" style="border-bottom-width:0.04em;"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-3.60742em;"&gt;&lt;span class="pstrut" style="height:3em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size6 size3 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.10764em;"&gt;f&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.31731428571428577em;"&gt;&lt;span style="top:-2.357em;margin-left:-0.10764em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.143em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.8913142857142857em;"&gt;&lt;span style="top:-2.214em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mathdefault mtight"&gt;p&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-2.931em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;′&lt;/span&gt;&lt;span class="mord mtight"&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.42488571428571426em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.56306em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mclose nulldelimiter"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.2222222222222222em;"&gt;&lt;/span&gt;&lt;span class="mbin"&gt;+&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.2222222222222222em;"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="base"&gt;&lt;span class="strut" style="height:1.9277399999999998em;vertical-align:-0.6963999999999999em;"&gt;&lt;/span&gt;&lt;span class="mop"&gt;&lt;span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;"&gt;∑&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.804292em;"&gt;&lt;span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"&gt;&lt;span class="pstrut" style="height:2.7em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size6 size3 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.05724em;"&gt;j&lt;/span&gt;&lt;span class="mrel mtight"&gt;=&lt;/span&gt;&lt;span class="mord mtight"&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-3.2029em;margin-right:0.05em;"&gt;&lt;span class="pstrut" style="height:2.7em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size6 size3 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight"&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.43581800000000004em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.16666666666666666em;"&gt;&lt;/span&gt;&lt;span class="mord"&gt;&lt;span class="mopen nulldelimiter"&gt;&lt;/span&gt;&lt;span class="mfrac"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:1.2313399999999999em;"&gt;&lt;span style="top:-2.6264200000000004em;"&gt;&lt;span class="pstrut" style="height:3em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size6 size3 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mopen mtight"&gt;(&lt;/span&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.8051142857142857em;"&gt;&lt;span style="top:-2.177714285714286em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight"&gt;o&lt;/span&gt;&lt;span class="mpunct mtight"&gt;,&lt;/span&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.05724em;"&gt;j&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-2.8448em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;′&lt;/span&gt;&lt;span class="mord mtight"&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.46117142857142857em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mbin mtight"&gt;−&lt;/span&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.7463142857142857em;"&gt;&lt;span style="top:-2.786em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mbin mtight"&gt;−&lt;/span&gt;&lt;span class="mord mathdefault mtight"&gt;i&lt;/span&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;Γ&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.7416285714285715em;"&gt;&lt;span style="top:-2.177714285714286em;margin-left:0em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.05724em;"&gt;j&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-2.8448em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;′&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.46117142857142857em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="mclose mtight"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-3.23em;"&gt;&lt;span class="pstrut" style="height:3em;"&gt;&lt;/span&gt;&lt;span class="frac-line" style="border-bottom-width:0.04em;"&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-3.60742em;"&gt;&lt;span class="pstrut" style="height:3em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size6 size3 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.10764em;"&gt;f&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.3280857142857143em;"&gt;&lt;span style="top:-2.357em;margin-left:-0.10764em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.05724em;"&gt;j&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.2818857142857143em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mathdefault mtight" style="margin-right:0.03588em;"&gt;ω&lt;/span&gt;&lt;span class="msupsub"&gt;&lt;span class="vlist-t vlist-t2"&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.8913142857142857em;"&gt;&lt;span style="top:-2.214em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mathdefault mtight"&gt;p&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="top:-2.931em;margin-right:0.07142857142857144em;"&gt;&lt;span class="pstrut" style="height:2.5em;"&gt;&lt;/span&gt;&lt;span class="sizing reset-size3 size1 mtight"&gt;&lt;span class="mord mtight"&gt;&lt;span class="mord mtight"&gt;′&lt;/span&gt;&lt;span class="mord mtight"&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.42488571428571426em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-s"&gt;​&lt;/span&gt;&lt;/span&gt;&lt;span class="vlist-r"&gt;&lt;span class="vlist" style="height:0.6963999999999999em;"&gt;&lt;span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="mclose nulldelimiter"&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;
+.&lt;/p&gt;
+&lt;p&gt;The first part of the function is the Drude part and the second part is the Lorentz part. The parameters for these models are taken from &lt;em&gt;Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998).&lt;/em&gt;&lt;/p&gt;
+&lt;div class = "alert alert-primary"&gt;
+&lt;strong&gt; Note: &lt;/strong&gt; You can find my module (LD.py) and its documentation &lt;a href = "https://github.com/plasmon360/LD_python"&gt;at my github account&lt;/a&gt;.
+&lt;/div&gt;
+
+&lt;p&gt;A typical example on how to use this modules is shown below:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Make sure the file is accessible to PYTHONPATH or in the same&lt;/span&gt;
+&lt;span class="c1"&gt;# directory of file which is trying to import&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;LD&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LD&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Creates a wavelength vector from 300 nm to 1000 nm of length&lt;/span&gt;
+&lt;span class="c1"&gt;# 100&lt;/span&gt;
+&lt;span class="n"&gt;lamda&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;linspace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;300E-9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;1000E-9&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Creates gold object with dielectric function of LD model&lt;/span&gt;
+&lt;span class="n"&gt;gold&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LD&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lamda&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;material&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Au&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;model&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;LD&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# prints the real part of the epislion&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;epsilon_real&lt;/span&gt;
+
+&lt;span class="c1"&gt;# prints the imag part of the epsilon&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;epsilon_imag&lt;/span&gt;
+
+&lt;span class="c1"&gt;# prints the real part of the refractive index&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+
+&lt;span class="c1"&gt;# prints the imag part of the refactive index&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;
+
+&lt;span class="c1"&gt;# plots wavelength vs real epilon and imag epsilon&lt;/span&gt;
+&lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_epsilon&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;# plots wavelength vs n and k .&lt;/span&gt;
+&lt;span class="n"&gt;gold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot_n_k&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is graph comparing the Au eps data obtained using LD.m and LD.python. The are exactly the same.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/LD_python_matlab_comp.png"&gt;&lt;/p&gt;</content><category term="Plasmonics"></category><category term="Python"></category></entry><entry><title>DDSCAT on amazon EC2</title><link href="plasmon360.github.io/ddscat-on-amazon-ec2.html" rel="alternate"></link><published>2015-09-03T21:37:00-07:00</published><updated>2015-09-03T21:37:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-09-03:plasmon360.github.io/ddscat-on-amazon-ec2.html</id><summary type="html">&lt;p&gt;Amazon provides high performance computing capabilities through their EC2 service. You can find more information &lt;a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;They provide a 750 hr free instance with their a &lt;a href="http://aws.amazon.com/free/"&gt;free-tier progra&lt;/a&gt;m. If you want more resources, you can pay for it. See the &lt;a href="https://aws.amazon.com/ec2/pricing/"&gt;pricing&lt;/a&gt;, pricing seem very reasonable.&lt;/p&gt;
+&lt;p&gt;I wanted to see …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Amazon provides high performance computing capabilities through their EC2 service. You can find more information &lt;a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;They provide a 750 hr free instance with their a &lt;a href="http://aws.amazon.com/free/"&gt;free-tier progra&lt;/a&gt;m. If you want more resources, you can pay for it. See the &lt;a href="https://aws.amazon.com/ec2/pricing/"&gt;pricing&lt;/a&gt;, pricing seem very reasonable.&lt;/p&gt;
+&lt;p&gt;I wanted to see how easy it was to install ddscat and run some examples files.&lt;/p&gt;
+&lt;p&gt;Amazon allows to create an instance through their very easy-to-use web interface. I chose to install ubuntu amazon machine image on the instance.  While you are creating an instance you are allowed to create a key pair file and download it.  You will need that to connect to amazon instance through ssh client with this key&lt;/p&gt;
+&lt;p&gt;Fire up  terminal on a linux box and browse to the folder you have the key pair and issue these commands&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod &lt;span class="m"&gt;400&lt;/span&gt; your-key-pair.pem
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Make ssh connection with a command like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -i your-key-pair.pem ubuntu@ec2-xx-xx-100-1.compute-1.amazonaws.com
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;here "ec2-xx-xx-100-1.compute-1.amazonaws.com" is your public dns address&lt;/p&gt;
+&lt;p&gt;You should be able to log into the instance. If you get stuck, see detailed info at &lt;a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html"&gt;how to connect to the instance&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Update the package list from different repos with  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;install these packages  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install gfortran gcc wget make
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Make a directory for ddscat&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir ddscat&lt;span class="se"&gt;\_&lt;/span&gt;install  
+&lt;span class="nb"&gt;cd&lt;/span&gt; ddscat&lt;span class="se"&gt;\_&lt;/span&gt;install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Download the source files and examples&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1&lt;span class="se"&gt;\_&lt;/span&gt;&lt;span class="m"&gt;150420&lt;/span&gt;.tgz  
+wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1&lt;span class="se"&gt;\_&lt;/span&gt;examples&lt;span class="se"&gt;\_&lt;/span&gt;&lt;span class="m"&gt;150519&lt;/span&gt;.tgz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Unzip them&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tar -xzvf ddscat7.3.1&lt;span class="se"&gt;\_&lt;/span&gt;&lt;span class="m"&gt;150420&lt;/span&gt;.tgz
+
+tar -xzvf ddscat7.3.1&lt;span class="se"&gt;\_&lt;/span&gt;examples&lt;span class="se"&gt;\_&lt;/span&gt;&lt;span class="m"&gt;150519&lt;/span&gt;.tgz
+
+rm &lt;span class="se"&gt;\*&lt;/span&gt;.tgz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Go to the examples_exp folder&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /examples&lt;span class="se"&gt;\_&lt;/span&gt;exp
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To compile ddscat executable and run the examples:  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./run&lt;span class="se"&gt;\_&lt;/span&gt;examples
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;ddscat executabe file should be created in the src folder, which you can use for your own ddscat test cases.&lt;/p&gt;
+&lt;p&gt;To quit the ssh session, type&lt;br&gt;
+&lt;code&gt;exit&lt;/code&gt; in the command prompt&lt;/p&gt;
+&lt;p&gt;So as you see, the process is very simple.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="DDSCAT"></category></entry><entry><title>Plasmonic Materials in MEEP &gt; 1.2</title><link href="plasmon360.github.io/plasmonic-materials-in-meep-1-2.html" rel="alternate"></link><published>2015-06-13T16:59:00-07:00</published><updated>2015-06-13T16:59:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2015-06-13:plasmon360.github.io/plasmonic-materials-in-meep-1-2.html</id><summary type="html">&lt;p&gt;&lt;a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP"&gt;Here is&lt;/a&gt; how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep &amp;gt;= 1. 2 changed the way materials are defined. &lt;/p&gt;
+&lt;p&gt;Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . Please note that one can still use …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP"&gt;Here is&lt;/a&gt; how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep &amp;gt;= 1. 2 changed the way materials are defined. &lt;/p&gt;
+&lt;p&gt;Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . Please note that one can still use the material definition written from Meep &amp;lt;1.2 for Meep &amp;gt;=1.2 but not vice versa.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Installation of Meep 1.2 on ubuntu&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;You can follow instructions given in &lt;a href="http://juluribk.com/2013/07/20/installing-meep-1-2-on-ubuntu/" title="Installing Meep 1.2 on ubuntu"&gt;my previous post&lt;/a&gt; to compile Meep 1.2 from the source code, but the procedure is outdated and one can use the recently pre-compiled meep packages (which is much easier)&lt;/p&gt;
 &lt;p&gt;1) Updated computer to at least "The Utopic Unicorn" (Ubuntu 14.10). Meep 1.2 is compiled for this versions and above. U can see instructions here &lt;a href="http://www.ubuntu.com/download/desktop/upgrade"&gt;how to update ubuntu distribution&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;2) Install meep 1.2 (for serial version) by "sudo apt-get install meep h5utils"&lt;br&gt;
-3) check it by "meep --version" and quit the program by "(exit)"&lt;/p&gt;
+&lt;p&gt;2) Install meep 1.2 (for serial version) by &lt;code&gt;sudo apt-get install meep h5utils&lt;/code&gt;  &lt;/p&gt;
+&lt;p&gt;3) check it by &lt;code&gt;meep --version&lt;/code&gt; and quit the program by &lt;code&gt;(exit)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Modifying the material definition type&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;For meep 1.1, I used the following code to define silver material with lorentian model from Rakic et al with 100 nm length unit:&lt;/p&gt;
-&lt;p&gt;[cc lang="scheme"]&lt;br&gt;
-(define myAg (make dielectric (epsilon 1)&lt;br&gt;
-(polarizations&lt;br&gt;
-(make polarizability&lt;br&gt;
-(omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))&lt;br&gt;
-(make polarizability&lt;br&gt;
-(omega 0.065815) (gamma 0.31343) (sigma 7.9247))&lt;br&gt;
-(make polarizability&lt;br&gt;
-(omega 0.36142) (gamma 0.036456) (sigma 0.50133))&lt;br&gt;
-(make polarizability&lt;br&gt;
-(omega 0.66017) (gamma 0.0052426) (sigma 0.013329))&lt;br&gt;
-(make polarizability&lt;br&gt;
-(omega 0.73259) (gamma 0.07388) (sigma 0.82655))&lt;br&gt;
-(make polarizability&lt;br&gt;
-(omega 1.6365) (gamma 0.19511) (sigma 1.1133))&lt;br&gt;
-)))&lt;/p&gt;
-&lt;p&gt;[/cc]&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;define &lt;/span&gt;&lt;span class="nv"&gt;myAg&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;dielectric&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;epsilon&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;polarizations&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;polarizability&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;omega&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;e-20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.0038715&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;4.4625&lt;/span&gt;&lt;span class="nv"&gt;e+39&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;polarizability&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;omega&lt;/span&gt; &lt;span class="mf"&gt;0.065815&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.31343&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;7.9247&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;polarizability&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;omega&lt;/span&gt; &lt;span class="mf"&gt;0.36142&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.036456&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;0.50133&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;polarizability&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;omega&lt;/span&gt; &lt;span class="mf"&gt;0.66017&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.0052426&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;0.013329&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;polarizability&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;omega&lt;/span&gt; &lt;span class="mf"&gt;0.73259&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.07388&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;0.82655&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;polarizability&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;omega&lt;/span&gt; &lt;span class="mf"&gt;1.6365&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.19511&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;1.1133&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;This was generated by my octave/matlab code (see the material_polarization_generator.m) in the &lt;a href="http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip"&gt;project file&lt;/a&gt;.  One can use the this file to generate code for other plasmonic materials.&lt;/p&gt;
 &lt;p&gt;For Meep 1.2, I did the following changes to the above code&lt;/p&gt;
-&lt;p&gt;changed the word "polarizations" to "E-susceptibilities"&lt;/p&gt;
-&lt;p&gt;changed the work "polarizability" to "lorentzian-susceptibility"&lt;/p&gt;
-&lt;p&gt;changed the word "omega" to "frequency"&lt;/p&gt;
+&lt;p&gt;changed the word &lt;code&gt;polarizations&lt;/code&gt; to &lt;code&gt;E-susceptibilities&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;changed the work &lt;code&gt;polarizability&lt;/code&gt; to &lt;code&gt;lorentzian-susceptibility&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;changed the word &lt;code&gt;omega&lt;/code&gt; to &lt;code&gt;frequency&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;So the meep1.2 code looks like this:&lt;/p&gt;
-&lt;p&gt;[cc lang="scheme"]&lt;/p&gt;
-&lt;p&gt;(define myAg (make dielectric (epsilon 1)&lt;br&gt;
-(E-susceptibilities&lt;br&gt;
-(make lorentzian-susceptibility&lt;br&gt;
-(frequency 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))&lt;br&gt;
-(make lorentzian-susceptibility&lt;br&gt;
-(frequency 0.065815) (gamma 0.31343) (sigma 7.9247))&lt;br&gt;
-(make lorentzian-susceptibility&lt;br&gt;
-(frequency 0.36142) (gamma 0.036456) (sigma 0.50133))&lt;br&gt;
-(make lorentzian-susceptibility&lt;br&gt;
-(frequency 0.66017) (gamma 0.0052426) (sigma 0.013329))&lt;br&gt;
-(make lorentzian-susceptibility&lt;br&gt;
-(frequency 0.73259) (gamma 0.07388) (sigma 0.82655))&lt;br&gt;
-(make lorentzian-susceptibility&lt;br&gt;
-(frequency 1.6365) (gamma 0.19511) (sigma 1.1133))&lt;br&gt;
-)))&lt;/p&gt;
-&lt;p&gt;[/cc]&lt;/p&gt;
-&lt;p&gt;This seems to work fine for me. I used this new code to calculate the reflection from a thin silver film (like the way i did in my previous post) and it matches with the analytical calculation.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="MEEP"></category><category term="octave"></category><category term="Plasmonics"></category></entry><entry><title>Surface plasmon dispersion relation for thin metal films</title><link href="plasmon360.github.io/surface-plasmon-dispersion-relation-for-thin-metal-films.html" rel="alternate"></link><published>2011-12-07T21:12:00-08:00</published><updated>2011-12-07T21:12:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2011-12-07:plasmon360.github.io/surface-plasmon-dispersion-relation-for-thin-metal-films.html</id><summary type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;define &lt;/span&gt;&lt;span class="nv"&gt;myAg&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;dielectric&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;epsilon&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;E-susceptibilities&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;lorentzian-susceptibility&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frequency&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;e-20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.0038715&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;4.4625&lt;/span&gt;&lt;span class="nv"&gt;e+39&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;lorentzian-susceptibility&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frequency&lt;/span&gt; &lt;span class="mf"&gt;0.065815&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.31343&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;7.9247&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;lorentzian-susceptibility&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frequency&lt;/span&gt; &lt;span class="mf"&gt;0.36142&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.036456&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;0.50133&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;lorentzian-susceptibility&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frequency&lt;/span&gt; &lt;span class="mf"&gt;0.66017&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.0052426&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;0.013329&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;lorentzian-susceptibility&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frequency&lt;/span&gt; &lt;span class="mf"&gt;0.73259&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.07388&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;0.82655&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;make&lt;/span&gt; &lt;span class="nv"&gt;lorentzian-susceptibility&lt;/span&gt;  
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frequency&lt;/span&gt; &lt;span class="mf"&gt;1.6365&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;gamma&lt;/span&gt; &lt;span class="mf"&gt;0.19511&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sigma&lt;/span&gt; &lt;span class="mf"&gt;1.1133&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
+&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This seems to work fine for me. I used this new code to calculate the reflection from a thin silver film (like the way i did in my previous post) and it matches with the analytical calculation.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="MEEP"></category><category term="octave"></category><category term="Plasmonics"></category></entry><entry><title>Electric field at localized plasmon resonance using MEEP</title><link href="plasmon360.github.io/electric-field-at-localized-plasmon-resonance-using-meep.html" rel="alternate"></link><published>2013-01-22T15:00:00-08:00</published><updated>2013-01-22T15:00:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2013-01-22:plasmon360.github.io/electric-field-at-localized-plasmon-resonance-using-meep.html</id><summary type="html">&lt;p&gt;This article is about simulating localized plasmon resonances in metal nanospheres using MEEP package. Generally, I am interested in solving three problems in LSPR systems:&lt;/p&gt;
+&lt;ol&gt;
+&lt;ol&gt;
+1.  **Calculate the extinction, scattering, absorption spectra of metal nanoparticle**  
+   The procedure for doing this is very similar to the method I mentioned [here](http …&lt;/ol&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;This article is about simulating localized plasmon resonances in metal nanospheres using MEEP package. Generally, I am interested in solving three problems in LSPR systems:&lt;/p&gt;
+&lt;ol&gt;
+&lt;ol&gt;
+1.  **Calculate the extinction, scattering, absorption spectra of metal nanoparticle**  
+   The procedure for doing this is very similar to the method I mentioned [here](http://juluribk.com/2011/06/01/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep/ "here").
+2.  **Calculating the electric field enhancement spatially as function of wavelength**  
+   This involves taking electric field distributions with a particle in time domain and taking FFT of them. Also to be noted is that the electric fields near the particle should be normalized with electric fields with no nanoparticle. This has to be done by an external program like octave/matlab. One has to do this for three components of electric field in two planes. This was the tough part to pull off.
+3.  **Calculate electric field at plasmon resonance as function of time**This was very easy. Get the electric fields at certain wavelength and then multiply it with a time varying sin function.
+
+&lt;/ol&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Below are some results for a silver sphere of 25 nm radius. I am happy with these results. They seem to match the analytical results. Some of the animations are large in size and may take time to load on your browser.&lt;/p&gt;
+&lt;p&gt;[gallery link="file" ids="1413,1409,1410,1411,1412,1414,1415"]&lt;/p&gt;
+&lt;p&gt;[Update1:]{style="color: #ff0000;"} You can find my project file &lt;a href="http://juluribk.com/wp-content/uploads/2013/01/silver_sphere_efficiencies_enhancement_for_website.zip"&gt;HERE&lt;/a&gt;. Enjoy!&lt;br&gt;
+(please remember that the project file is designed to run on ubuntu like system with meep and octave installed. The shell script does everything needed to get the results, make sure to "chmod" the shell file, so that you can run the file. In addition, also make sure to increase the resl (resolution) from 10 to 50 for decent results. This means it will take longer time to run the simulation. The results you see in this post were generated by resl=100 and it took 2 days to run on my computer. If you find any bugs, please let me know.)&lt;/p&gt;
+&lt;p&gt;[Update2:]{style="color: #ff0000;"} This method also works well for gold nano-particles of 50 nm radius. See the last figure in above album.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="MEEP"></category><category term="Plasmonics"></category></entry><entry><title>Surface plasmon dispersion relation for thin metal films</title><link href="plasmon360.github.io/surface-plasmon-dispersion-relation-for-thin-metal-films.html" rel="alternate"></link><published>2011-12-07T21:12:00-08:00</published><updated>2011-12-07T21:12:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2011-12-07:plasmon360.github.io/surface-plasmon-dispersion-relation-for-thin-metal-films.html</id><summary type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
 &lt;p&gt;A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
 &lt;p&gt;A thin metal film in dielectric (also known as dielectric-metal-dielectric configuration) can support surface plasmons that are different in nature to the ones observed in thick metal-dielectric interfaces. Unlike, a single mode that is observed in thick metal film, thin metal films exhibit two types of modes for the same wavevector due to excitation and interaction of surface plasmons on both sides of the film. One mode (L+) is at higher energy and other (L-) is at a lower energy. The high energy has anti-symmetric field distribution whereas the low energy one has symmetric field distribution. The dispersion relations of these modes can be obtained by applying appropriate boundary conditions and solving Maxwell equations (&lt;a href="http://paper.gentilemathieu.free.fr/_L1988Raether%20Surface%20Plasmons.pdf"&gt;page 25 of Raether book on Surface plasmons&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;The dispersion relations (energy of different modes as function of complex wavevector, \$k_x\^{'}(\omega)+ik_x\^{''}(\omega)\$) are given by the solutions of :&lt;/p&gt;
@@ -999,33 +1045,246 @@ legend('L+','L-','location','SouthEast')&lt;br&gt;
 title('Analytical solution to metal thin-film surface plasmon dispersion relation')&lt;br&gt;
 xlim([0,3]);&lt;br&gt;
 print('dmd_analytical_web.png','-dpng','-r200','-S600,600');&lt;br&gt;
-[/cc]&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="octave"></category><category term="Plasmonics"></category></entry><entry><title>Simulation of Localized surface plasmons</title><link href="plasmon360.github.io/simulation-of-localized-surface-plasmons.html" rel="alternate"></link><published>2010-01-11T12:09:00-08:00</published><updated>2010-01-11T12:09:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-11:plasmon360.github.io/simulation-of-localized-surface-plasmons.html</id><summary type="html">&lt;p&gt;
-&lt;center&gt;
+[/cc]&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="octave"></category><category term="Plasmonics"></category></entry><entry><title>Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep</title><link href="plasmon360.github.io/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html" rel="alternate"></link><published>2011-06-01T14:06:00-07:00</published><updated>2011-06-01T14:06:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2011-06-01:plasmon360.github.io/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html</id><summary type="html">&lt;p&gt;Particles scatter and absorb electromagnetic radiation. One often needs to compare the amount of scattering/absorption/extinction for particles of different shapes, composition, sizes and incident light properties (polarization, frequency and angle). In this regard, the concept of cross-sections comes into picture. There are three types of cross-sections, 1) scattering …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Particles scatter and absorb electromagnetic radiation. One often needs to compare the amount of scattering/absorption/extinction for particles of different shapes, composition, sizes and incident light properties (polarization, frequency and angle). In this regard, the concept of cross-sections comes into picture. There are three types of cross-sections, 1) scattering 2) absorption and 3) extinction. All of them have units of area, \$m\^2\$, and provide a measure to quantify scattering/absorption process. Here using MEEP I calculate the crossections of silver nanowires and compare them with numerical solution (&lt;a href="http://onlinelibrary.wiley.com/doi/10.1002/9783527618156.app4/pdf"&gt;code from Bohren and Hauffman book&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_862" align="aligncenter" width="400"]&lt;a href="http://juluribk.com/wp-content/uploads/2011/06/cylinders_meepvsanalytical.png"&gt;&lt;img alt="" class="size-full wp-image-862" height="300" src="http://juluribk.com/wp-content/uploads/2011/06/cylinders_meepvsanalytical.png" title="plasmonic cylinder cross-sections meep vs analytical" width="400"&gt;&lt;/a&gt; Comparison of meep results with analytical results for silver nanowires[/caption]&lt;/p&gt;
+&lt;p&gt;To achieve this, I wrote a meep code that performs a 2D simulation (x-y) with the cylinder axis along z axis with sources and monitors places as shown below. The source is a line source which travels along y direction and has polarization with electric field along x axis (along radius). I also use mirror-symmetries anti-symetry along X direction (which reduces the simulation time by half). PML layers are used on all sides. Calculation of cross-sections involves creating multiple 1-d flux monitors and running multiple simulations as shown below.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://juluribk.com/wp-content/uploads/2011/06/silver_cylinder_gray_comp_no_fft.zip"&gt;Here is my project file.&lt;/a&gt;. You would need ubuntu like system with meep and octave installed. Shell script will do all the work.&lt;/p&gt;
+&lt;p&gt;I have also shared the &lt;a href="https://github.com/juluribk/Meep_cylinder_scattering_project"&gt;project at github.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://juluribk.com/wp-content/uploads/2011/06/Picture3.png"&gt;&lt;img alt="" class="aligncenter size-medium wp-image-1014" height="252" src="http://juluribk.com/wp-content/uploads/2011/06/Picture3-300x252.png" title="simulation set up" width="300"&gt;&lt;/a&gt;&lt;a href="http://juluribk.com/wp-content/uploads/2011/06/simulation_steps.png"&gt;&lt;img alt="" class="aligncenter size-medium wp-image-1013" height="99" src="http://juluribk.com/wp-content/uploads/2011/06/simulation_steps-300x99.png" title="simulation_steps" width="300"&gt;&lt;/a&gt;&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="MEEP"></category><category term="octave"></category><category term="photonics"></category><category term="Plasmonics"></category></entry><entry><title>Arbitrary 2d shapes in MEEP</title><link href="plasmon360.github.io/arbitrary-2d-shapes-in-meep.html" rel="alternate"></link><published>2011-05-10T22:52:00-07:00</published><updated>2011-05-10T22:52:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2011-05-10:plasmon360.github.io/arbitrary-2d-shapes-in-meep.html</id><summary type="html">&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/Arbirary_shapes-eps.png" title=""&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://ab-initio.mit.edu/wiki/index.php/Meep"&gt;In MEEP (1.1.1)&lt;/a&gt;, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/Arbirary_shapes-eps.png" title=""&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://ab-initio.mit.edu/wiki/index.php/Meep"&gt;In MEEP (1.1.1)&lt;/a&gt;, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was wondering if it was possible to somehow create any complex shape in 2d without figuring out the exact positions and operations with the available primitive shapes. Here I report how I solve this problem.&lt;/p&gt;
+&lt;p&gt;The first thing I figured out was to create a 2d triangle with known vertices using a certain primitive shape. One can cut a cone to create a triangle, but that would limit me to isosceles triangle. My very smart colleague (&lt;a href="http://www.esm.psu.edu/wiki/research:juh17:mengqian_lu"&gt;Mengqian Lu&lt;/a&gt;) suggested me to cut a block/brick object with non-orthogonal axes such that you get a triangle. &lt;/p&gt;
+&lt;p&gt;In meep, block object requires, 
+1) the lengths of the block edges along each of its three axes
+2) the directions of the axes of the block and 
+3)center. &lt;/p&gt;
+&lt;p&gt;A triangle with known (x1,y1,0), (x2,y2,0) and (x3,y3,0) can be represented with a block (with possible non-orthogonality) element by modifications as shown in the figure. I pick a random point "E" which is not in the plane of my triangle and assume it as origin of the block. Then the vectors corresponding to axes of block are given by EA, EB, EC vectors, sizes are given by |EA|,|EB|,|EC| and the center of the block is OE+0.5*(EA+EB+EC).&lt;/p&gt;
+&lt;p&gt;Triangle in Meep using block primitive object&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/Arbirary_shapes-single-triangle.png"&gt;&lt;/p&gt;
+&lt;p&gt;To test this, I wrote a octave code which produces a meep code that that can be executed to create a triangle with vertices of (-10,0,0), (10,0,0) and (0,10,0). The result of compiling the meep code and exporting the dielectric distribution is shown below. The length of the simulation domain is 20 units in both x and y directions.&lt;/p&gt;
+&lt;p&gt;Triangle shape implemented in meep using block primitve object.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/Arbirary_shapes-single-triangle2.png"&gt;&lt;/p&gt;
+&lt;p&gt;With this information of incorporating a single triangle in meep, I can now obtain complex 2d shapes in meep. I start by writing a file that contains information regarding points that make up my structure and do a &lt;a href="http://en.wikipedia.org/wiki/Delaunay_triangulation"&gt;constrained delaunay triangulation&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;One can use &lt;a href="http://www.mathworks.com/products/matlab/demos.html?file=/products/demos/shipping/matlab/demoDelaunayTri.html"&gt;matlab (versions &amp;gt;2009) to do such constrained delaunay triangulation&lt;/a&gt;. However, many of us (poor graduate students :( ) do not have access to matlab. I figured out that constrained delaunay triangulation can be done by using &lt;a href="http://www.cs.cmu.edu/~quake/triangle.html"&gt;Triangle package&lt;/a&gt;, which is free. After I compile this code, I see two executables 1) Triangle and 2) Showme in my source folder. Triangle does the triangulation and showme does the visualization before and after triangulation.&lt;/p&gt;
+&lt;p&gt;First, I write a ".poly" file, to mention my structure. ”.poly” file contains information of the points that make up the structure, one has to also mention segments (the border of the polygon) and any holes (if present). More information can be &lt;a href="http://www.cs.cmu.edu/~quake/triangle.delaunay.html"&gt;found here&lt;/a&gt;. Once a poly file is written, it can visualized using showme executable . If everything is ok, then do a constrained delaunay triangulation using Triangle executable (beware of concavities). I again visualize the structure after triangulation using showme executable to check whether triangulation has happened correctly or not. Once triangulated, I use the method above to convert each triangle to a corresponding meep block element (with suitable centers, sizes and axes) and stitch all of them together (once again use a octave code to do that automatically).&lt;/p&gt;
+&lt;p&gt;Using the poly file for shape “A” obtained from &lt;a href="http://people.sc.fsu.edu/~jburkardt/data/poly/a.poly"&gt;here&lt;/a&gt; I create a dielectric structure in MEEP with each triangle representing a random dielectric constant. Below is the final result. This method can also be extended to a group of arbitrary shapes in one simulation each with different dielectric functions.  &lt;/p&gt;
+&lt;p&gt;Screenshot of showme executable showing the triangulation of 'A' shape.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/Arbirary_shapes-screenshot.png"&gt;&lt;/p&gt;
+&lt;p&gt;'A' shaped dielectric structure in MEEP.
+&lt;img alt="" class="center" src="plasmon360.github.io/images/Arbirary_shapes-eps.png" title=""&gt;&lt;/p&gt;
+&lt;p&gt;I seem to be missing my octave code for this implementation.&lt;/p&gt;
+&lt;p&gt;Here is a version posted by Felip BM &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;out &lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;MEEPtriangle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;p1,p2,p3&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="c"&gt;% Create a triangle in MEEP with vertices in p1, p2, p3&lt;/span&gt;
+&lt;span class="c"&gt;% as explained in&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;juluribk&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2011&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;05&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;arbitrary&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;shapes&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;in&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;meep&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;#&lt;span class="n"&gt;comment&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;54057&lt;/span&gt;
 
-&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
-&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
+&lt;span class="c"&gt;%origin&lt;/span&gt;
+&lt;span class="n"&gt;O&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt; &lt;span class="c"&gt;% for now axes origin is a constant&lt;/span&gt;
 
-&lt;embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;" allowscriptaccess="always" allowfullscreen="true"&gt;
-&lt;/embed&gt;
-&lt;/object&gt;
+&lt;span class="n"&gt;OA&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;p1&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;OB&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;p2&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;OC&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;p3&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
+&lt;span class="c"&gt;% Origin of the triangle&lt;/span&gt;
+&lt;span class="n"&gt;E&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt;  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;&lt;span class="c"&gt;% for now coords&amp;#39; origin is a constant&lt;/span&gt;
+&lt;span class="n"&gt;OE&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;E&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;O&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-&lt;/center&gt;
+&lt;span class="c"&gt;% block edges and center&lt;/span&gt;
+&lt;span class="n"&gt;EA&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OA&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;OE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;EB&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OB&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;OE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;EC&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OC&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;OE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;CC&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;OE&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EA&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;EB&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;EC&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c"&gt;% center&lt;/span&gt;
 
-A cool simulation using FDTD showing the excitaion of Localized Surface Plasmons in metal nanorods. These simulations are done by [Prof. Maxim Sukhrev](https://webapp4.asu.edu/directory/person/1271759). The external electromagnetic wave excites plasmons (oscillation of electron sea in the particle) in the direction of polarization of incident …&lt;/p&gt;</summary><content type="html">&lt;p&gt;
-&lt;center&gt;
-
-&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;
-&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;
-
-&lt;embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/cR1U_cIEhVE&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;" allowscriptaccess="always" allowfullscreen="true"&gt;
-&lt;/embed&gt;
-&lt;/object&gt;
-
-
-&lt;/center&gt;
-
-A cool simulation using FDTD showing the excitaion of Localized Surface Plasmons in metal nanorods. These simulations are done by [Prof. Maxim Sukhrev](https://webapp4.asu.edu/directory/person/1271759). The external electromagnetic wave excites plasmons (oscillation of electron sea in the particle) in the direction of polarization of incident wave. At a certain resonance frequency of incoming light (which depends on the shape, size and environment), the particle exhibits large scattering and absorption. It also leads to large enhancements in electric field at the surface.
-
-&lt;/p&gt;
-To know more about localized surface plasmons, read my upcoming articles in my plasmonics information center.</content><category term="Plasmonics"></category><category term="FDTD"></category><category term="Plasmonics"></category></entry></feed>
+&lt;span class="n"&gt;fprintf&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;(make block (center %6.4f %6.4f %6.4f)\n\t\t&amp;#39;&lt;/span&gt;&lt;span class="c"&gt;...&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;(size %6.4f %6.4f %6.4f)\n\t\t&amp;#39;&lt;/span&gt;&lt;span class="c"&gt;...&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;(e1 %6.4f %6.4f %6.4f)\n\t\t&amp;#39;&lt;/span&gt;&lt;span class="c"&gt;...&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;(e2 %6.4f %6.4f %6.4f)\n\t\t&amp;#39;&lt;/span&gt;&lt;span class="c"&gt;...&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;(e3 %6.4f %6.4f %6.4f)\n\t\t&amp;#39;&lt;/span&gt;&lt;span class="c"&gt;...&lt;/span&gt;
+        &lt;span class="s"&gt;&amp;#39;(material (make dielectric (epsilon 12))))&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="c"&gt;...% for now epsilon is constant&lt;/span&gt;
+        &lt;span class="n"&gt;CC&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;norm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EA&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;norm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EB&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;norm&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;EC&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="n"&gt;EA&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EB&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;EC&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="MEEP"></category><category term="octave"></category><category term="photonics"></category><category term="Plasmonics"></category></entry><entry><title>Plasmonic materials in MEEP</title><link href="plasmon360.github.io/plasmonic-materials-in-meep.html" rel="alternate"></link><published>2011-04-27T00:39:00-07:00</published><updated>2011-04-27T00:39:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2011-04-27:plasmon360.github.io/plasmonic-materials-in-meep.html</id><summary type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
+&lt;p&gt;The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.&lt;/p&gt;
+&lt;p&gt;Metals such …&lt;/p&gt;</summary><content type="html">&lt;p&gt;[latexpage]&lt;/p&gt;
+&lt;p&gt;The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.&lt;/p&gt;
+&lt;p&gt;Metals such as gold and silver have both Drude and Lorentz components for the dielectric function. There are many forms of Lorentz-Drude expressions in literature with slight notation differences.&lt;/p&gt;
+&lt;p&gt;I prefer the Lorentz-Drude expression mentioned in &lt;a href="http://www.opticsinfobase.org/abstract.cfm?URI=ao-37-22-5271"&gt;Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998)&lt;/a&gt; and is given by:&lt;/p&gt;
+&lt;p&gt;\$\epsilon(\omega)=1-\frac{f_1\omega_p'\^2}{(\omega\^2+i\Gamma_1'\omega)}+\sum_{j=2}\^{n}\frac{f_j\omega_p'\^2}{(\omega_{o,j}'\^2-\omega\^2-i\Gamma_j'\omega)}\$.&lt;/p&gt;
+&lt;p&gt;I took it as reference as they also give the parameters for metals such as Ag and Au and these models fit decently well to experimental data over a larger frequency range (0.1 eV to 6 eV).&lt;/p&gt;
+&lt;p&gt;For Silver, the parameters are :&lt;/p&gt;
+&lt;p&gt;\$\omega_p\$ = 9.01;% Plasma frequency in eV&lt;/p&gt;
+&lt;p&gt;f = [0.845 0.065 0.124 0.011 0.840 5.646];% Oscillators' strengths&lt;/p&gt;
+&lt;p&gt;\$\Gamma\$ = [0.048 3.886 0.452 0.065 0.916 2.419];% Damping frequency of each oscillator in eV&lt;/p&gt;
+&lt;p&gt;\$\omega_o\$ = [0.000 0.816 4.481 8.185 9.083 20.29];% Resonant frequency of each oscillator in eV&lt;/p&gt;
+&lt;p&gt;For Gold, the parameters are :&lt;/p&gt;
+&lt;p&gt;\$\omega_p\$ = 9.03;% Plasma frequency in eV&lt;/p&gt;
+&lt;p&gt;f = [0.760 0.024 0.010 0.071 0.601 4.384];% Oscillators' strengths&lt;/p&gt;
+&lt;p&gt;\$\Gamma\$ = [0.053 0.241 0.345 0.870 2.494 2.214];% Damping frequency of each oscillator in eV&lt;/p&gt;
+&lt;p&gt;\$\omega_o\$ = [0.000 0.415 0.830 2.969 4.304 13.32];% Resonant frequency of each oscillator in eV&lt;/p&gt;
+&lt;p&gt;To convert these parameters usable for MEEP codes, one needs to do the following:&lt;/p&gt;
+&lt;p&gt;1) Normalization:&lt;/p&gt;
+&lt;p&gt;\$\omega_p'=\omega_p \times \textrm{norm}\$,&lt;/p&gt;
+&lt;p&gt;\$\Gamma'=\Gamma \times \textrm{norm}\$,&lt;/p&gt;
+&lt;p&gt;\$\omega_o'=\omega_o \times \textrm{norm}\$,&lt;/p&gt;
+&lt;p&gt;where \$\textrm{norm}=\frac{ev2w}{\frac{2\pi c}{a}}\$, \$ev2w=\frac{2\pi}{4.135666e-15}\$ .&lt;/p&gt;
+&lt;p&gt;Essentially, we are converting the units of \$\omega_p\$,\$\Gamma\$ and \$\omega_o\$ from eV to angular frequency, which is done by multiplying them with \$ev2w\$. Further, they need to be normalized to MEEP units, divide by \$\frac{2\pi c}{a}\$, where \$a\$ is the length unit in meters used in your MEEP code and obviously c is 299792458 m/s.&lt;/p&gt;
+&lt;p&gt;2) Casting Lorentz-Drude model to MEEP's model&lt;/p&gt;
+&lt;p&gt;Current version of MEEP (1.1.1), supports dispersive materials through Lorentz model and is given by:&lt;/p&gt;
+&lt;p&gt;\$ \epsilon(\omega)=\epsilon_{\infty}+\sum_{j=1}\^{n}\frac{\sigma_{L,j}\omega_{L,j}\^2} {(\omega_{L,j}\^2-\omega\^2-i\Gamma_{L,j}\omega)}\$.&lt;/p&gt;
+&lt;p&gt;The normalized parameters, \$\omega_p'\$,\$\Gamma'\$ and \$\omega_o'\$ from step 1, need to be cast into the MEEP's dispersive materials model by the following modifications:&lt;/p&gt;
+&lt;p&gt;1) \$\omega_{L,1}=1e\^{-20}\$ (Any small number should be fine.)&lt;/p&gt;
+&lt;p&gt;2) \$\omega_{L,j&amp;gt;1}=\omega_{o,j&amp;gt;1}'\$&lt;/p&gt;
+&lt;p&gt;3) \$\sigma_{L,j}=\frac{f_j\omega_p'\^2}{\omega_{L,j}\^2}\$&lt;/p&gt;
+&lt;p&gt;4) \$\epsilon_{\infty}=1\$&lt;/p&gt;
+&lt;p&gt;5) \$\Gamma_{L,j}=\Gamma_j'\$&lt;/p&gt;
+&lt;p&gt;Here is scheme code snippet for silver with a=100e-9m (100 nm) after normalization and casting them into MEEP's material model.&lt;/p&gt;
+&lt;p&gt;[cc lang="scheme"]&lt;br&gt;
+(define myAg (make dielectric (epsilon 1)&lt;br&gt;
+(polarizations&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.065815) (gamma 0.31343) (sigma 7.9247))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.36142) (gamma 0.036456) (sigma 0.50133))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.66017) (gamma 0.0052426) (sigma 0.013329))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 0.73259) (gamma 0.07388) (sigma 0.82655))&lt;br&gt;
+(make polarizability&lt;br&gt;
+(omega 1.6365) (gamma 0.19511) (sigma 1.1133))&lt;br&gt;
+)))&lt;/p&gt;
+&lt;p&gt;[/cc]&lt;/p&gt;
+&lt;p&gt;The first polarizability is the Drude component and the rest 5 polarzabilities represent the Lorentz components. I have used this snippet in a MEEP code that calculates the reflection from a thin film of silver (to be consistent, all my units in this MEEP code are also normalized to 100 nm). Later I compared the reflection spectra with an &lt;a href="http://en.wikipedia.org/wiki/Fresnel_equations"&gt;analytical solution&lt;/a&gt;. These results are shown below. The MEEP calculation results match very well the analytical solutions. One can also clearly see the Ag interband effects in UV regime. The results also match with an other &lt;a href="http://upload.wikimedia.org/wikipedia/commons/9/9d/Image-Metal-reflectance.png"&gt;reference&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If anyone needs the codes that generate the scheme snippet for material polarization and calculation of reflectivity of thin metal films, please shoot me an email.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_795" align="aligncenter" width="600"]&lt;a href="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png"&gt;&lt;img alt="" class="size-full wp-image-795" height="450" src="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png" title="Reflectivity comparision between MEEP and analytical model for Silver" width="600"&gt;&lt;/a&gt; Reflectivity of Ag thin film (MEEP vs. analytical model)[/caption]&lt;/p&gt;
+&lt;p&gt;[You can find my project file &lt;a href="http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip"&gt;here&lt;/a&gt;. Please read the readme.txt for further instructions.]{style="text-decoration: underline;"}&lt;/p&gt;
+&lt;p&gt;[UPDATE:]{style="color: #ff0000;"} Aaron Webster used this code for a 1 × 1 × 1 pixel region and epilion was exported with the command meep-fields-analytic-chi1. He showed that the dielectric function seen by meep through using my snippet matches with the experimental dielectric function. You can find his report &lt;a href="http://falsecolour.com/aw/meep_metals/meep-metals.pdf"&gt;here&lt;/a&gt;. Thank you Aaron.&lt;/p&gt;
+&lt;p&gt;Majid has written a python code to do the operation described above. Please find it &lt;a href="http://msdresearch.blogspot.com/2012/02/understanding-meeps-dispersive-media.html"&gt;here&lt;/a&gt;&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="Free Software"></category><category term="Matlab"></category><category term="MEEP"></category><category term="octave"></category><category term="photonics"></category><category term="Plasmonics"></category><category term="SERS"></category></entry><entry><title>Electric Field in Metal Nanoparticle Dimers</title><link href="plasmon360.github.io/electric-field-in-metal-nanoparticle-dimers.html" rel="alternate"></link><published>2011-04-09T15:32:00-07:00</published><updated>2011-04-09T15:32:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2011-04-09:plasmon360.github.io/electric-field-in-metal-nanoparticle-dimers.html</id><summary type="html">&lt;p&gt;Metal nanoparticles exhibit localized surface plasmon resonance (LSPR). One can think of LSPR as resonance of electron sea oscillations driven by incident electric field. This is similar to the way a spring-mass system attains resonance under external periodic driving force.&lt;/p&gt;
+&lt;p&gt;The result of this plasmon resonance is enhanced dipole moment …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Metal nanoparticles exhibit localized surface plasmon resonance (LSPR). One can think of LSPR as resonance of electron sea oscillations driven by incident electric field. This is similar to the way a spring-mass system attains resonance under external periodic driving force.&lt;/p&gt;
+&lt;p&gt;The result of this plasmon resonance is enhanced dipole moment or charge separation, which leads to 1) large extinction (extinction is defined as sum of scattering and absorption) and 2) large electric field near the particle. Both of which are shape, size and surrounding dependent. &lt;/p&gt;
+&lt;p&gt;Researchers have taken advantage of this large electric field localization to enhance Raman signals from molecules and have lead to the field of Surface Enhanced Raman Spectroscopy (SERS) (&lt;a href="http://en.wikipedia.org/wiki/Surface_enhanced_Raman_spectroscopy"&gt;more information here&lt;/a&gt;). Raman signal provides quantitative information of vibration modes in molecules and is proportional to the fourth power of electric field perceived by the molecule. Therefore large electric field structures are important for SERS. The real mechanism of SERS is still a topic of debate due to arguments of whether this effect is caused due to enhanced electromagnetic electric field (EM effect) or due to charge transfer effects (usually referred to CHEM effect). &lt;/p&gt;
+&lt;p&gt;Most researchers think that both of these arguments are valid and depend upon the system under consideration. Assuming electric field as an important requirement for SERS, one can think that nanostructures with large electric field should be better SERS candidates. This is very true and researchers have designed many geometries that can give large electric field. Another argument in SERS community is that not only large electric fields are important, it is equally important to get reproducible SERS signals from structures.&lt;/p&gt;
+&lt;p&gt;Of interest have been nanoparticle configurations that consist of two nanoparticles that are very close to each other (commonly referred as dimer nanoparticles).  I have simulated electric fields (see figure below) using FDTD for both single nanoparticle and nanoparticle dimers with varying gap (here disks are used, but it is more or less true for any other geometry) at LSPR. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/electric_field_disc_dimers_gap.png"&gt;&lt;/p&gt;
+&lt;p&gt;One can see, &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Metal nanoparticle dimers have large electric field in the junction compared to single nanoparticles &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gap dependence on the electric field. As the gap reduces, electric field increases. The electric field intensity (|E/Eo|^2) goes from 2 orders to 4 orders of magnitude driving Raman enhancement factors (|E/Eo|^4) from 4 orders to 8 orders.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Not only large electric field is important for SERS, one has to also match the LSPR wavelength of these particles to the Raman excitation laser wavelength to get the best benefit out of dimers. This is tricky because gap also changes the plasmon resonances generally moving them to lower energy (nearly exponentially with gap).  One can think of why they move to lower energy is due to increased restoring force between charge separations in individual nanoparticles making the system more easy to resonate. There is still a debate what happens at very small gaps when electrons start to tunnel between nanoparticles one can expect to see a LSPR move to higher energy instead of lower energy. This cannot be simulated by basic Maxwell equations as tunneling of electrons is not considered in them. Such cases require quantum treatment.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="FDTD"></category><category term="Molecular Machines"></category><category term="photonics"></category><category term="Plasmonics"></category><category term="SERS"></category></entry><entry><title>Charge density in metal nanoparticles at plasmon resonance</title><link href="plasmon360.github.io/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html" rel="alternate"></link><published>2010-11-23T14:11:00-08:00</published><updated>2010-11-23T14:11:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-11-23:plasmon360.github.io/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html</id><summary type="html">&lt;p&gt;It is important to know the magnitude and distribution of electric field near the metallic nanoparticles at plasmon resonance. One can look at the electric field and say whether the plasmon mode is dipolar or higher order mode such as qudrapolar mode. At many times one is also interested to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It is important to know the magnitude and distribution of electric field near the metallic nanoparticles at plasmon resonance. One can look at the electric field and say whether the plasmon mode is dipolar or higher order mode such as qudrapolar mode. At many times one is also interested to know the surface charge density which makes easier to identify the plasmon mode. One can get the surface charge density by talking the divergence of electric field (near field) either calculated by DDA method or FDTD method &lt;a href="http://iopscience.iop.org/1367-2630/2/1/327/"&gt;[Reference paper]&lt;/a&gt;. Below I have calculated the electric field near nanoparticle at plasmon resonance using FDTD method and also calculated the corresponding surface charge density. One can see the dipolar nature of the electric field, and also the surface charge density maximum at one end of the particle and minimum at the other end. Surface Charge density plots become more useful when analyzing complex geometries with complex modes.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_655" align="alignnone" width="300" caption="Electric field and charge density distribution"]&lt;a href="http://juluribk.com/wp-content/uploads/2010/11/test.png"&gt;&lt;img alt="" class="size-medium wp-image-655" height="97" src="http://juluribk.com/wp-content/uploads/2010/11/test-300x97.png" title="Electric field and charge density distribution" width="300"&gt;&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://juluribk.com/wp-content/uploads/2010/11/test.png"&gt;&lt;/a&gt;&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="Free Software"></category><category term="photonics"></category><category term="Plasmonics"></category></entry><entry><title>Spoof Plasmons / Designer Surface Plasmons</title><link href="plasmon360.github.io/spoof-plasmons-designer-surface-plasmons.html" rel="alternate"></link><published>2010-10-07T14:28:00-07:00</published><updated>2010-10-07T14:28:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2010-10-07:plasmon360.github.io/spoof-plasmons-designer-surface-plasmons.html</id><summary type="html">&lt;p&gt;Aim of this article/post: To 1) introduce the concept of Designer surface plasmons or Spoof plasmons and 2) Dispersion relations and Visualization of the fields using MEEP code. (Some of the text/simulations are taken from &lt;a href="http://www.esm.psu.edu/wiki/_media/research%3Ajuh17%3Apublication%3Abkjuluri_oe_2009.pdf"&gt;my paper in the area of DSPs.&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;Surface Plasmons are electromagnetic waves that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Aim of this article/post: To 1) introduce the concept of Designer surface plasmons or Spoof plasmons and 2) Dispersion relations and Visualization of the fields using MEEP code. (Some of the text/simulations are taken from &lt;a href="http://www.esm.psu.edu/wiki/_media/research%3Ajuh17%3Apublication%3Abkjuluri_oe_2009.pdf"&gt;my paper in the area of DSPs.&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;Surface Plasmons are electromagnetic waves that travel at the interface of metals such as Ag/Au (follow Lorentz-Drude dielectric model) and a dielectric. Surface plasmons are not expected in perfect electric conductors (PEC's) as the electric field inside the metal is zero. However, highly localized surface-bound states appear when the PEC is periodically modulated with arrays of sub-wavelength square or circular holes. Both theoretical and experimental studies suggest that surface-bound states and SPs exhibit similar dispersion relationships. Due to the similarity such surface-bound states are referred to as ‘spoof’ or ‘designer’ surface plasmons (DSPs).&lt;/p&gt;
+&lt;p&gt;Structured PEC surfaces and the excited DSPs have recently garnered interest within the photonics community, as a new platform to engineer surface-bound states of a wide frequency range.  An important example is the guiding of terahertz-range radiation  in the form of DSPs. This enables the application of terahertz plasmonics to near-field imaging, sensing, and spectroscopy. A prime advantage of DSP is that, unlike conventional SP, the propagation of these waves can be controlled by engineering the material-independent, perceived group index. PEC structures have been engineered to guide DSPs of speci?c terahertz-range frequencies. To know more about &lt;a href="http://www.esm.psu.edu/wiki/_media/research%3Ajuh17%3Apublication%3Abkjuluri_oe_2009.pdf"&gt;DSP's and relevant references, see references in my paper on DSP's here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the figure below, I show how DSP's are excited. I also show numerically calculated dispersion curves and fields. These were obtained using freely available finite difference time domain simulation software, MEEP.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_624" align="aligncenter" width="502"]&lt;a href="http://juluribk.com/wp-content/uploads/2010/10/band_structure.png"&gt;&lt;img alt="" class="size-large wp-image-624" height="158" src="http://juluribk.com/wp-content/uploads/2010/10/band_structure-1024x321.png" title="Designer Surface Plasmons" width="502"&gt;&lt;/a&gt; Schematic shows the excitation of Designer surface plasmons (DSPS) (left). Inset shows the fields (Ey and Ex). Dispersion relationship of these waves (right))[/caption]&lt;/p&gt;
+&lt;p&gt;&lt;object width="240" height="192" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.youtube.com/v/YxaB9wwXJ2g?fs=1&amp;amp;hl=en_US&amp;amp;color1=0x2b405b&amp;amp;color2=0x6b8ab6"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;&lt;embed width="240" height="192" type="application/x-shockwave-flash" src="http://www.youtube.com/v/YxaB9wwXJ2g?fs=1&amp;amp;hl=en_US&amp;amp;color1=0x2b405b&amp;amp;color2=0x6b8ab6" allowfullscreen="true" allowscriptaccess="always" allowfullscreen="true"&gt;&lt;/embed&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;&lt;object width="240" height="192" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.youtube.com/v/VAM9r8EV1_I?fs=1&amp;amp;hl=en_US&amp;amp;color1=0x2b405b&amp;amp;color2=0x6b8ab6"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;&lt;embed width="240" height="192" type="application/x-shockwave-flash" src="http://www.youtube.com/v/VAM9r8EV1_I?fs=1&amp;amp;hl=en_US&amp;amp;color1=0x2b405b&amp;amp;color2=0x6b8ab6" allowfullscreen="true" allowscriptaccess="always" allowfullscreen="true"&gt;&lt;/embed&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;[Update on May 2 2013:]{style="color: #ff0000;"} (&lt;a href="http://juluribk.com/wp-content/uploads/2010/10/Spoof_plasmons_Two-dimensional-unit-cell.zip"&gt;Here is my project file&lt;/a&gt;)&lt;/p&gt;</content><category term="Plasmonics"></category><category term="MEEP"></category><category term="FDTD"></category></entry><entry><title>DDSCAT and electric field at plasmon resonance</title><link href="plasmon360.github.io/ddscat-and-electric-field-at-plasmon-resonance.html" rel="alternate"></link><published>2010-05-26T21:10:00-07:00</published><updated>2010-05-26T21:10:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2010-05-26:plasmon360.github.io/ddscat-and-electric-field-at-plasmon-resonance.html</id><summary type="html">&lt;p&gt;Discrete Dipole Approximation (DDA) is an important tool in plasmonics research. Using DDA, one can calculate scattering properties of nanoparticles at various wavelengths, polarizations and surrounding medium. The specialty of DDA is that one can calculate scattering properties of irregular shape particles (particles other than spheroids). DDA is based on …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Discrete Dipole Approximation (DDA) is an important tool in plasmonics research. Using DDA, one can calculate scattering properties of nanoparticles at various wavelengths, polarizations and surrounding medium. The specialty of DDA is that one can calculate scattering properties of irregular shape particles (particles other than spheroids). DDA is based on representing a particle into a set of interacting dipoles and solving their dipole moments such that they are all self-conistent with each other and are linked by far-field and near-field interactions. Once these dipole moments are calculated, they can be used to calculate scattering properties such as scattering efficiency, absorption efficiency and extinction efficiency. Not only efficiencies, one can also calculate electric field and magnetic field at an interested wavelength of incident light. More information on DDA can be found in this &lt;a href="http://arxiv.org/ftp/arxiv/papers/0704/0704.0038.pdf"&gt;review paper&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are various codes that have implemented the discrete dipole approximation method. My favorite implentation is DDSCAT. DDSCAT is a free and easy to learn code.  You can get more information on downloading and installing &lt;a href="http://www.astro.princeton.edu/~draine/DDSCAT.html"&gt;DDSCAT here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here, I have used DDSCAT to calculate the electric field near the vicinity of a 60 nm gold nanoparticle in water at localized surface plasmon resonance (532 nm). Note the large electric field at the edges of the nanoparticle and dipolar field due to plasmon resonance.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_554" align="aligncenter" width="614"]&lt;a href="http://juluribk.com/wp-content/uploads/2010/05/field.png"&gt;&lt;img alt="" class="size-large wp-image-554" height="250" src="http://juluribk.com/wp-content/uploads/2010/05/field-1024x417.png" title="field around nanoparticles" width="614"&gt;&lt;/a&gt; Electric field distribution inside and outside of a 60 nm Au nanosphere in water at a wavelength at LSPR (532 nm). These results were obtained using DDSCAT 7.1[/caption]&lt;/p&gt;
+&lt;p&gt;[UPDATE:]{style="color: #ff0000;"} Many of my readers were interested in the simulation files. You can find my project file &lt;a href="http://juluribk.com/wp-content/uploads/2010/05/spheres_website.zip"&gt;here&lt;/a&gt;. &lt;strong&gt;Note that electric fields were calculated using DDSCAT7.1 (ddscat7.2 uses totally different method to calculate electric field)&lt;/strong&gt;. The folder contains details for calculating and plotting the electric field around a sphere in xy plane, where light is polarized in y direction and propagting in x direction. But this could be extended to other geometries and other planes of interest. Follow these steps: 1) Read the flowchart.ppt to understand the problem of interest and the work flow 2) compile the ddscat7.1 source_code on linux or windows with cygwin 3) get hold of octave/matlab for running the efield part.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="DDSCAT"></category><category term="electromagnetism"></category><category term="Free Software"></category><category term="Plasmonics"></category></entry><entry><title>Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles</title><link href="plasmon360.github.io/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html" rel="alternate"></link><published>2010-05-11T21:37:00-07:00</published><updated>2010-05-11T21:37:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2010-05-11:plasmon360.github.io/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html</id><summary type="html">&lt;p&gt;&lt;img alt="" src="file:///C:/Users/Mengqian/AppData/Local/Temp/moz-screenshot-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_551" align="alignleft" width="300" caption="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. "]&lt;a href="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1.png"&gt;&lt;img alt="" class="size-medium wp-image-551" height="215" src="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1-300x215.png" title="nmie_screenshot" width="300"&gt;&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;p&gt;Since 2009, I have been a regular user of Nanohub …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="" src="file:///C:/Users/Mengqian/AppData/Local/Temp/moz-screenshot-2.png"&gt;&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_551" align="alignleft" width="300" caption="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. "]&lt;a href="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1.png"&gt;&lt;img alt="" class="size-medium wp-image-551" height="215" src="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1-300x215.png" title="nmie_screenshot" width="300"&gt;&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;p&gt;Since 2009, I have been a regular user of Nanohub.org. &lt;a href="www.nanohub.org"&gt;www.Nanohub.org&lt;/a&gt;is a website that provides a platform for online simulation, research and teaching resources. Of interest is the ability to perform simulation online without installing software on your local computer. I envision that this type of cloud computing model will be the future of scientific computing.&lt;/p&gt;
+&lt;p&gt;Developers can use their Rappture toolkit (&lt;a href="http://www.youtube.com/watch?v=bsJ8bzQQ6vw"&gt;nice video to learn Rappture toolkit&lt;/a&gt;) to write wrappers for codes that are written in Fortran, C or Matlab and enable an easy to use GUI for the executables. There are few tools for Plasmonics on nanohub which you can find on &lt;a href="http://juluribk.com/2010/01/12/books-on-electromagnetics/"&gt;my plasmonics resources&lt;/a&gt; post.&lt;/p&gt;
+&lt;p&gt;We have developed a Rappture tool called nmie. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer), core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. The user can change the layer composition (metals- au/ag or dielectric) and the refractive index of the surrounding medium. He/She can also change the wavelength range of the calculation. One thing I like about nanohub tools is that you can do many simulation cases and compare with each other.&lt;/p&gt;
+&lt;p&gt;You can find the tool &lt;a href="https://nanohub.org/resources/8228"&gt;here.&lt;/a&gt;To use this tool, you need to register first, which is free. :)&lt;/p&gt;
+&lt;p&gt;Technical details:&lt;/p&gt;
+&lt;p&gt;The engine is based on nmie code distributed by Dr. Nikolai Voshchinnikov http://www.astro.spbu.ru/staff/ilin2/SOFTWARE/nmie0.html. The nmie code can take layers more than 3, however I have used the code for three layers which is more common in plasmonics research. The recursive algorithm of Wu &amp;amp; Wang are used. Fore more details see&lt;/p&gt;
+&lt;p&gt;1) Wu Z.P., Wang Y.P., Electromagnetic scattering for multilaered spheres using recursive algorithms, Radio Science 1991. V. 26. P. 1393-1401.&lt;/p&gt;
+&lt;p&gt;2) Voshchinnikov N.V., Mathis J.S., Calculating Cross Sections of Composite Interstellar Grains, Astrophys. J. 1999. V. 526. 3) Johnson PB, Christy RW (1972) Phys Rev B 6,4370&lt;/p&gt;
+&lt;p&gt;The demo for this tool is here:&lt;br&gt;
+&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"&gt;&lt;param name="allowFullScreen" value="true"&gt;&lt;/param&gt;&lt;param name="allowscriptaccess" value="always"&gt;&lt;/param&gt;&lt;param name="src" value="http://www.youtube.com/v/Yp2_N1zj5oU&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;"&gt;&lt;/param&gt;&lt;param name="allowfullscreen" value="true"&gt;&lt;/param&gt;&lt;embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/Yp2_N1zj5oU&amp;amp;hl=en_US&amp;amp;fs=1&amp;amp;" allowscriptaccess="always" allowfullscreen="true"&gt;&lt;/embed&gt;&lt;/object&gt;&lt;/p&gt;
+&lt;p&gt;If you have any questions/comments/bugs on this tool, please let me know either at the nanohub website or here in the comments section.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="Free Software"></category><category term="Nanohub.org"></category><category term="Plasmonics"></category><category term="DDSCAT"></category></entry><entry><title>WINSPALL software for surface plasmon resonance experiments</title><link href="plasmon360.github.io/winspall-software-for-surface-plasmon-resonance-experiments.html" rel="alternate"></link><published>2010-03-10T23:12:00-08:00</published><updated>2010-03-10T23:12:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-03-10:plasmon360.github.io/winspall-software-for-surface-plasmon-resonance-experiments.html</id><summary type="html">&lt;p&gt;One needs to fit the reflectivity curves obtained in surface plasmon resonance experiments with theoretical models. A free software (for non commercial use) called Winspall exactly does that.&lt;/p&gt;
+&lt;p&gt;According to the developers, WINSPALL is a PC based software which computes the reflectivity of optical multilayer systems. It is based on …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One needs to fit the reflectivity curves obtained in surface plasmon resonance experiments with theoretical models. A free software (for non commercial use) called Winspall exactly does that.&lt;/p&gt;
+&lt;p&gt;According to the developers, WINSPALL is a PC based software which computes the reflectivity of optical multilayer systems. It is based on the Fresnel equations and the matrix formalism. It can be used to analyze surface plasmon experiments. WINSPALL was developed in the Knoll group. WINSPALL is available for use without charge. It may &lt;strong&gt;not&lt;/strong&gt; be reused for commercial purposes.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="file:///C:/DOCUME%7E1/bxj139/LOCALS%7E1/Temp/moz-screenshot-3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;[caption id="" align="alignnone" width="475" caption="Image from the developer website"]&lt;img alt="" height="370" src="http://www.mpip-mainz.mpg.de/knoll/soft/winspall.jpg" width="475"&gt;[/caption]&lt;/p&gt;
+&lt;p&gt;~~It is available for download &lt;a href="http://www.mpip-mainz.mpg.de/knoll/soft/"&gt;here&lt;/a&gt;.~~&lt;/p&gt;
+&lt;p&gt;you can download the software from this discussion on Research Gate. &lt;a href="https://www.researchgate.net/post/Where_can_I_find_Winspall_software_the_free_software_for_predicting_SPR_angles"&gt;https://www.researchgate.net/post/Where_can_I_find_Winspall_software_the_free_software_for_predicting_SPR_angles&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A tutorial to use this software is available &lt;a href="http://www.res-tec.de/tutorials/res-tec-tutorial-02.pdf"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Many thanks for &lt;a href="http://chem.okstate.edu/index.php?option=com_content&amp;amp;task=view&amp;amp;id=42&amp;amp;Itemid=126"&gt;Prof. Barry Lavine&lt;/a&gt; for this information&lt;em&gt;.&lt;/em&gt;&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="Free Software"></category><category term="photonics"></category><category term="Plasmonics"></category></entry><entry><title>Radiation from an oscillating dipole</title><link href="plasmon360.github.io/radiation-from-dipole.html" rel="alternate"></link><published>2010-01-14T19:26:00-08:00</published><updated>2010-01-14T19:26:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-14:plasmon360.github.io/radiation-from-dipole.html</id><summary type="html">&lt;p&gt;The electric field from an oscillating dipole is given by:&lt;img alt="" src="file:///C:/DOCUME%7E1/bxj139/LOCALS%7E1/Temp/moz-screenshot-1.jpg"&gt;&lt;img alt="" class="aligncenter" height="52" src="http://upload.wikimedia.org/math/1/c/b/1cb95474b78138db05d3763ac2fcd75a.png" title="dipole_radiation" width="527"&gt;, where [tex]\hat{r}[/tex] is the position vector, [tex] \omega [/tex] is the frequency of dipole oscillation, [tex]\textbf{p}[/tex] is the dipole moment. The two terms in the electric field consists of 1) near field (area near …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The electric field from an oscillating dipole is given by:&lt;img alt="" src="file:///C:/DOCUME%7E1/bxj139/LOCALS%7E1/Temp/moz-screenshot-1.jpg"&gt;&lt;img alt="" class="aligncenter" height="52" src="http://upload.wikimedia.org/math/1/c/b/1cb95474b78138db05d3763ac2fcd75a.png" title="dipole_radiation" width="527"&gt;, where [tex]\hat{r}[/tex] is the position vector, [tex] \omega [/tex] is the frequency of dipole oscillation, [tex]\textbf{p}[/tex] is the dipole moment. The two terms in the electric field consists of 1) near field (area near to the dipole) and 2) far field (area far from the dipole) contributions. Far field falls of as [tex]\frac{1}{r}[/tex] and the near field falls of by [tex]\frac{1}{r\^3}[/tex].&lt;/p&gt;
+&lt;p&gt;A beautiful simulation showing the electric field radiation from a dipole is shown below. This simulation is part of &lt;a href="http://www.ece.rutgers.edu/~orfanidi/ewa/"&gt;Sophocles J. Orfanidis book on electromagnetic waves and antennas&lt;/a&gt;.  For more details on 1) how the above equation is simplified by transforming into polar coordinates and 2) the matlab code to plot the field, see Example 14.5.1. in Chapter 14 of his book. Many thanks to Prof. Orfanidis for sharing these matlab codes.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_354" align="aligncenter" width="600" caption="Radiation from an oscillating dipole (Simulation done using Matlab code from Prof. Orfanidis book)"]&lt;a href="http://juluribk.com/wp-content/uploads/2010/01/dipmovie.gif"&gt;&lt;img alt="" class="size-full wp-image-354" height="600" src="http://juluribk.com/wp-content/uploads/2010/01/dipmovie.gif" title="Radiation from an oscillating dipole" width="600"&gt;&lt;/a&gt;[/caption]&lt;/p&gt;</content><category term="Plasmonics"></category><category term="electromagnetism"></category><category term="Matlab"></category><category term="Plasmonics"></category></entry><entry><title>Resources on Electromagnetics/Plasmonics/Nanophotonics</title><link href="plasmon360.github.io/books-on-electromagnetics.html" rel="alternate"></link><published>2010-01-12T11:01:00-08:00</published><updated>2010-01-12T11:01:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-12:plasmon360.github.io/books-on-electromagnetics.html</id><summary type="html">&lt;p&gt;These are some resources on Electromagnetics/plasmonics/nanophotonics&lt;/p&gt;
+&lt;p&gt;I will maintain a list of free resources on electromagnetics, plasmonics, nanophotonics, optics and other related topics here. If any of you (readers) know any other free resources related to this topic, please let me know and I can add into these …&lt;/p&gt;</summary><content type="html">&lt;p&gt;These are some resources on Electromagnetics/plasmonics/nanophotonics&lt;/p&gt;
+&lt;p&gt;I will maintain a list of free resources on electromagnetics, plasmonics, nanophotonics, optics and other related topics here. If any of you (readers) know any other free resources related to this topic, please let me know and I can add into these lists.&lt;/p&gt;
+&lt;p&gt;Free books:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.ece.rutgers.edu/~orfanidi/ewa/"&gt;Electromagnetic waves and Antennas&lt;/a&gt; by Prof. Sophocles J. Orfanidis&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Surface plasmons by Smooth and Rough surfaces by Heinz Raether (Note: This book is hosted by Prof. Shalaev's on &lt;a href="http://cobweb.ecn.purdue.edu/~ece695s/"&gt;Nanophotonics &amp;amp; Metamaterials course website&lt;/a&gt;).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Photonic Crystals:Molding the Flow of Light by John D. Joannopoulos, Steven G. Johnson, Joshua N. Winn, and Robert D. Meade. This can be downloaded from &lt;a href="http://ab-initio.mit.edu/book/"&gt;their website&lt;/a&gt;.  This book is must for anyone interested in photonic crystals and for serious readers, purchasing the book is definitely worth it (I have a copy).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://optics.byu.edu/textbook.aspx"&gt;Physics of Light and Waves&lt;/a&gt; by Justin Peatross and MichaelWare. You can also  buy a printed copy which covers the printing &lt;a href="http://www.lulu.com/content/393488"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.plasma.uu.se/CED/Book/"&gt;Electromagnetic Field Theory&lt;/a&gt; by Bo Thidé&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.giss.nasa.gov/~crmim/publications/book_2.pdf"&gt;Scattering, Absorption and Emission of Light by Small Particles&lt;/a&gt; by Micheal I Mishchenko, Larry D. Travis,  and Andrew A. Lacis available at their &lt;a href="http://www.giss.nasa.gov/staff/mmishchenko/books.html"&gt;website&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.giss.nasa.gov/staff/mmishchenko/books.html"&gt;&lt;/a&gt;&lt;a href="http://www.lrsm.upenn.edu/~frenchrh/download/0208fwootenopticalpropertiesofsolids.pdf"&gt;Frederick Wooten, Optical Properties of Solids, Academic Press, New York, 49, (1972).&lt;/a&gt; This book is shared on Dr. Roger French website and focuses on dielectrics of metals.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Free course material:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://nanohub.org/resources/1748#series"&gt;Nanophotonics by Prof. Valdamir Shalev&lt;/a&gt; (Purdue University)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.erbium.nl/nanophotonics/"&gt;Nanophotonics by Prof. Albert Polman&lt;/a&gt; (Center for Nanophotonics, FOM-Institute AMOLF, Amsterdam)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.aph.kit.edu/wegener/en/lectures/advanced-optical-materials-ws09-10"&gt;Advanved Optical Materials&lt;/a&gt; by Georg von Freymann, Stefan Linden on Prof. Martin Wegener group.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://sharepoint.creol.ucf.edu/kik/OSE6650"&gt;Opt. Prop. of Nanostructured Materials&lt;/a&gt; by Prof. Peter Kik (CREOL, UCF)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://sharepoint.creol.ucf.edu/kik/OSE5312"&gt;Fundamentals of Optical Science&lt;/a&gt; by Prof. Peter Kik (CREOL, UCF)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Online Simulation tools:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://nanohub.org/tools/nmie"&gt;Nmie Tool. Calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer), core-shell Nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer).&lt;/a&gt; I have blogged about it &lt;a href="http://juluribk.com/2010/05/11/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles/"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://nanohub.org/tools/photonicsdb"&gt;PhotonicsDB: Nanohub tool to download experimental and theoretical data on dielectric constants of metals (Ag, Au, etc.)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://nanohub.org/tools/bowtie"&gt;Simulation of Bowtie Nanoantennas using MEEP FDTD software&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://nanohub.org/resources/nsoptics"&gt;Nanooptics Lab center: Calculates the absorption, scattering, and extinction spectra of spherical nanoparticles&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://nanohub.org/tools/nsoptics3d"&gt;Nanosphere Optics Lab Field Simulator. Calculates fields and efficiencies of spherical nanoparticles&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://refractiveindex.info"&gt;&lt;img alt="Refractive index database" src="http://refractiveindex.info/banners/button_88x31.gif"&gt;Refractive index database for crystals, metals, etc&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Free Optical tools&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://people.csail.mit.edu/jaffer/FreeSnell/"&gt;Freesnell. This tool calculates various optical properties such as transmission, reflection and absorption of multi-layer thin films.&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Plasmonics"></category><category term="books"></category><category term="electromagnetism"></category><category term="FDTD"></category><category term="Free Software"></category><category term="Nanohub.org"></category><category term="photonics"></category><category term="Plasmonics"></category></entry><entry><title>Surface Plasmons (SP's)</title><link href="plasmon360.github.io/surface-plasmons-animation.html" rel="alternate"></link><published>2010-01-08T19:14:00-08:00</published><updated>2010-01-08T19:14:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-08:plasmon360.github.io/surface-plasmons-animation.html</id><summary type="html">&lt;p&gt;[caption id="attachment_263" align="aligncenter" width="300"]&lt;a href="http://juluribk.com/wp-content/uploads/2010/01/test_water_mark.gif"&gt;&lt;img alt="" class="size-full wp-image-263" height="120" src="http://juluribk.com/wp-content/uploads/2010/01/test_water_mark.gif" title="Surface plasmon simulation" width="300"&gt;&lt;/a&gt; Propagation of surface plasmons[/caption]&lt;/p&gt;
+&lt;p&gt;Surface plasmons (SP's) are electromagnetic waves that propagate at the interface between metals (such as Ag, Au ) and dielectric material. Here I have simulated the propagation of surface plasmons on Ag-air interface, the color indicates the magnitude of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;[caption id="attachment_263" align="aligncenter" width="300"]&lt;a href="http://juluribk.com/wp-content/uploads/2010/01/test_water_mark.gif"&gt;&lt;img alt="" class="size-full wp-image-263" height="120" src="http://juluribk.com/wp-content/uploads/2010/01/test_water_mark.gif" title="Surface plasmon simulation" width="300"&gt;&lt;/a&gt; Propagation of surface plasmons[/caption]&lt;/p&gt;
+&lt;p&gt;Surface plasmons (SP's) are electromagnetic waves that propagate at the interface between metals (such as Ag, Au ) and dielectric material. Here I have simulated the propagation of surface plasmons on Ag-air interface, the color indicates the magnitude of electric field (blue for positive and red for negative).  I have used MEEP  (a FDTD program that solves for Maxwells equations on numerical grid) to simulate these electric field distribution of these special waves. The source for SP's is a point dipole and is placed at the center. It is easier to excite SP's in numerical simulation, however to excite them in an experiment, one has to use tricks to match the momentum.  In this simulation, one can also see strong localization of these waves at the interface. This form of localization and propagation characteristics have attracted attention of researchers in engineering, physics and chemistry communities. Few applications include integerated circuits driven by light, sensing, energy harvesting, nanolithography etc.&lt;/p&gt;
+&lt;p&gt;[UPDATE:]{style="color: #ff0000;"} You can download my &lt;a href="http://juluribk.com/wp-content/uploads/2010/01/Metal-dielectric_interface-_web1.zip"&gt;meep code here&lt;/a&gt;. The zip file also contains code to obtain dispersion relation of surface plasmon modes using MEEP. Let me know if you have any questions.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="animation"></category><category term="Plasmonics"></category></entry><entry><title>Plasmonic coupling of electromagnetic energy in hexagonal array of silver nanorods</title><link href="plasmon360.github.io/plasmonic-coupling-of-electromagnetic-energy-in-hexagonal-array-of-silver-nanorods.html" rel="alternate"></link><published>2010-01-08T18:20:00-08:00</published><updated>2010-01-08T18:20:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-08:plasmon360.github.io/plasmonic-coupling-of-electromagnetic-energy-in-hexagonal-array-of-silver-nanorods.html</id><summary type="html">&lt;p&gt;&lt;a href="http://juluribk.com/wp-content/uploads/2010/01/Plasmonics-silver-helix.gif"&gt;&lt;img alt="" class="aligncenter size-full wp-image-245" height="180" src="http://juluribk.com/wp-content/uploads/2010/01/Plasmonics-silver-helix.gif" title="Plasmonics-silver-helix" width="720"&gt;&lt;/a&gt;A cool animation which I reproduced from W.M Saj, Optics Express, Vol 13, 13, 2005 using freely obtained FDTD software (MEEP). It demonstrates the propagation of electromagnetic energy in hexagonal array of silver nanorods due to plasmonic coupling. The source is offset from the center and the energy is …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://juluribk.com/wp-content/uploads/2010/01/Plasmonics-silver-helix.gif"&gt;&lt;img alt="" class="aligncenter size-full wp-image-245" height="180" src="http://juluribk.com/wp-content/uploads/2010/01/Plasmonics-silver-helix.gif" title="Plasmonics-silver-helix" width="720"&gt;&lt;/a&gt;A cool animation which I reproduced from W.M Saj, Optics Express, Vol 13, 13, 2005 using freely obtained FDTD software (MEEP). It demonstrates the propagation of electromagnetic energy in hexagonal array of silver nanorods due to plasmonic coupling. The source is offset from the center and the energy is propagated in an interesting snake like pattern. For more details about this kind of propagation,  look at the article &lt;a href="http://www.opticsinfobase.org/oe/abstract.cfm?URI=oe-13-13-4818"&gt;(W.M Saj, Optics Express, Vol 13, 13, 2005)&lt;/a&gt;.&lt;/p&gt;</content><category term="Plasmonics"></category><category term="FDTD"></category><category term="MEEP"></category><category term="Plasmonics"></category></entry></feed>
