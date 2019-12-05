@@ -25,13 +25,13 @@
 
 
 <meta name="author" content="juluribk" />
-<meta name="description" content="As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communication and control of Princeton Instruments Acton SP2150i Monochromator. As I looked at the code, I noticed methods in the class such as get_nm() and set_nm(). When …" />
+<meta name="description" content="As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a Princeton Instruments Acton SP2150i Monochromator. As I looked at the code, I noticed methods in the class such as get_nm() and set_nm(). I …" />
 <meta name="keywords" content="">
 
 
 <meta property="og:site_name" content="Bala Juluri's Blog"/>
 <meta property="og:title" content="Improving code using getters and setters in Python"/>
-<meta property="og:description" content="As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communication and control of Princeton Instruments Acton SP2150i Monochromator. As I looked at the code, I noticed methods in the class such as get_nm() and set_nm(). When …"/>
+<meta property="og:description" content="As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a Princeton Instruments Acton SP2150i Monochromator. As I looked at the code, I noticed methods in the class such as get_nm() and set_nm(). I …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./Improving code with getters and setters in python.html"/>
 <meta property="og:type" content="article"/>
@@ -108,8 +108,8 @@
 
 
   <div>
-    <p>As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communication and control of <a href="./controlling-sp2150i-monochromator-with-pythonpyvisa.html">Princeton Instruments Acton SP2150i Monochromator</a>.</p>
-<p>As I looked at the code, I noticed methods in the class such as <code>get_nm()</code> and <code>set_nm()</code>. When I was writing that code, I was not aware of the functionality of getters and setters in Python. Since then, I have been using getters and setters occasionally and thought everyone using python should be knowing about them.</p>
+    <p>As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a <a href="./controlling-sp2150i-monochromator-with-pythonpyvisa.html">Princeton Instruments Acton SP2150i Monochromator</a>.</p>
+<p>As I looked at the code, I noticed methods in the class such as <code>get_nm()</code> and <code>set_nm()</code>. I was not aware of the functionality of getters and setters in Python when I was writing that code. Since then, I have been using getters and setters occasionally and thought everyone using Python should be knowing about them.</p>
 <p>Lets simply the original code to only few methods and implement getters and setters functionality.</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">visa</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -148,7 +148,8 @@
 </pre></div>
 
 
-<p>There are many filters in the instrument and one get the current filter number or set a different filter number. <code>get_filter(self)</code> returns an attribute <code>self.filter</code> by calling <code>ask_for_values</code> pyvisa method. </p>
+<p>There are many filters in the instrument and one can get the current filter number or set a different filter number. </p>
+<p>The <code>get_filter(self)</code> method returns an attribute <code>self.filter</code> by calling <code>ask_for_values</code> pyvisa method. </p>
 <p><code>self.filter</code> holds the current filter value. <code>set_filter(num)</code> uses pyvisa's 'ask' method (think of ask here as writing to instrument) to set the filter to a different number. In this method I also check to make sure filter 'num' be always less than 6.</p>
 <p>When the user needs the functionality of getting the current filter in the instrument or setting the filter to different type, he has to use lengthy <code>a.get_filter()</code> and <code>a.set_filter(num = x)</code> methods. </p>
 <p>It would be better if the user can access the current filter by typing <code>a.filter</code> and it should return the current filter num. This can be achieved by using a "property" decorator. The "property" decorator makes a method behave like an attribute. So if I added "property" decorator to <code>def filter(self): ...</code>, then when user prints or accesses <code>a.filter</code> then it executes <code>a.filter()</code> method. In this method, we can write our logic to get the current filter in the monochromator.</p>
