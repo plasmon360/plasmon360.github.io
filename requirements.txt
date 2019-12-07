@@ -48,6 +48,7 @@ jupytext==1.2.3
 kiwisolver==1.1.0
 libarchive-c==2.8
 lxml==4.4.1
+-e git+https://github.com/plasmon360/markdown@ed3809a52223af43ca352e45295f2298c7e9fb3c#egg=Markdown
 MarkupSafe==1.1.1
 matplotlib==3.1.1
 mistune==0.8.4

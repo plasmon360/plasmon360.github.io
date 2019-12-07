@@ -10,15 +10,16 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
 
 
 
@@ -29,71 +30,81 @@
 <meta name="keywords" content="Linux, python">
 
 
-<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:site_name" content="Bala Juluri"/>
 <meta property="og:title" content="Tab autocompletetion with python interpreter in bash terminal"/>
 <meta property="og:description" content="I want to tab autocomplete commands in my python interpreter within bash terminal. This is very useful when I import a module and just want to browse through the methods and autocomplete. Found two ways to do it. Thanks to stack overflow posts. Method 1 (as mentioned here): This is …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./tab-autocompletetion-with-python-interpreter-in-bash-terminal.html"/>
+<meta property="og:url" content="/tab-autocompletetion-with-python-interpreter-in-bash-terminal.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-10-29 18:16:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/juluribk.html">
+<meta property="article:author" content="/author/juluribk.html">
 <meta property="article:section" content="Misc"/>
 <meta property="article:tag" content="Linux"/>
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="">
 
-  <title>Bala Juluri's Blog &ndash; Tab autocompletetion with python interpreter in bash terminal</title>
+  <title>Bala Juluri &ndash; Tab autocompletetion with python interpreter in bash terminal</title>
 
 </head>
 <body>
   <aside>
     <div>
-      <a href=".">
-        <img src="./theme/img/profile.png" alt="" title="">
+      <a href="">
+        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
-      <h1><a href="."></a></h1>
 
-<p>Ramblings</p>
-      <nav>
-        <ul class="list">
+      <h1><a href="">Bala Juluri</a></h1>
 
+    
 
-            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
-            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
-            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
-            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
-        </ul>
-      </nav>
+     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
+
 
       <ul class="social">
           <li>
-            <a  class="sc-You can add links in your config file" href="#" target="_blank">
-            <i class="fab fa-You can add links in your config file">
+            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
+            <i class="fas fa-envelope ">
             </i>
           </a></li>
           <li>
-            <a  class="sc-Another social link" href="#" target="_blank">
-            <i class="fab fa-Another social link">
+            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="#" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
+            <i class="fab fa-stack-overflow">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
+            <i class="ai ai-google-scholar">
             </i>
           </a></li>
       </ul>
+
+
     </div>
+
 
 
   </aside>
   <main>
 
     <nav>
-      <a href=".">    Home
+      <a href="">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
-</a>
 
     </nav>
 
@@ -102,7 +113,7 @@
       
     <h1 id="tab-autocompletetion-with-python-interpreter-in-bash-terminal">Tab autocompletetion with python interpreter in bash terminal</h1>
     <p>
-          Posted on Sat 29 October 2016 in <a href="./category/misc.html">Misc</a>
+          Posted on Sat 29 October 2016 in <a href="/category/misc.html">Misc</a>
 
 
     </p>
@@ -119,45 +130,45 @@
 <p>This is for standard  python interpreter in bash terminal (such as in Ubuntu). This method requires readline and rlcompeter modules. Install these modules if you do not have them installed. This can be done with pip.</p>
 <p>Basically, the idea is to have a python interpreter look for the value of environment path variable "PYTHONSTARTUP". This variable should be set to a location for the file ("python startup file.py") with commands that enable tab autocompletion.</p>
 <p>In my home directory "/home/bjuluri" I make a file called "python startup file.py" by</p>
-<div class="highlight"><pre><span></span>bjuluri@bjuluri-VirtualBox:<span class="se">\~\$</span> gedit python startup file.py
-</pre></div>
+<div class="highlight bash"><pre><span></span><code>bjuluri@bjuluri-VirtualBox:<span class="se">\~\$</span> gedit python startup file.py
+</code></pre></div>
 
 
 <p>copy and paste following lines</p>
-<div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>  
+<div class="highlight python"><pre><span></span><code><span class="k">try</span><span class="p">:</span>  
    <span class="kn">import</span> <span class="nn">readline</span>  
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  
     <span class="k">print</span> <span class="s2">&quot;Module readline not available.&quot;</span>  
 <span class="k">else</span><span class="p">:</span>  
     <span class="kn">import</span> <span class="nn">rlcompleter</span>  
     <span class="n">readline</span><span class="o">.</span><span class="n">parse</span> <span class="ow">and</span> <span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tab: complete&quot;</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>Save and close the file.</p>
 <p>Now lets assign the an environmental variable "PYTHONSTARTUP" to the location of this "python startup file"</p>
 <p>./bashrc is loaded whenever a bash terminal is fired. This file sits in the user's home directory, we will edit it and assign the environmental variable at the end of the file.</p>
-<div class="highlight"><pre><span></span>nano .bashrc
-</pre></div>
+<div class="highlight bash"><pre><span></span><code>nano .bashrc
+</code></pre></div>
 
 
 <p>at the end of the file, copy and paste</p>
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONSTARTUP</span><span class="o">=</span><span class="s2">&quot;python startup file.py&quot;</span>
-</pre></div>
+<div class="highlight bash"><pre><span></span><code><span class="nb">export</span> <span class="nv">PYTHONSTARTUP</span><span class="o">=</span><span class="s2">&quot;python startup file.py&quot;</span>
+</code></pre></div>
 
 
 <p>Save the file and exit.</p>
 <p>reload the .bashrc file in terminal by either opening a new terminal or by typing the following in the current terminal.</p>
-<div class="highlight"><pre><span></span><span class="nb">source</span> .bashrc
-</pre></div>
+<div class="highlight bash"><pre><span></span><code><span class="nb">source</span> .bashrc
+</code></pre></div>
 
 
 <p>Once those commands run at the python startup, tab autocompletion with suggestions will be enabled in the interpreter.</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="./tag/linux.html">Linux</a>
-      <a href="./tag/python.html">python</a>
+      <a href="/tag/linux.html">Linux</a>
+      <a href="/tag/python.html">python</a>
     </p>
   </div>
 
@@ -180,8 +191,8 @@
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Bala Juluri's Blog ",
-  "url" : ".",
+  "name": " Bala Juluri ",
+  "url" : "",
   "image": "",
   "description": ""
 }
