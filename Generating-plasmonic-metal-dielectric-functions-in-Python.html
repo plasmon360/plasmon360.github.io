@@ -14,11 +14,13 @@
 
   <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
@@ -29,7 +31,7 @@
 <meta name="keywords" content="Python">
 
 
-<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:site_name" content="Bala Juluri"/>
 <meta property="og:title" content="Generating plasmonic metal dielectric functions in Python"/>
 <meta property="og:description" content=".katex img { display: block; position: absolute; width: 100%; height: inherit; } I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m. LD.m is a matlab file written by Bora Ung …"/>
 <meta property="og:locale" content="en_US"/>
@@ -42,42 +44,54 @@
 <meta property="article:tag" content="Python"/>
 <meta property="og:image" content="">
 
-  <title>Bala Juluri's Blog &ndash; Generating plasmonic metal dielectric functions in Python</title>
+  <title>Bala Juluri &ndash; Generating plasmonic metal dielectric functions in Python</title>
 
 </head>
 <body>
   <aside>
     <div>
       <a href=".">
-        <img src="./theme/img/profile.png" alt="" title="">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
-      <h1><a href="."></a></h1>
 
-<p>Ramblings</p>
-      <nav>
-        <ul class="list">
+      <h1><a href=".">Bala Juluri</a></h1>
 
+    
 
-            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
-            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
-            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
-            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
-        </ul>
-      </nav>
+     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
+
 
       <ul class="social">
           <li>
-            <a  class="sc-You can add links in your config file" href="#" target="_blank">
-            <i class="fab fa-You can add links in your config file">
+            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
+            <i class="fas fa-envelope ">
             </i>
           </a></li>
           <li>
-            <a  class="sc-Another social link" href="#" target="_blank">
-            <i class="fab fa-Another social link">
+            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="#" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
+            <i class="fab fa-stack-overflow">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
+            <i class="ai ai-google-scholar">
             </i>
           </a></li>
       </ul>
+
+
     </div>
+
 
 
   </aside>
@@ -132,7 +146,7 @@
 </div>
 
 <p>A typical example on how to use this modules is shown below:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight python"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="c1"># Make sure the file is accessible to PYTHONPATH or in the same</span>
 <span class="c1"># directory of file which is trying to import</span>
@@ -162,7 +176,7 @@
 
 <span class="c1"># plots wavelength vs n and k .</span>
 <span class="n">gold</span><span class="o">.</span><span class="n">plot_n_k</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>This is graph comparing the Au eps data obtained using LD.m and LD.python. The are exactly the same.</p>
@@ -193,7 +207,7 @@
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Bala Juluri's Blog ",
+  "name": " Bala Juluri ",
   "url" : ".",
   "image": "",
   "description": ""

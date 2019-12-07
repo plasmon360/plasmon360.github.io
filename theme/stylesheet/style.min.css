@@ -396,10 +396,16 @@ ul.social a {
     line-height: 36px
 }
 
+ul.social a.sc-envelope{
+    background-color: #3e5b98
+}
 ul.social a.sc-facebook {
     background-color: #3e5b98
 }
 
+ul.social a.sc-google-scholar {
+    background-color: #00ab6b
+}
 ul.social a.sc-google {
     background-color: #d93e2d
 }
@@ -480,11 +486,6 @@ a.sc-flickr {
     background-color: #ff0084
 }
 
-.ads-aside {
-    display: inline-block;
-    height: 90px;
-    width: 70%
-}
 
 .ads-responsive {
     display: inline-block;
@@ -1190,10 +1191,6 @@ a.sc-flickr {
     aside div nav ul li {
         padding: 0!important;
         display: block
-    }
-
-    aside div ul.social {
-        padding-top: 32px
     }
 
     main {
