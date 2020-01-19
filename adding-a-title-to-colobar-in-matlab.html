@@ -14,84 +14,70 @@
 
   <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
 
 
 
 
 
 <meta name="author" content="juluribk" />
-<meta name="description" content="To insert a title to the colorbar in matlab. Use the following code (Source): % Loads a data for the example load mandrill % Plots an image for the example image(X) % Inserts a colorbar. a handle is created t=colorbar; % sets the ylabel property of the handle t. set(get(t …" />
+<meta name="description" content="To insert a title to the colorbar in matlab. Use the following code(Source): [cc lang=&#39;matlab&#39;] load mandrill % Loads a data for the example image(X) % Plots an image for the example t=colorbar;% Inserts a colorbar. a handle is created set(get(t,&#39;ylabel&#39;),&#39;string&#39;,&#39;My colorbar title&#39; …" />
 <meta name="keywords" content="Matlab">
 
 
-<meta property="og:site_name" content="Bala Juluri"/>
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
 <meta property="og:title" content="Adding a title to colobar in Matlab"/>
-<meta property="og:description" content="To insert a title to the colorbar in matlab. Use the following code (Source): % Loads a data for the example load mandrill % Plots an image for the example image(X) % Inserts a colorbar. a handle is created t=colorbar; % sets the ylabel property of the handle t. set(get(t …"/>
+<meta property="og:description" content="To insert a title to the colorbar in matlab. Use the following code(Source): [cc lang=&#39;matlab&#39;] load mandrill % Loads a data for the example image(X) % Plots an image for the example t=colorbar;% Inserts a colorbar. a handle is created set(get(t,&#39;ylabel&#39;),&#39;string&#39;,&#39;My colorbar title&#39; …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./adding-a-title-to-colobar-in-matlab.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2010-03-21 16:34:00-07:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Misc"/>
+<meta property="article:section" content="Publications"/>
 <meta property="article:tag" content="Matlab"/>
 <meta property="og:image" content="">
 
-  <title>Bala Juluri &ndash; Adding a title to colobar in Matlab</title>
+  <title>Bala Juluri's Blog &ndash; Adding a title to colobar in Matlab</title>
 
 </head>
 <body>
   <aside>
     <div>
       <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+        <img src="./theme/img/profile.png" alt="" title="">
       </a>
+      <h1><a href="."></a></h1>
 
-      <h1><a href=".">Bala Juluri</a></h1>
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
 
-    
 
-     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
-
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
 
       <ul class="social">
           <li>
-            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope ">
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
             </i>
           </a></li>
           <li>
-            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="#" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
-            <i class="fab fa-stack-overflow">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="ai ai-google-scholar">
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
             </i>
           </a></li>
       </ul>
-
-
     </div>
-
 
 
   </aside>
@@ -115,7 +101,7 @@
       
     <h1 id="adding-a-title-to-colobar-in-matlab">Adding a title to colobar in Matlab</h1>
     <p>
-          Posted on Sun 21 March 2010 in <a href="./category/misc.html">Misc</a>
+          Posted on Sun 21 March 2010 in <a href="./category/publications.html">Publications</a>
 
 
     </p>
@@ -123,20 +109,13 @@
 
 
   <div>
-    <p>To insert a title to the colorbar in matlab.  </p>
-<p>Use the following code (<a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788">Source</a>):  </p>
-<div class="highlight matlab"><pre><span></span><code><span class="c">% Loads a data for the example </span>
-<span class="n">load</span> <span class="n">mandrill</span>
-
-<span class="c">% Plots an image for the example </span>
-<span class="n">image</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="c">% Inserts a colorbar. a handle is created </span>
-<span class="n">t</span><span class="p">=</span><span class="n">colorbar</span><span class="p">;</span>
-
-<span class="c">% sets the ylabel property of the handle t. </span>
-<span class="n">set</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="s">&#39;ylabel&#39;</span><span class="p">),</span><span class="s">&#39;string&#39;</span><span class="p">,</span><span class="s">&#39;My colorbar title&#39;</span><span class="p">,</span><span class="s">&#39;Fontsize&#39;</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-</code></pre></div>
+    <p>To insert a title to the colorbar in matlab.  Use the following code(<a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788">Source</a>):<br>
+[cc lang='matlab']<br>
+load mandrill % Loads a data for the example<br>
+image(X) % Plots an image for the example<br>
+t=colorbar;% Inserts a colorbar. a handle is created<br>
+set(get(t,'ylabel'),'string','My colorbar title','Fontsize',10) % sets the ylabel property of the handle t.<br>
+[/cc]</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -163,7 +142,7 @@
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Bala Juluri ",
+  "name": " Bala Juluri's Blog ",
   "url" : ".",
   "image": "",
   "description": ""

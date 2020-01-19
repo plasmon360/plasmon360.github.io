@@ -14,85 +14,71 @@
 
   <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
 
 
 
 
 
 <meta name="author" content="juluribk" />
-<meta name="description" content="DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three …" />
+<meta name="description" content="DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel …" />
 <meta name="keywords" content="Instrumentation, python">
 
 
-<meta property="og:site_name" content="Bala Juluri"/>
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
 <meta property="og:title" content="Controlling Rigol Dp832 with python"/>
-<meta property="og:description" content="DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three …"/>
+<meta property="og:description" content="DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="./controlling-rigol-dp832-with-python.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2015-05-08 17:08:00-07:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Electronics"/>
+<meta property="article:section" content="Publications, Test Equipment"/>
 <meta property="article:tag" content="Instrumentation"/>
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="">
 
-  <title>Bala Juluri &ndash; Controlling Rigol Dp832 with python</title>
+  <title>Bala Juluri's Blog &ndash; Controlling Rigol Dp832 with python</title>
 
 </head>
 <body>
   <aside>
     <div>
       <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+        <img src="./theme/img/profile.png" alt="" title="">
       </a>
+      <h1><a href="."></a></h1>
 
-      <h1><a href=".">Bala Juluri</a></h1>
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
 
-    
 
-     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
-
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
 
       <ul class="social">
           <li>
-            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope ">
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
             </i>
           </a></li>
           <li>
-            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="#" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
-            <i class="fab fa-stack-overflow">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="ai ai-google-scholar">
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
             </i>
           </a></li>
       </ul>
-
-
     </div>
-
 
 
   </aside>
@@ -116,7 +102,7 @@
       
     <h1 id="controlling-rigol-dp832-with-python">Controlling Rigol Dp832 with python</h1>
     <p>
-          Posted on Fri 08 May 2015 in <a href="./category/electronics.html">Electronics</a>
+          Posted on Fri 08 May 2015 in <a href="./category/publications-test-equipment.html">Publications, Test Equipment</a>
 
 
     </p>
@@ -124,104 +110,12 @@
 
 
   <div>
-    <p>DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. </p>
-<p>I got my hands on a RIGOL DP832 which is three channel (two 30V and one 5V) power supply and is programmable through SCPI commands. The device can be controlled by USB and rs232 (optionally by LAN). SCPI commands can be sent to the instruments using VISA interface. I used Python and pyvisa module to communicate with it. I wrote a class with basic functionality. Currently it has a console application and turning on and off at a  particular bias and current value on a specified channel.</p>
+    <p>DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel (two 30V and one 5V) power supply and is programmable through SCPI commands. The device can be controlled by USB and rs232 (optionally by LAN). SCPI commands can be sent to the instruments using VISA interface. I used Python and pyvisa module to communicate with it. I wrote a class with basic functionality. Currently it has a console application and turning on and off at a  particular bias and current value on a specified channel.</p>
 <p>You can add more methods to the class for advanced features. You can see those commands in the <a href="http://www.batronix.com/pdf/Rigol/ProgrammingGuide/DP800_ProgrammingGuide_EN.pdf">programming manual</a>.</p>
-<div class = "alert alert-primary">
-<strong> Note: </strong> Download this gist from <a href = "https://gist.github.com/plasmon360/3204dc28deddeefe42d5"> my gihub </a>
-</div>
-
-<div class="highlight python"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Created on Sat Dec 21 13:57:32 2013</span>
-
-<span class="sd">@author: bjuluri</span>
-<span class="sd">Uses Pyvisa for commounication</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">visa</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">sys</span>
-
-
-<span class="k">class</span> <span class="nc">Rigoldp832</span><span class="p">():</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">usb_serial</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">instrument_list</span> <span class="o">=</span> <span class="n">get_instruments_list</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">usb_address</span> <span class="o">=</span> <span class="p">[</span><span class="n">elem</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">instrument_list</span> <span class="k">if</span> <span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;USB&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">elem</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
-                <span class="n">usb_serial</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># Search a instrument with USB and serial number in the instrument list</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usb_address</span> <span class="o">==</span> <span class="p">[]</span> <span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Not Connected&quot;</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">usb_address</span> <span class="o">!=</span> <span class="p">[]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">instrument</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usb_address</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Connected&quot;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">connected_with</span> <span class="o">=</span> <span class="s1">&#39;USB&#39;</span>
-        <span class="k">except</span> <span class="n">VisaIOError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Not Connected&quot;</span>
-            <span class="k">print</span> <span class="s2">&quot;Pyvisa is not able to find the connections&quot;</span>
-
-
-    <span class="k">def</span> <span class="nf">mywrite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;SYST:ERR?&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">print</span> <span class="n">message</span><span class="o">+</span><span class="s1">&#39; recieved. No error occured&#39;</span>
-        <span class="k">else</span> <span class="p">:</span>
-            <span class="k">print</span> <span class="n">message</span><span class="o">+</span><span class="s1">&#39; recieved. An Error occured: &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;resets the instrument, registers,buffers&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s2">&quot;*RST&quot;</span><span class="p">)</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
-
-
-    <span class="k">def</span> <span class="nf">close_instrument</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">set_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">i_protection_level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:INST CH{channel}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">channel</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR {i}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR:PROT {i_level}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i_level</span> <span class="o">=</span> <span class="n">i_protection_level</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR:PROT:STAT ON&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:VOLT {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-
-
-    <span class="k">def</span> <span class="nf">turn_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:OUTP CH{channel},OFF&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">turn_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:OUTP CH{channel},ON&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">console</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        opens a console to send commands. See the commands in the user manual.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="k">while</span> <span class="n">cmd</span> <span class="o">!=</span> <span class="s1">&#39;exit()&#39;</span><span class="p">:</span>
-            <span class="n">cmd</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s1">&#39;Rigol DP832 console, Type exit() to leave&gt; &#39;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">answer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-                <span class="k">print</span> <span class="n">answer</span>
-            <span class="k">elif</span> <span class="n">cmd</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">cmd</span> <span class="o">!=</span> <span class="s1">&#39;exit()&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s2">&quot;Exiting the Rigol DP832 console&quot;</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">Rigoldp832</span><span class="p">(</span><span class="n">usb_serial</span><span class="o">=</span><span class="s1">&#39;your_Serial_number&#39;</span><span class="p">)</span>
-
-    <span class="c1">#To start a console</span>
-    <span class="c1">#r.console()</span>
-
-    <span class="c1"># This will reset the instrument, apply a bias of 1 V wih 0.1A of protection current for 10 sec and then turn off</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">set_bias</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">i_protection_level</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">turn_on</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">turn_off</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">r</span><span class="o">.</span><span class="n">close_instrument</span><span class="p">()</span>
-</code></pre></div>
+<p>You can find my gist underneath or [<a href="https://gist.github.com/plasmon360/3204dc28deddeefe42d5">download from here.</a>]{style="text-decoration: underline; color: #ff0000;"}</p>
+<p>
+<script src="https://gist.github.com/plasmon360/3204dc28deddeefe42d5.js"></script>
+</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -249,7 +143,7 @@
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Bala Juluri ",
+  "name": " Bala Juluri's Blog ",
   "url" : ".",
   "image": "",
   "description": ""

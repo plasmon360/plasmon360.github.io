@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="For DDSCAT 7 users, the makefile needs gfortran. On window os, Gfortran can be installed in Cygwin 1.7.1 by installing &#34;GCC4-fortran&#34; package. It installs a exe file named &#34;gfotran-4.exe&#34; in the &#34;xyz\cygwin\bin&#34;. So my makefile compiler options are as follows: [cc lang=&#34;fortran&#34;] # 1. gfortran …" />
+<meta name="keywords" content="Cygwin, DDSCAT">
+
+
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:title" content="GFortran in Cygwin1.7.1 for DDSCAT"/>
+<meta property="og:description" content="For DDSCAT 7 users, the makefile needs gfortran. On window os, Gfortran can be installed in Cygwin 1.7.1 by installing &#34;GCC4-fortran&#34; package. It installs a exe file named &#34;gfotran-4.exe&#34; in the &#34;xyz\cygwin\bin&#34;. So my makefile compiler options are as follows: [cc lang=&#34;fortran&#34;] # 1. gfortran …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./gfortran-in-cygwin1-7-1-for-ddscat.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2010-01-06 16:25:00-08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/juluribk.html">
+<meta property="article:section" content="Free Software"/>
+<meta property="article:tag" content="Cygwin"/>
+<meta property="article:tag" content="DDSCAT"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri's Blog &ndash; GFortran in Cygwin1.7.1 for DDSCAT</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="" title="">
+      </a>
+      <h1><a href="."></a></h1>
+
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
+
+
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="gfortran-in-cygwin1-7-1-for-ddscat">GFortran in Cygwin1.7.1 for DDSCAT</h1>
+    <p>
+          Posted on Wed 06 January 2010 in <a href="./category/free-software.html">Free Software</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>For DDSCAT 7 users, the makefile needs gfortran. On window os, Gfortran can be installed in Cygwin 1.7.1 by installing "GCC4-fortran" package. It installs a exe file named "gfotran-4.exe" in the "xyz\cygwin\bin". So my makefile compiler options are as follows:</p>
+<p>[cc lang="fortran"]<br>
+# 1.  gfortran compiler<br>
+#     sp + no MKL + no OpenMP + no MPI<br>
+# define the following:<br>
+PRECISION    = dp<br>
+CXFFTMKL.f    = cxfft3_mkl_fake.f90<br>
+CXFFTMKL.o    = cxfft3_mkl_fake.o<br>
+MKLM        =<br>
+DOMP        =<br>
+OPENMP        =<br>
+MPI.f        = mpi_fake.f90<br>
+MPI.o        = mpi_fake.o<br>
+DMPI        =<br>
+FC        = gfortran-4<br>
+FFLAGS        = -O2<br>
+LFLAGS         =<br>
+[/cc]</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/cygwin.html">Cygwin</a>
+      <a href="./tag/ddscat.html">DDSCAT</a>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri's Blog ",
+  "url" : ".",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

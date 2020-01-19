@@ -14,13 +14,11 @@
 
   <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
 
 
 
@@ -31,7 +29,7 @@
 <meta name="keywords" content="electromagnetism, FDTD, MEEP, octave, photonics, Plasmonics">
 
 
-<meta property="og:site_name" content="Bala Juluri"/>
+<meta property="og:site_name" content="Bala Juluri's Blog"/>
 <meta property="og:title" content="Arbitrary 2d shapes in MEEP"/>
 <meta property="og:description" content="In MEEP (1.1.1), dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was …"/>
 <meta property="og:locale" content="en_US"/>
@@ -40,7 +38,7 @@
 <meta property="article:published_time" content="2011-05-10 22:52:00-07:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Plasmonics"/>
+<meta property="article:section" content="Publications"/>
 <meta property="article:tag" content="electromagnetism"/>
 <meta property="article:tag" content="FDTD"/>
 <meta property="article:tag" content="MEEP"/>
@@ -49,54 +47,42 @@
 <meta property="article:tag" content="Plasmonics"/>
 <meta property="og:image" content="">
 
-  <title>Bala Juluri &ndash; Arbitrary 2d shapes in MEEP</title>
+  <title>Bala Juluri's Blog &ndash; Arbitrary 2d shapes in MEEP</title>
 
 </head>
 <body>
   <aside>
     <div>
       <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+        <img src="./theme/img/profile.png" alt="" title="">
       </a>
+      <h1><a href="."></a></h1>
 
-      <h1><a href=".">Bala Juluri</a></h1>
+<p>Ramblings</p>
+      <nav>
+        <ul class="list">
 
-    
 
-     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
-
+            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
+            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
+            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
+            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
+        </ul>
+      </nav>
 
       <ul class="social">
           <li>
-            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope ">
+            <a  class="sc-You can add links in your config file" href="#" target="_blank">
+            <i class="fab fa-You can add links in your config file">
             </i>
           </a></li>
           <li>
-            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="#" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
-            <i class="fab fa-stack-overflow">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="ai ai-google-scholar">
+            <a  class="sc-Another social link" href="#" target="_blank">
+            <i class="fab fa-Another social link">
             </i>
           </a></li>
       </ul>
-
-
     </div>
-
 
 
   </aside>
@@ -120,7 +106,7 @@
       
     <h1 id="arbitrary-2d-shapes-in-meep">Arbitrary 2d shapes in MEEP</h1>
     <p>
-          Posted on Tue 10 May 2011 in <a href="./category/plasmonics.html">Plasmonics</a>
+          Posted on Tue 10 May 2011 in <a href="./category/publications.html">Publications</a>
 
 
     </p>
@@ -128,60 +114,16 @@
 
 
   <div>
-    <p><img alt="" class="center" src="./images/Arbirary_shapes-eps.png" title=""></p>
-<p><a href="http://ab-initio.mit.edu/wiki/index.php/Meep">In MEEP (1.1.1)</a>, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was wondering if it was possible to somehow create any complex shape in 2d without figuring out the exact positions and operations with the available primitive shapes. Here I report how I solve this problem.</p>
-<p>The first thing I figured out was to create a 2d triangle with known vertices using a certain primitive shape. One can cut a cone to create a triangle, but that would limit me to isosceles triangle. My very smart colleague (<a href="http://www.esm.psu.edu/wiki/research:juh17:mengqian_lu">Mengqian Lu</a>) suggested me to cut a block/brick object with non-orthogonal axes such that you get a triangle. </p>
-<p>In meep, block object requires, 
-1) the lengths of the block edges along each of its three axes
-2) the directions of the axes of the block and 
-3)center. </p>
-<p>A triangle with known (x1,y1,0), (x2,y2,0) and (x3,y3,0) can be represented with a block (with possible non-orthogonality) element by modifications as shown in the figure. I pick a random point "E" which is not in the plane of my triangle and assume it as origin of the block. Then the vectors corresponding to axes of block are given by EA, EB, EC vectors, sizes are given by |EA|,|EB|,|EC| and the center of the block is OE+0.5*(EA+EB+EC).</p>
-<p>Triangle in Meep using block primitive object</p>
-<p><img alt="" class="center" src="./images/Arbirary_shapes-single-triangle.png"></p>
+    <p><a href="http://juluribk.com/wp-content/uploads/2011/05/Arbirary_shapes-eps-000000000.png"><img alt="" class="aligncenter size-full wp-image-816" height="460" src="http://juluribk.com/wp-content/uploads/2011/05/Arbirary_shapes-eps-000000000.png" title="&quot;A&quot; shaped dielectric object in meep after triangulation" width="513"></a><a href="http://ab-initio.mit.edu/wiki/index.php/Meep">In MEEP (1.1.1)</a>, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was wondering if it was possible to somehow create any complex shape in 2d without figuring out the exact positions and operations with the available primitive shapes. Here I report how I solve this problem.</p>
+<p>The first thing I figured out was to create a 2d triangle with known vertices using a certain primitive shape. One can cut a cone to create a triangle, but that would limit me to isosceles triangle. My very smart colleague (<a href="http://www.esm.psu.edu/wiki/research:juh17:mengqian_lu">Mengqian Lu</a>) suggested me to cut a block/brick object with non-orthogonal axes such that you get a triangle. In meep, block object requires, 1) the lengths of the block edges along each of its three axes, 2) the directions of the axes of the block and 3)center. A triangle with known (x1,y1,0), (x2,y2,0) and (x3,y3,0) can be represented with a block (with possible non-orthogonality) element by modifications as shown in the figure. I pick a random point "E" which is not in the plane of my triangle and assume it as origin of the block. Then the vectors corresponding to axes of block are given by EA, EB, EC vectors, sizes are given by |EA|,|EB|,|EC| and the center of the block is OE+0.5*(EA+EB+EC).</p>
+<p>[caption id="attachment_809" align="aligncenter" width="300" caption="Triangle in meep using block primitive object"]<a href="http://juluribk.com/wp-content/uploads/2011/05/tr.png"><img alt="" class="size-medium wp-image-809" height="242" src="http://juluribk.com/wp-content/uploads/2011/05/tr-300x242.png" title="Triangle in meep using block primitive object" width="300"></a>[/caption]</p>
 <p>To test this, I wrote a octave code which produces a meep code that that can be executed to create a triangle with vertices of (-10,0,0), (10,0,0) and (0,10,0). The result of compiling the meep code and exporting the dielectric distribution is shown below. The length of the simulation domain is 20 units in both x and y directions.</p>
-<p>Triangle shape implemented in meep using block primitve object.</p>
-<p><img alt="" class="center" src="./images/Arbirary_shapes-single-triangle2.png"></p>
-<p>With this information of incorporating a single triangle in meep, I can now obtain complex 2d shapes in meep. I start by writing a file that contains information regarding points that make up my structure and do a <a href="http://en.wikipedia.org/wiki/Delaunay_triangulation">constrained delaunay triangulation</a>. </p>
-<p>One can use <a href="http://www.mathworks.com/products/matlab/demos.html?file=/products/demos/shipping/matlab/demoDelaunayTri.html">matlab (versions &gt;2009) to do such constrained delaunay triangulation</a>. However, many of us (poor graduate students :( ) do not have access to matlab. I figured out that constrained delaunay triangulation can be done by using <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle package</a>, which is free. After I compile this code, I see two executables 1) Triangle and 2) Showme in my source folder. Triangle does the triangulation and showme does the visualization before and after triangulation.</p>
+<p>[caption id="attachment_809" align="aligncenter" width="300" caption="Triangle shape implemented in meep using block primitive object"]<a href="http://juluribk.com/wp-content/uploads/2011/05/single_triangle-eps-000000.00.png"><img alt="" class="aligncenter size-medium wp-image-815" height="300" src="http://juluribk.com/wp-content/uploads/2011/05/single_triangle-eps-000000.00-300x300.png" title="Triangle in MEEP" width="300"></a>[/caption]</p>
+<p>With this information of incorporating a single triangle in meep, I can now obtain complex 2d shapes in meep. I start by writing a file that contains information regarding points that make up my structure and do a <a href="http://en.wikipedia.org/wiki/Delaunay_triangulation">constrained delaunay triangulation</a>. One can use <a href="http://www.mathworks.com/products/matlab/demos.html?file=/products/demos/shipping/matlab/demoDelaunayTri.html">matlab (versions &gt;2009) to do such constrained delaunay triangulation</a>. However, many of us (poor graduate students :( ) do not have access to matlab. I figured out that constrained delaunay triangulation can be done by using <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle package</a>, which is free. After I compile this code, I see two executables 1) Triangle and 2) Showme in my source folder. Triangle does the triangulation and showme does the visualization before and after triangulation.</p>
 <p>First, I write a ".poly" file, to mention my structure. ”.poly” file contains information of the points that make up the structure, one has to also mention segments (the border of the polygon) and any holes (if present). More information can be <a href="http://www.cs.cmu.edu/~quake/triangle.delaunay.html">found here</a>. Once a poly file is written, it can visualized using showme executable . If everything is ok, then do a constrained delaunay triangulation using Triangle executable (beware of concavities). I again visualize the structure after triangulation using showme executable to check whether triangulation has happened correctly or not. Once triangulated, I use the method above to convert each triangle to a corresponding meep block element (with suitable centers, sizes and axes) and stitch all of them together (once again use a octave code to do that automatically).</p>
-<p>Using the poly file for shape “A” obtained from <a href="http://people.sc.fsu.edu/~jburkardt/data/poly/a.poly">here</a> I create a dielectric structure in MEEP with each triangle representing a random dielectric constant. Below is the final result. This method can also be extended to a group of arbitrary shapes in one simulation each with different dielectric functions.  </p>
-<p>Screenshot of showme executable showing the triangulation of 'A' shape.</p>
-<p><img alt="" class="center" src="./images/Arbirary_shapes-screenshot.png"></p>
-<p>'A' shaped dielectric structure in MEEP.
-<img alt="" class="center" src="./images/Arbirary_shapes-eps.png" title=""></p>
-<p>I seem to be missing my octave code for this implementation.</p>
-<p>Here is a version posted by Felip BM </p>
-<div class="highlight matlab"><pre><span></span><code><span class="k">function</span><span class="w"> </span>out <span class="p">=</span><span class="w"> </span><span class="nf">MEEPtriangle</span><span class="p">(</span>p1,p2,p3<span class="p">);</span>
-<span class="c">% Create a triangle in MEEP with vertices in p1, p2, p3</span>
-<span class="c">% as explained in</span>
-<span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">juluribk</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="mi">2011</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="n">arbitrary</span><span class="o">-</span><span class="mi">2</span><span class="n">d</span><span class="o">-</span><span class="n">shapes</span><span class="o">-</span><span class="n">in</span><span class="o">-</span><span class="n">meep</span><span class="o">/</span>#<span class="n">comment</span><span class="o">-</span><span class="mi">54057</span>
-
-<span class="c">%origin</span>
-<span class="n">O</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">];</span> <span class="c">% for now axes origin is a constant</span>
-
-<span class="n">OA</span> <span class="p">=</span> <span class="p">[</span><span class="n">p1</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">O</span><span class="p">;</span>
-<span class="n">OB</span> <span class="p">=</span> <span class="p">[</span><span class="n">p2</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">O</span><span class="p">;</span>
-<span class="n">OC</span> <span class="p">=</span> <span class="p">[</span><span class="n">p3</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">O</span><span class="p">;</span>
-
-<span class="c">% Origin of the triangle</span>
-<span class="n">E</span> <span class="p">=</span>  <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">5</span><span class="p">];</span><span class="c">% for now coords&#39; origin is a constant</span>
-<span class="n">OE</span> <span class="p">=</span> <span class="n">E</span> <span class="o">-</span> <span class="n">O</span><span class="p">;</span>
-
-<span class="c">% block edges and center</span>
-<span class="n">EA</span> <span class="p">=</span> <span class="n">OA</span> <span class="o">-</span> <span class="n">OE</span><span class="p">;</span>
-<span class="n">EB</span> <span class="p">=</span> <span class="n">OB</span> <span class="o">-</span> <span class="n">OE</span><span class="p">;</span>
-<span class="n">EC</span> <span class="p">=</span> <span class="n">OC</span> <span class="o">-</span> <span class="n">OE</span><span class="p">;</span>
-<span class="n">CC</span> <span class="p">=</span> <span class="n">OE</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">EA</span><span class="o">+</span><span class="n">EB</span><span class="o">+</span><span class="n">EC</span><span class="p">);</span> <span class="c">% center</span>
-
-<span class="n">fprintf</span><span class="p">([</span><span class="s">&#39;(make block (center %6.4f %6.4f %6.4f)\n\t\t&#39;</span><span class="c">...</span>
-        <span class="s">&#39;(size %6.4f %6.4f %6.4f)\n\t\t&#39;</span><span class="c">...</span>
-        <span class="s">&#39;(e1 %6.4f %6.4f %6.4f)\n\t\t&#39;</span><span class="c">...</span>
-        <span class="s">&#39;(e2 %6.4f %6.4f %6.4f)\n\t\t&#39;</span><span class="c">...</span>
-        <span class="s">&#39;(e3 %6.4f %6.4f %6.4f)\n\t\t&#39;</span><span class="c">...</span>
-        <span class="s">&#39;(material (make dielectric (epsilon 12))))&#39;</span><span class="p">],</span><span class="c">...% for now epsilon is constant</span>
-        <span class="n">CC</span><span class="p">,</span><span class="n">norm</span><span class="p">(</span><span class="n">EA</span><span class="p">),</span><span class="n">norm</span><span class="p">(</span><span class="n">EB</span><span class="p">),</span><span class="n">norm</span><span class="p">(</span><span class="n">EC</span><span class="p">),</span><span class="n">EA</span><span class="p">,</span><span class="n">EB</span><span class="p">,</span><span class="n">EC</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div>
+<p>Using the poly file for shape “A” obtained from <a href="http://people.sc.fsu.edu/~jburkardt/data/poly/a.poly">here</a> I create a dielectric structure in MEEP with each triangle representing a random dielectric constant. Below is the final result. This method can also be extended to a group of arbitrary shapes in one simulation each with different dielectric functions.<br>
+[caption id="attachment_829" align="aligncenter" width="249" caption="Screenshot of showme executable showing the triangulation of 'A' shape"]<a href="http://juluribk.com/wp-content/uploads/2011/05/Screenshot.png"><img alt="" class="size-medium wp-image-829" height="300" src="http://juluribk.com/wp-content/uploads/2011/05/Screenshot-249x300.png" title="Screenshot of showme executable showing the triangulation of 'A' shape" width="249"></a>[/caption]</p>
+<p>[caption id="attachment_809" align="aligncenter" width="300" caption="'A' shaped dielectric structure in MEEP"]<a href="http://people.sc.fsu.edu/~jburkardt/data/poly/a.poly"></a><a href="http://juluribk.com/wp-content/uploads/2011/05/Arbirary_shapes-eps-000000000.png"><img alt="" class="aligncenter size-medium wp-image-816" height="269" src="http://juluribk.com/wp-content/uploads/2011/05/Arbirary_shapes-eps-000000000-300x269.png" title="&quot;A&quot; shaped dielectric object in meep after triangulation" width="300"></a>[/caption]</p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -213,7 +155,7 @@
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Bala Juluri ",
+  "name": " Bala Juluri's Blog ",
   "url" : ".",
   "image": "",
   "description": ""
