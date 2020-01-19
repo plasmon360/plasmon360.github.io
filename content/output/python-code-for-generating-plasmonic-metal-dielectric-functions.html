@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Python code for generating plasmonic metal dielectric functions</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li class="active"><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/python-code-for-generating-plasmonic-metal-dielectric-functions.html" rel="bookmark"
+           title="Permalink to Python code for generating plasmonic metal dielectric functions">Python code for generating plasmonic metal dielectric functions</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-09-10T08:54:00+00:00">
+                Published: Thu 10 September 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->      <p>I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as <a href="https://pypi.python.org/pypi/tmm">TMM</a>. So I wrote a python version of LD.m</p>
+<p><a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water">LD.m</a> is a matlab file written by Bora Ung that produces dielectric functions of metals either for Lortenz and Loretnz drude models. The dielectric functions are given as follows:</p>
+<p>$<code>\epsilon(\omega)=1-\frac{f_1\omega_p'^2}{(\omega^2+i\Gamma_1'\omega)}+\sum_{j=2}^{n}\frac{f_j\omega_p'^2}{(\omega_{o,j}'^2-\omega^2-i\Gamma_j'\omega)}</code>$.</p>
+<p>The first part of the function is the Drude part and the second part is the Lorentz part. The parameters for these models are taken from Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998).</p>
+<p>You can find my module (LD.py) and its documentation <a href="https://github.com/plasmon360/LD_python">at my github account</a>.</p>
+<p>A typical example is shown below:</p>
+<table class="highlight pythontable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight python"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="c1"># Make sure the file is accessible to PYTHONPATH or in the same</span>
+<span class="c1"># directory of file which is trying to import</span>
+<span class="kn">from</span> <span class="nn">LD</span> <span class="kn">import</span> <span class="n">LD</span>
+
+<span class="c1"># Creates a wavelength vector from 300 nm to 1000 nm of length</span>
+<span class="c1"># 100</span>
+<span class="n">lamda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">300E-9</span><span class="p">,</span> <span class="mf">1000E-9</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Creates gold object with dielectric function of LD model</span>
+<span class="n">gold</span> <span class="o">=</span> <span class="n">LD</span><span class="p">(</span><span class="n">lamda</span><span class="p">,</span> <span class="n">material</span><span class="o">=</span><span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s1">&#39;LD&#39;</span><span class="p">)</span>
+
+<span class="c1"># prints the real part of the epislion</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">epsilon_real</span>
+
+<span class="c1"># prints the imag part of the epsilon</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">epsilon_imag</span>
+
+<span class="c1"># prints the real part of the refractive index</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">n</span>
+
+<span class="c1"># prints the imag part of the refactive index</span>
+<span class="k">print</span> <span class="n">gold</span><span class="o">.</span><span class="n">k</span>
+
+<span class="c1"># plots wavelength vs real epilon and imag epsilon</span>
+<span class="n">gold</span><span class="o">.</span><span class="n">plot_epsilon</span><span class="p">()</span>
+
+<span class="c1"># plots wavelength vs n and k .</span>
+<span class="n">gold</span><span class="o">.</span><span class="n">plot_n_k</span><span class="p">()</span>
+</pre></div>
+</td></tr></table>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

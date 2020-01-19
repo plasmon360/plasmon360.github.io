@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - Matlab</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/spaces-in-strings-in-matlaboctave.html">Spaces in strings in matlab/octave</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2012-02-24T11:33:00+00:00">
+                Published: Fri 24 February 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/matlab.html">Matlab</a>.</p>
+<p>tags: <a href="/tag/matlab.html">Matlab</a> <a href="/tag/octave.html">octave</a> </p>
+</footer><!-- /.post-info --><p>To get spaces in the strings to work in matlab or octave, use</p>
+<p>t1={'test test'}</p>
+<p>Result is<br>
+t1 =<br>
+{<br>
+[1,1] = test test<br>
+}</p>
+<p>t2=strcat({'test test '},{'blah blah'})</p>
+<p>Result is<br>
+t2 =<br>
+{<br>
+[1,1] = test test blah blah<br>
+}</p>
+<p>you can use this string in your figures by<br>
+plot([1:4])<br>
+title(t2{})</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/all-entries-of-array-except-certain-indices-in-octavematlab.html" rel="bookmark"
+                           title="Permalink to All entries of array except certain indices in octave/matlab">All entries of array except certain indices in octave/matlab</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-12-07T18:14:00+00:00">
+                Published: Wed 07 December 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/matlab.html">Matlab</a> <a href="/tag/octave.html">octave</a> </p>
+</footer><!-- /.post-info -->                <p>In Octave or Matlab, some times one needs to eliminate certain elements in an array.</p>
+<p>For example, if</p>
+<p>[cclN_matlab]<br>
+a=[10,20,30,40,50,60];<br>
+[/cclN_matlab]</p>
+<p>and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This …</p>
+                <a class="readmore" href="/all-entries-of-array-except-certain-indices-in-octavematlab.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/plasmonic-materials-in-meep.html" rel="bookmark"
+                           title="Permalink to Plasmonic materials in MEEP">Plasmonic materials in MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-04-27T00:39:00+00:00">
+                Published: Wed 27 April 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics-researc.html">Plasmonics, Researc</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/matlab.html">Matlab</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/sers.html">SERS</a> </p>
+</footer><!-- /.post-info -->                <p>[latexpage]</p>
+<p>The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.</p>
+<p>Metals such …</p>
+                <a class="readmore" href="/plasmonic-materials-in-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/adding-a-title-to-colobar-in-matlab.html" rel="bookmark"
+                           title="Permalink to Adding a title to colobar in Matlab">Adding a title to colobar in Matlab</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-03-21T16:34:00+00:00">
+                Published: Sun 21 March 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/matlab.html">Matlab</a> </p>
+</footer><!-- /.post-info -->                <p>To insert a title to the colorbar in matlab.  Use the following code(<a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788">Source</a>):<br>
+[cc lang='matlab']<br>
+load mandrill % Loads a data for the example<br>
+image(X) % Plots an image for the example<br>
+t=colorbar;% Inserts a colorbar. a handle is created<br>
+set(get(t,'ylabel'),'string','My colorbar title' …</p>
+                <a class="readmore" href="/adding-a-title-to-colobar-in-matlab.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/radiation-from-dipole.html" rel="bookmark"
+                           title="Permalink to Radiation from an oscillating dipole">Radiation from an oscillating dipole</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-14T19:26:00+00:00">
+                Published: Thu 14 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/matlab.html">Matlab</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>The electric field from an oscillating dipole is given by:<img alt="" src="file:///C:/DOCUME%7E1/bxj139/LOCALS%7E1/Temp/moz-screenshot-1.jpg"><img alt="" class="aligncenter" height="52" src="http://upload.wikimedia.org/math/1/c/b/1cb95474b78138db05d3763ac2fcd75a.png" title="dipole_radiation" width="527">, where [tex]\hat{r}[/tex] is the position vector, [tex] \omega [/tex] is the frequency of dipole oscillation, [tex]\textbf{p}[/tex] is the dipole moment. The two terms in the electric field consists of 1) near field (area near …</p>
+                <a class="readmore" href="/radiation-from-dipole.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/smooth-image-in-matlab.html" rel="bookmark"
+                           title="Permalink to Smooth image in matlab">Smooth image in matlab</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-10T01:25:00+00:00">
+                Published: Sun 10 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/matlab.html">Matlab</a>.</p>
+<p>tags: <a href="/tag/graphs.html">graphs</a> <a href="/tag/matlab.html">Matlab</a> </p>
+</footer><!-- /.post-info -->                <p>In matlab, sometimes I prefer to plot a image for mesh data instead of surf and use view(2) (view(2) gives the top view of the surface plot). However,<br>
+<code lang="matlab">imagesc(x,y,z) shading 'interp'</code><br>
+does not work. This problem can be solved by using:<br>
+<code lang="matlab">pcolor(x,y,z …</code></p>
+                <a class="readmore" href="/smooth-image-in-matlab.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - Plasmonics, Researc</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li class="active"><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/installing-meep-1-2-on-ubuntu.html">Installing Meep 1.2 on ubuntu</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2013-07-20T18:50:00+00:00">
+                Published: Sat 20 July 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics-researc.html">Plasmonics, Researc</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info --><p>Pre-compiled Meep binaries for meep1.1 exist for Ubuntu distribution. This makes it very easy to install meep on ubuntu using “apt-get install” command or from the ubuntu software center. However recently, Meep developers have release meep1.2 which has more functions compared to meep1.1. I have recently installed meep1.2 from source on ubuntu 12.04 using the instructions shown at <a href="http://ab-initio.mit.edu/wiki/index.php/Meep_Installation">http://ab-initio.mit.edu/wiki/index.php/Meep_Installation</a>.</p>
+<p>I have root access to my computer, so I installed all the libraries/bin files in their default location (i.e, libraries go in /usr/local/lib, programs in /usr/local/bin, etc)</p>
+<p>These are the steps I followed:</p>
+<p>1) To avoid any complications, I uninstalled meep1.1 and meep-openmpi, which were installed earlier on my ubuntu system from the software center.</p>
+<p><strong>2) Setting the environmental variables:</strong><br>
+export LDFLAGS="-L/usr/local/lib"<br>
+export CPPFLAGS="-I/usr/local/include"<br>
+export LD_LIBRARY_PATH="/usr/local/lib:\$LD_LIBRARY_PATH"</p>
+<p>3) I installed G77, gfortran, f77, g++ and make packages on my system. I installed g++ and make using “sudo apt-get install build-essential”. Some of the packages might have been pre-installed.</p>
+<p>4)<strong>Installing blas and lapack</strong></p>
+<p>As said at <a href="http://ab-initio.mit.edu/wiki/index.php/Meep_Installation">http://ab-initio.mit.edu/wiki/index.php/Meep_Installation</a>, Openblas at <a href="http://xianyi.github.io/OpenBLAS/">http://xianyi.github.io/OpenBLAS/</a> should install both blas and lapack libraries. I downloaded the tar file from the website and extracted it. Then I cd’ed into that folder and issued a “make” command. I had some problems with “make” command as it was using f77 for compiling and was throwing an error. After some search, I found that “make FC=gfortran NO_AFFINITY=1 USE_OPENMP=1” solves this problem. This resulted in “libopenblas.a” in /usr/local/lib folder.</p>
+<p><strong>5) Installing Harminv</strong><br>
+I downloaded the tar file from <a href="http://ab-initio.mit.edu/wiki/index.php/Harminv">http://ab-initio.mit.edu/wiki/index.php/Harminv</a>. Extracted the tar file and cd’ed into it. I installed the harminv using ./configure, make and sudo make commands as said at " title="http://ab-initio.mit.edu/wiki/index.php/Harminv"&gt;http://ab-initio.mit.edu/wiki/index.php/Harminv_installation This resulted in “libharminv.a”. Harminv required blas and lapack installed.</p>
+<p><strong>6) Installing Guile</strong><br>
+This was simple. I used the command “sudo apt-get install guile-2.0” and “sudo apt-get install guile-2.0-dev”</p>
+<p><strong>7) Installing libctl</strong><br>
+Downloaded the tar file, extracted it, cd’ed into it. I followed ./configure, make and sudo make commands as told on at <a href="http://ab-initio.mit.edu/wiki/index.php/Libctl">http://ab-initio.mit.edu/wiki/index.php/Libctl</a> and after the process I saw libctl.a in the /usr/local/lib folder.</p>
+<p><strong>8) Installing hdf5</strong><br>
+I downloaded the hdf5 tar file from <a href="http://www.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8.8/src">hdf5-1.8.8 source page</a>. I used 1.8.8 version (no special reason for this version). Extracted the tar file. Cd’ed into the folder and use “./configure, make, make install” . It took a while for this to complete. At the end, I saw all the libraries, executables and include files were placed in “hdf5” sub-folder. I saw “bin”,”include”,”share”,”lib” inside this sub-folder. I figured they should be placed at default locations so I issued following commands inside the hdf5-1.8.6 folder<br>
+sudo cp hdf5/bin/* /usr/local/bin/<br>
+sudo cp hdf5/lib/* /usr/local/lib/<br>
+sudo cp hdf5/include/* /usr/local/include/<br>
+sudo cp hdf5/share/* /usr/local/share/<br>
+By the end of the process, I saw libhdf5.a in the /usr/local/lib. I did not enable MPI parallel I/O support in hdf5.</p>
+<p><strong>9) Installing meep</strong><br>
+I downloaded the tar file from <a href="http://ab-initio.mit.edu/wiki/index.php/Meep_download">meep downloaded page</a> and then extracted it. Then I cd’ed into that folder and issued “./configure” command. I had no errors as guile, libctl, harminv, hdf5 libraries were all available. See my <a href="http://juluribk.com/wp-content/uploads/2013/07/configure_log_file.txt">configure_log_file</a>. Then “make” and then “sudo make install” commands were issued. I did not enabled parallel version for this post. This resulted in meep executable in “/usr/local/bin” folder. I renamed it to meep12 (sudo mv /usr/local/bin/meep meep12) so that I know that it is running meep1.2 and not to confuse with meep1.1.  Now I opened a new terminal and issued “/usr/local/bin/meep12” to run meep1.2. you should see:<br>
+“GNU Guile 2.0.5-deb+1-1<br>
+Copyright (C) 1995-2012 Free Software Foundation, Inc.<br>
+Guile comes with ABSOLUTELY NO WARRANTY; for details type `,show w'.<br>
+This program is free software, and you are welcome to redistribute it<br>
+under certain conditions; type `,show c' for details.<br>
+Enter `,help' for help.<br>
+”</p>
+<p>In future, I will post some meep examples that use the added functionalities of meep1.2. Stay tuned!</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/plasmonic-materials-in-meep.html" rel="bookmark"
+                           title="Permalink to Plasmonic materials in MEEP">Plasmonic materials in MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-04-27T00:39:00+00:00">
+                Published: Wed 27 April 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics-researc.html">Plasmonics, Researc</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/matlab.html">Matlab</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/sers.html">SERS</a> </p>
+</footer><!-- /.post-info -->                <p>[latexpage]</p>
+<p>The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.</p>
+<p>Metals such …</p>
+                <a class="readmore" href="/plasmonic-materials-in-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

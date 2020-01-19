@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - Free Software</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li class="active"><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/tab-autocompletetion-with-python-interpreter-in-bash-terminal.html">Tab autocompletetion with python interpreter in bash terminal</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-10-29T18:16:00+00:00">
+                Published: Sat 29 October 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software.html">Free Software</a>.</p>
+<p>tags: <a href="/tag/linux.html">Linux</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info --><p>I want to tab autocomplete commands in my python interpreter within bash terminal. This is very useful when I import a module and just want to browse through the methods and autocomplete.</p>
+<p>Found two ways to do it. Thanks to stack overflow posts.</p>
+<h3>Method 1 (<a href="http://stackoverflow.com/questions/2603798/ipython-tab-completion-not-working">as mentioned here</a>):</h3>
+<p>This is easy. Install pyreadline (pip install pyreadline) and use ipython. This is a snapshot of it working.</p>
+<p><a href="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png"><img alt="iptyhon autocompletion" class="aligncenter size-full wp-image-1731" height="322" src="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png" width="708"></a></p>
+<h3>Method 2 ( <a href="https://docs.python.org/2/library/rlcompleter.html#module-rlcompleter">as mentioned here</a>):</h3>
+<p>This is for standard  python interpreter in bash terminal (such as in Ubuntu). This method requires readline and rlcompeter modules. Install these modules if you do not have them installed. This can be done with pip.</p>
+<p>Basically, the idea is to have a python interpreter look for the value of environment path variable "PYTHONSTARTUP". This variable should be set to a location for the file ("python startup file.py") with commands that enable tab autocompletion.</p>
+<p>In my home directory "/home/bjuluri" I make a file called "python startup file.py" by</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span>bjuluri@bjuluri-VirtualBox:<span class="se">\~\$</span> gedit python startup file.py
+</pre></div>
+</td></tr></table>
+
+<p>copy and paste following lines</p>
+<table class="highlight pythontable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight python"><pre><span></span><span class="k">try</span><span class="p">:</span>  
+   <span class="kn">import</span> <span class="nn">readline</span>  
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  
+    <span class="k">print</span> <span class="s2">&quot;Module readline not available.&quot;</span>  
+<span class="k">else</span><span class="p">:</span>  
+    <span class="kn">import</span> <span class="nn">rlcompleter</span>  
+    <span class="n">readline</span><span class="o">.</span><span class="n">parse</span> <span class="ow">and</span> <span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tab: complete&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Save and close the file.</p>
+<p>Now lets assign the an environmental variable "PYTHONSTARTUP" to the location of this "python startup file"</p>
+<p>./bashrc is loaded whenever a bash terminal is fired. This file sits in the user's home directory, we will edit it and assign the environmental variable at the end of the file.</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span>nano .bashrc
+</pre></div>
+</td></tr></table>
+
+<p>at the end of the file, copy and paste</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONSTARTUP</span><span class="o">=</span><span class="s2">&quot;python startup file.py&quot;</span>
+</pre></div>
+</td></tr></table>
+
+<p>Save the file and exit.</p>
+<p>reload the .bashrc file in terminal by either opening a new terminal or by typing the following in the current terminal.</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span><span class="nb">source</span> .bashrc
+</pre></div>
+</td></tr></table>
+
+<p>Once those commands run at the python startup, tab autocompletion with suggestions will be enabled in the interpreter.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/parallelization-in-octave-using-parcellfunpararrayfun.html" rel="bookmark"
+                           title="Permalink to Parallelization in Octave using parcellfun/pararrayfun">Parallelization in Octave using parcellfun/pararrayfun</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-03-09T13:27:00+00:00">
+                Published: Fri 09 March 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software.html">Free Software</a>.</p>
+<p>tags: <a href="/tag/octave.html">octave</a> </p>
+</footer><!-- /.post-info -->                <p>My computer has many processors and I would like to run some octave scripts so that all the processors are being used.<br>
+One can use octave function called "<a href="http://octave.sourceforge.net/general/function/pararrayfun.html">pararrayfun</a>" for this purpose. This function is part of "general" package on octave-forge.</p>
+<p>On my ubuntu 11.10, I used "sudo apt-get …</p>
+                <a class="readmore" href="/parallelization-in-octave-using-parcellfunpararrayfun.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/split-collate-watermark-and-password-protect-pdf-documents-using-portable-pdftk.html" rel="bookmark"
+                           title="Permalink to Split, collate, watermark and password protect PDF documents using portable pdftk">Split, collate, watermark and password protect PDF documents using portable pdftk</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-08T11:07:00+00:00">
+                Published: Fri 08 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software.html">Free Software</a>.</p>
+
+</footer><!-- /.post-info -->                <p>To split, collate, watermark and password protect pdf documents, I use pdftk portable app. pdftk is one of numerous applications that come with  PortableApps.com free software. This platform can be installed on any portable USB drive and can be run on any computer without administrative privileges. More information can …</p>
+                <a class="readmore" href="/split-collate-watermark-and-password-protect-pdf-documents-using-portable-pdftk.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/update-gnuplot-plot-automatically.html" rel="bookmark"
+                           title="Permalink to Update Gnuplot plot automatically">Update Gnuplot plot automatically</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-07T23:18:00+00:00">
+                Published: Thu 07 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software.html">Free Software</a>.</p>
+<p>tags: <a href="/tag/gnuplot.html">gnuplot</a> <a href="/tag/graphs.html">graphs</a> <a href="/tag/linux.html">Linux</a> </p>
+</footer><!-- /.post-info -->                <p>To update gnuplot plot automatically. Run the command [cc]gnuplot gnuplot_script.txt[/cc] in terminal. (note: for some unknown reason it does not work for me on cygwin xterm, however it works on linux terminals.)</p>
+<p>gnuplot_script looks like this:</p>
+<p>[cc lang="gnuplot"]<br>
+plot "data.dat" using 1:2 w lp …</p>
+                <a class="readmore" href="/update-gnuplot-plot-automatically.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/gfortran-in-cygwin1-7-1-for-ddscat.html" rel="bookmark"
+                           title="Permalink to GFortran in Cygwin1.7.1 for DDSCAT">GFortran in Cygwin1.7.1 for DDSCAT</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-06T16:25:00+00:00">
+                Published: Wed 06 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software.html">Free Software</a>.</p>
+<p>tags: <a href="/tag/cygwin.html">Cygwin</a> <a href="/tag/ddscat.html">DDSCAT</a> </p>
+</footer><!-- /.post-info -->                <p>For DDSCAT 7 users, the makefile needs gfortran. On window os, Gfortran can be installed in Cygwin 1.7.1 by installing "GCC4-fortran" package. It installs a exe file named "gfotran-4.exe" in the "xyz\cygwin\bin". So my makefile compiler options are as follows:</p>
+<p>[cc lang="fortran"]<br>
+# 1.  gfortran …</p>
+                <a class="readmore" href="/gfortran-in-cygwin1-7-1-for-ddscat.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - python</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/tab-autocompletetion-with-python-interpreter-in-bash-terminal.html">Tab autocompletetion with python interpreter in bash terminal</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2016-10-29T18:16:00+00:00">
+                Published: Sat 29 October 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software.html">Free Software</a>.</p>
+<p>tags: <a href="/tag/linux.html">Linux</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info --><p>I want to tab autocomplete commands in my python interpreter within bash terminal. This is very useful when I import a module and just want to browse through the methods and autocomplete.</p>
+<p>Found two ways to do it. Thanks to stack overflow posts.</p>
+<h3>Method 1 (<a href="http://stackoverflow.com/questions/2603798/ipython-tab-completion-not-working">as mentioned here</a>):</h3>
+<p>This is easy. Install pyreadline (pip install pyreadline) and use ipython. This is a snapshot of it working.</p>
+<p><a href="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png"><img alt="iptyhon autocompletion" class="aligncenter size-full wp-image-1731" height="322" src="http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png" width="708"></a></p>
+<h3>Method 2 ( <a href="https://docs.python.org/2/library/rlcompleter.html#module-rlcompleter">as mentioned here</a>):</h3>
+<p>This is for standard  python interpreter in bash terminal (such as in Ubuntu). This method requires readline and rlcompeter modules. Install these modules if you do not have them installed. This can be done with pip.</p>
+<p>Basically, the idea is to have a python interpreter look for the value of environment path variable "PYTHONSTARTUP". This variable should be set to a location for the file ("python startup file.py") with commands that enable tab autocompletion.</p>
+<p>In my home directory "/home/bjuluri" I make a file called "python startup file.py" by</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span>bjuluri@bjuluri-VirtualBox:<span class="se">\~\$</span> gedit python startup file.py
+</pre></div>
+</td></tr></table>
+
+<p>copy and paste following lines</p>
+<table class="highlight pythontable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight python"><pre><span></span><span class="k">try</span><span class="p">:</span>  
+   <span class="kn">import</span> <span class="nn">readline</span>  
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  
+    <span class="k">print</span> <span class="s2">&quot;Module readline not available.&quot;</span>  
+<span class="k">else</span><span class="p">:</span>  
+    <span class="kn">import</span> <span class="nn">rlcompleter</span>  
+    <span class="n">readline</span><span class="o">.</span><span class="n">parse</span> <span class="ow">and</span> <span class="n">bind</span><span class="p">(</span><span class="s2">&quot;tab: complete&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Save and close the file.</p>
+<p>Now lets assign the an environmental variable "PYTHONSTARTUP" to the location of this "python startup file"</p>
+<p>./bashrc is loaded whenever a bash terminal is fired. This file sits in the user's home directory, we will edit it and assign the environmental variable at the end of the file.</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span>nano .bashrc
+</pre></div>
+</td></tr></table>
+
+<p>at the end of the file, copy and paste</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span><span class="nb">export</span> <span class="nv">PYTHONSTARTUP</span><span class="o">=</span><span class="s2">&quot;python startup file.py&quot;</span>
+</pre></div>
+</td></tr></table>
+
+<p>Save the file and exit.</p>
+<p>reload the .bashrc file in terminal by either opening a new terminal or by typing the following in the current terminal.</p>
+<table class="highlight bashtable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight bash"><pre><span></span><span class="nb">source</span> .bashrc
+</pre></div>
+</td></tr></table>
+
+<p>Once those commands run at the python startup, tab autocompletion with suggestions will be enabled in the interpreter.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/coupled-dipole-approximation-in-python.html" rel="bookmark"
+                           title="Permalink to Coupled Dipole Approximation in Python">Coupled Dipole Approximation in Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2016-07-20T09:39:00+00:00">
+                Published: Wed 20 July 2016
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics.html">Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>Coupled dipole approximation (CDA) method is a numerical method to calculate the optical properties (scattering and absorption) of interacting dipoles. This method is used in discrete dipole approximation method (like in<a href="http:gc/www.ddscat.org/">DDSCAT</a>software), where a big particle (also known as target) is broken into lot of interacting dipoles arranged in …</p>
+                <a class="readmore" href="/coupled-dipole-approximation-in-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/controlling-rigol-dp832-with-python.html" rel="bookmark"
+                           title="Permalink to Controlling Rigol Dp832 with python">Controlling Rigol Dp832 with python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-05-08T17:08:00+00:00">
+                Published: Fri 08 May 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications-test-equipment.html">Publications, Test Equipment</a>.</p>
+<p>tags: <a href="/tag/instrumentation.html">Instrumentation</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel …</p>
+                <a class="readmore" href="/controlling-rigol-dp832-with-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi.html" rel="bookmark"
+                           title="Permalink to Hacking Weighing Scale to Upload Weight to Plotly using Raspberry Pi">Hacking Weighing Scale to Upload Weight to Plotly using Raspberry Pi</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-11T12:44:00+00:00">
+                Published: Sat 11 April 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/test-equipment.html">Test Equipment</a>.</p>
+<p>tags: <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p><img alt="Weighing scale" class="aligncenter size-full wp-image-1512" height="228" src="http://juluribk.com/wp-content/uploads/2015/04/Picture7.png" width="902"></p>
+<p>I have been interested in monitoring and keep track of my weight. In the past, I have used phone apps for this purpose, works OK but I was thinking of reading weight information using some microcontroller from my weighing scale and upload the data to an online database. That means …</p>
+                <a class="readmore" href="/hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/newport-1918-power-meter-with-python.html" rel="bookmark"
+                           title="Permalink to Controlling Newport 1918 Power Meter with Python">Controlling Newport 1918 Power Meter with Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-04-04T12:23:00+00:00">
+                Published: Sat 04 April 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/test-equipment.html">Test Equipment</a>.</p>
+<p>tags: <a href="/tag/instrumentation.html">Instrumentation</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p><a href="http://juluribk.com/wp-content/uploads/2015/04/23632.jpg"><img alt="Newport 1918 power meter" class="aligncenter size-medium wp-image-1456" height="225" src="http://juluribk.com/wp-content/uploads/2015/04/23632-300x225.jpg" width="300"></a></p>
+<p>Optical power meters in-conjunction with a detector are used to measure power from a laser source or monochromatic output. At work, we use <a href="http://www.newport.com/Optical-Power-Meter-High-Performance-Hand-Held-19/509478/1033/info.aspx" title="Newport 1918">Newport 1918</a> power meter. This power meter comes with its own <a href="http://www.newport.com/Optical-Power-Meter-High-Performance-Hand-Held-19/509478/1033/info.aspx#tab_Literature" title="software">software</a>. However, I was interested in controlling this instrument with python. I made a class for …</p>
+                <a class="readmore" href="/newport-1918-power-meter-with-python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/python.html" rel="bookmark"
+                           title="Permalink to Python">Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-17T14:19:00+00:00">
+                Published: Sun 17 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/free-software.html">Free Software</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>[caption id="" align="aligncenter" width="311" caption="from XKCD on Python"]<img alt="" height="353" src="http://imgs.xkcd.com/comics/python.png" title="Python" width="311">[/caption]</p>
+<p>I am playing with Python for the first time. The syntax seems to be so natural. So many modules (numpy, scipy and matplotlib) for researchers/scientists. Cannot see any shortcoming at this point. Perhaps need more testing and …</p>
+                <a class="readmore" href="/python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

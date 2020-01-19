@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Creating Energy Band Diagrams for Solar cells and LED</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li class="active"><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/Energy-band-diagrams-for-solar-cell-and-led.html" rel="bookmark"
+           title="Permalink to Creating Energy Band Diagrams for Solar cells and LED">Creating Energy Band Diagrams for Solar cells and LED</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-09-11T10:42:00+00:00">
+                Published: Mon 11 September 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->      <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
+<p>Here's an example on how to use this code.</p>
+<table class="highlight pythontable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight python"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
+
+<span class="c1"># Define the metals and semiconductors. Here wf is the work function of metals,</span>
+<span class="c1"># cb is conduction band minimum and vb is valance band maximum wrt to vacuum level</span>
+
+<span class="n">ITO</span> <span class="o">=</span> <span class="n">metal</span><span class="p">(</span><span class="n">wf</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span> <span class="s1">&#39;ITO&#39;</span><span class="p">)</span>  
+<span class="n">p_nio</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.85</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.49</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;P-NIO&#39;</span><span class="p">)</span>  
+<span class="n">p3HT</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;P3HT&#39;</span><span class="p">)</span>  
+<span class="n">PCBM</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">6.5</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;PCBM&#39;</span><span class="p">)</span>  
+<span class="n">ZnO</span> <span class="o">=</span> <span class="n">semiconductor</span><span class="p">(</span><span class="n">cb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.2</span><span class="p">,</span> <span class="n">vb</span> <span class="o">=</span> <span class="o">-</span><span class="mf">7.5</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ZnO&#39;</span><span class="p">)</span>  
+<span class="n">LiF_Al</span> <span class="o">=</span> <span class="n">metal</span><span class="p">(</span><span class="n">wf</span><span class="o">=-</span><span class="mf">3.7</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;LiF/Al&#39;</span><span class="p">)</span>
+
+<span class="c1">## Create the stack  </span>
+<span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">ITO</span><span class="p">,</span><span class="n">p_nio</span><span class="p">,</span><span class="n">p3HT</span><span class="p">,</span><span class="n">PCBM</span><span class="p">,</span><span class="n">ZnO</span><span class="p">,</span><span class="n">LiF_Al</span><span class="p">]</span>
+
+<span class="c1">## plot the stack and save it  </span>
+<span class="n">plot</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;Images/Stack1.png&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>will result in
+<a href="http://juluribk.com/wp-content/uploads/2017/09/Stack1.png"><img alt="Energy Band diagram of organic solar cell" class="aligncenter size-full wp-image-1742" height="480" src="http://juluribk.com/wp-content/uploads/2017/09/Stack1.png" width="640"></a></p>
+<p>You can download it at my <a href="%20%20https://github.com/plasmon360/Energy-Band-diagram" title="github repository">github repository</a>.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

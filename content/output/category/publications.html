@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - Publications</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li class="active"><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution.html">Calculating molarity, weight concentration from absorbance value for plasmonic nanoparticles in solution</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2018-06-20T10:50:00+00:00">
+                Published: Wed 20 June 2018
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info --><p>It is common to measure the peak absorbance of the plasmonic nanoparticles in solution and then get the following:</p>
+<ol>
+<li>Molarity (moles/liter)</li>
+<li>Number of particles per ml</li>
+<li>Weight concentration (ug/ml)</li>
+</ol>
+<p>I wrote a small python function to extract these parameters.  The following inputs are needed for the function</p>
+<ol>
+<li>d_nm :   diameter of the particle in nanoparticle</li>
+<li>od :  peak OD measured from the absorbance plot</li>
+<li>path_length_cm :  cuvette length in centimeter</li>
+<li>density_g_per_cm3 :  for gold it is 19.28, for silver it is 10.49</li>
+<li>molar_Extinction_perM_percm :  Molar extinction coefficient extracted from <a href="https://www.sigmaaldrich.com/technical-documents/articles/materials-science/nanomaterials/gold-nanoparticles.html">here</a>.</li>
+<li>This can extracted from measuring absorbance at different concentrations and then fitting a linear line. the slope will be molar extinction coefficient</li>
+</ol>
+<p>Here is the code.
+<iframe src="https://trinket.io/embed/python/f1353652f2?start=result" width="100%" height="656" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe></p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/Energy-band-diagrams-for-solar-cell-and-led.html" rel="bookmark"
+                           title="Permalink to Creating Energy Band Diagrams for Solar cells and LED">Creating Energy Band Diagrams for Solar cells and LED</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-09-11T10:42:00+00:00">
+                Published: Mon 11 September 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
+<p>Here's an example on how to use this code.</p>
+<table class="highlight pythontable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10 …</pre></div></td></tr></table>
+                <a class="readmore" href="/Energy-band-diagrams-for-solar-cell-and-led.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/python-code-for-generating-plasmonic-metal-dielectric-functions.html" rel="bookmark"
+                           title="Permalink to Python code for generating plasmonic metal dielectric functions">Python code for generating plasmonic metal dielectric functions</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-09-10T08:54:00+00:00">
+                Published: Thu 10 September 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as <a href="https://pypi.python.org/pypi/tmm">TMM</a>. So I wrote a python version of LD.m</p>
+<p><a href="http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water">LD.m</a> is a matlab file written …</p>
+                <a class="readmore" href="/python-code-for-generating-plasmonic-metal-dielectric-functions.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ddscat-on-amazon-ec2.html" rel="bookmark"
+                           title="Permalink to DDSCAT on amazon EC2">DDSCAT on amazon EC2</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-09-03T21:37:00+00:00">
+                Published: Thu 03 September 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Amazon provides high performance computing capabilities through their EC2 service. You can find more information <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html">here</a></p>
+<p>They provide a 750 hr free instance with their a <a href="http://aws.amazon.com/free/">free-tier progra</a>m. If you want more resources, you can pay for it. See the <a href="https://aws.amazon.com/ec2/pricing/">pricing</a>, pricing seem very reasonable.</p>
+<p>I wanted to see …</p>
+                <a class="readmore" href="/ddscat-on-amazon-ec2.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/doorbell-with-nrf24l01-and-arduino.html" rel="bookmark"
+                           title="Permalink to Doorbell with NRF24L01 and Arduino">Doorbell with NRF24L01 and Arduino</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-05-29T13:30:00+00:00">
+                Published: Fri 29 May 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>My current apartment does not have a doorbell (Its strange but it is true). I went ahead and built a doorbell using two arduino pro-minis and two NRF24L01 transceivers. The melody to be played when a guest presses a button is controlled by me. I have four melodies programmed in …</p>
+                <a class="readmore" href="/doorbell-with-nrf24l01-and-arduino.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/airtel-tune-on-arduino.html" rel="bookmark"
+                           title="Permalink to Airtel tune on arduino">Airtel tune on arduino</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-05-21T19:54:00+00:00">
+                Published: Thu 21 May 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/arduino.html">arduino</a> </p>
+</footer><!-- /.post-info -->                <p>For my doorbell project, I needed some melodies to be played on arduino. One can takes notes of a melody and write a corresponding arduino code.</p>
+<p>I like airtel tune and wanted to play it with arduino. I got the notes from https://www.youtube.com/watch?v=3m5j5UIRqQc</p>
+<p>Here …</p>
+                <a class="readmore" href="/airtel-tune-on-arduino.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/diy-audio-cables-using-cat5.html" rel="bookmark"
+                           title="Permalink to DIY Audio cables using CAT5">DIY Audio cables using CAT5</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-09-20T23:09:00+00:00">
+                Published: Sat 20 September 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Inspired by the <a href="http://www.audioholics.com/gadget-reviews/diy-speaker-cable-faceoff/diy-cable-faceoff-results-and-conclusion">article on speaker cables</a>, I built the CAT5 V3 version of the speaker cable. Following are the images of how I made them. I have access to a precise LCR meter and will measure R, L and C as function of frequencies shortly. The capacitance of the …</p>
+                <a class="readmore" href="/diy-audio-cables-using-cat5.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/van-der-pauw-correction-factor.html" rel="bookmark"
+                           title="Permalink to van der Pauw correction factor">van der Pauw correction factor</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-01-08T15:27:00+00:00">
+                Published: Sun 08 January 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/octave.html">octave</a> <a href="/tag/van-der-pauw.html">van der pauw</a> </p>
+</footer><!-- /.post-info -->                <p>The <a href="http://en.wikipedia.org/wiki/Van_der_Pauw_method">van der Pauw</a> Method is a technique commonly used to measure the Resistivity and the Hall Coefficient of a sample. A correction factor goes into calculating the resistivity as described in <a href="http://electron.mit.edu/~gsteele/vanderpauw/vanderpauw.pdf">van der Pauw paper</a>. A iterative method is generally used to calculate the correction factor and this correction …</p>
+                <a class="readmore" href="/van-der-pauw-correction-factor.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/all-entries-of-array-except-certain-indices-in-octavematlab.html" rel="bookmark"
+                           title="Permalink to All entries of array except certain indices in octave/matlab">All entries of array except certain indices in octave/matlab</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-12-07T18:14:00+00:00">
+                Published: Wed 07 December 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/matlab.html">Matlab</a> <a href="/tag/octave.html">octave</a> </p>
+</footer><!-- /.post-info -->                <p>In Octave or Matlab, some times one needs to eliminate certain elements in an array.</p>
+<p>For example, if</p>
+<p>[cclN_matlab]<br>
+a=[10,20,30,40,50,60];<br>
+[/cclN_matlab]</p>
+<p>and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This …</p>
+                <a class="readmore" href="/all-entries-of-array-except-certain-indices-in-octavematlab.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html" rel="bookmark"
+                           title="Permalink to Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep">Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-06-01T14:06:00+00:00">
+                Published: Wed 01 June 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Particles scatter and absorb electromagnetic radiation. One often needs to compare the amount of scattering/absorption/extinction for particles of different shapes, composition, sizes and incident light properties (polarization, frequency and angle). In this regard, the concept of cross-sections comes into picture. There are three types of cross-sections, 1) scattering …</p>
+                <a class="readmore" href="/scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/843.html" rel="bookmark"
+                           title="Permalink to Gnuplot rgb color schemes in matlab as colormaps">Gnuplot rgb color schemes in matlab as colormaps</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-05-18T12:00:00+00:00">
+                Published: Wed 18 May 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>I like the color schemes that are used as <a href="http://gnuplot.sourceforge.net/demo/pm3dcolors.html">palettes in gnuplot's pm3d plots</a>. I wanted similar color schemes that can be used as colormaps in matlab.</p>
+<p>After reading this <a href="http://gnuplot-tricks.blogspot.com/2009/06/comment-on-phonged-surfaces-in-gnuplot.html">article</a>, I found that  one can easily incorporate the traditional rgbpallette schemes in matlab</p>
+<p>To start, there are several schemes …</p>
+                <a class="readmore" href="/843.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/arbitrary-2d-shapes-in-meep.html" rel="bookmark"
+                           title="Permalink to Arbitrary 2d shapes in MEEP">Arbitrary 2d shapes in MEEP</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-05-10T22:52:00+00:00">
+                Published: Tue 10 May 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p><a href="http://juluribk.com/wp-content/uploads/2011/05/Arbirary_shapes-eps-000000000.png"><img alt="" class="aligncenter size-full wp-image-816" height="460" src="http://juluribk.com/wp-content/uploads/2011/05/Arbirary_shapes-eps-000000000.png" title="&quot;A&quot; shaped dielectric object in meep after triangulation" width="513"></a><a href="http://ab-initio.mit.edu/wiki/index.php/Meep">In MEEP (1.1.1)</a>, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was …</p>
+                <a class="readmore" href="/arbitrary-2d-shapes-in-meep.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/electric-field-in-metal-nanoparticle-dimers.html" rel="bookmark"
+                           title="Permalink to Electric Field in Metal Nanoparticle Dimers">Electric Field in Metal Nanoparticle Dimers</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2011-04-09T15:32:00+00:00">
+                Published: Sat 09 April 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/molecular-machines.html">Molecular Machines</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/sers.html">SERS</a> </p>
+</footer><!-- /.post-info -->                <p>Metal nanoparticles exhibit localized surface plasmon resonance (LSPR). One can think of LSPR as resonance of electron sea oscillations driven by incident electric field. This is similar to the way a spring-mass system attains resonance under external periodic driving force. The result of this plasmon resonance is enhanced dipole moment …</p>
+                <a class="readmore" href="/electric-field-in-metal-nanoparticle-dimers.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html" rel="bookmark"
+                           title="Permalink to Charge density in metal nanoparticles at plasmon resonance">Charge density in metal nanoparticles at plasmon resonance</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-11-23T14:11:00+00:00">
+                Published: Tue 23 November 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>It is important to know the magnitude and distribution of electric field near the metallic nanoparticles at plasmon resonance. One can look at the electric field and say whether the plasmon mode is dipolar or higher order mode such as qudrapolar mode. At many times one is also interested to …</p>
+                <a class="readmore" href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/spoof-plasmons-designer-surface-plasmons.html" rel="bookmark"
+                           title="Permalink to Spoof Plasmons / Designer Surface Plasmons">Spoof Plasmons / Designer Surface Plasmons</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-10-07T14:28:00+00:00">
+                Published: Thu 07 October 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>Aim of this article/post: To 1) introduce the concept of Designer surface plasmons or Spoof plasmons and 2) Dispersion relations and Visualization of the fields using MEEP code. (Some of the text/simulations are taken from <a href="http://www.esm.psu.edu/wiki/_media/research%3Ajuh17%3Apublication%3Abkjuluri_oe_2009.pdf">my paper in the area of DSPs.</a>)</p>
+<p>Surface Plasmons are electromagnetic waves that …</p>
+                <a class="readmore" href="/spoof-plasmons-designer-surface-plasmons.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ddscat-and-electric-field-at-plasmon-resonance.html" rel="bookmark"
+                           title="Permalink to DDSCAT and electric field at plasmon resonance">DDSCAT and electric field at plasmon resonance</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-05-26T21:10:00+00:00">
+                Published: Wed 26 May 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/ddscat.html">DDSCAT</a> <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>Discrete Dipole Approximation (DDA) is an important tool in plasmonics research. Using DDA, one can calculate scattering properties of nanoparticles at various wavelengths, polarizations and surrounding medium. The specialty of DDA is that one can calculate scattering properties of irregular shape particles (particles other than spheroids). DDA is based on …</p>
+                <a class="readmore" href="/ddscat-and-electric-field-at-plasmon-resonance.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html" rel="bookmark"
+                           title="Permalink to Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles">Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-05-11T21:37:00+00:00">
+                Published: Tue 11 May 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/nanohuborg.html">Nanohub.org</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p><img alt="" src="file:///C:/Users/Mengqian/AppData/Local/Temp/moz-screenshot-2.png"></p>
+<p>[caption id="attachment_551" align="alignleft" width="300" caption="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. "]<a href="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1.png"><img alt="" class="size-medium wp-image-551" height="215" src="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1-300x215.png" title="nmie_screenshot" width="300"></a>[/caption]</p>
+<p>Since 2009, I have been a regular user of Nanohub …</p>
+                <a class="readmore" href="/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/beamer-themes.html" rel="bookmark"
+                           title="Permalink to Beamer Themes">Beamer Themes</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-04-18T15:32:00+00:00">
+                Published: Sun 18 April 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/beamer.html">beamer</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/latex.html">Latex</a> </p>
+</footer><!-- /.post-info -->                <p>One can use Beamer to make high quality presentations using Latex code. To know more about beamer and its capabilities visit <a href="http://en.wikipedia.org/wiki/Beamer_%28LaTeX%29">here</a>and <a href="http://latex-beamer.sourceforge.net/beamerexample1.pdf">here</a>.</p>
+<p>Beamer comes with a set of default templates. However,it has capability to design new themes.</p>
+<p>Here, I will maintain a list of beamer themes shared …</p>
+                <a class="readmore" href="/beamer-themes.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/adding-a-title-to-colobar-in-matlab.html" rel="bookmark"
+                           title="Permalink to Adding a title to colobar in Matlab">Adding a title to colobar in Matlab</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-03-21T16:34:00+00:00">
+                Published: Sun 21 March 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/matlab.html">Matlab</a> </p>
+</footer><!-- /.post-info -->                <p>To insert a title to the colorbar in matlab.  Use the following code(<a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788">Source</a>):<br>
+[cc lang='matlab']<br>
+load mandrill % Loads a data for the example<br>
+image(X) % Plots an image for the example<br>
+t=colorbar;% Inserts a colorbar. a handle is created<br>
+set(get(t,'ylabel'),'string','My colorbar title' …</p>
+                <a class="readmore" href="/adding-a-title-to-colobar-in-matlab.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/shortcuts-in-ubuntugnome.html" rel="bookmark"
+                           title="Permalink to Shortcuts in Ubuntu/Gnome">Shortcuts in Ubuntu/Gnome</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-30T12:44:00+00:00">
+                Published: Sat 30 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+
+</footer><!-- /.post-info -->                <p>ctrl + alt + l locks the user screen.</p>
+<p>ctrl+alt+del Logout</p>
+<p>ctrl-h : show hidden files</p>
+<p>ctrl-t : move to trash</p>
+<p>f9 : toggle side-pane in file/folder manger</p>
+<p>alt-home : jump to home folder</p>
+<p>alt-enter : file / folder properties</p>
+<p>alt-f1 : launch applications menu</p>
+<p>alt-f2 : launch "run application" dialogue</p>
+<p>ctrl-alt - right/left arrow : move to …</p>
+                <a class="readmore" href="/shortcuts-in-ubuntugnome.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/python.html" rel="bookmark"
+                           title="Permalink to Python">Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-17T14:19:00+00:00">
+                Published: Sun 17 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/free-software.html">Free Software</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>[caption id="" align="aligncenter" width="311" caption="from XKCD on Python"]<img alt="" height="353" src="http://imgs.xkcd.com/comics/python.png" title="Python" width="311">[/caption]</p>
+<p>I am playing with Python for the first time. The syntax seems to be so natural. So many modules (numpy, scipy and matplotlib) for researchers/scientists. Cannot see any shortcoming at this point. Perhaps need more testing and …</p>
+                <a class="readmore" href="/python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/plot-on-your-wordpress-pagesposts-using-gnuplot-plugin.html" rel="bookmark"
+                           title="Permalink to Plot on your wordpress pages/posts using gnuplot plugin">Plot on your wordpress pages/posts using gnuplot plugin</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-13T10:12:00+00:00">
+                Published: Wed 13 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/gnuplot.html">gnuplot</a> <a href="/tag/graphs.html">graphs</a> <a href="/tag/wordpress.html">wordpress</a> </p>
+</footer><!-- /.post-info -->                <p>One can insert a gnuplot plot on any of the wordpress post/page by installing gnuplot plugin version 1.1 for wordpress available <a href="http://www.clker.com/blog/2008/07/18/gnuplot-wordpress-plugin-v11/">here.</a></p>
+<p>NOTE: I am not sure whether this plugin can plot from a data file. If you any of you readers can do it, please let me …</p>
+                <a class="readmore" href="/plot-on-your-wordpress-pagesposts-using-gnuplot-plugin.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/adding-psu-webmail-to-gmail.html" rel="bookmark"
+                           title="Permalink to Adding PSU webmail to Gmail">Adding PSU webmail to Gmail</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-12T14:24:00+00:00">
+                Published: Tue 12 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/mail.html">mail</a> <a href="/tag/psu.html">psu</a> </p>
+</footer><!-- /.post-info -->                <p>For those who want to get their Pennstate emails from webmail to gmail. Follow these <a href="http://three20four.wordpress.com/2008/03/26/penn-state-webmail-to-gmail/">instructions</a> posted by <a href="http://three20four.wordpress.com/">324 reflections.</a></p>
+<p>In addition, you also can send email from another address (like xyz@psu.edu) without "on behalf of" by following these <a href="http://gmailblog.blogspot.com/2009/07/send-mail-from-another-address-without.html">instructuctions</a>.</p>
+                <a class="readmore" href="/adding-psu-webmail-to-gmail.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/books-on-electromagnetics.html" rel="bookmark"
+                           title="Permalink to Resources on Electromagnetics/Plasmonics/Nanophotonics">Resources on Electromagnetics/Plasmonics/Nanophotonics</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-12T11:01:00+00:00">
+                Published: Tue 12 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/books.html">books</a> <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/nanohuborg.html">Nanohub.org</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>These are some resources on Electromagnetics/plasmonics/nanophotonics</p>
+<p>I will maintain a list of free resources on electromagnetics, plasmonics, nanophotonics, optics and other related topics here. If any of you (readers) know any other free resources related to this topic, please let me know and I can add into these …</p>
+                <a class="readmore" href="/books-on-electromagnetics.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/sabih-and-guler-hayek-graduate-scholarship.html" rel="bookmark"
+                           title="Permalink to Sabih and Guler Hayek Graduate Scholarship">Sabih and Guler Hayek Graduate Scholarship</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-08T15:54:00+00:00">
+                Published: Fri 08 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/news.html">News</a> </p>
+</footer><!-- /.post-info -->                <p>I have been selected to receive the Sabih and Guler Hayek Graduate Scholarship in Engineering Science and Mechanics for Fall 2009. This scholarship provides recognition and financial assistance to outstanding graduate students enrolled or planning to enroll in the Department of Engineering Science and Mechanics.</p>
+                <a class="readmore" href="/sabih-and-guler-hayek-graduate-scholarship.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/test-2.html" rel="bookmark"
+                           title="Permalink to Artificial Molecular Muscles drive Microcantilevers">Artificial Molecular Muscles drive Microcantilevers</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-08T12:31:00+00:00">
+                Published: Fri 08 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/molecular-machines.html">Molecular Machines</a> </p>
+</footer><!-- /.post-info -->                <p><a href="http://juluribk.com/wp-content/uploads/2010/01/nn-2008-002373_0005.gif"><img alt="" class="alignleft size-full wp-image-159" height="145" src="http://juluribk.com/wp-content/uploads/2010/01/nn-2008-002373_0005-e1262972270948.gif" title="nn-2008-002373_0005" width="253"></a></p>
+<p>The collective motions induced by oxidation and reduction of <img alt="" src="http://pubs.acs.org/appl/literatum/publisher/achs/journals/entities/223C.gif">8 billion muscle molecules are harnessed to perform mechanical work on a microcantilevers. The use of the cooperative forces generated by these self-assembled, nanometer-scale artificial molecular muscles that are electrically wired to an external power supply constitutes a seminal step toward …</p>
+                <a class="readmore" href="/test-2.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>A Pelican Blog - Free Software</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/plasmonic-materials-in-meep.html">Plasmonic materials in MEEP</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2011-04-27T00:39:00+00:00">
+                Published: Wed 27 April 2011
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/plasmonics-researc.html">Plasmonics, Researc</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/matlab.html">Matlab</a> <a href="/tag/meep.html">MEEP</a> <a href="/tag/octave.html">octave</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> <a href="/tag/sers.html">SERS</a> </p>
+</footer><!-- /.post-info --><p>[latexpage]</p>
+<p>The aim of this post is to share my experience in incorporating dielectric function of metals such as gold and silver into MEEP (a free finite difference time domain package) code. The incorporation is not an easy task and can be daunting for the first time user.</p>
+<p>Metals such as gold and silver have both Drude and Lorentz components for the dielectric function. There are many forms of Lorentz-Drude expressions in literature with slight notation differences.</p>
+<p>I prefer the Lorentz-Drude expression mentioned in <a href="http://www.opticsinfobase.org/abstract.cfm?URI=ao-37-22-5271">Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998)</a> and is given by:</p>
+<p>\$\epsilon(\omega)=1-\frac{f_1\omega_p'\^2}{(\omega\^2+i\Gamma_1'\omega)}+\sum_{j=2}\^{n}\frac{f_j\omega_p'\^2}{(\omega_{o,j}'\^2-\omega\^2-i\Gamma_j'\omega)}\$.</p>
+<p>I took it as reference as they also give the parameters for metals such as Ag and Au and these models fit decently well to experimental data over a larger frequency range (0.1 eV to 6 eV).</p>
+<p>For Silver, the parameters are :</p>
+<p>\$\omega_p\$ = 9.01;% Plasma frequency in eV</p>
+<p>f = [0.845 0.065 0.124 0.011 0.840 5.646];% Oscillators' strengths</p>
+<p>\$\Gamma\$ = [0.048 3.886 0.452 0.065 0.916 2.419];% Damping frequency of each oscillator in eV</p>
+<p>\$\omega_o\$ = [0.000 0.816 4.481 8.185 9.083 20.29];% Resonant frequency of each oscillator in eV</p>
+<p>For Gold, the parameters are :</p>
+<p>\$\omega_p\$ = 9.03;% Plasma frequency in eV</p>
+<p>f = [0.760 0.024 0.010 0.071 0.601 4.384];% Oscillators' strengths</p>
+<p>\$\Gamma\$ = [0.053 0.241 0.345 0.870 2.494 2.214];% Damping frequency of each oscillator in eV</p>
+<p>\$\omega_o\$ = [0.000 0.415 0.830 2.969 4.304 13.32];% Resonant frequency of each oscillator in eV</p>
+<p>To convert these parameters usable for MEEP codes, one needs to do the following:</p>
+<p>1) Normalization:</p>
+<p>\$\omega_p'=\omega_p \times \textrm{norm}\$,</p>
+<p>\$\Gamma'=\Gamma \times \textrm{norm}\$,</p>
+<p>\$\omega_o'=\omega_o \times \textrm{norm}\$,</p>
+<p>where \$\textrm{norm}=\frac{ev2w}{\frac{2\pi c}{a}}\$, \$ev2w=\frac{2\pi}{4.135666e-15}\$ .</p>
+<p>Essentially, we are converting the units of \$\omega_p\$,\$\Gamma\$ and \$\omega_o\$ from eV to angular frequency, which is done by multiplying them with \$ev2w\$. Further, they need to be normalized to MEEP units, divide by \$\frac{2\pi c}{a}\$, where \$a\$ is the length unit in meters used in your MEEP code and obviously c is 299792458 m/s.</p>
+<p>2) Casting Lorentz-Drude model to MEEP's model</p>
+<p>Current version of MEEP (1.1.1), supports dispersive materials through Lorentz model and is given by:</p>
+<p>\$ \epsilon(\omega)=\epsilon_{\infty}+\sum_{j=1}\^{n}\frac{\sigma_{L,j}\omega_{L,j}\^2} {(\omega_{L,j}\^2-\omega\^2-i\Gamma_{L,j}\omega)}\$.</p>
+<p>The normalized parameters, \$\omega_p'\$,\$\Gamma'\$ and \$\omega_o'\$ from step 1, need to be cast into the MEEP's dispersive materials model by the following modifications:</p>
+<p>1) \$\omega_{L,1}=1e\^{-20}\$ (Any small number should be fine.)</p>
+<p>2) \$\omega_{L,j&gt;1}=\omega_{o,j&gt;1}'\$</p>
+<p>3) \$\sigma_{L,j}=\frac{f_j\omega_p'\^2}{\omega_{L,j}\^2}\$</p>
+<p>4) \$\epsilon_{\infty}=1\$</p>
+<p>5) \$\Gamma_{L,j}=\Gamma_j'\$</p>
+<p>Here is scheme code snippet for silver with a=100e-9m (100 nm) after normalization and casting them into MEEP's material model.</p>
+<p>[cc lang="scheme"]<br>
+(define myAg (make dielectric (epsilon 1)<br>
+(polarizations<br>
+(make polarizability<br>
+(omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))<br>
+(make polarizability<br>
+(omega 0.065815) (gamma 0.31343) (sigma 7.9247))<br>
+(make polarizability<br>
+(omega 0.36142) (gamma 0.036456) (sigma 0.50133))<br>
+(make polarizability<br>
+(omega 0.66017) (gamma 0.0052426) (sigma 0.013329))<br>
+(make polarizability<br>
+(omega 0.73259) (gamma 0.07388) (sigma 0.82655))<br>
+(make polarizability<br>
+(omega 1.6365) (gamma 0.19511) (sigma 1.1133))<br>
+)))</p>
+<p>[/cc]</p>
+<p>The first polarizability is the Drude component and the rest 5 polarzabilities represent the Lorentz components. I have used this snippet in a MEEP code that calculates the reflection from a thin film of silver (to be consistent, all my units in this MEEP code are also normalized to 100 nm). Later I compared the reflection spectra with an <a href="http://en.wikipedia.org/wiki/Fresnel_equations">analytical solution</a>. These results are shown below. The MEEP calculation results match very well the analytical solutions. One can also clearly see the Ag interband effects in UV regime. The results also match with an other <a href="http://upload.wikimedia.org/wikipedia/commons/9/9d/Image-Metal-reflectance.png">reference</a>.</p>
+<p>If anyone needs the codes that generate the scheme snippet for material polarization and calculation of reflectivity of thin metal films, please shoot me an email.</p>
+<p>[caption id="attachment_795" align="aligncenter" width="600"]<a href="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png"><img alt="" class="size-full wp-image-795" height="450" src="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png" title="Reflectivity comparision between MEEP and analytical model for Silver" width="600"></a> Reflectivity of Ag thin film (MEEP vs. analytical model)[/caption]</p>
+<p>[You can find my project file <a href="http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip">here</a>. Please read the readme.txt for further instructions.]{style="text-decoration: underline;"}</p>
+<p>[UPDATE:]{style="color: #ff0000;"} Aaron Webster used this code for a 1 × 1 × 1 pixel region and epilion was exported with the command meep-fields-analytic-chi1. He showed that the dielectric function seen by meep through using my snippet matches with the experimental dielectric function. You can find his report <a href="http://falsecolour.com/aw/meep_metals/meep-metals.pdf">here</a>. Thank you Aaron.</p>
+<p>Majid has written a python code to do the operation described above. Please find it <a href="http://msdresearch.blogspot.com/2012/02/understanding-meeps-dispersive-media.html">here</a></p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html" rel="bookmark"
+                           title="Permalink to Charge density in metal nanoparticles at plasmon resonance">Charge density in metal nanoparticles at plasmon resonance</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-11-23T14:11:00+00:00">
+                Published: Tue 23 November 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>It is important to know the magnitude and distribution of electric field near the metallic nanoparticles at plasmon resonance. One can look at the electric field and say whether the plasmon mode is dipolar or higher order mode such as qudrapolar mode. At many times one is also interested to …</p>
+                <a class="readmore" href="/charge-density-in-metal-nanoparticles-at-plasmon-resonance.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/spoof-plasmons-designer-surface-plasmons.html" rel="bookmark"
+                           title="Permalink to Spoof Plasmons / Designer Surface Plasmons">Spoof Plasmons / Designer Surface Plasmons</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-10-07T14:28:00+00:00">
+                Published: Thu 07 October 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>Aim of this article/post: To 1) introduce the concept of Designer surface plasmons or Spoof plasmons and 2) Dispersion relations and Visualization of the fields using MEEP code. (Some of the text/simulations are taken from <a href="http://www.esm.psu.edu/wiki/_media/research%3Ajuh17%3Apublication%3Abkjuluri_oe_2009.pdf">my paper in the area of DSPs.</a>)</p>
+<p>Surface Plasmons are electromagnetic waves that …</p>
+                <a class="readmore" href="/spoof-plasmons-designer-surface-plasmons.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/ddscat-and-electric-field-at-plasmon-resonance.html" rel="bookmark"
+                           title="Permalink to DDSCAT and electric field at plasmon resonance">DDSCAT and electric field at plasmon resonance</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-05-26T21:10:00+00:00">
+                Published: Wed 26 May 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/ddscat.html">DDSCAT</a> <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>Discrete Dipole Approximation (DDA) is an important tool in plasmonics research. Using DDA, one can calculate scattering properties of nanoparticles at various wavelengths, polarizations and surrounding medium. The specialty of DDA is that one can calculate scattering properties of irregular shape particles (particles other than spheroids). DDA is based on …</p>
+                <a class="readmore" href="/ddscat-and-electric-field-at-plasmon-resonance.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html" rel="bookmark"
+                           title="Permalink to Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles">Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-05-11T21:37:00+00:00">
+                Published: Tue 11 May 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/nanohuborg.html">Nanohub.org</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p><img alt="" src="file:///C:/Users/Mengqian/AppData/Local/Temp/moz-screenshot-2.png"></p>
+<p>[caption id="attachment_551" align="alignleft" width="300" caption="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. "]<a href="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1.png"><img alt="" class="size-medium wp-image-551" height="215" src="http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1-300x215.png" title="nmie_screenshot" width="300"></a>[/caption]</p>
+<p>Since 2009, I have been a regular user of Nanohub …</p>
+                <a class="readmore" href="/nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/beamer-themes.html" rel="bookmark"
+                           title="Permalink to Beamer Themes">Beamer Themes</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-04-18T15:32:00+00:00">
+                Published: Sun 18 April 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/beamer.html">beamer</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/latex.html">Latex</a> </p>
+</footer><!-- /.post-info -->                <p>One can use Beamer to make high quality presentations using Latex code. To know more about beamer and its capabilities visit <a href="http://en.wikipedia.org/wiki/Beamer_%28LaTeX%29">here</a>and <a href="http://latex-beamer.sourceforge.net/beamerexample1.pdf">here</a>.</p>
+<p>Beamer comes with a set of default templates. However,it has capability to design new themes.</p>
+<p>Here, I will maintain a list of beamer themes shared …</p>
+                <a class="readmore" href="/beamer-themes.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/winspall-software-for-surface-plasmon-resonance-experiments.html" rel="bookmark"
+                           title="Permalink to WINSPALL software for surface plasmon resonance experiments">WINSPALL software for surface plasmon resonance experiments</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-03-10T23:12:00+00:00">
+                Published: Wed 10 March 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a>.</p>
+<p>tags: <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>One needs to fit the reflectivity curves obtained in surface plasmon resonance experiments with theoretical models. A free software (for non commercial use) called Winspall exactly does that.</p>
+<p>According to the developers, WINSPALL is a PC based software which computes the reflectivity of optical multilayer systems. It is based on …</p>
+                <a class="readmore" href="/winspall-software-for-surface-plasmon-resonance-experiments.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/my-list-of-most-used-packages-for-ubuntu.html" rel="bookmark"
+                           title="Permalink to My list of most used packages for ubuntu">My list of most used packages for ubuntu</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-27T17:44:00+00:00">
+                Published: Wed 27 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software-linux.html">Free Software, Linux</a>.</p>
+<p>tags: <a href="/tag/free-software.html">Free Software</a> <a href="/tag/linux.html">Linux</a> </p>
+</footer><!-- /.post-info -->                <p>To install octave, gnuplot,numpy,scipy,matplotlib,gcc-4.2-base, gfortran<br>
+[cc lang='bash']<br>
+sudo apt-get install octave gnuplot \<br>
+ipython python-numpy python-scipy \<br>
+python-matplotlib wine gcc-4.2-base gfortran-4.2<br>
+[/cc]<br>
+To install graphics programs: gimp, imagmagick and inkscape<br>
+[cc lang='bash']sudo apt-get install inkscape gimp imagemagick [/cc]<br>
+To install most of …</p>
+                <a class="readmore" href="/my-list-of-most-used-packages-for-ubuntu.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/python.html" rel="bookmark"
+                           title="Permalink to Python">Python</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-17T14:19:00+00:00">
+                Published: Sun 17 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/free-software.html">Free Software</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->                <p>[caption id="" align="aligncenter" width="311" caption="from XKCD on Python"]<img alt="" height="353" src="http://imgs.xkcd.com/comics/python.png" title="Python" width="311">[/caption]</p>
+<p>I am playing with Python for the first time. The syntax seems to be so natural. So many modules (numpy, scipy and matplotlib) for researchers/scientists. Cannot see any shortcoming at this point. Perhaps need more testing and …</p>
+                <a class="readmore" href="/python.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/books-on-electromagnetics.html" rel="bookmark"
+                           title="Permalink to Resources on Electromagnetics/Plasmonics/Nanophotonics">Resources on Electromagnetics/Plasmonics/Nanophotonics</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2010-01-12T11:01:00+00:00">
+                Published: Tue 12 January 2010
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications.html">Publications</a>.</p>
+<p>tags: <a href="/tag/books.html">books</a> <a href="/tag/electromagnetism.html">electromagnetism</a> <a href="/tag/fdtd.html">FDTD</a> <a href="/tag/free-software.html">Free Software</a> <a href="/tag/nanohuborg.html">Nanohub.org</a> <a href="/tag/photonics.html">photonics</a> <a href="/tag/plasmonics.html">Plasmonics</a> </p>
+</footer><!-- /.post-info -->                <p>These are some resources on Electromagnetics/plasmonics/nanophotonics</p>
+<p>I will maintain a list of free resources on electromagnetics, plasmonics, nanophotonics, optics and other related topics here. If any of you (readers) know any other free resources related to this topic, please let me know and I can add into these …</p>
+                <a class="readmore" href="/books-on-electromagnetics.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+                </ol><!-- /#posts-list -->
+                </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Parallelization in Octave using parcellfun/pararrayfun</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li class="active"><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li><a href="/category/publications.html">Publications</a></li>
+                    <li><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/parallelization-in-octave-using-parcellfunpararrayfun.html" rel="bookmark"
+           title="Permalink to Parallelization in Octave using parcellfun/pararrayfun">Parallelization in Octave using parcellfun/pararrayfun</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2012-03-09T13:27:00+00:00">
+                Published: Fri 09 March 2012
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/free-software.html">Free Software</a>.</p>
+<p>tags: <a href="/tag/octave.html">octave</a> </p>
+</footer><!-- /.post-info -->      <p>My computer has many processors and I would like to run some octave scripts so that all the processors are being used.<br>
+One can use octave function called "<a href="http://octave.sourceforge.net/general/function/pararrayfun.html">pararrayfun</a>" for this purpose. This function is part of "general" package on octave-forge.</p>
+<p>On my ubuntu 11.10, I used "sudo apt-get install octave-general" to install this package and ran the following script</p>
+<p>[cc lang='matlab']<br>
+1; # this is kept to Prevent Octave from thinking that this is a function file:</p>
+<p>close all;<br>
+clear all;</p>
+<p>function y=test(a,b)<br>
+y=sin(a)+cos(b)<br>
+endfunction</p>
+<p>num_process=8</p>
+<p>a_test_inputs=[0:3.14/20:3.14];<br>
+b_test_inputs=[0:3.14/20:3.14]*2;</p>
+<p>tic ();<br>
+tt_par= pararrayfun(num_process,@test,(a_test_inputs),(b_test_inputs));<br>
+parallel_elapsed_time = toc ()</p>
+<p>tic ();<br>
+tt_ser= test((a_test_inputs),(b_test_inputs));<br>
+serial_elapsed_time = toc ()</p>
+<p>plot(a_test_inputs,tt_par,'-o',a_test_inputs,tt_ser,'-s');<br>
+legend('Parallel result','Serial result');</p>
+<p>disp(sprintf('Elapsed time during serial computation is %e',serial_elapsed_time))<br>
+disp(sprintf('Elapsed time during parallel computation is %e',parallel_elapsed_time))</p>
+<p>[/cc]</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Controlling Rigol Dp832 with python</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Pelican Blog Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">A Pelican Blog </a></h1>
+                <nav><ul>
+                    <li><a href="/category/electronics.html">Electronics</a></li>
+                    <li><a href="/category/free-software.html">Free Software</a></li>
+                    <li><a href="/category/free-software-latex-publications.html">Free Software, Latex, Publications</a></li>
+                    <li><a href="/category/free-software-linux.html">Free Software, Linux</a></li>
+                    <li><a href="/category/free-software-matlab-plasmonics.html">Free Software, Matlab, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics.html">Free Software, Plasmonics</a></li>
+                    <li><a href="/category/free-software-plasmonics-publications.html">Free Software, Plasmonics, Publications</a></li>
+                    <li><a href="/category/linux-ramblings.html">Linux, Ramblings</a></li>
+                    <li><a href="/category/matlab.html">Matlab</a></li>
+                    <li><a href="/category/plasmonics.html">Plasmonics</a></li>
+                    <li><a href="/category/plasmonics-publications.html">Plasmonics, Publications</a></li>
+                    <li><a href="/category/plasmonics-researc.html">Plasmonics, Researc</a></li>
+                    <li><a href="/category/publications.html">Publications</a></li>
+                    <li class="active"><a href="/category/publications-test-equipment.html">Publications, Test Equipment</a></li>
+                    <li><a href="/category/python.html">Python</a></li>
+                    <li><a href="/category/test-equipment.html">Test Equipment</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/controlling-rigol-dp832-with-python.html" rel="bookmark"
+           title="Permalink to Controlling Rigol Dp832 with python">Controlling Rigol Dp832 with python</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-05-08T17:08:00+00:00">
+                Published: Fri 08 May 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/juluribk.html">juluribk</a>
+        </address>
+<p>In <a href="/category/publications-test-equipment.html">Publications, Test Equipment</a>.</p>
+<p>tags: <a href="/tag/instrumentation.html">Instrumentation</a> <a href="/tag/python.html">python</a> </p>
+</footer><!-- /.post-info -->      <p>DC power supplies are very handy for electronic projects. They help to apply bias to a devicve. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three channel (two 30V and one 5V) power supply and is programmable through SCPI commands. The device can be controlled by USB and rs232 (optionally by LAN). SCPI commands can be sent to the instruments using VISA interface. I used Python and pyvisa module to communicate with it. I wrote a class with basic functionality. Currently it has a console application and turning on and off at a  particular bias and current value on a specified channel.</p>
+<p>You can add more methods to the class for advanced features. You can see those commands in the <a href="http://www.batronix.com/pdf/Rigol/ProgrammingGuide/DP800_ProgrammingGuide_EN.pdf">programming manual</a>.</p>
+<p>You can find my gist underneath or [<a href="https://gist.github.com/plasmon360/3204dc28deddeefe42d5">download from here.</a>]{style="text-decoration: underline; color: #ff0000;"}</p>
+<p>
+<script src="https://gist.github.com/plasmon360/3204dc28deddeefe42d5.js"></script>
+</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

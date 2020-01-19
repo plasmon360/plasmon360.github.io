@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Pelican Blog - Free Software, Linux</title><link href="/" rel="alternate"></link><link href="/feeds/free-software-linux.atom.xml" rel="self"></link><id>/</id><updated>2010-01-27T17:44:00+00:00</updated><entry><title>My list of most used packages for ubuntu</title><link href="/my-list-of-most-used-packages-for-ubuntu.html" rel="alternate"></link><published>2010-01-27T17:44:00+00:00</published><updated>2010-01-27T17:44:00+00:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-27:/my-list-of-most-used-packages-for-ubuntu.html</id><summary type="html">&lt;p&gt;To install octave, gnuplot,numpy,scipy,matplotlib,gcc-4.2-base, gfortran&lt;br&gt;
+[cc lang='bash']&lt;br&gt;
+sudo apt-get install octave gnuplot \&lt;br&gt;
+ipython python-numpy python-scipy \&lt;br&gt;
+python-matplotlib wine gcc-4.2-base gfortran-4.2&lt;br&gt;
+[/cc]&lt;br&gt;
+To install graphics programs: gimp, imagmagick and inkscape&lt;br&gt;
+[cc lang='bash']sudo apt-get install inkscape gimp imagemagick [/cc]&lt;br&gt;
+To install most of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;To install octave, gnuplot,numpy,scipy,matplotlib,gcc-4.2-base, gfortran&lt;br&gt;
+[cc lang='bash']&lt;br&gt;
+sudo apt-get install octave gnuplot \&lt;br&gt;
+ipython python-numpy python-scipy \&lt;br&gt;
+python-matplotlib wine gcc-4.2-base gfortran-4.2&lt;br&gt;
+[/cc]&lt;br&gt;
+To install graphics programs: gimp, imagmagick and inkscape&lt;br&gt;
+[cc lang='bash']sudo apt-get install inkscape gimp imagemagick [/cc]&lt;br&gt;
+To install most of the multimedia requirements&lt;br&gt;
+[cc lang='bash'] sudo apt-get install vlc mozilla-plugin-vlc gstreamer0.10-ffmpeg \&lt;br&gt;
+gstreamer0.10-fluendo-mp3 gstreamer0.10-fluendo-mpegdemux \&lt;br&gt;
+gstreamer0.10-plugins-ugly gstreamer0.10-plugins-ugly-multiverse \&lt;br&gt;
+gstreamer0.10-plugins-bad gstreamer0.10-plugins-bad-multiverse w32codecs [/cc]&lt;br&gt;
+To install Microsoft fonts&lt;br&gt;
+[cc lang='bash']sudo apt-get install msttcorefonts[/cc]&lt;br&gt;
+To install latex relates stuff, kile&lt;br&gt;
+[cc lang='bash']sudo apt-get install texlive kile texlive-latex-extra texlive-xetex lmodern[/cc]&lt;br&gt;
+To install utilities:&lt;br&gt;
+[cc lang='bash']sudo apt-get install subversion unrar kdiff3[/cc]&lt;/p&gt;</content><category term="Free Software, Linux"></category><category term="Free Software"></category><category term="Linux"></category></entry></feed>

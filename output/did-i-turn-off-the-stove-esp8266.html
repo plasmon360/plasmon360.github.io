@@ -10,14 +10,15 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
 
 
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
 
 
 
@@ -32,11 +33,11 @@
 <meta property="og:title" content="Did I turn off the stove...ESP8266"/>
 <meta property="og:description" content="My wife and I leave the house after a good meal and after like 20 minutes in the car, I ask my wife…did we turn off the stove? My wife answers…you were the last one to cook. What to do now? Go back home and check it. Now …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/did-i-turn-off-the-stove-esp8266.html"/>
+<meta property="og:url" content="./did-i-turn-off-the-stove-esp8266.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-10-08 12:27:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:author" content="./author/juluribk.html">
 <meta property="article:section" content="Electronics"/>
 <meta property="article:tag" content="ESP8266"/>
 <meta property="article:tag" content="IOT"/>
@@ -48,10 +49,10 @@
 <body>
   <aside>
     <div>
-      <a href="">
-        <img src="/theme/img/profile.png" alt="" title="">
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="" title="">
       </a>
-      <h1><a href=""></a></h1>
+      <h1><a href="."></a></h1>
 
 <p>Ramblings</p>
       <nav>
@@ -84,13 +85,15 @@
   <main>
 
     <nav>
-      <a href="">    Home
+      <a href=".">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -99,7 +102,7 @@
       
     <h1 id="did-i-turn-off-the-stove-esp8266">Did I turn off the stove...ESP8266</h1>
     <p>
-          Posted on Sat 08 October 2016 in <a href="/category/electronics.html">Electronics</a>
+          Posted on Sat 08 October 2016 in <a href="./category/electronics.html">Electronics</a>
 
 
     </p>
@@ -120,14 +123,18 @@ It can be programmed to connect to wifi network and act as tcp server or tcp cli
 <p><a href="http://juluribk.com/wp-content/uploads/2016/10/prototype.png"><img alt="prototype" class="aligncenter wp-image-1721" height="339" src="http://juluribk.com/wp-content/uploads/2016/10/prototype-1024x704.png" width="493"></a>  </p>
 <p>Once the code is flashed onto the esp8266, it should be serving the status of stove. But this only works on local network. How to get the stove status outside my network i.e, when I am not at home? This can be done by assigning a static IP, a port to esp8266 and using dynamic DNS forwarding on my router (a good tutorial on how to do this <a href="http://www.howtogeek.com/66438/how-to-easily-access-your-home-network-from-anywhere-with-ddns/">is here</a>. There are many free dynamic dns services out there than can be used. With these modifications, I can now access the stove status from any place in the world.  </p>
 <p>Here is final implementation of the project.</p>
-<p><img alt="" src="/images/stove_status_implementation.jpg" title="Implementation">
-<img alt="" src="/images/stove_status_prototype_box.png.jpg" title="Final prototype"></p>
-<p>The code for this project (server application on esp8266 serving GPIO4 status) can be seen <a href="https://github.com/plasmon360/esp8266_c_examples/tree/master/examples/did_i_turn_off_my_stove">here at my github repository.</a></p>
+<p><img alt="" src="./images/stove_status_implementation.jpg" title="Implementation">
+<img alt="" src="./images/stove_status_prototype_box.png.jpg" title="Final prototype"></p>
+<div class ="alert alert-primary">
+<p>
+<strong>Code</strong> for this project is available <a href="https://github.com/plasmon360/esp8266_c_examples/tree/master/examples/did_i_turn_off_my_stove"> at my gihub page</a>
+</p>
+</div>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="/tag/esp8266.html">ESP8266</a>
-      <a href="/tag/iot.html">IOT</a>
+      <a href="./tag/esp8266.html">ESP8266</a>
+      <a href="./tag/iot.html">IOT</a>
     </p>
   </div>
 
@@ -151,7 +158,7 @@ It can be programmed to connect to wifi network and act as tcp server or tcp cli
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri's Blog ",
-  "url" : "",
+  "url" : ".",
   "image": "",
   "description": ""
 }
