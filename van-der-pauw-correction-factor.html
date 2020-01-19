@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
@@ -26,10 +26,10 @@
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="The van der Pauw Method is a technique commonly used to measure the Resistivity and the Hall Coefficient of a sample. A correction factor goes into calculating the resistivity as described in van der Pauw paper. A iterative method is generally used to calculate the correction factor and this correction …" />
-<meta name="keywords" content="octave, van der pauw">
+<meta name="keywords" content="">
 
 
-<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:site_name" content="Bala Juluri"/>
 <meta property="og:title" content="van der Pauw correction factor"/>
 <meta property="og:description" content="The van der Pauw Method is a technique commonly used to measure the Resistivity and the Hall Coefficient of a sample. A correction factor goes into calculating the resistivity as described in van der Pauw paper. A iterative method is generally used to calculate the correction factor and this correction …"/>
 <meta property="og:locale" content="en_US"/>
@@ -38,43 +38,46 @@
 <meta property="article:published_time" content="2012-01-08 15:27:00-08:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Publications"/>
-<meta property="article:tag" content="octave"/>
-<meta property="article:tag" content="van der pauw"/>
+<meta property="article:section" content="Electronics"/>
 <meta property="og:image" content="">
 
-  <title>Bala Juluri's Blog &ndash; van der Pauw correction factor</title>
+  <title>Bala Juluri &ndash; van der Pauw correction factor</title>
 
 </head>
 <body>
   <aside>
     <div>
       <a href=".">
-        <img src="./theme/img/profile.png" alt="" title="">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
-      <h1><a href="."></a></h1>
-
-<p>Ramblings</p>
-      <nav>
-        <ul class="list">
+      <h1><a href=".">Bala Juluri</a></h1>
 
 
-            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
-            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
-            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
-            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
-        </ul>
-      </nav>
 
       <ul class="social">
           <li>
-            <a  class="sc-You can add links in your config file" href="#" target="_blank">
-            <i class="fab fa-You can add links in your config file">
+            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
             </i>
           </a></li>
           <li>
-            <a  class="sc-Another social link" href="#" target="_blank">
-            <i class="fab fa-Another social link">
+            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="#" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
+            <i class="fab fa-stack-overflow">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
+            <i class="fab fa-google-scholar">
             </i>
           </a></li>
       </ul>
@@ -102,7 +105,7 @@
       
     <h1 id="van-der-pauw-correction-factor">van der Pauw correction factor</h1>
     <p>
-          Posted on Sun 08 January 2012 in <a href="./category/publications.html">Publications</a>
+          Posted on Sun 08 January 2012 in <a href="./category/electronics.html">Electronics</a>
 
 
     </p>
@@ -111,31 +114,37 @@
 
   <div>
     <p>The <a href="http://en.wikipedia.org/wiki/Van_der_Pauw_method">van der Pauw</a> Method is a technique commonly used to measure the Resistivity and the Hall Coefficient of a sample. A correction factor goes into calculating the resistivity as described in <a href="http://electron.mit.edu/~gsteele/vanderpauw/vanderpauw.pdf">van der Pauw paper</a>. A iterative method is generally used to calculate the correction factor and this correction factor is plotted in Figure 5 of <a href="http://electron.mit.edu/~gsteele/vanderpauw/vanderpauw.pdf">van der Pauw paper</a></p>
-<p>I reproduced the same figure below using fsolve function in octave.<br>
-<a href="http://juluribk.com/wp-content/uploads/2012/01/Van_der_Paw_correction_factor.png"><img alt="" class="aligncenter size-medium wp-image-943" height="300" src="http://juluribk.com/wp-content/uploads/2012/01/Van_der_Paw_correction_factor-300x300.png" title="Van der Pauw correction factor" width="300"></a></p>
-<p>This figure was produced by the octave code shown below. The raw data is <a href="http://juluribk.com/wp-content/uploads/2012/01/van_der_pauw_correction_factor.csv">here</a>.</p>
-<p>[cc lang='matlab']<br>
-%This octave/matlab code calculates the correction factor,f as a function of Rmnop/Rnopm. This correcton factor will be used in calculation of sheet resistance/resistivity of thin films.<br>
-% Fore more details see the paper L. J. van der Pauw, A method of measuring the resistivity and hall coefficients of Lamellae of arbitrary shape, Philips Technical Review, Vol 26, 220.<br>
-clear all<br>
-close all<br>
-x = logspace(0,3,100);<br>
-for i=1:length(x)<br>
-Lp=@(f)cosh(((x(i)-1)./(x(i)+1))*(log(2)/f))-0.5*exp((log(2)/f));<br>
-F(i) = fsolve(Lp,0.5);<br>
-end<br>
-semilogx(x,F,'-o')<br>
-xlabel('R_{RM,OP}/R_{NO,PM}')<br>
-ylabel('Correction Factor (f)')<br>
-grid('minor');<br>
-title('van der Pauw Correction factors for resistivity measurements');<br>
-print('Van_der_Paw_correction_factor.png','-dpng','-r200','-S600,600');<br>
-[/cc]</p>
+<p>I reproduced the same figure below using <code>fsolve</code> function in octave.  </p>
+<p><img alt="" class="center" src="./images/Van_der_Paw_correction_factor-300x300.png"></p>
+<p>This figure was produced by the octave code shown below. </p>
+<p>The raw data can be <a href="./images/van_der_pauw_correction_factor.csv">downloaded from here</a></p>
+<div class="highlight matlab"><pre><span></span><span class="c">% This octave/matlab code calculates the correction factor,f as a function</span>
+<span class="c">% of Rmnop/Rnopm. This correcton factor will be used in calculation of sheet</span>
+<span class="c">% resistance/resistivity of thin films.</span>
+
+<span class="c">% Fore more details see the paper L. J. van der Pauw, A method of measuring</span>
+<span class="c">% the resistivity and hall coefficients of Lamellae of arbitrary shape,</span>
+<span class="c">% Philips Technical Review, Vol 26, 220.</span>
+
+<span class="n">clear</span> <span class="n">all</span>
+<span class="n">close</span> <span class="n">all</span>
+<span class="n">x</span> <span class="p">=</span>  <span class="nb">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">Lp</span><span class="p">=@(</span><span class="n">f</span><span class="p">)</span><span class="nb">cosh</span><span class="p">(((</span><span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">./</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="nb">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">f</span><span class="p">))</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="nb">exp</span><span class="p">((</span><span class="nb">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">f</span><span class="p">));</span>
+<span class="n">F</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="p">=</span> <span class="n">fsolve</span><span class="p">(</span><span class="n">Lp</span><span class="p">,</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="n">semilogx</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="s">&#39;-o&#39;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;R_{RM,OP}/R_{NO,PM}&#39;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Correction Factor (f)&#39;</span><span class="p">)</span>
+<span class="n">grid</span><span class="p">(</span><span class="s">&#39;minor&#39;</span><span class="p">);</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;van der Pauw Correction factors for resistivity measurements&#39;</span><span class="p">);</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&#39;Van_der_Paw_correction_factor.png&#39;</span><span class="p">,</span><span class="s">&#39;-dpng&#39;</span><span class="p">,</span><span class="s">&#39;-r200&#39;</span><span class="p">,</span><span class="s">&#39;-S600,600&#39;</span><span class="p">);</span>
+</pre></div>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="./tag/octave.html">octave</a>
-      <a href="./tag/van-der-pauw.html">van der pauw</a>
     </p>
   </div>
 
@@ -158,7 +167,7 @@ print('Van_der_Paw_correction_factor.png','-dpng','-r200','-S600,600');<br>
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Bala Juluri's Blog ",
+  "name": " Bala Juluri ",
   "url" : ".",
   "image": "",
   "description": ""

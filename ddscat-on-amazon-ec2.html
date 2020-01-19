@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
@@ -26,10 +26,10 @@
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="Amazon provides high performance computing capabilities through their EC2 service. You can find more information here They provide a 750 hr free instance with their a free-tier program. If you want more resources, you can pay for it. See the pricing, pricing seem very reasonable. I wanted to see …" />
-<meta name="keywords" content="">
+<meta name="keywords" content="DDSCAT">
 
 
-<meta property="og:site_name" content="Bala Juluri's Blog"/>
+<meta property="og:site_name" content="Bala Juluri"/>
 <meta property="og:title" content="DDSCAT on amazon EC2"/>
 <meta property="og:description" content="Amazon provides high performance computing capabilities through their EC2 service. You can find more information here They provide a 750 hr free instance with their a free-tier program. If you want more resources, you can pay for it. See the pricing, pricing seem very reasonable. I wanted to see …"/>
 <meta property="og:locale" content="en_US"/>
@@ -38,41 +38,47 @@
 <meta property="article:published_time" content="2015-09-03 21:37:00-07:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Publications"/>
+<meta property="article:section" content="Plasmonics"/>
+<meta property="article:tag" content="DDSCAT"/>
 <meta property="og:image" content="">
 
-  <title>Bala Juluri's Blog &ndash; DDSCAT on amazon EC2</title>
+  <title>Bala Juluri &ndash; DDSCAT on amazon EC2</title>
 
 </head>
 <body>
   <aside>
     <div>
       <a href=".">
-        <img src="./theme/img/profile.png" alt="" title="">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
-      <h1><a href="."></a></h1>
-
-<p>Ramblings</p>
-      <nav>
-        <ul class="list">
+      <h1><a href=".">Bala Juluri</a></h1>
 
 
-            <li><a target="_blank" href="http://getpelican.com/" >Pelican</a></li>
-            <li><a target="_blank" href="http://python.org/" >Python.org</a></li>
-            <li><a target="_blank" href="http://jinja.pocoo.org/" >Jinja2</a></li>
-            <li><a target="_blank" href="#" >You can modify those links in your config file</a></li>
-        </ul>
-      </nav>
 
       <ul class="social">
           <li>
-            <a  class="sc-You can add links in your config file" href="#" target="_blank">
-            <i class="fab fa-You can add links in your config file">
+            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
             </i>
           </a></li>
           <li>
-            <a  class="sc-Another social link" href="#" target="_blank">
-            <i class="fab fa-Another social link">
+            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="#" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
+            <i class="fab fa-stack-overflow">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
+            <i class="fab fa-google-scholar">
             </i>
           </a></li>
       </ul>
@@ -100,7 +106,7 @@
       
     <h1 id="ddscat-on-amazon-ec2">DDSCAT on amazon EC2</h1>
     <p>
-          Posted on Thu 03 September 2015 in <a href="./category/publications.html">Publications</a>
+          Posted on Thu 03 September 2015 in <a href="./category/plasmonics.html">Plasmonics</a>
 
 
     </p>
@@ -113,36 +119,66 @@
 <p>I wanted to see how easy it was to install ddscat and run some examples files.</p>
 <p>Amazon allows to create an instance through their very easy-to-use web interface. I chose to install ubuntu amazon machine image on the instance.  While you are creating an instance you are allowed to create a key pair file and download it.  You will need that to connect to amazon instance through ssh client with this key</p>
 <p>Fire up  terminal on a linux box and browse to the folder you have the key pair and issue these commands</p>
-<p>chmod 400 your-key-pair.pem</p>
+<div class="highlight bash"><pre><span></span>chmod <span class="m">400</span> your-key-pair.pem
+</pre></div>
+
+
 <p>Make ssh connection with a command like this</p>
-<p>ssh -i your-key-pair.pem ubuntu@ec2-xx-xx-100-1.compute-1.amazonaws.com<br>
-here "ec2-xx-xx-100-1.compute-1.amazonaws.com" is your public dns address</p>
+<div class="highlight bash"><pre><span></span>ssh -i your-key-pair.pem ubuntu@ec2-xx-xx-100-1.compute-1.amazonaws.com
+</pre></div>
+
+
+<p>here "ec2-xx-xx-100-1.compute-1.amazonaws.com" is your public dns address</p>
 <p>You should be able to log into the instance. If you get stuck, see detailed info at <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html">how to connect to the instance</a></p>
-<p>Update the package list from different repos with<br>
-sudo apt-get update</p>
-<p>install these packages<br>
-sudo apt-get install gfortran gcc wget make</p>
+<p>Update the package list from different repos with  </p>
+<div class="highlight bash"><pre><span></span>sudo apt-get update
+</pre></div>
+
+
+<p>install these packages  </p>
+<div class="highlight bash"><pre><span></span>sudo apt-get install gfortran gcc wget make
+</pre></div>
+
+
 <p>Make a directory for ddscat</p>
-<p>mkdir ddscat_install<br>
-cd ddscat_install</p>
+<div class="highlight bash"><pre><span></span>mkdir ddscat<span class="se">\_</span>install  
+<span class="nb">cd</span> ddscat<span class="se">\_</span>install
+</pre></div>
+
+
 <p>Download the source files and examples</p>
-<p>wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1_150420.tgz<br>
-wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1_examples_150519.tgz</p>
+<div class="highlight bash"><pre><span></span>wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1<span class="se">\_</span><span class="m">150420</span>.tgz  
+wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1<span class="se">\_</span>examples<span class="se">\_</span><span class="m">150519</span>.tgz
+</pre></div>
+
+
 <p>Unzip them</p>
-<p>tar -xzvf ddscat7.3.1_150420.tgz</p>
-<p>tar -xzvf ddscat7.3.1_examples_150519.tgz</p>
-<p>rm *.tgz</p>
+<div class="highlight bash"><pre><span></span>tar -xzvf ddscat7.3.1<span class="se">\_</span><span class="m">150420</span>.tgz
+
+tar -xzvf ddscat7.3.1<span class="se">\_</span>examples<span class="se">\_</span><span class="m">150519</span>.tgz
+
+rm <span class="se">\*</span>.tgz
+</pre></div>
+
+
 <p>Go to the examples_exp folder</p>
-<p>cd /examples_exp</p>
-<p>To compile ddscat executable and run the examples:<br>
-./run_examples</p>
+<div class="highlight bash"><pre><span></span><span class="nb">cd</span> /examples<span class="se">\_</span>exp
+</pre></div>
+
+
+<p>To compile ddscat executable and run the examples:  </p>
+<div class="highlight bash"><pre><span></span>./run<span class="se">\_</span>examples
+</pre></div>
+
+
 <p>ddscat executabe file should be created in the src folder, which you can use for your own ddscat test cases.</p>
 <p>To quit the ssh session, type<br>
-'exit' in the command prompt</p>
+<code>exit</code> in the command prompt</p>
 <p>So as you see, the process is very simple.</p>
   </div>
   <div class="tag-cloud">
     <p>
+      <a href="./tag/ddscat.html">DDSCAT</a>
     </p>
   </div>
 
@@ -165,7 +201,7 @@ wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1_examples_15051
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-  "name": " Bala Juluri's Blog ",
+  "name": " Bala Juluri ",
   "url" : ".",
   "image": "",
   "description": ""
