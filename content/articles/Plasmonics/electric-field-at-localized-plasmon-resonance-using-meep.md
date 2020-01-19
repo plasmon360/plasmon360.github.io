@@ -1,7 +1,7 @@
 Title: Electric field at localized plasmon resonance using MEEP
 Date: 2013-01-22 15:00
 Author: juluribk
-Category: Plasmonics, Publications
+Category: Plasmonics
 Tags: electromagnetism, FDTD, MEEP, Plasmonics
 Slug: electric-field-at-localized-plasmon-resonance-using-meep
 Status: published

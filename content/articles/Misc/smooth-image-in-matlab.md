@@ -1,7 +1,7 @@
 Title: Smooth image in matlab
 Date: 2010-01-10 01:25
 Author: juluribk
-Category: Matlab
+Category: Misc
 Tags: graphs, Matlab
 Slug: smooth-image-in-matlab
 Status: published

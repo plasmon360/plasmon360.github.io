@@ -1,7 +1,7 @@
 Title: Surface Plasmons (SP's)
 Date: 2010-01-08 19:14
 Author: juluribk
-Category: Free Software, Plasmonics, Publications
+Category: Plasmonics
 Tags: animation, Plasmonics
 Slug: surface-plasmons-animation
 Status: published

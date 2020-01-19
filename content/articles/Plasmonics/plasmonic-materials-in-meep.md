@@ -1,7 +1,7 @@
 Title: Plasmonic materials in MEEP
 Date: 2011-04-27 00:39
 Author: juluribk
-Category: Plasmonics, Researc
+Category: Plasmonics
 Tags: electromagnetism, FDTD, Free Software, Matlab, MEEP, octave, photonics, Plasmonics, SERS
 Slug: plasmonic-materials-in-meep
 Status: published

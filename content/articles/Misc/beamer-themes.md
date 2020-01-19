@@ -1,7 +1,7 @@
 Title: Beamer Themes
 Date: 2010-04-18 15:32
 Author: juluribk
-Category: Publications
+Category: Misc
 Tags: beamer, Free Software, Latex
 Slug: beamer-themes
 Status: published

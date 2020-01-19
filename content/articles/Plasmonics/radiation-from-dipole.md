@@ -1,7 +1,7 @@
 Title: Radiation from an oscillating dipole
 Date: 2010-01-14 19:26
 Author: juluribk
-Category: Free Software, Matlab, Plasmonics
+Category: Plasmonics
 Tags: electromagnetism, Matlab, Plasmonics
 Slug: radiation-from-dipole
 Status: published

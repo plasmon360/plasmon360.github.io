@@ -1,8 +1,8 @@
 Title: Spoof Plasmons / Designer Surface Plasmons
 Date: 2010-10-07 14:28
 Author: juluribk
-Category: Publications
-Tags: Free Software, photonics, Plasmonics
+Category: Plasmonics
+Tags: MEEP, FDTD
 Slug: spoof-plasmons-designer-surface-plasmons
 Status: published
 

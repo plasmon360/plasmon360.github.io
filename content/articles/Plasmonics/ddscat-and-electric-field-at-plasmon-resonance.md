@@ -1,7 +1,7 @@
 Title: DDSCAT and electric field at plasmon resonance
 Date: 2010-05-26 21:10
 Author: juluribk
-Category: Publications
+Category: Plasmonics
 Tags: DDSCAT, electromagnetism, Free Software, Plasmonics
 Slug: ddscat-and-electric-field-at-plasmon-resonance
 Status: published

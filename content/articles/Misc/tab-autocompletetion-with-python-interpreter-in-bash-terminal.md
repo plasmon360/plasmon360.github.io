@@ -1,7 +1,7 @@
 Title: Tab autocompletetion with python interpreter in bash terminal
 Date: 2016-10-29 18:16
 Author: juluribk
-Category: Free Software
+Category: Misc 
 Tags: Linux, python
 Slug: tab-autocompletetion-with-python-interpreter-in-bash-terminal
 Status: published

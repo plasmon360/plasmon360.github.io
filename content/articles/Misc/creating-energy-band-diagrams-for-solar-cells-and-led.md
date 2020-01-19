@@ -1,7 +1,8 @@
 Title: Creating Energy Band Diagrams for Solar cells and LED
 Date: 2017-09-11 10:42
 Author: juluribk
-Category: Publications
+Category: Misc
+Tags: Python
 Slug: Energy-band-diagrams-for-solar-cell-and-led
 Status: published
 
@@ -29,7 +30,8 @@ Here's an example on how to use this code.
     ## plot the stack and save it  
     plot(stack, filepath = 'Images/Stack1.png')  
 
-will result in
-[![Energy Band diagram of organic solar cell](http://juluribk.com/wp-content/uploads/2017/09/Stack1.png){.aligncenter .size-full .wp-image-1742 width="640" height="480"}](http://juluribk.com/wp-content/uploads/2017/09/Stack1.png)
+will result in the following plot
 
-You can download it at my [github repository](%20%20https://github.com/plasmon360/Energy-Band-diagram "github repository").
+![]({filename}/images/energy_band_diagram.png){.center}
+
+You can download it at my [github repository](https://github.com/plasmon360/Energy-Band-diagram).

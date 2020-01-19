@@ -1,7 +1,8 @@
 Title: Dealing with plotting negative, zero and positive values in log scale
 Date: 2016-03-30 10:00
 Author: juluribk
-Category: Python
+Category: Misc
+Tags: Python
 Slug: dealing-with-plotting-negative-zero-and-positive-values-in-log-scale
 Status: published
 

@@ -1,7 +1,7 @@
 Title: Calculating molarity, weight concentration from absorbance value for plasmonic nanoparticles in solution
 Date: 2018-06-20 10:50
 Author: juluribk
-Category: Publications
+Category: Plasmonics
 Slug: calculating-molarity-weight-concentration-from-absorbance-value-for-plasmonic-nanoparticles-in-solution
 Status: published
 

@@ -1,7 +1,8 @@
 Title: DDSCAT on amazon EC2
 Date: 2015-09-03 21:37
 Author: juluribk
-Category: Publications
+Category: Plasmonics
+Tags: DDSCAT
 Slug: ddscat-on-amazon-ec2
 Status: published
 
@@ -15,49 +16,62 @@ Amazon allows to create an instance through their very easy-to-use web interface
 
 Fire up  terminal on a linux box and browse to the folder you have the key pair and issue these commands
 
-chmod 400 your-key-pair.pem
+    #!bash
+    chmod 400 your-key-pair.pem
 
 Make ssh connection with a command like this
 
-ssh -i your-key-pair.pem ubuntu@ec2-xx-xx-100-1.compute-1.amazonaws.com  
+    #!bash
+    ssh -i your-key-pair.pem ubuntu@ec2-xx-xx-100-1.compute-1.amazonaws.com  
+
 here "ec2-xx-xx-100-1.compute-1.amazonaws.com" is your public dns address
 
 You should be able to log into the instance. If you get stuck, see detailed info at [how to connect to the instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-connect-to-instance-linux.html)
 
 Update the package list from different repos with  
-sudo apt-get update
+    
+    #!bash
+    sudo apt-get update
 
 install these packages  
-sudo apt-get install gfortran gcc wget make
+
+    #!bash
+    sudo apt-get install gfortran gcc wget make
 
 Make a directory for ddscat
 
-mkdir ddscat\_install  
-cd ddscat\_install
+    #!bash
+    mkdir ddscat\_install  
+    cd ddscat\_install
 
 Download the source files and examples
 
-wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1\_150420.tgz  
-wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1\_examples\_150519.tgz
+    #!bash
+    wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1\_150420.tgz  
+    wget http://ddscat.wikidot.com/local--files/downloads/ddscat7.3.1\_examples\_150519.tgz
 
 Unzip them
 
-tar -xzvf ddscat7.3.1\_150420.tgz
+    #!bash
+    tar -xzvf ddscat7.3.1\_150420.tgz
 
-tar -xzvf ddscat7.3.1\_examples\_150519.tgz
+    tar -xzvf ddscat7.3.1\_examples\_150519.tgz
 
-rm \*.tgz
+    rm \*.tgz
 
 Go to the examples\_exp folder
 
-cd /examples\_exp
+    #!bash
+    cd /examples\_exp
 
 To compile ddscat executable and run the examples:  
-./run\_examples
+
+    #!bash
+    ./run\_examples
 
 ddscat executabe file should be created in the src folder, which you can use for your own ddscat test cases.
 
 To quit the ssh session, type  
-'exit' in the command prompt
+`exit` in the command prompt
 
 So as you see, the process is very simple.

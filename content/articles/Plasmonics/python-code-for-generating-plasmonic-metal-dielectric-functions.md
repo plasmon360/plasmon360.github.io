@@ -1,21 +1,26 @@
-Title: Python code for generating plasmonic metal dielectric functions
+Title: Generating plasmonic metal dielectric functions in Python
 Date: 2015-09-10 08:54
 Author: juluribk
-Category: Publications
-Slug: python-code-for-generating-plasmonic-metal-dielectric-functions
+Category: Plasmonics
+Tags: Python
+Slug: Generating-plasmonic-metal-dielectric-functions-in-Python
 Status: published
 
-I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. I wanted the dielectric functions called by other python codes such as [TMM](https://pypi.python.org/pypi/tmm). So I wrote a python version of LD.m
+I keep needing a python code to generate the dielectric functions of plasmonic materials such as Au, Ag, Pd, and Pt. So I wrote a python version of LD.m.
 
-[LD.m](http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water) is a matlab file written by Bora Ung that produces dielectric functions of metals either for Lortenz and Loretnz drude models. The dielectric functions are given as follows:
+[LD.m](http://www.mathworks.com/matlabcentral/fileexchange/18040-drude-lorentz-and-debye-lorentz-models-for-the-dielectric-constant-of-metals-and-water) is a matlab file written by Bora Ung that produces dielectric functions of metals either for Lortenz and Loretnz drude models. 
+
+The dielectric functions are given as follows:
 
 $`\epsilon(\omega)=1-\frac{f_1\omega_p'^2}{(\omega^2+i\Gamma_1'\omega)}+\sum_{j=2}^{n}\frac{f_j\omega_p'^2}{(\omega_{o,j}'^2-\omega^2-i\Gamma_j'\omega)}`$.
 
-The first part of the function is the Drude part and the second part is the Lorentz part. The parameters for these models are taken from Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998).
+The first part of the function is the Drude part and the second part is the Lorentz part. The parameters for these models are taken from *Rakic et al., Optical properties of metallic films for vertical-cavity optoelectronic devices, Applied Optics (1998).*
 
-You can find my module (LD.py) and its documentation [at my github account](https://github.com/plasmon360/LD_python).
+<div class = "alert alert-primary">
+<strong> Note: </strong> You can find my module (LD.py) and its documentation <a href = "https://github.com/plasmon360/LD_python">at my github account</a>.
+</div>
 
-A typical example is shown below:
+A typical example on how to use this modules is shown below:
 
     #!python
     import numpy as np
@@ -48,4 +53,8 @@ A typical example is shown below:
     
     # plots wavelength vs n and k .
     gold.plot_n_k()  
-    
+ 
+This is graph comparing the Au eps data obtained using LD.m and LD.python. The are exactly the same.
+
+![]({filename}/images/LD_python_matlab_comp.png){.center}
+

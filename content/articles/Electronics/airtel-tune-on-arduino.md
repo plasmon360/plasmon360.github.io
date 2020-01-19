@@ -1,8 +1,8 @@
 Title: Airtel tune on arduino
 Date: 2015-05-21 19:54
 Author: juluribk
-Category: Publications
-Tags: arduino
+Category: Electronics
+Tags: Arduino
 Slug: airtel-tune-on-arduino
 Status: published
 

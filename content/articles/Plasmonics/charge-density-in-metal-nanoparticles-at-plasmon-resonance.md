@@ -1,7 +1,7 @@
 Title: Charge density in metal nanoparticles at plasmon resonance
 Date: 2010-11-23 14:11
 Author: juluribk
-Category: Publications
+Category: Plasmonics
 Tags: electromagnetism, FDTD, Free Software, photonics, Plasmonics
 Slug: charge-density-in-metal-nanoparticles-at-plasmon-resonance
 Status: published

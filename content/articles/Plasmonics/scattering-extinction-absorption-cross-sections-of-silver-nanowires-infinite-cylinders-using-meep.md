@@ -1,7 +1,8 @@
 Title: Scattering / extinction / absorption cross-sections of silver nanowires (infinite cylinders) using meep
 Date: 2011-06-01 14:06
 Author: juluribk
-Category: Publications
+Category: Plasmonics
+Tags: electromagnetism, FDTD, MEEP, octave, photonics, Plasmonics
 Slug: scattering-extinction-absorption-cross-sections-of-silver-nanowires-infinite-cylinders-using-meep
 Status: published
 

@@ -1,8 +1,8 @@
 Title: Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles
 Date: 2010-05-11 21:37
 Author: juluribk
-Category: Publications
-Tags: electromagnetism, Free Software, Nanohub.org, Plasmonics
+Category: Plasmonics
+Tags: electromagnetism, Free Software, Nanohub.org, Plasmonics, DDSCAT
 Slug: nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles
 Status: published
 

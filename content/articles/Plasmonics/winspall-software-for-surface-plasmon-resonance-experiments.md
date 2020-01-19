@@ -1,7 +1,7 @@
 Title: WINSPALL software for surface plasmon resonance experiments
 Date: 2010-03-10 23:12
 Author: juluribk
-Category: Free Software, Plasmonics
+Category: Plasmonics
 Tags: electromagnetism, Free Software, photonics, Plasmonics
 Slug: winspall-software-for-surface-plasmon-resonance-experiments
 Status: published

@@ -1,7 +1,7 @@
 Title: Plasmonic coupling of electromagnetic energy in hexagonal array of silver nanorods
 Date: 2010-01-08 18:20
 Author: juluribk
-Category: Free Software, Plasmonics
+Category: Plasmonics
 Tags: FDTD, MEEP, Plasmonics
 Slug: plasmonic-coupling-of-electromagnetic-energy-in-hexagonal-array-of-silver-nanorods
 Status: published
