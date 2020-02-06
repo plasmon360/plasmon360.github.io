@@ -14,8 +14,10 @@
 
   <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
     <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
@@ -52,8 +54,12 @@
       <a href=".">
         <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
+
       <h1><a href=".">Bala Juluri</a></h1>
 
+    
+
+     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
 
 
       <ul class="social">
@@ -79,11 +85,14 @@
           </a></li>
           <li>
             <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="fab fa-google-scholar">
+            <i class="ai ai-google-scholar">
             </i>
           </a></li>
       </ul>
+
+
     </div>
+
 
 
   </aside>
@@ -122,7 +131,7 @@
 <strong> Note: </strong> Download this gist from <a href = "https://gist.github.com/plasmon360/3204dc28deddeefe42d5"> my gihub </a>
 </div>
 
-<div class="highlight python"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight python"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Created on Sat Dec 21 13:57:32 2013</span>
 
 <span class="sd">@author: bjuluri</span>
@@ -147,7 +156,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">connected_with</span> <span class="o">=</span> <span class="s1">&#39;USB&#39;</span>
         <span class="k">except</span> <span class="n">VisaIOError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Not Connected&quot;</span>
-            <span class="k">print</span> <span class="s2">&quot;Pyvisa is not able to find the connections&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Pyvisa is not able to find the connections&quot;</span>
 
 
     <span class="k">def</span> <span class="nf">mywrite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
@@ -155,9 +164,9 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
         <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;SYST:ERR?&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-            <span class="k">print</span> <span class="n">message</span><span class="o">+</span><span class="s1">&#39; recieved. No error occured&#39;</span>
+            <span class="nb">print</span> <span class="n">message</span><span class="o">+</span><span class="s1">&#39; recieved. No error occured&#39;</span>
         <span class="k">else</span> <span class="p">:</span>
-            <span class="k">print</span> <span class="n">message</span><span class="o">+</span><span class="s1">&#39; recieved. An Error occured: &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+            <span class="nb">print</span> <span class="n">message</span><span class="o">+</span><span class="s1">&#39; recieved. An Error occured: &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;resets the instrument, registers,buffers&quot;&quot;&quot;</span>
@@ -169,18 +178,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">i_protection_level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:INST CH{channel}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">channel</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR {i}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR:PROT {i_level}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i_level</span> <span class="o">=</span> <span class="n">i_protection_level</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:INST CH</span><span class="si">{channel}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">channel</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR </span><span class="si">{i}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR:PROT </span><span class="si">{i_level}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i_level</span> <span class="o">=</span> <span class="n">i_protection_level</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:CURR:PROT:STAT ON&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:VOLT {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:VOLT </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
 
 
     <span class="k">def</span> <span class="nf">turn_off</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:OUTP CH{channel},OFF&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:OUTP CH</span><span class="si">{channel}</span><span class="s1">,OFF&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">turn_on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:OUTP CH{channel},ON&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mywrite</span><span class="p">(</span><span class="s1">&#39;:OUTP CH</span><span class="si">{channel}</span><span class="s1">,ON&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">console</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -189,14 +198,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="k">while</span> <span class="n">cmd</span> <span class="o">!=</span> <span class="s1">&#39;exit()&#39;</span><span class="p">:</span>
-            <span class="n">cmd</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s1">&#39;Rigol DP832 console, Type exit() to leave&gt; &#39;</span><span class="p">)</span>
+            <span class="n">cmd</span> <span class="o">=</span> <span class="n">raw_input</span><span class="p">(</span><span class="s1">&#39;Rigol DP832 console, Type exit() to leave&gt; &#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">cmd</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">answer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
-                <span class="k">print</span> <span class="n">answer</span>
+                <span class="nb">print</span> <span class="n">answer</span>
             <span class="k">elif</span> <span class="n">cmd</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">cmd</span> <span class="o">!=</span> <span class="s1">&#39;exit()&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s2">&quot;Exiting the Rigol DP832 console&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Exiting the Rigol DP832 console&quot;</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -212,7 +221,7 @@
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
     <span class="n">r</span><span class="o">.</span><span class="n">turn_off</span><span class="p">(</span><span class="n">channel</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">r</span><span class="o">.</span><span class="n">close_instrument</span><span class="p">()</span>
-</pre></div>
+</code></pre></div>
   </div>
   <div class="tag-cloud">
     <p>

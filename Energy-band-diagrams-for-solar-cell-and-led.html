@@ -14,8 +14,10 @@
 
   <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
     <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
@@ -51,8 +53,12 @@
       <a href=".">
         <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
+
       <h1><a href=".">Bala Juluri</a></h1>
 
+    
+
+     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
 
 
       <ul class="social">
@@ -78,11 +84,14 @@
           </a></li>
           <li>
             <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="fab fa-google-scholar">
+            <i class="ai ai-google-scholar">
             </i>
           </a></li>
       </ul>
+
+
     </div>
+
 
 
   </aside>
@@ -116,7 +125,7 @@
   <div>
     <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
 <p>Here's an example on how to use this code.</p>
-<div class="highlight python"><pre><span></span><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
+<div class="highlight python"><pre><span></span><code><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
 
 <span class="c1"># Define the metals and semiconductors. Here wf is the work function of metals,</span>
 <span class="c1"># cb is conduction band minimum and vb is valance band maximum wrt to vacuum level</span>
@@ -133,7 +142,7 @@
 
 <span class="c1">## plot the stack and save it  </span>
 <span class="n">plot</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;Images/Stack1.png&#39;</span><span class="p">)</span>
-</pre></div>
+</code></pre></div>
 
 
 <p>will result in the following plot</p>

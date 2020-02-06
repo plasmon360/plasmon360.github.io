@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Bala Juluri - Misc</title><link href="plasmon360.github.io/" rel="alternate"></link><link href="plasmon360.github.io/feeds/misc.atom.xml" rel="self"></link><id>plasmon360.github.io/</id><updated>2017-09-11T10:42:00-07:00</updated><subtitle></subtitle><entry><title>Creating Energy Band Diagrams for Solar cells and LED</title><link href="plasmon360.github.io/Energy-band-diagrams-for-solar-cell-and-led.html" rel="alternate"></link><published>2017-09-11T10:42:00-07:00</published><updated>2017-09-11T10:42:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2017-09-11:plasmon360.github.io/Energy-band-diagrams-for-solar-cell-and-led.html</id><summary type="html">&lt;p&gt;Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.&lt;/p&gt;
 &lt;p&gt;Here's an example on how to use this code.&lt;/p&gt;
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Band_diagram&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;metal&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;semiconductor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt;
+&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Band_diagram&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;metal&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;semiconductor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt;
 
-&lt;span class="c1"&gt;# Define the metals and …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.&lt;/p&gt;
+&lt;span class="c1"&gt;# Define the metals and …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.&lt;/p&gt;
 &lt;p&gt;Here's an example on how to use this code.&lt;/p&gt;
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Band_diagram&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;metal&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;semiconductor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt;
+&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Band_diagram&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;metal&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;semiconductor&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;plot&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Define the metals and semiconductors. Here wf is the work function of metals,&lt;/span&gt;
 &lt;span class="c1"&gt;# cb is conduction band minimum and vb is valance band maximum wrt to vacuum level&lt;/span&gt;
@@ -22,7 +22,7 @@
 
 &lt;span class="c1"&gt;## plot the stack and save it  &lt;/span&gt;
 &lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stack&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;filepath&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Images/Stack1.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;will result in the following plot&lt;/p&gt;
@@ -39,53 +39,53 @@
 &lt;p&gt;This is for standard  python interpreter in bash terminal (such as in Ubuntu). This method requires readline and rlcompeter modules. Install these modules if you do not have them installed. This can be done with pip.&lt;/p&gt;
 &lt;p&gt;Basically, the idea is to have a python interpreter look for the value of environment path variable "PYTHONSTARTUP". This variable should be set to a location for the file ("python startup file.py") with commands that enable tab autocompletion.&lt;/p&gt;
 &lt;p&gt;In my home directory "/home/bjuluri" I make a file called "python startup file.py" by&lt;/p&gt;
-&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;bjuluri@bjuluri-VirtualBox:&lt;span class="se"&gt;\~\$&lt;/span&gt; gedit python startup file.py
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;bjuluri@bjuluri-VirtualBox:&lt;span class="se"&gt;\~\$&lt;/span&gt; gedit python startup file.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;copy and paste following lines&lt;/p&gt;
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
+&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
    &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;readline&lt;/span&gt;  
 &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;ImportError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Module readline not available.&amp;quot;&lt;/span&gt;  
+    &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Module readline not available.&amp;quot;&lt;/span&gt;  
 &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  
     &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;rlcompleter&lt;/span&gt;  
     &lt;span class="n"&gt;readline&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;bind&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tab: complete&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Save and close the file.&lt;/p&gt;
 &lt;p&gt;Now lets assign the an environmental variable "PYTHONSTARTUP" to the location of this "python startup file"&lt;/p&gt;
 &lt;p&gt;./bashrc is loaded whenever a bash terminal is fired. This file sits in the user's home directory, we will edit it and assign the environmental variable at the end of the file.&lt;/p&gt;
-&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nano .bashrc
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;nano .bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;at the end of the file, copy and paste&lt;/p&gt;
-&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PYTHONSTARTUP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python startup file.py&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PYTHONSTARTUP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;python startup file.py&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Save the file and exit.&lt;/p&gt;
 &lt;p&gt;reload the .bashrc file in terminal by either opening a new terminal or by typing the following in the current terminal.&lt;/p&gt;
-&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; .bashrc
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight bash"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;source&lt;/span&gt; .bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Once those commands run at the python startup, tab autocompletion with suggestions will be enabled in the interpreter.&lt;/p&gt;</content><category term="Misc"></category><category term="Linux"></category><category term="python"></category></entry><entry><title>Dealing with plotting negative, zero and positive values in log scale</title><link href="plasmon360.github.io/dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html" rel="alternate"></link><published>2016-03-30T10:00:00-07:00</published><updated>2016-03-30T10:00:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2016-03-30:plasmon360.github.io/dealing-with-plotting-negative-zero-and-positive-values-in-log-scale.html</id><summary type="html">&lt;p&gt;Sometimes you have to show positive, zero and negative number in log scale. However you cannot take log of negative numbers and zero. But one could approximate it with a log transform modulus as stated &lt;a href="http://blogs.sas.com/content/iml/2014/07/14/log-transformation-of-pos-neg.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In Python with numpy:&lt;/p&gt;
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;sign&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log10&lt;/span&gt;  
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="kn"&gt;as …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Sometimes you have to show positive, zero and negative number in log scale. However you cannot take log of negative numbers and zero. But one could approximate it with a log transform modulus as stated &lt;a href="http://blogs.sas.com/content/iml/2014/07/14/log-transformation-of-pos-neg.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;sign&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log10&lt;/span&gt;  
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Sometimes you have to show positive, zero and negative number in log scale. However you cannot take log of negative numbers and zero. But one could approximate it with a log transform modulus as stated &lt;a href="http://blogs.sas.com/content/iml/2014/07/14/log-transformation-of-pos-neg.html"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In Python with numpy:&lt;/p&gt;
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;sign&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log10&lt;/span&gt;  
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
+&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;sign&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;log10&lt;/span&gt;  
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;plt&lt;/span&gt;
 
 &lt;span class="c1"&gt;# Data varies in several magnitudes and has both positive, zero and negative numbers  &lt;/span&gt;
 &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10000&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;  
 &lt;span class="c1"&gt;# log modulus transform  &lt;/span&gt;
 &lt;span class="n"&gt;x_log_modulus_transform&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;sign&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;log10&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;abs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
-&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sharex&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
+&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;subplots&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sharex&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;plot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;o&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;margins&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.12&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# for better visualization of datapoints at the end of axis&lt;/span&gt;
 
@@ -94,29 +94,29 @@
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="n"&gt;ax&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;sign(x)*(log(|x|+1))&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  
 &lt;span class="n"&gt;plt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;a href="http://juluribk.com/wp-content/uploads/2016/03/download.png"&gt;&lt;img alt="download" class="aligncenter size-full wp-image-1759" height="349" src="http://juluribk.com/wp-content/uploads/2016/03/download.png" width="567"&gt;&lt;/a&gt;&lt;/p&gt;</content><category term="Misc"></category><category term="Python"></category></entry><entry><title>All entries of array except certain indices in octave/matlab</title><link href="plasmon360.github.io/all-entries-of-array-except-certain-indices-in-octavematlab.html" rel="alternate"></link><published>2011-12-07T18:14:00-08:00</published><updated>2011-12-07T18:14:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2011-12-07:plasmon360.github.io/all-entries-of-array-except-certain-indices-in-octavematlab.html</id><summary type="html">&lt;p&gt;In Octave or Matlab, some times one needs to eliminate certain elements in an array.&lt;/p&gt;
 &lt;p&gt;For example, if&lt;/p&gt;
-&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This can be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In Octave or Matlab, some times one needs to eliminate certain elements in an array.&lt;/p&gt;
 &lt;p&gt;For example, if&lt;/p&gt;
-&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;40&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;60&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;and suppose I want to create a matrix "b" such that it has all the elements of "a" except 20 and 40. This can be achieved by:&lt;/p&gt;
-&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="o"&gt;~=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="o"&gt;~=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="o"&gt;~=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="o"&gt;~=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;The result is:&lt;/p&gt;
-&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Misc"></category><category term="Matlab"></category><category term="octave"></category></entry><entry><title>Beamer Themes</title><link href="plasmon360.github.io/beamer-themes.html" rel="alternate"></link><published>2010-04-18T15:32:00-07:00</published><updated>2010-04-18T15:32:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2010-04-18:plasmon360.github.io/beamer-themes.html</id><summary type="html">&lt;p&gt;One can use Beamer to make high quality presentations using Latex code. To know more about beamer and its capabilities visit &lt;a href="http://en.wikipedia.org/wiki/Beamer_%28LaTeX%29"&gt;here&lt;/a&gt;and &lt;a href="http://latex-beamer.sourceforge.net/beamerexample1.pdf"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt; &lt;span class="mi"&gt;60&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Misc"></category><category term="Matlab"></category><category term="octave"></category></entry><entry><title>Beamer Themes</title><link href="plasmon360.github.io/beamer-themes.html" rel="alternate"></link><published>2010-04-18T15:32:00-07:00</published><updated>2010-04-18T15:32:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2010-04-18:plasmon360.github.io/beamer-themes.html</id><summary type="html">&lt;p&gt;One can use Beamer to make high quality presentations using Latex code. To know more about beamer and its capabilities visit &lt;a href="http://en.wikipedia.org/wiki/Beamer_%28LaTeX%29"&gt;here&lt;/a&gt;and &lt;a href="http://latex-beamer.sourceforge.net/beamerexample1.pdf"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Beamer comes with a set of default templates. However,it has capability to design new themes.&lt;/p&gt;
 &lt;p&gt;Here, I will maintain a list of beamer themes shared …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One can use Beamer to make high quality presentations using Latex code. To know more about beamer and its capabilities visit &lt;a href="http://en.wikipedia.org/wiki/Beamer_%28LaTeX%29"&gt;here&lt;/a&gt;and &lt;a href="http://latex-beamer.sourceforge.net/beamerexample1.pdf"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Beamer comes with a set of default templates. However,it has capability to design new themes.&lt;/p&gt;
@@ -137,8 +137,8 @@
 &lt;a href="https://bitbucket.org/marczellm/beamerports"&gt;https://bitbucket.org/marczellm/beamerports&lt;/a&gt;&lt;br&gt;
 &lt;a href="http://latex.simon04.net/"&gt;http://latex.simon04.net/&lt;/a&gt;&lt;/p&gt;</content><category term="Misc"></category><category term="beamer"></category><category term="Free Software"></category><category term="Latex"></category></entry><entry><title>Adding a title to colobar in Matlab</title><link href="plasmon360.github.io/adding-a-title-to-colobar-in-matlab.html" rel="alternate"></link><published>2010-03-21T16:34:00-07:00</published><updated>2010-03-21T16:34:00-07:00</updated><author><name>juluribk</name></author><id>tag:None,2010-03-21:plasmon360.github.io/adding-a-title-to-colobar-in-matlab.html</id><summary type="html">&lt;p&gt;To insert a title to the colorbar in matlab.  &lt;/p&gt;
 &lt;p&gt;Use the following code (&lt;a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788"&gt;Source&lt;/a&gt;):  &lt;/p&gt;
-&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;% Loads a data for the example &lt;/span&gt;
-&lt;span class="n"&gt;load&lt;/span&gt; &lt;span class="n"&gt;mandrill&lt;/span&gt;
+&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% Loads a data for the example &lt;/span&gt;
+&lt;span class="n"&gt;load &lt;/span&gt;&lt;span class="s"&gt;mandrill&lt;/span&gt;&lt;span class="p"&gt;&lt;/span&gt;
 
 &lt;span class="c"&gt;% Plots an image for the example &lt;/span&gt;
 &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -147,10 +147,10 @@
 &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;colorbar&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="c"&gt;% sets the ylabel property of the handle t. &lt;/span&gt;
-&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;To insert a title to the colorbar in matlab.  &lt;/p&gt;
+&lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;To insert a title to the colorbar in matlab.  &lt;/p&gt;
 &lt;p&gt;Use the following code (&lt;a href="http://www.mathworks.com/matlabcentral/newsreader/view_thread/171788"&gt;Source&lt;/a&gt;):  &lt;/p&gt;
-&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;% Loads a data for the example &lt;/span&gt;
-&lt;span class="n"&gt;load&lt;/span&gt; &lt;span class="n"&gt;mandrill&lt;/span&gt;
+&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% Loads a data for the example &lt;/span&gt;
+&lt;span class="n"&gt;load &lt;/span&gt;&lt;span class="s"&gt;mandrill&lt;/span&gt;&lt;span class="p"&gt;&lt;/span&gt;
 
 &lt;span class="c"&gt;% Plots an image for the example &lt;/span&gt;
 &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -160,7 +160,7 @@
 
 &lt;span class="c"&gt;% sets the ylabel property of the handle t. &lt;/span&gt;
 &lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;ylabel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;string&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;My colorbar title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Fontsize&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content><category term="Misc"></category><category term="Matlab"></category></entry><entry><title>Python</title><link href="plasmon360.github.io/python.html" rel="alternate"></link><published>2010-01-17T14:19:00-08:00</published><updated>2010-01-17T14:19:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-17:plasmon360.github.io/python.html</id><content type="html">&lt;p&gt;&lt;img alt="" class="center" src="http://imgs.xkcd.com/comics/python.png" title="Python"&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Misc"></category><category term="Matlab"></category></entry><entry><title>Python</title><link href="plasmon360.github.io/python.html" rel="alternate"></link><published>2010-01-17T14:19:00-08:00</published><updated>2010-01-17T14:19:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-17:plasmon360.github.io/python.html</id><content type="html">&lt;p&gt;&lt;img alt="" class="center" src="http://imgs.xkcd.com/comics/python.png" title="Python"&gt;&lt;/p&gt;
 &lt;p&gt;I am playing with Python for the first time. The syntax seems to be so natural. So many modules (numpy, scipy and matplotlib) for researchers/scientists. Cannot see any shortcoming at this point. Perhaps need more testing and implementation.&lt;/p&gt;</content><category term="Misc"></category><category term="Python"></category></entry><entry><title>Smooth image in matlab</title><link href="plasmon360.github.io/smooth-image-in-matlab.html" rel="alternate"></link><published>2010-01-10T01:25:00-08:00</published><updated>2010-01-10T01:25:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2010-01-10:plasmon360.github.io/smooth-image-in-matlab.html</id><summary type="html">&lt;p&gt;In matlab, sometimes I prefer to plot a image for mesh data instead of surf and use view(2) (view(2) gives the top view of the surface plot). However,&lt;br&gt;
 &lt;code lang="matlab"&gt;imagesc(x,y,z) shading 'interp'&lt;/code&gt;&lt;br&gt;
 does not work. This problem can be solved by using:&lt;br&gt;
