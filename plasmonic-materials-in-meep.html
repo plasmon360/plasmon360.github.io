@@ -164,28 +164,30 @@
 <p>4) \$\epsilon_{\infty}=1\$</p>
 <p>5) \$\Gamma_{L,j}=\Gamma_j'\$</p>
 <p>Here is scheme code snippet for silver with a=100e-9m (100 nm) after normalization and casting them into MEEP's material model.</p>
-<p>[cc lang="scheme"]<br>
-(define myAg (make dielectric (epsilon 1)<br>
-(polarizations<br>
-(make polarizability<br>
-(omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))<br>
-(make polarizability<br>
-(omega 0.065815) (gamma 0.31343) (sigma 7.9247))<br>
-(make polarizability<br>
-(omega 0.36142) (gamma 0.036456) (sigma 0.50133))<br>
-(make polarizability<br>
-(omega 0.66017) (gamma 0.0052426) (sigma 0.013329))<br>
-(make polarizability<br>
-(omega 0.73259) (gamma 0.07388) (sigma 0.82655))<br>
-(make polarizability<br>
-(omega 1.6365) (gamma 0.19511) (sigma 1.1133))<br>
-)))</p>
-<p>[/cc]</p>
+<div class="highlight scheme"><pre><span></span><code><span class="p">(</span><span class="k">define </span><span class="nv">myAg</span> <span class="p">(</span><span class="nf">make</span> <span class="nv">dielectric</span> <span class="p">(</span><span class="nf">epsilon</span> <span class="mi">1</span><span class="p">)</span>  
+<span class="p">(</span><span class="nf">polarizations</span>  
+<span class="p">(</span><span class="nf">make</span> <span class="nv">polarizability</span>  
+<span class="p">(</span><span class="nf">omega</span> <span class="mi">1</span><span class="nv">e-20</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.0038715</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">4.4625</span><span class="nv">e+39</span><span class="p">))</span>  
+<span class="p">(</span><span class="nf">make</span> <span class="nv">polarizability</span>  
+<span class="p">(</span><span class="nf">omega</span> <span class="mf">0.065815</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.31343</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">7.9247</span><span class="p">))</span>  
+<span class="p">(</span><span class="nf">make</span> <span class="nv">polarizability</span>  
+<span class="p">(</span><span class="nf">omega</span> <span class="mf">0.36142</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.036456</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">0.50133</span><span class="p">))</span>  
+<span class="p">(</span><span class="nf">make</span> <span class="nv">polarizability</span>  
+<span class="p">(</span><span class="nf">omega</span> <span class="mf">0.66017</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.0052426</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">0.013329</span><span class="p">))</span>  
+<span class="p">(</span><span class="nf">make</span> <span class="nv">polarizability</span>  
+<span class="p">(</span><span class="nf">omega</span> <span class="mf">0.73259</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.07388</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">0.82655</span><span class="p">))</span>  
+<span class="p">(</span><span class="nf">make</span> <span class="nv">polarizability</span>  
+<span class="p">(</span><span class="nf">omega</span> <span class="mf">1.6365</span><span class="p">)</span> <span class="p">(</span><span class="nf">gamma</span> <span class="mf">0.19511</span><span class="p">)</span> <span class="p">(</span><span class="nf">sigma</span> <span class="mf">1.1133</span><span class="p">))</span>  
+<span class="p">)))</span>
+</code></pre></div>
+
+
 <p>The first polarizability is the Drude component and the rest 5 polarzabilities represent the Lorentz components. I have used this snippet in a MEEP code that calculates the reflection from a thin film of silver (to be consistent, all my units in this MEEP code are also normalized to 100 nm). Later I compared the reflection spectra with an <a href="http://en.wikipedia.org/wiki/Fresnel_equations">analytical solution</a>. These results are shown below. The MEEP calculation results match very well the analytical solutions. One can also clearly see the Ag interband effects in UV regime. The results also match with an other <a href="http://upload.wikimedia.org/wikipedia/commons/9/9d/Image-Metal-reflectance.png">reference</a>.</p>
 <p>If anyone needs the codes that generate the scheme snippet for material polarization and calculation of reflectivity of thin metal films, please shoot me an email.</p>
-<p>[caption id="attachment_795" align="aligncenter" width="600"]<a href="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png"><img alt="" class="size-full wp-image-795" height="450" src="http://juluribk.com/wp-content/uploads/2011/04/bitmap.png" title="Reflectivity comparision between MEEP and analytical model for Silver" width="600"></a> Reflectivity of Ag thin film (MEEP vs. analytical model)[/caption]</p>
-<p>[You can find my project file <a href="http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip">here</a>. Please read the readme.txt for further instructions.]{style="text-decoration: underline;"}</p>
-<p>[UPDATE:]{style="color: #ff0000;"} Aaron Webster used this code for a 1 × 1 × 1 pixel region and epilion was exported with the command meep-fields-analytic-chi1. He showed that the dielectric function seen by meep through using my snippet matches with the experimental dielectric function. You can find his report <a href="http://falsecolour.com/aw/meep_metals/meep-metals.pdf">here</a>. Thank you Aaron.</p>
+<p>Reflectivity comparision between MEEP and analytical model for Silver
+<img alt="" src="./images/bitmap.png" title="Reflectivity Comparion"></p>
+<p>[You can find my project file <a href="http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip">here</a>. Please read the readme.txt for further instructions.]</p>
+<p>[UPDATE:] Aaron Webster used this code for a 1 × 1 × 1 pixel region and epilion was exported with the command meep-fields-analytic-chi1. He showed that the dielectric function seen by meep through using my snippet matches with the experimental dielectric function. You can find his report <a href="http://falsecolour.com/aw/meep_metals/meep-metals.pdf">here</a>. Thank you Aaron.</p>
 <p>Majid has written a python code to do the operation described above. Please find it <a href="http://msdresearch.blogspot.com/2012/02/understanding-meeps-dispersive-media.html">here</a></p>
   </div>
   <div class="tag-cloud">
