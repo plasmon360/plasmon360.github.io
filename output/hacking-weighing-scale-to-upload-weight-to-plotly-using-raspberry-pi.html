@@ -12,22 +12,15 @@
 
     <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-<<<<<<< HEAD
   <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-=======
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
-
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
->>>>>>> ca26671696a15107b056a8ce32185c309f4a600f
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri's Blog Atom">
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
@@ -46,13 +39,8 @@
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2015-04-11 12:44:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<<<<<<< HEAD
 <meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Test Equipment"/>
-=======
-<meta property="article:author" content="/author/juluribk.html">
 <meta property="article:section" content="Electronics"/>
->>>>>>> ca26671696a15107b056a8ce32185c309f4a600f
 <meta property="article:tag" content="python"/>
 <meta property="og:image" content="">
 
@@ -62,18 +50,11 @@
 <body>
   <aside>
     <div>
-<<<<<<< HEAD
       <a href=".">
-        <img src="./theme/img/profile.png" alt="" title="">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
-      <h1><a href="."></a></h1>
-=======
-      <a href="">
-        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
-      </a>
->>>>>>> ca26671696a15107b056a8ce32185c309f4a600f
 
-      <h1><a href="">Bala Juluri</a></h1>
+      <h1><a href=".">Bala Juluri</a></h1>
 
     
 
@@ -83,7 +64,7 @@
       <ul class="social">
           <li>
             <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope ">
+            <i class="fas fa-envelope">
             </i>
           </a></li>
           <li>
@@ -134,11 +115,7 @@
       
     <h1 id="hacking-weighing-scale-to-upload-weight-to-plotly-using-raspberry-pi">Hacking Weighing Scale to Upload Weight to Plotly using Raspberry Pi</h1>
     <p>
-<<<<<<< HEAD
-          Posted on Sat 11 April 2015 in <a href="./category/test-equipment.html">Test Equipment</a>
-=======
-          Posted on Sat 11 April 2015 in <a href="/category/electronics.html">Electronics</a>
->>>>>>> ca26671696a15107b056a8ce32185c309f4a600f
+          Posted on Sat 11 April 2015 in <a href="./category/electronics.html">Electronics</a>
 
 
     </p>
@@ -146,7 +123,7 @@
 
 
   <div>
-    <p><img alt="" class="center" src="/images/weighing_scale_hack_summary_img.png"></p>
+    <p><img alt="" class="center" src="./images/weighing_scale_hack_summary_img.png"></p>
 <p>I have been interested in monitoring and keep track of my weight. In the past,
 I have used different phone apps to track my weight. They work reasonably well,
 but I was thinking of reading weight data directly from my weighing scale and
@@ -193,14 +170,14 @@ The slave does not send any data to the microcontroller so there is no MISO
 line. SCLK is the clock signal. MOSI and SS line are referred as DIO and STB
 respectively in the TM1628 manual.</p>
 <p>Schematic of the hacked weighing scale</p>
-<p><img alt="" class="center" src="/images/weighing_scale_schematic.png"></p>
+<p><img alt="" class="center" src="./images/weighing_scale_schematic.png"></p>
 <p>After intercepting the STB, SCLK and DIO with raspberry pi as shown in the
 above figure (used bitscope package to read these signals). A typical pattern looks
 like this:</p>
-<p><img alt="" class="center" src="/images/weighing_scale_oscilloscope_1.png"></p>
+<p><img alt="" class="center" src="./images/weighing_scale_oscilloscope_1.png"></p>
 <p>Each green line in the DIO contains data that is synced to STB and SCLK. When I
 zoom on the each green line I see the following:</p>
-<p><img alt="" class="center" src="/images/weighing_scale_oscilloscope_2.png"></p>
+<p><img alt="" class="center" src="./images/weighing_scale_oscilloscope_2.png"></p>
 <p>Bits of data are being sent out in the DIO line at the rising edge of the clock
 signal.To decode these bytes.</p>
 <p>When I just step on the weighing scale and get down, weighing scale displayed
@@ -209,7 +186,7 @@ for this action and start to decode according to the TM1628 manual. Below are
 the bytes being sent and the decoded information for the action of just
 stepping on and stepping of the weighing scale.</p>
 <p>The order in which bytes are sent is shown below:
-<img alt="" class="center" src="/images/weighing_scale_bytes_sent.png"></p>
+<img alt="" class="center" src="./images/weighing_scale_bytes_sent.png"></p>
 <p>Command 1 and command 2 prepare the display. Command 3 helps in preparing the
 grid/digit. It can be seen from the above figure, once a grid is prepared, a
 character is being written to that grid/digit. This process starts from the
@@ -217,10 +194,10 @@ first grid and ends at the fifth grid. This cycle repeats many times. The cycle
 repeats so fast that we think the display is not changing.  I used the
 following cheat sheets for decoding the above data bytes. </p>
 <p>Following table is for command 3 where a certain grid/digit has to being chosen.</p>
-<p><img alt="" class="center" src="/images/weighing_scale_grid_digit.png"></p>
+<p><img alt="" class="center" src="./images/weighing_scale_grid_digit.png"></p>
 <p>Following table shows the bytes for displaying a certain character on a certain
 grid/digit.</p>
-<p><img alt="" class="center" src="/images/weighing_scale_segement_char.png"></p>
+<p><img alt="" class="center" src="./images/weighing_scale_segement_char.png"></p>
 <p><strong> Code to capture the data </strong></p>
 <p>Once I understood the commands being sent and how to interpret them, I wrote a
 python code that uses <a href="http://abyz.co.uk/rpi/pigpio/python.html">PIGPIO</a> to
@@ -233,15 +210,15 @@ account</a> </div>
 <p>I also added the capability to select a user with a rotary switch and assign weight information. A user can be guest, myself or my wife.</p>
 <p>Weight information is written to a file locally and also uploads the information to plotly for visualization.</p>
 <p><strong>Final product</strong></p>
-<p><img alt="" class="center" src="/images/weighing_scale_final_product1.png">
-<img alt="" class="center" src="/images/weighing_scale_final_product2.png"></p>
+<p><img alt="" class="center" src="./images/weighing_scale_final_product1.png">
+<img alt="" class="center" src="./images/weighing_scale_final_product2.png"></p>
 <p>Below is the youtube video of how the program works (without plotly
 integration)  </p>
 <iframe src="https://www.youtube.com/embed/KuFBi6P7Lm8"width="100%"
 height="100%" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 
 <p>Below is the plotly image showing the weight data collected over a year. I am still overweight.</p>
-<p><img alt="" class="center" src="/images/weighing_scale_plotly_image.png"></p>
+<p><img alt="" class="center" src="./images/weighing_scale_plotly_image.png"></p>
   </div>
   <div class="tag-cloud">
     <p>
@@ -268,13 +245,8 @@ height="100%" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 {
   "@context" : "http://schema.org",
   "@type" : "Blog",
-<<<<<<< HEAD
-  "name": " Bala Juluri's Blog ",
-  "url" : ".",
-=======
   "name": " Bala Juluri ",
-  "url" : "",
->>>>>>> ca26671696a15107b056a8ce32185c309f4a600f
+  "url" : ".",
   "image": "",
   "description": ""
 }

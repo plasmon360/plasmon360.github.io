@@ -10,16 +10,17 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
@@ -34,11 +35,11 @@
 <meta property="og:title" content="Improving code using getters and setters in Python"/>
 <meta property="og:description" content="As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a Princeton Instruments Acton SP2150i Monochromator. As I looked at the code, I noticed methods in the class such as get_nm() and set_nm(). I …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/Improving code with getters and setters in python.html"/>
+<meta property="og:url" content="./Improving code with getters and setters in python.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2019-12-04 18:28:00-08:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:author" content="./author/juluribk.html">
 <meta property="article:section" content="Electronics"/>
 <meta property="og:image" content="">
 
@@ -48,11 +49,11 @@
 <body>
   <aside>
     <div>
-      <a href="">
-        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
 
-      <h1><a href="">Bala Juluri</a></h1>
+      <h1><a href=".">Bala Juluri</a></h1>
 
     
 
@@ -62,7 +63,7 @@
       <ul class="social">
           <li>
             <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope ">
+            <i class="fas fa-envelope">
             </i>
           </a></li>
           <li>
@@ -96,13 +97,15 @@
   <main>
 
     <nav>
-      <a href="">    Home
+      <a href=".">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -111,7 +114,7 @@
       
     <h1 id="Improving code with getters and setters in python">Improving code using getters and setters in Python</h1>
     <p>
-          Posted on Wed 04 December 2019 in <a href="/category/electronics.html">Electronics</a>
+          Posted on Wed 04 December 2019 in <a href="./category/electronics.html">Electronics</a>
 
 
     </p>
@@ -119,7 +122,7 @@
 
 
   <div>
-    <p>As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a <a href="/controlling-sp2150i-monochromator-with-pythonpyvisa.html">Princeton Instruments Acton SP2150i Monochromator</a>.</p>
+    <p>As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a <a href="./controlling-sp2150i-monochromator-with-pythonpyvisa.html">Princeton Instruments Acton SP2150i Monochromator</a>.</p>
 <p>As I looked at the code, I noticed methods in the class such as <code>get_nm()</code> and <code>set_nm()</code>. I was not aware of the functionality of getters and setters in Python when I was writing that code. Since then, I have been using getters and setters occasionally and thought everyone using Python should be knowing about them.</p>
 <p>Lets simply the original code to only few methods and implement getters and setters functionality.</p>
 <div class="highlight python"><pre><span></span><code><span class="kn">from</span> <span class="nn">visa</span> <span class="kn">import</span> <span class="o">*</span>
@@ -128,10 +131,10 @@
 <span class="k">class</span> <span class="nc">SP2150i</span><span class="p">():</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">print</span> <span class="n">get_instruments_list</span><span class="p">()</span>
+            <span class="nb">print</span> <span class="n">get_instruments_list</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">=</span><span class="n">instrument</span><span class="p">(</span><span class="s1">&#39;COM7&#39;</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">#he default timeout is 5 sec, change the timeout if needed</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s2">&quot;Check if monochromotor is connected to right COM port of instrument list.&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Check if monochromotor is connected to right COM port of instrument list.&quot;</span>
 
     <span class="k">def</span> <span class="nf">get_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?FILTER&#39;</span><span class="p">)</span>
@@ -141,18 +144,18 @@
     <span class="k">def</span> <span class="nf">set_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span><span class="mi">6</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; FILTER&#39;</span><span class="p">)</span>
-            <span class="k">print</span> <span class="s2">&quot;Filter changed and waiting with additional delay...&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Filter changed and waiting with additional delay...&quot;</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Additional delay, just in case.</span>
-            <span class="k">print</span> <span class="s2">&quot;Done waiting&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Done waiting&quot;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s2">&quot;There is no filter with this input&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;There is no filter with this input&quot;</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="c1">#Create a object of the monochromator class</span>
     <span class="n">a</span><span class="o">=</span><span class="n">SP2150i</span><span class="p">()</span>
 
     <span class="c1"># request the filter currently used</span>
-    <span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">get_filter</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">get_filter</span><span class="p">()</span>
 
     <span class="c1"># set the filter </span>
     <span class="n">a</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># this applies the 320 nm filter in the beginning</span>
@@ -175,7 +178,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="n">port</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">=</span><span class="n">instrument</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">#he default timeout is 5 sec, change the timeout if needed</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s2">&quot;Check if monochromotor is connected to right COM port&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Check if monochromotor is connected to right COM port&quot;</span>
 
 
     <span class="nd">@property</span> <span class="c1">#Read this as `by adding a property decorator on this mthod, when object.filter is accessed, object.filter() is returned`</span>
@@ -183,13 +186,13 @@
         <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?FILTER&#39;</span><span class="p">)</span>
 
-    <span class="nd">@filter.setter</span> <span class="c1">#Reads this as `by adding filter.settter decorator, when object.filter = num is executed, object.filter(num) is returned`</span>
+    <span class="nd">@filter</span><span class="o">.</span><span class="n">setter</span> <span class="c1">#Reads this as `by adding filter.settter decorator, when object.filter = num is executed, object.filter(num) is returned`</span>
     <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;=</span><span class="mi">6</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">))</span><span class="o">+</span> <span class="s1">&#39; FILTER&#39;</span><span class="p">)</span>
-            <span class="k">print</span> <span class="s2">&quot;Filter changed and waiting with additional delay...&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Filter changed and waiting with additional delay...&quot;</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Additional delay, just in case.</span>
-            <span class="k">print</span> <span class="s2">&quot;Done waiting&quot;</span>
+            <span class="nb">print</span> <span class="s2">&quot;Done waiting&quot;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;There is no filter with this input&quot;</span><span class="p">)</span>
 
@@ -201,7 +204,7 @@
     <span class="n">a</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="mi">2</span>
 
     <span class="c1"># get the filter currently being used. This will return 2</span>
-    <span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">filter</span>
+    <span class="nb">print</span> <span class="n">a</span><span class="o">.</span><span class="n">filter</span>
 
     <span class="c1"># set the filter to unacceptable number</span>
     <span class="n">a</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># this will raise an exception.</span>
@@ -243,7 +246,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri ",
-  "url" : "",
+  "url" : ".",
   "image": "",
   "description": ""
 }
