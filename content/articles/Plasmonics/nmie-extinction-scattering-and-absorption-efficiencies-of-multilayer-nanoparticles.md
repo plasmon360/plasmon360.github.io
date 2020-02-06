@@ -6,9 +6,11 @@ Tags: electromagnetism, Free Software, Nanohub.org, Plasmonics, DDSCAT
 Slug: nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles
 Status: published
 
-![](file:///C:/Users/Mengqian/AppData/Local/Temp/moz-screenshot-2.png)
 
-\[caption id="attachment\_551" align="alignleft" width="300" caption="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. "\][![](http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1-300x215.png "nmie_screenshot"){.size-medium .wp-image-551 width="300" height="215"}](http://juluribk.com/wp-content/uploads/2010/05/Screenshot-main1.png)\[/caption\]
+
+
+nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. 
+![]({filename}/images/nmie_screenshot.png "nmie screenshot")
 
 Since 2009, I have been a regular user of Nanohub.org. [www.Nanohub.org](www.nanohub.org)is a website that provides a platform for online simulation, research and teaching resources. Of interest is the ability to perform simulation online without installing software on your local computer. I envision that this type of cloud computing model will be the future of scientific computing.
 

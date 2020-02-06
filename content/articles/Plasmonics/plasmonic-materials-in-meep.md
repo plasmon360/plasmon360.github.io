@@ -74,33 +74,34 @@ The normalized parameters, \$\\omega\_p'\$,\$\\Gamma'\$ and \$\\omega\_o'\$ from
 
 Here is scheme code snippet for silver with a=100e-9m (100 nm) after normalization and casting them into MEEP's material model.
 
-\[cc lang="scheme"\]  
-(define myAg (make dielectric (epsilon 1)  
-(polarizations  
-(make polarizability  
-(omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))  
-(make polarizability  
-(omega 0.065815) (gamma 0.31343) (sigma 7.9247))  
-(make polarizability  
-(omega 0.36142) (gamma 0.036456) (sigma 0.50133))  
-(make polarizability  
-(omega 0.66017) (gamma 0.0052426) (sigma 0.013329))  
-(make polarizability  
-(omega 0.73259) (gamma 0.07388) (sigma 0.82655))  
-(make polarizability  
-(omega 1.6365) (gamma 0.19511) (sigma 1.1133))  
-)))
+    #!scheme
+    (define myAg (make dielectric (epsilon 1)  
+    (polarizations  
+    (make polarizability  
+    (omega 1e-20) (gamma 0.0038715) (sigma 4.4625e+39))  
+    (make polarizability  
+    (omega 0.065815) (gamma 0.31343) (sigma 7.9247))  
+    (make polarizability  
+    (omega 0.36142) (gamma 0.036456) (sigma 0.50133))  
+    (make polarizability  
+    (omega 0.66017) (gamma 0.0052426) (sigma 0.013329))  
+    (make polarizability  
+    (omega 0.73259) (gamma 0.07388) (sigma 0.82655))  
+    (make polarizability  
+    (omega 1.6365) (gamma 0.19511) (sigma 1.1133))  
+    )))
 
-\[/cc\]
 
 The first polarizability is the Drude component and the rest 5 polarzabilities represent the Lorentz components. I have used this snippet in a MEEP code that calculates the reflection from a thin film of silver (to be consistent, all my units in this MEEP code are also normalized to 100 nm). Later I compared the reflection spectra with an [analytical solution](http://en.wikipedia.org/wiki/Fresnel_equations). These results are shown below. The MEEP calculation results match very well the analytical solutions. One can also clearly see the Ag interband effects in UV regime. The results also match with an other [reference](http://upload.wikimedia.org/wikipedia/commons/9/9d/Image-Metal-reflectance.png).
 
 If anyone needs the codes that generate the scheme snippet for material polarization and calculation of reflectivity of thin metal films, please shoot me an email.
 
-\[caption id="attachment\_795" align="aligncenter" width="600"\][![](http://juluribk.com/wp-content/uploads/2011/04/bitmap.png "Reflectivity comparision between MEEP and analytical model for Silver"){.size-full .wp-image-795 width="600" height="450"}](http://juluribk.com/wp-content/uploads/2011/04/bitmap.png) Reflectivity of Ag thin film (MEEP vs. analytical model)\[/caption\]
+Reflectivity comparision between MEEP and analytical model for Silver
+![]({filename}/images/bitmap.png "Reflectivity Comparion")
 
-[You can find my project file [here](http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip). Please read the readme.txt for further instructions.]{style="text-decoration: underline;"}
+[You can find my project file [here](http://juluribk.com/wp-content/uploads/2011/04/reflection_meep_material_generator.zip). Please read the readme.txt for further instructions.]
 
-[UPDATE:]{style="color: #ff0000;"} Aaron Webster used this code for a 1 × 1 × 1 pixel region and epilion was exported with the command meep-fields-analytic-chi1. He showed that the dielectric function seen by meep through using my snippet matches with the experimental dielectric function. You can find his report [here](http://falsecolour.com/aw/meep_metals/meep-metals.pdf). Thank you Aaron.
+
+[UPDATE:] Aaron Webster used this code for a 1 × 1 × 1 pixel region and epilion was exported with the command meep-fields-analytic-chi1. He showed that the dielectric function seen by meep through using my snippet matches with the experimental dielectric function. You can find his report [here](http://falsecolour.com/aw/meep_metals/meep-metals.pdf). Thank you Aaron.
 
 Majid has written a python code to do the operation described above. Please find it [here](http://msdresearch.blogspot.com/2012/02/understanding-meeps-dispersive-media.html)

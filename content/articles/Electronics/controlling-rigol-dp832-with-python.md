@@ -10,6 +10,8 @@ DC power supplies are very handy for electronic projects. They help to apply bia
 
 I got my hands on a RIGOL DP832 which is three channel (two 30V and one 5V) power supply and is programmable through SCPI commands. The device can be controlled by USB and rs232 (optionally by LAN). SCPI commands can be sent to the instruments using VISA interface. I used Python and pyvisa module to communicate with it. I wrote a class with basic functionality. Currently it has a console application and turning on and off at a  particular bias and current value on a specified channel.
 
+![]({filename}/images/DP832.jpg "DP832")
+
 You can add more methods to the class for advanced features. You can see those commands in the [programming manual](http://www.batronix.com/pdf/Rigol/ProgrammingGuide/DP800_ProgrammingGuide_EN.pdf).
 
 <div class = "alert alert-primary">

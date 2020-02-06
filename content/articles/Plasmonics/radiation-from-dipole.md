@@ -10,4 +10,6 @@ The electric field from an oscillating dipole is given by:![](file:///C:/DOCUME%
 
 A beautiful simulation showing the electric field radiation from a dipole is shown below. This simulation is part of [Sophocles J. Orfanidis book on electromagnetic waves and antennas](http://www.ece.rutgers.edu/~orfanidi/ewa/).  For more details on 1) how the above equation is simplified by transforming into polar coordinates and 2) the matlab code to plot the field, see Example 14.5.1. in Chapter 14 of his book. Many thanks to Prof. Orfanidis for sharing these matlab codes.
 
-\[caption id="attachment\_354" align="aligncenter" width="600" caption="Radiation from an oscillating dipole (Simulation done using Matlab code from Prof. Orfanidis book)"\][![](http://juluribk.com/wp-content/uploads/2010/01/dipmovie.gif "Radiation from an oscillating dipole"){.size-full .wp-image-354 width="600" height="600"}](http://juluribk.com/wp-content/uploads/2010/01/dipmovie.gif)\[/caption\]
+
+Radiation from an oscillating dipole (Simulation done using Matlab code from Prof. Orfanidis book)
+![]({filename}/images/dipmovie.gif "Animation")

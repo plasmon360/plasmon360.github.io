@@ -30,5 +30,5 @@ In Python with numpy:
     ax[1].set_ylabel('sign(x)*(log(|x|+1))')  
     plt.show()
     
+![]({filename}/images/Negative_numbers_log_scale.png "Schematic")
 
-[![download](http://juluribk.com/wp-content/uploads/2016/03/download.png){.aligncenter .size-full .wp-image-1759 width="567" height="349"}](http://juluribk.com/wp-content/uploads/2016/03/download.png)

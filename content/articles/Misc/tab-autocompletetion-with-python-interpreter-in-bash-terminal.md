@@ -14,7 +14,7 @@ Found two ways to do it. Thanks to stack overflow posts.
 
 This is easy. Install pyreadline (pip install pyreadline) and use ipython. This is a snapshot of it working.
 
-[![iptyhon autocompletion](http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png){.aligncenter .size-full .wp-image-1731 width="708" height="322"}](http://juluribk.com/wp-content/uploads/2016/10/iptyhon_autocompletion.png)
+![]({filename}/images/iptyhon_autocompletion-350x197.png "Schematic")
 
 ### Method 2 ( [as mentioned here](https://docs.python.org/2/library/rlcompleter.html#module-rlcompleter)):
 
