@@ -7,11 +7,11 @@ Status: published
 
 I was refreshing my understanding of probability and random chance. I think that a simple experiment of tossing a coin and observing the result is very useful in understanding these concepts. 
 
-As we know a coin when tossed/flipped will result either in a HEAD or TAIL. So a simple quesion to answer is "If I toss a fair coin (equal chance of Head and Tail) 1000 times, how many times do you expect to get HEADS?"
+As we know a coin when tossed/flipped will result either in a HEAD or TAIL. So a simple question to answer is "If I toss a fair coin (equal chance of Head and Tail) 1000 times, how many times do you expect to get HEADS?"
 
 Is it 500 or in other words the fraction of heads is 0.5? 
 
-Actually the answer is complicated. It may be 500, but it could be also above 500 or below 500. There is going to be uncertainity/randomness in the number of heads or the fraction of heads. 
+Actually the answer is complicated. It may be 500, but it could be also above 500 or below 500. There is going to be uncertainty/randomness in the number of heads or the fraction of heads. 
 
 
 To investigate more about the nature of this randomness, lets define some terms to make it easy to follow this write-up. 
@@ -30,9 +30,9 @@ Questions to ask:
 
     We will see that for each trial in different expt run, we will get different fraction sometimes above 0.5, sometimes exactly 0.5 and sometimes below 0.5.
 
-- Does this behavior chance if there are more tosses in a trial? 
+- Does this behavior change if there are more tosses in a trial? 
 
-    No. But, we will see that as the number of tosses in a trial increases (lets say the number of tosses change from 500 to 20000), the fraction of heads approaches towards 0.5 or in other words the uncertainity in the fraction of heads decreases.
+    No. But, we will see that as the number of tosses in a trial increases (lets say the number of tosses change from 500 to 20000), the fraction of heads approaches towards 0.5 or in other words the uncertainty in the fraction of heads decreases.
 
 To understand these insights, lets start make a python class that mimics the behavior of fair coin and play with it.
 
@@ -83,28 +83,30 @@ Lets run an expt with one trial. In this trial, we will toss the coin 100 times.
 
 ![]({filename}/images/coin_toss_expt1.png){.center}
 
-As expected it is generating 'Heads' and 'Tails' randomly with the number of tosses. But you can see that the number of 'Heads' is not exactly the half of the tosses. If we repeated this expt of one trial, we will get different numbers. So there will uncertainity in the fraction of heads.
+As expected it is generating 'Heads' and 'Tails' randomly with the number of tosses. But you can see that the number of 'Heads' is not exactly the half of the tosses. If we repeated this expt of one trial, we will get different numbers. So there will uncertainty in the fraction of heads.
 
-To understand that uncertainity, lets conduct a series of expt runs. For each run, we will conduct different trials consisting of different number of tosses and calculate the fraction of heads in each trial. 
+To understand that uncertainty, lets conduct a series of expt runs. For each run, we will conduct different trials consisting of different number of tosses and calculate the fraction of heads in each trial. 
 
-We will look at the effect of number of tosses in a trial and see if it varies with number of tosses or the expt run. So the outline of our expt is as follows 
+The outline of our expt is as follows:
 
 Expt Run1:
 
-Trial 1 (Toss for 50 times). Calculate the fraction of heads.
-Trial 2 (Toss for 100 times). Calculate the fraction of heads. 
-...
-Trial x (Toss for 20000 times). Calculate the fraction of heads. 
+    Trial 1 (Toss for 50 times). Calculate the fraction of heads.
+    Trial 2 (Toss for 100 times). Calculate the fraction of heads. 
+    ...
+    Trial x (Toss for 20000 times). Calculate the fraction of heads. 
 
 Expt Run2
-
-Repeat of Run1
+    Repeat of Run1
 
 Expt Run3 
-Repeat of Run 1
-...
+    Repeat of Run 1
+
+    ...
 
 Expt Run 10 
+
+Lets write some code to do this.
 
     #!python 
     ## Lets define the expt with a series of trials
@@ -149,13 +151,15 @@ This results in
 
 What do you see from this figure?
 
+Each datapoint is a result of trial. Each colored series is a expt run.
+
 1) Lets look at fraction of heads at a certain trial, it is sometimes above 0.5 and sometimes below 0.5 depending on the expt run.
 
-2) The variation (difference between the expected fraction of heads, ie 0.5 and observed fraction of heads in different runs) is getting lesser with more number of tosses in a trial. It is approaching 0.5 but is never 0.5. 
+2) The variation (spread of fraction of heads) is getting lesser with more number of tosses in a trial. It is approaching 0.5 but is never 0.5. 
 
-In other words, if we define the uncertainity as the standard deviation (paremeter estimating the variation) among various expt runs (at the same number of tosses). We can say that the uncertainity is decreasing with the number of tosses. 
+In other words, if we define the uncertainty as the standard deviation (parameter estimating the variation) among various expt runs (at the same number of tosses). We can say that the uncertainty is decreasing with the number of tosses. 
 
-Is there a precise relationship of this uncertainity? Yes there is. 
+Is there a precise relationship of this uncertainty? Yes there is. 
 
 Lets plot that and see if we can fit it with a mathematical function
 
@@ -192,7 +196,7 @@ Lets plot that and see if we can fit it with a mathematical function
 
 ![]({filename}/images/coin_toss_expt3.png){.center}
 
-We try to fit the relationship between the uncertainity in fraction of heads and the number of tosses with a functional form a/sqrt(n), where n is the number of tosses and a is constant. The fits looks pretty good, so we can concude that it is following inverse of square root of n relationship. This is an important conclusion and can be also proved mathematically. It forms the basis of many stastical tests and parameters like standard errors and confidence intervals.
+The code tried to fit the relationship between the uncertainty in fraction of heads and the number of tosses with a function of a form a/sqrt(n), where n is the number of tosses and a is constant. The fits looks pretty good, so we can conclude that it is following inverse of square root of n relationship. This is an important conclusion and can be also proved mathematically. It forms the basis of many statistical tests and parameters like standard errors and confidence intervals.
 
 So what does it means to say a coin has a probability of 0.5? If we have very large number of tosses in a trial, then we could expect the fraction of heads to be very close to a value of 0.5. 
 
