@@ -10,20 +10,31 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
-
-
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27406008-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="I want to tab autocomplete commands in my python interpreter within bash terminal. This is very useful when I import a module and just want to browse through the methods and autocomplete. Found two ways to do it. Thanks to stack overflow posts. Method 1 (as mentioned here): This is …" />
@@ -34,11 +45,11 @@
 <meta property="og:title" content="Tab autocompletetion with python interpreter in bash terminal"/>
 <meta property="og:description" content="I want to tab autocomplete commands in my python interpreter within bash terminal. This is very useful when I import a module and just want to browse through the methods and autocomplete. Found two ways to do it. Thanks to stack overflow posts. Method 1 (as mentioned here): This is …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/tab-autocompletetion-with-python-interpreter-in-bash-terminal.html"/>
+<meta property="og:url" content="./tab-autocompletetion-with-python-interpreter-in-bash-terminal.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2016-10-29 18:16:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:author" content="./author/juluribk.html">
 <meta property="article:section" content="Misc"/>
 <meta property="article:tag" content="Linux"/>
 <meta property="article:tag" content="python"/>
@@ -50,11 +61,11 @@
 <body>
   <aside>
     <div>
-      <a href="">
-        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
 
-      <h1><a href="">Bala Juluri</a></h1>
+      <h1><a href=".">Bala Juluri</a></h1>
 
     
 
@@ -98,13 +109,15 @@
   <main>
 
     <nav>
-      <a href="">    Home
+      <a href=".">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -113,7 +126,7 @@
       
     <h1 id="tab-autocompletetion-with-python-interpreter-in-bash-terminal">Tab autocompletetion with python interpreter in bash terminal</h1>
     <p>
-          Posted on Sat 29 October 2016 in <a href="/category/misc.html">Misc</a>
+          Posted on Sat 29 October 2016 in <a href="./category/misc.html">Misc</a>
 
 
     </p>
@@ -125,7 +138,7 @@
 <p>Found two ways to do it. Thanks to stack overflow posts.</p>
 <h3>Method 1 (<a href="http://stackoverflow.com/questions/2603798/ipython-tab-completion-not-working">as mentioned here</a>):</h3>
 <p>This is easy. Install pyreadline (pip install pyreadline) and use ipython. This is a snapshot of it working.</p>
-<p><img alt="" src="/images/iptyhon_autocompletion-350x197.png" title="Schematic"></p>
+<p><img alt="" src="./images/iptyhon_autocompletion-350x197.png" title="Schematic"></p>
 <h3>Method 2 ( <a href="https://docs.python.org/2/library/rlcompleter.html#module-rlcompleter">as mentioned here</a>):</h3>
 <p>This is for standard  python interpreter in bash terminal (such as in Ubuntu). This method requires readline and rlcompeter modules. Install these modules if you do not have them installed. This can be done with pip.</p>
 <p>Basically, the idea is to have a python interpreter look for the value of environment path variable "PYTHONSTARTUP". This variable should be set to a location for the file ("python startup file.py") with commands that enable tab autocompletion.</p>
@@ -167,8 +180,8 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="/tag/linux.html">Linux</a>
-      <a href="/tag/python.html">python</a>
+      <a href="./tag/linux.html">Linux</a>
+      <a href="./tag/python.html">python</a>
     </p>
   </div>
 
@@ -192,7 +205,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri ",
-  "url" : "",
+  "url" : ".",
   "image": "",
   "description": ""
 }
