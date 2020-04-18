@@ -26,5 +26,9 @@ ghp_import is useful for publishing to github
 
 https://rsip22.github.io/blog/create-a-blog-with-pelican-and-github-pages.html
 
-After doing make github 
+
+Commit: git add -A && git commit -a -m 'Addded an article on Coin tossingi_edits' && git push --all
+
+make github 
+
 Change the custom domain name to juluribk.com at https://github.com/plasmon360/plasmon360.github.io/settings
