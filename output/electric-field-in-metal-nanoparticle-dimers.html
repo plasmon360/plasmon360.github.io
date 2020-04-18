@@ -10,31 +10,20 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
-
-
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
 
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-27406008-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
+
+
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="Metal nanoparticles exhibit localized surface plasmon resonance (LSPR). One can think of LSPR as resonance of electron sea oscillations driven by incident electric field. This is similar to the way a spring-mass system attains resonance under external periodic driving force. The result of this plasmon resonance is enhanced dipole moment …" />
@@ -45,11 +34,11 @@
 <meta property="og:title" content="Electric Field in Metal Nanoparticle Dimers"/>
 <meta property="og:description" content="Metal nanoparticles exhibit localized surface plasmon resonance (LSPR). One can think of LSPR as resonance of electron sea oscillations driven by incident electric field. This is similar to the way a spring-mass system attains resonance under external periodic driving force. The result of this plasmon resonance is enhanced dipole moment …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./electric-field-in-metal-nanoparticle-dimers.html"/>
+<meta property="og:url" content="/electric-field-in-metal-nanoparticle-dimers.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2011-04-09 15:32:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/juluribk.html">
+<meta property="article:author" content="/author/juluribk.html">
 <meta property="article:section" content="Plasmonics"/>
 <meta property="article:tag" content="FDTD"/>
 <meta property="article:tag" content="Molecular Machines"/>
@@ -64,11 +53,11 @@
 <body>
   <aside>
     <div>
-      <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      <a href="">
+        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
 
-      <h1><a href=".">Bala Juluri</a></h1>
+      <h1><a href="">Bala Juluri</a></h1>
 
     
 
@@ -112,15 +101,13 @@
   <main>
 
     <nav>
-      <a href=".">    Home
+      <a href="">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
-</a>
 
     </nav>
 
@@ -129,7 +116,7 @@
       
     <h1 id="electric-field-in-metal-nanoparticle-dimers">Electric Field in Metal Nanoparticle Dimers</h1>
     <p>
-          Posted on Sat 09 April 2011 in <a href="./category/plasmonics.html">Plasmonics</a>
+          Posted on Sat 09 April 2011 in <a href="/category/plasmonics.html">Plasmonics</a>
 
 
     </p>
@@ -142,7 +129,7 @@
 <p>Researchers have taken advantage of this large electric field localization to enhance Raman signals from molecules and have lead to the field of Surface Enhanced Raman Spectroscopy (SERS) (<a href="http://en.wikipedia.org/wiki/Surface_enhanced_Raman_spectroscopy">more information here</a>). Raman signal provides quantitative information of vibration modes in molecules and is proportional to the fourth power of electric field perceived by the molecule. Therefore large electric field structures are important for SERS. The real mechanism of SERS is still a topic of debate due to arguments of whether this effect is caused due to enhanced electromagnetic electric field (EM effect) or due to charge transfer effects (usually referred to CHEM effect). </p>
 <p>Most researchers think that both of these arguments are valid and depend upon the system under consideration. Assuming electric field as an important requirement for SERS, one can think that nanostructures with large electric field should be better SERS candidates. This is very true and researchers have designed many geometries that can give large electric field. Another argument in SERS community is that not only large electric fields are important, it is equally important to get reproducible SERS signals from structures.</p>
 <p>Of interest have been nanoparticle configurations that consist of two nanoparticles that are very close to each other (commonly referred as dimer nanoparticles).  I have simulated electric fields (see figure below) using FDTD for both single nanoparticle and nanoparticle dimers with varying gap (here disks are used, but it is more or less true for any other geometry) at LSPR. </p>
-<p><img alt="" class="center" src="./images/electric_field_disc_dimers_gap.png"></p>
+<p><img alt="" class="center" src="/images/electric_field_disc_dimers_gap.png"></p>
 <p>One can see, </p>
 <ol>
 <li>
@@ -156,11 +143,11 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="./tag/fdtd.html">FDTD</a>
-      <a href="./tag/molecular-machines.html">Molecular Machines</a>
-      <a href="./tag/photonics.html">photonics</a>
-      <a href="./tag/plasmonics.html">Plasmonics</a>
-      <a href="./tag/sers.html">SERS</a>
+      <a href="/tag/fdtd.html">FDTD</a>
+      <a href="/tag/molecular-machines.html">Molecular Machines</a>
+      <a href="/tag/photonics.html">photonics</a>
+      <a href="/tag/plasmonics.html">Plasmonics</a>
+      <a href="/tag/sers.html">SERS</a>
     </p>
   </div>
 
@@ -184,7 +171,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri ",
-  "url" : ".",
+  "url" : "",
   "image": "",
   "description": ""
 }

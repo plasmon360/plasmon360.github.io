@@ -13,4 +13,15 @@ Check if it is installed by
 pip install markdown_katex ghp-import
 
 
+Local Development:
+
+
+Deployment:
+Writing  selected content 
+pelican --write-selected output/posts/my-post-title.html
+
+Note here that the output the output html required and input source
+
 ghp_import is useful for publishing to github
+
+https://rsip22.github.io/blog/create-a-blog-with-pelican-and-github-pages.html

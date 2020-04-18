@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
+
+
+
+
+
+
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="I was refreshing my understanding of probability and random chance. I think that a simple experiment of tossing a coin and observing the result is very useful in understanding these concepts. As we know a coin when tossed/flipped will result either in a HEAD or TAIL. So a simple …" />
+<meta name="keywords" content="">
+
+
+<meta property="og:site_name" content="Bala Juluri"/>
+<meta property="og:title" content="Understanding Probability and Randomness using a coin"/>
+<meta property="og:description" content="I was refreshing my understanding of probability and random chance. I think that a simple experiment of tossing a coin and observing the result is very useful in understanding these concepts. As we know a coin when tossed/flipped will result either in a HEAD or TAIL. So a simple …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/Randomness with a coin.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-04-18 15:00:00-07:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:section" content="Python, Statistics"/>
+<meta property="og:image" content="">
+
+  <title>Bala Juluri &ndash; Understanding Probability and Randomness using a coin</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="">
+        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      </a>
+
+      <h1><a href="">Bala Juluri</a></h1>
+
+    
+
+     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
+
+
+      <ul class="social">
+          <li>
+            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-linkedin" href="#" target="_blank">
+            <i class="fab fa-linkedin">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
+            <i class="fab fa-stack-overflow">
+            </i>
+          </a></li>
+          <li>
+            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
+            <i class="ai ai-google-scholar">
+            </i>
+          </a></li>
+      </ul>
+
+
+    </div>
+
+
+
+  </aside>
+  <main>
+
+    <nav>
+      <a href="">    Home
+</a>
+
+      <a href="/archives.html">Archives</a>
+      <a href="/categories.html">Categories</a>
+      <a href="/tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="Randomness with a coin">Understanding Probability and Randomness using a coin</h1>
+    <p>
+          Posted on Sat 18 April 2020 in <a href="/category/python-statistics.html">Python, Statistics</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>I was refreshing my understanding of probability and random chance. I think that a simple experiment of tossing a coin and observing the result is very useful in understanding these concepts. </p>
+<p>As we know a coin when tossed/flipped will result either in a HEAD or TAIL. So a simple quesion to answer is "If I toss a fair coin (equal chance of Head and Tail) 1000 times, how many times do you expect to get HEADS?"</p>
+<p>Is it 500 or in other words the fraction of heads is 0.5? </p>
+<p>Actually the answer is complicated. It may be 500, but it could be also above 500 or below 500. There is going to be uncertainity/randomness in the number of heads or the fraction of heads. </p>
+<p>To investigate more about the nature of this randomness, lets define some terms to make it easy to follow this write-up. </p>
+<p>We can define </p>
+<ul>
+<li>
+<p>a trial as series of tosses. Each trial is characterized by certain number of tosses and associated fraction of heads that result from this trial.</p>
+</li>
+<li>
+<p>an expt run is a series of one or more trials. </p>
+</li>
+</ul>
+<p>Understand these definitions before we can move ahead.</p>
+<p>Questions to ask:</p>
+<ul>
+<li>
+<p>Will the fraction of heads in a trial change between expt runs? </p>
+<p>We will see that for each trial in different expt run, we will get different fraction sometimes above 0.5, sometimes exactly 0.5 and sometimes below 0.5.</p>
+</li>
+<li>
+<p>Does this behavior chance if there are more tosses in a trial? </p>
+<p>No. But, we will see that as the number of tosses in a trial increases (lets say the number of tosses change from 500 to 20000), the fraction of heads approaches towards 0.5 or in other words the uncertainity in the fraction of heads decreases.</p>
+</li>
+</ul>
+<p>To understand these insights, lets start make a python class that mimics the behavior of fair coin and play with it.</p>
+<div class="highlight python"><pre><span></span><code><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">class</span> <span class="nc">Coin</span><span class="p">():</span>
+<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">heads_prob</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">heads_prob</span> <span class="o">=</span> <span class="n">heads_prob</span>
+
+<span class="nd">@property</span>
+<span class="k">def</span> <span class="nf">toss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># 1 represents head and 0 represents tail</span>
+    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Lets mint our coin </span>
+<span class="n">mycoin</span> <span class="o">=</span> <span class="n">Coin</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p>Lets run an expt with one trial. In this trial, we will toss the coin 100 times. Lets check if our newly minted coin is tossing as we expect </p>
+<div class="highlight python"><pre><span></span><code><span class="n">num_tosses</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># lets run a trial ie toss it for 50 times!</span>
+<span class="n">toss_coin_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">mycoin</span><span class="o">.</span><span class="n">toss</span> <span class="k">for</span> <span class="n">toss</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_tosses</span><span class="p">)]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">6</span><span class="o">*</span><span class="mf">1.619</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># lets plot how we do in each toss</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">toss_coin_results</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+
+<span class="c1"># lets plot the number of heads and number of tails in this trial</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Heads&#39;</span><span class="p">,</span> <span class="s1">&#39;Tails&#39;</span><span class="p">],</span> <span class="n">height</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">toss_coin_results</span><span class="p">),</span> <span class="n">num_tosses</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">toss_coin_results</span><span class="p">)])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">num_tosses</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Apply some cosmetics</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Toss number&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]);</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;Tails&#39;</span><span class="p">,</span><span class="s1">&#39;Heads&#39;</span><span class="p">]);</span> 
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Heads&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Result of tossing our coin&#39;</span><span class="p">);</span>    
+    <span class="c1"># toss the coin for 100 times </span>
+    <span class="n">toss_coin_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">mycoin</span><span class="o">.</span><span class="n">toss</span> <span class="k">for</span> <span class="n">toss</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+
+<span class="c1"># Plot the result as function of toss number</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">toss_coin_results</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Toss number&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tails&#39;</span><span class="p">,</span><span class="s1">&#39;Heads&#39;</span><span class="p">]);</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Result of tossing our coin&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+
+<p><img alt="" class="center" src="/images/coin_toss_expt1.png"></p>
+<p>As expected it is generating 'Heads' and 'Tails' randomly with the number of tosses. But you can see that the number of 'Heads' is not exactly the half of the tosses. If we repeated this expt of one trial, we will get different numbers. So there will uncertainity in the fraction of heads.</p>
+<p>To understand that uncertainity, lets conduct a series of expt runs. For each run, we will conduct different trials consisting of different number of tosses and calculate the fraction of heads in each trial. </p>
+<p>We will look at the effect of number of tosses in a trial and see if it varies with number of tosses or the expt run. So the outline of our expt is as follows </p>
+<p>Expt Run1:</p>
+<p>Trial 1 (Toss for 50 times). Calculate the fraction of heads.
+Trial 2 (Toss for 100 times). Calculate the fraction of heads. 
+...
+Trial x (Toss for 20000 times). Calculate the fraction of heads. </p>
+<p>Expt Run2</p>
+<p>Repeat of Run1</p>
+<p>Expt Run3 
+Repeat of Run 1
+...</p>
+<p>Expt Run 10 </p>
+<div class="highlight python"><pre><span></span><code><span class="c1">## Lets define the expt with a series of trials</span>
+<span class="k">def</span> <span class="nf">expt_run</span><span class="p">():</span>
+    <span class="n">num_of_tosses_in_each_trial</span> <span class="o">=</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">7500</span><span class="p">,</span> 
+                                   <span class="mi">10000</span><span class="p">,</span> <span class="mi">12500</span><span class="p">,</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">17500</span><span class="p">,</span> <span class="mi">20000</span><span class="p">]</span>
+    <span class="n">fraction_of_heads_in_each_trial</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">num_in_trial</span> <span class="ow">in</span> <span class="n">num_of_tosses_in_each_trial</span><span class="p">:</span>
+        <span class="n">tosses</span> <span class="o">=</span> <span class="p">[</span><span class="n">mycoin</span><span class="o">.</span><span class="n">toss</span> <span class="k">for</span> <span class="n">toss</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_in_trial</span><span class="p">)]</span>
+        <span class="n">fraction_of_heads_in_each_trial</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">tosses</span><span class="p">)</span><span class="o">/</span><span class="n">num_in_trial</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">num_of_tosses_in_each_trial</span><span class="p">,</span> <span class="n">fraction_of_heads_in_each_trial</span>
+
+<span class="c1">## Set up the canvas to plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span> <span class="mi">8</span><span class="o">*</span><span class="mf">1.619</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1">## Run the expt for ten times</span>
+<span class="n">expt_runs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">fraction_of_heads_in_each_trial_all_runs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">expt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">expt_runs</span><span class="p">):</span>
+    <span class="n">num_of_tosses_in_each_trial</span><span class="p">,</span> <span class="n">fraction_of_heads_in_each_trial</span><span class="o">=</span> <span class="n">expt_run</span><span class="p">()</span>
+    <span class="n">fraction_of_heads_in_each_trial_all_runs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fraction_of_heads_in_each_trial</span><span class="p">)</span>
+
+    <span class="c1"># plot the results of each run</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_of_tosses_in_each_trial</span><span class="p">,</span> <span class="n">fraction_of_heads_in_each_trial</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> 
+             <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Expt Run: {expt+1}&#39;</span><span class="p">)</span>
+
+
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">mycoin</span><span class="o">.</span><span class="n">heads_prob</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">linestyles</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of tosses in each trial&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of Heads&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Expected Fraction of Heads&#39;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">xycoords</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">),</span>
+            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+
+<p>This results in 
+<img alt="" class="center" src="/images/coin_toss_expt2.png"></p>
+<p>What do you see from this figure?</p>
+<p>1) Lets look at fraction of heads at a certain trial, it is sometimes above 0.5 and sometimes below 0.5 depending on the expt run.</p>
+<p>2) The variation (difference between the expected fraction of heads, ie 0.5 and observed fraction of heads in different runs) is getting lesser with more number of tosses in a trial. It is approaching 0.5 but is never 0.5. </p>
+<p>In other words, if we define the uncertainity as the standard deviation (paremeter estimating the variation) among various expt runs (at the same number of tosses). We can say that the uncertainity is decreasing with the number of tosses. </p>
+<p>Is there a precise relationship of this uncertainity? Yes there is. </p>
+<p>Lets plot that and see if we can fit it with a mathematical function</p>
+<div class="highlight python"><pre><span></span><code><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="c1"># lets convert the revalant list objects to numpy arrays for convinience</span>
+<span class="n">fraction_of_heads_in_each_trial_all_runs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fraction_of_heads_in_each_trial_all_runs</span><span class="p">)</span>
+<span class="n">num_of_tosses_in_each_trial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">num_of_tosses_in_each_trial</span><span class="p">)</span>
+
+
+<span class="c1"># This is the standard deviation of fraction of heads at different trials</span>
+<span class="n">std_observed_fraction_of_heads</span> <span class="o">=</span> <span class="n">fraction_of_heads_in_each_trial_all_runs</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+
+
+<span class="c1"># Plot the standard deviation with the number of tosses in each trial</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="mf">1.616</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_of_tosses_in_each_trial</span><span class="p">,</span> <span class="n">std_observed_fraction_of_heads</span><span class="p">,</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+
+<span class="c1">## lets define a function that is approrpriate for the relationship.</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1">## Fit the curve and plot along side our datapoints</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">num_of_tosses_in_each_trial</span><span class="p">,</span> <span class="n">std_observed_fraction_of_heads</span><span class="p">)</span>
+<span class="n">fit_for_these_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">num_of_tosses_in_each_trial</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">num_of_tosses_in_each_trial</span><span class="p">),</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_for_these_x</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">fit_for_these_x</span> <span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;fit = </span><span class="si">{popt[0]:.2f}</span><span class="s1">/sqrt(num_of_tosses)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of tosses in each trial&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Standard Deviation of </span><span class="se">\n</span><span class="s1"> obserbed fraction of heads&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+<p><img alt="" class="center" src="/images/coin_toss_expt3.png"></p>
+<p>You can see the relationship between the uncertainity and number of tosses is following 0.5/sqrt(n) relationship, where n is the number of tosses. This is an important conclusion and can be also proved mathematically. It forms the basics of many stastical tests and parameters like standard errors and confidence intervals.</p>
+<p>Why is there a factor of 0.5 in the numerator of the fit function? Thats for another day.</p>
+<p>So what does it means to say a coin has a probability of 0.5. If we have very large number of tosses in a trial in an experiment run, then we would expect the fraction of heads to be very close to 0.5 (uncertainity is very low but still there). </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy;  </p>
+<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri ",
+  "url" : "",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
