@@ -1,0 +1,8 @@
+title: Fitting Complex Metal Dielectric Functions with Differential Evolution Method
+date: Sun Apr 19 14:22:44 PDT 2018
+category: plasmonics
+tags: plasmonics, python
+slug: Fitting_complex_metal_dielectric_functions
+authors: Bala Juluri 
+summary: I use differential evolution method to fit the dielectric functions of metals using Differential Evolution method. 
+

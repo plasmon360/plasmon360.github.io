@@ -12,11 +12,18 @@ Check if it is installed by
 
 pip install markdown_katex ghp-import
 
+# For integrating python notebooks in pelican. 
+I am using https://github.com/danielfrg/pelican-ipynb
+Currently using mode A and Option 1
+
 
 Local Development:
 
+pelican content -o output 
 
-Deployment:
+pelican --listen
+
+
 Writing  selected content 
 pelican --write-selected output/posts/my-post-title.html
 
@@ -27,7 +34,12 @@ ghp_import is useful for publishing to github
 https://rsip22.github.io/blog/create-a-blog-with-pelican-and-github-pages.html
 
 
-Commit: git add -A && git commit -a -m 'Addded an article on Coin tossingi_edits' && git push --all
+Deployment
+Commit: git add -A && git commit -a -m 'Addded an article on Coin tossingi_edits'
+
+git push 
+
+git pull
 
 make github 
 

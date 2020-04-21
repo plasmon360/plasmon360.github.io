@@ -10,31 +10,20 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
-
-
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
 
 
 
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-27406008-1', 'auto');
-  ga('send', 'pageview');
-</script>
-<!-- End Google Analytics -->
+
+
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="My current apartment does not have a doorbell (Its strange but it is true). I went ahead and built a doorbell using two arduino pro-minis and two NRF24L01 transceivers. The melody to be played when a guest presses a button can also be controlled. I have four melodies programmed in …" />
@@ -45,11 +34,11 @@
 <meta property="og:title" content="Doorbell with NRF24L01 and Arduino"/>
 <meta property="og:description" content="My current apartment does not have a doorbell (Its strange but it is true). I went ahead and built a doorbell using two arduino pro-minis and two NRF24L01 transceivers. The melody to be played when a guest presses a button can also be controlled. I have four melodies programmed in …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./doorbell-with-nrf24l01-and-arduino.html"/>
+<meta property="og:url" content="/doorbell-with-nrf24l01-and-arduino.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2015-05-29 13:30:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/juluribk.html">
+<meta property="article:author" content="/author/juluribk.html">
 <meta property="article:section" content="Electronics"/>
 <meta property="og:image" content="">
 
@@ -59,11 +48,11 @@
 <body>
   <aside>
     <div>
-      <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      <a href="">
+        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
 
-      <h1><a href=".">Bala Juluri</a></h1>
+      <h1><a href="">Bala Juluri</a></h1>
 
     
 
@@ -107,15 +96,13 @@
   <main>
 
     <nav>
-      <a href=".">    Home
+      <a href="">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
-      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
-</a>
 
     </nav>
 
@@ -124,7 +111,7 @@
       
     <h1 id="doorbell-with-nrf24l01-and-arduino">Doorbell with NRF24L01 and Arduino</h1>
     <p>
-          Posted on Fri 29 May 2015 in <a href="./category/electronics.html">Electronics</a>
+          Posted on Fri 29 May 2015 in <a href="/category/electronics.html">Electronics</a>
 
 
     </p>
@@ -140,15 +127,15 @@
 <p><strong>Remote</strong> </p>
 <p>The schematic for the remote is shown below. The remote is configured to run on 2 AAA batteries and goes to sleep mode most of the time and then wakes up when a guest presses the button. This button press is transmitted to an NRF24L01 receiver on the doorbell by a NRF24L01 tranmisster. I decreased the overall current to 65 microA by removing the LED on the arduino pro mini and used <a href="https://github.com/rocketscream/Low-Power">rocket</a> library's sleep functions. This arduino pro mini was running at 3.3V and 8 MHz. Could have gone even further in current reduction by removing the board regulator, but I was happy with 65 microAmps. For AAA batteries, assuming 1000 mAh capacity, it should last around 20 months.</p>
 <p>Here are some pictures of the remote. I enclosed it in a eye wear case, which turned out to be a nice enclosure.</p>
-<p><img alt="" class="center" src="./images/doorbell_remote1.png"></p>
-<p><img alt="" class="center" src="./images/doorbell_remote2.png"></p>
-<p><img alt="" class="center" src="./images/doorbell_remote3.png"></p>
+<p><img alt="" class="center" src="/images/doorbell_remote1.png"></p>
+<p><img alt="" class="center" src="/images/doorbell_remote2.png"></p>
+<p><img alt="" class="center" src="/images/doorbell_remote3.png"></p>
 <p><strong>Doorbell</strong>  </p>
 <p>The schematic for the doorbell is shown below. This circuit is powered by 9V adapter from AC mains, which is  converted to a 5V and 3.3V by <a href="http://www.ebay.com/itm/ICSA009A-Stable-Step-Down-Power-Supply-Module-3-3V-5V-for-MB-102-Breadboard-/221584526129">ICSA009</a> breadboard adapter. I use 3.3V to power the arduino pro-mini and NRF2L01 receiver. Other than that, nothing fancy here, but I have four doorbell melodies on the arduino that can be chosen with a DIP switch. </p>
 <p>Connecting buzzer directly to the arduino resulted in very less volume since arduino could source much current, so I connected it to 5V supply with 2N3409 transitor. <a href="http://bryanduxbury.com/2012/01/20/one-transistor-audio-amplifier-for-arduino-projects/">The base of the transistor is controlled by an arduino pin in series with a 100 ohm resistor</a>. I placed the whole breadboard into a food storage container as a case.</p>
 <p>Here are some photos of the final prototype.</p>
-<p><img alt="" class="center" src="./images/doorbell_1.jpg"></p>
-<p><img alt="" class="center" src="./images/doorbell_2.jpg"></p>
+<p><img alt="" class="center" src="/images/doorbell_1.jpg"></p>
+<p><img alt="" class="center" src="/images/doorbell_2.jpg"></p>
 <div class = "alert alert-primary">
 
 <strong> Note :</strong> You can find my code at my <a href = "https://github.com/plasmon360/Arduino_NRF24L01_Doorbell_project"> github account</a>.
@@ -181,7 +168,7 @@ The same code should be uploaded to both remote and doorbell arduino's.
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri ",
-  "url" : ".",
+  "url" : "",
   "image": "",
   "description": ""
 }
