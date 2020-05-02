@@ -10,20 +10,31 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
-
-
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27406008-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="In MEEP (1.1.1), dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was …" />
@@ -34,11 +45,11 @@
 <meta property="og:title" content="Arbitrary 2d shapes in MEEP"/>
 <meta property="og:description" content="In MEEP (1.1.1), dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/arbitrary-2d-shapes-in-meep.html"/>
+<meta property="og:url" content="./arbitrary-2d-shapes-in-meep.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2011-05-10 22:52:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:author" content="./author/juluribk.html">
 <meta property="article:section" content="Plasmonics"/>
 <meta property="article:tag" content="electromagnetism"/>
 <meta property="article:tag" content="FDTD"/>
@@ -54,11 +65,11 @@
 <body>
   <aside>
     <div>
-      <a href="">
-        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
 
-      <h1><a href="">Bala Juluri</a></h1>
+      <h1><a href=".">Bala Juluri</a></h1>
 
     
 
@@ -102,13 +113,15 @@
   <main>
 
     <nav>
-      <a href="">    Home
+      <a href=".">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -117,7 +130,7 @@
       
     <h1 id="arbitrary-2d-shapes-in-meep">Arbitrary 2d shapes in MEEP</h1>
     <p>
-          Posted on Tue 10 May 2011 in <a href="/category/plasmonics.html">Plasmonics</a>
+          Posted on Tue 10 May 2011 in <a href="./category/plasmonics.html">Plasmonics</a>
 
 
     </p>
@@ -125,7 +138,7 @@
 
 
   <div>
-    <p><img alt="" class="center" src="/images/Arbirary_shapes-eps.png" title=""></p>
+    <p><img alt="" class="center" src="./images/Arbirary_shapes-eps.png" title=""></p>
 <p><a href="http://ab-initio.mit.edu/wiki/index.php/Meep">In MEEP (1.1.1)</a>, dielectric structures are often created by constructive geometry (adding and subtracting primitive shapes). The primitive shapes that are allowed are blocks, cylinders, ellipsoids and cones. To create a complex shape, one has to decompose the geometry into these primitive shapes. Over the weekend, I was wondering if it was possible to somehow create any complex shape in 2d without figuring out the exact positions and operations with the available primitive shapes. Here I report how I solve this problem.</p>
 <p>The first thing I figured out was to create a 2d triangle with known vertices using a certain primitive shape. One can cut a cone to create a triangle, but that would limit me to isosceles triangle. My very smart colleague (<a href="http://www.esm.psu.edu/wiki/research:juh17:mengqian_lu">Mengqian Lu</a>) suggested me to cut a block/brick object with non-orthogonal axes such that you get a triangle. </p>
 <p>In meep, block object requires, 
@@ -134,18 +147,18 @@
 3)center. </p>
 <p>A triangle with known (x1,y1,0), (x2,y2,0) and (x3,y3,0) can be represented with a block (with possible non-orthogonality) element by modifications as shown in the figure. I pick a random point "E" which is not in the plane of my triangle and assume it as origin of the block. Then the vectors corresponding to axes of block are given by EA, EB, EC vectors, sizes are given by |EA|,|EB|,|EC| and the center of the block is OE+0.5*(EA+EB+EC).</p>
 <p>Triangle in Meep using block primitive object</p>
-<p><img alt="" class="center" src="/images/Arbirary_shapes-single-triangle.png"></p>
+<p><img alt="" class="center" src="./images/Arbirary_shapes-single-triangle.png"></p>
 <p>To test this, I wrote a octave code which produces a meep code that that can be executed to create a triangle with vertices of (-10,0,0), (10,0,0) and (0,10,0). The result of compiling the meep code and exporting the dielectric distribution is shown below. The length of the simulation domain is 20 units in both x and y directions.</p>
 <p>Triangle shape implemented in meep using block primitve object.</p>
-<p><img alt="" class="center" src="/images/Arbirary_shapes-single-triangle2.png"></p>
+<p><img alt="" class="center" src="./images/Arbirary_shapes-single-triangle2.png"></p>
 <p>With this information of incorporating a single triangle in meep, I can now obtain complex 2d shapes in meep. I start by writing a file that contains information regarding points that make up my structure and do a <a href="http://en.wikipedia.org/wiki/Delaunay_triangulation">constrained delaunay triangulation</a>. </p>
 <p>One can use <a href="http://www.mathworks.com/products/matlab/demos.html?file=/products/demos/shipping/matlab/demoDelaunayTri.html">matlab (versions &gt;2009) to do such constrained delaunay triangulation</a>. However, many of us (poor graduate students :( ) do not have access to matlab. I figured out that constrained delaunay triangulation can be done by using <a href="http://www.cs.cmu.edu/~quake/triangle.html">Triangle package</a>, which is free. After I compile this code, I see two executables 1) Triangle and 2) Showme in my source folder. Triangle does the triangulation and showme does the visualization before and after triangulation.</p>
 <p>First, I write a ".poly" file, to mention my structure. ”.poly” file contains information of the points that make up the structure, one has to also mention segments (the border of the polygon) and any holes (if present). More information can be <a href="http://www.cs.cmu.edu/~quake/triangle.delaunay.html">found here</a>. Once a poly file is written, it can visualized using showme executable . If everything is ok, then do a constrained delaunay triangulation using Triangle executable (beware of concavities). I again visualize the structure after triangulation using showme executable to check whether triangulation has happened correctly or not. Once triangulated, I use the method above to convert each triangle to a corresponding meep block element (with suitable centers, sizes and axes) and stitch all of them together (once again use a octave code to do that automatically).</p>
 <p>Using the poly file for shape “A” obtained from <a href="http://people.sc.fsu.edu/~jburkardt/data/poly/a.poly">here</a> I create a dielectric structure in MEEP with each triangle representing a random dielectric constant. Below is the final result. This method can also be extended to a group of arbitrary shapes in one simulation each with different dielectric functions.  </p>
 <p>Screenshot of showme executable showing the triangulation of 'A' shape.</p>
-<p><img alt="" class="center" src="/images/Arbirary_shapes-screenshot.png"></p>
+<p><img alt="" class="center" src="./images/Arbirary_shapes-screenshot.png"></p>
 <p>'A' shaped dielectric structure in MEEP.
-<img alt="" class="center" src="/images/Arbirary_shapes-eps.png" title=""></p>
+<img alt="" class="center" src="./images/Arbirary_shapes-eps.png" title=""></p>
 <p>I seem to be missing my octave code for this implementation.</p>
 <p>Here is a version posted by Felip BM </p>
 <div class="highlight matlab"><pre><span></span><code><span class="k">function</span><span class="w"> </span>out <span class="p">=</span><span class="w"> </span><span class="nf">MEEPtriangle</span><span class="p">(</span>p1,p2,p3<span class="p">);</span>
@@ -182,12 +195,12 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="/tag/electromagnetism.html">electromagnetism</a>
-      <a href="/tag/fdtd.html">FDTD</a>
-      <a href="/tag/meep.html">MEEP</a>
-      <a href="/tag/octave.html">octave</a>
-      <a href="/tag/photonics.html">photonics</a>
-      <a href="/tag/plasmonics.html">Plasmonics</a>
+      <a href="./tag/electromagnetism.html">electromagnetism</a>
+      <a href="./tag/fdtd.html">FDTD</a>
+      <a href="./tag/meep.html">MEEP</a>
+      <a href="./tag/octave.html">octave</a>
+      <a href="./tag/photonics.html">photonics</a>
+      <a href="./tag/plasmonics.html">Plasmonics</a>
     </p>
   </div>
 
@@ -211,7 +224,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri ",
-  "url" : "",
+  "url" : ".",
   "image": "",
   "description": ""
 }

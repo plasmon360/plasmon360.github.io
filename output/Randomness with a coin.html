@@ -10,20 +10,31 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
-
-
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27406008-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="I was refreshing my understanding of probability and random chance. I think that a simple experiment of tossing a coin and observing the result is very useful in understanding these concepts. As we know a coin when tossed/flipped will result either in a HEAD or TAIL. So a simple …" />
@@ -34,11 +45,11 @@
 <meta property="og:title" content="Understanding Probability and Randomness using a coin"/>
 <meta property="og:description" content="I was refreshing my understanding of probability and random chance. I think that a simple experiment of tossing a coin and observing the result is very useful in understanding these concepts. As we know a coin when tossed/flipped will result either in a HEAD or TAIL. So a simple …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/Randomness with a coin.html"/>
+<meta property="og:url" content="./Randomness with a coin.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2020-04-18 15:00:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:author" content="./author/juluribk.html">
 <meta property="article:section" content="Python, Statistics"/>
 <meta property="og:image" content="">
 
@@ -48,11 +59,11 @@
 <body>
   <aside>
     <div>
-      <a href="">
-        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
 
-      <h1><a href="">Bala Juluri</a></h1>
+      <h1><a href=".">Bala Juluri</a></h1>
 
     
 
@@ -96,13 +107,15 @@
   <main>
 
     <nav>
-      <a href="">    Home
+      <a href=".">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -111,7 +124,7 @@
       
     <h1 id="Randomness with a coin">Understanding Probability and Randomness using a coin</h1>
     <p>
-          Posted on Sat 18 April 2020 in <a href="/category/python-statistics.html">Python, Statistics</a>
+          Posted on Sat 18 April 2020 in <a href="./category/python-statistics.html">Python, Statistics</a>
 
 
     </p>
@@ -191,7 +204,7 @@
 </code></pre></div>
 
 
-<p><img alt="" class="center" src="/images/coin_toss_expt1.png"></p>
+<p><img alt="" class="center" src="./images/coin_toss_expt1.png"></p>
 <p>As expected it is generating 'Heads' and 'Tails' randomly with the number of tosses. But you can see that the number of 'Heads' is not exactly the half of the tosses. If we repeated this expt of one trial, we will get different numbers. So there will uncertainty in the fraction of heads.</p>
 <p>To understand that uncertainty, lets conduct a series of expt runs. For each run, we will conduct different trials consisting of different number of tosses and calculate the fraction of heads in each trial. </p>
 <p>The outline of our expt is as follows:</p>
@@ -252,7 +265,7 @@
 
 
 <p>This results in 
-<img alt="" class="center" src="/images/coin_toss_expt2.png"></p>
+<img alt="" class="center" src="./images/coin_toss_expt2.png"></p>
 <p>What do you see from this figure?</p>
 <p>Each datapoint is a result of trial. Each colored series is a expt run.</p>
 <p>1) Lets look at fraction of heads at a certain trial, it is sometimes above 0.5 and sometimes below 0.5 depending on the expt run.</p>
@@ -291,7 +304,7 @@
 </code></pre></div>
 
 
-<p><img alt="" class="center" src="/images/coin_toss_expt3.png"></p>
+<p><img alt="" class="center" src="./images/coin_toss_expt3.png"></p>
 <p>The code tried to fit the relationship between the uncertainty in fraction of heads and the number of tosses with a function of a form a/sqrt(n), where n is the number of tosses and a is constant. The fits looks pretty good, so we can conclude that it is following inverse of square root of n relationship. This is an important conclusion and can be also proved mathematically. It forms the basis of many statistical tests and parameters like standard errors and confidence intervals.</p>
 <p>So what does it means to say a coin has a probability of 0.5? If we have very large number of tosses in a trial, then we could expect the fraction of heads to be very close to a value of 0.5. </p>
 <p>Another interesting thing that we notice is... why did the curve fitting came up with a=0.5? Thats for another day.</p>
@@ -321,7 +334,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri ",
-  "url" : "",
+  "url" : ".",
   "image": "",
   "description": ""
 }
