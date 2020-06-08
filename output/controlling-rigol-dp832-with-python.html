@@ -10,20 +10,31 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="/theme/academicons-1.8.6/css/academicons.min.css">
-
-
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
 
 
+    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27406008-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three …" />
@@ -34,11 +45,11 @@
 <meta property="og:title" content="Controlling Rigol Dp832 with python"/>
 <meta property="og:description" content="DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. I got my hands on a RIGOL DP832 which is three …"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/controlling-rigol-dp832-with-python.html"/>
+<meta property="og:url" content="./controlling-rigol-dp832-with-python.html"/>
 <meta property="og:type" content="article"/>
 <meta property="article:published_time" content="2015-05-08 17:08:00-07:00"/>
 <meta property="article:modified_time" content=""/>
-<meta property="article:author" content="/author/juluribk.html">
+<meta property="article:author" content="./author/juluribk.html">
 <meta property="article:section" content="Electronics"/>
 <meta property="article:tag" content="Instrumentation"/>
 <meta property="article:tag" content="python"/>
@@ -50,11 +61,11 @@
 <body>
   <aside>
     <div>
-      <a href="">
-        <img src="/theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
       </a>
 
-      <h1><a href="">Bala Juluri</a></h1>
+      <h1><a href=".">Bala Juluri</a></h1>
 
     
 
@@ -98,13 +109,15 @@
   <main>
 
     <nav>
-      <a href="">    Home
+      <a href=".">    Home
 </a>
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
       <a href="/tags.html">Tags</a>
 
+      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
+</a>
 
     </nav>
 
@@ -113,7 +126,7 @@
       
     <h1 id="controlling-rigol-dp832-with-python">Controlling Rigol Dp832 with python</h1>
     <p>
-          Posted on Fri 08 May 2015 in <a href="/category/electronics.html">Electronics</a>
+          Posted on Fri 08 May 2015 in <a href="./category/electronics.html">Electronics</a>
 
 
     </p>
@@ -123,7 +136,7 @@
   <div>
     <p>DC power supplies are very handy for electronic projects. They help to apply bias/voltage to a device. Controlling it by a computer by a program is helpful in advanced projects where timing and accurate control is an issue. </p>
 <p>I got my hands on a RIGOL DP832 which is three channel (two 30V and one 5V) power supply and is programmable through SCPI commands. The device can be controlled by USB and rs232 (optionally by LAN). SCPI commands can be sent to the instruments using VISA interface. I used Python and pyvisa module to communicate with it. I wrote a class with basic functionality. Currently it has a console application and turning on and off at a  particular bias and current value on a specified channel.</p>
-<p><img alt="" src="/images/DP832.jpg" title="DP832"></p>
+<p><img alt="" src="./images/DP832.jpg" title="DP832"></p>
 <p>You can add more methods to the class for advanced features. You can see those commands in the <a href="http://www.batronix.com/pdf/Rigol/ProgrammingGuide/DP800_ProgrammingGuide_EN.pdf">programming manual</a>.</p>
 <div class = "alert alert-primary">
 <strong> Note: </strong> Download this gist from <a href = "https://gist.github.com/plasmon360/3204dc28deddeefe42d5"> my gihub </a>
@@ -223,8 +236,8 @@
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="/tag/instrumentation.html">Instrumentation</a>
-      <a href="/tag/python.html">python</a>
+      <a href="./tag/instrumentation.html">Instrumentation</a>
+      <a href="./tag/python.html">python</a>
     </p>
   </div>
 
@@ -248,7 +261,7 @@
   "@context" : "http://schema.org",
   "@type" : "Blog",
   "name": " Bala Juluri ",
-  "url" : "",
+  "url" : ".",
   "image": "",
   "description": ""
 }
