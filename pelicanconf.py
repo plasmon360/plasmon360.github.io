@@ -21,17 +21,12 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-'''
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
-'''
-
 # Social widget
-BIO = 'I love tinkering with python, electronics and woodworking.'
+BIO = 'I love tinkering with python, AI, electronics and woodworking.'
 
-SOCIAL = (
+HIDE_AUTHORS = True
+
+LINKs = (
             ('envelope','mailto:juluribk@gmail.com'),
             ( 'github','https://github.com/plasmon360'),
           ('linkedin', '#'),
@@ -58,7 +53,8 @@ MARKDOWN = {
 
 MAIN_MENU = True
 
-THEME = "Flex"
+# THEME = "Flex"
+THEME = "../pelican-alchemy/alchemy"
 
 #PYGMENTS_STYLE = 'monokai'
 
@@ -67,9 +63,6 @@ THEME = "Flex"
 
 
 MARKUP = ('md', 'ipynb')
-
-PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup']
 
 # if you create jupyter files in the content dir, snapshots are saved with the same
 # metadata. These need to be ignored.

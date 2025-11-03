@@ -11,36 +11,12 @@ The catch? It had display issues. When I connected the HDMI output to my monitor
 
 My goal isn't just to fix the display; it's to finally learn how NVIDIA GPUs work. I've used GPUs blindly within frameworks like PyTorch, never truly understanding their internal mechanics. While diving into CUDA (Compute Unified Device Architecture) programming isn't strictly necessary for learning deep learning or GenAI models, I have an itch I need to scratch!
 
-## Unveiling the Hardware
+### Unveiling the Hardware
 
 After successfully getting all the necessary drivers and prerequisites installed on the server, a quick run of nvidia-smi gave me the crucial details:
 
-```
-```
-+---------------------------------------------------------------------------------------+
-| NVIDIA-SMI 535.183.01          Driver Version: 535.183.01      CUDA Version: 12.2     |
-|-----------------------------------------+----------------------+----------------------+
-| GPU  Name                   Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp   Perf            Pwr:Usage/Cap |       Memory-Usage | GPU-Util  Compute M. |
-|                                             |                      |              MIG M. |
-|=========================================+======================+======================|
-|   0  NVIDIA GeForce GTX 1070          Off | 00000000:03:00.0 Off |                  N/A |
-| 28%   29C    P8                 5W / 151W |     15MiB /  8192MiB |      0%      Default | 
-|                                             |                      |                  N/A |
-+-----------------------------------------+----------------------+----------------------+
+![]({filename}/images/gtx_1070_nvidia_smi.png){.center}
 
-+---------------------------------------------------------------------------------------+
-| Processes:                                                                            |
-|  GPU  GI  CI       PID   Type   Process name                             GPU Memory |
-|       ID  ID                                                             Usage      |
-|=======================================================================================|
-|   0  N/A N/A      1070      G   /usr/lib/xorg/Xorg                             9MiB |
-|   0  N/A N/A      1356      G   /usr/bin/gnome-shell                           3MiB |
-+---------------------------------------------------------------------------------------+
-```
-
-
-```
 The output confirms I have a NVIDIA GeForce GTX 1070.
 
 After some research, I found that the GTX 1070 was launched back in June 2016 as part of NVIDIA’s Pascal architecture. While it's a few years old now, it’s likely overkill for my goal of just learning how GPUs work internally and how to program simple computations.
@@ -66,3 +42,5 @@ The core of any GPU compute task, including our low-level CUDA kernels (function
 GTX 1070 (part of the Pascal generation) does not have Tensor Cores. Tensor cores seems to more of recent addition in RTX series. Tensor Cores are specifically designed to accelerate matrix multiplication and accumulation operations, which are the fundamental building blocks of neural networks (Deep Learning). They seem to achieve massive speed-ups by performing these operations using mixed precision (e.g., multiplying matrices in FP16/BF16 but accumulating the results in FP32 to maintain accuracy).
 
 The lack of tensor cores is actually a benefit. I will be forced to use the standard CUDA Cores, which is the foundational skill of GPU programming. This gives me a pure, low-level starting point. 
+
+With the hardware mystery solved, my focus is entirely on the next steps: understanding the architecture and immediately launching into programming.
