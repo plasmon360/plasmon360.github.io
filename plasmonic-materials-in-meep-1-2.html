@@ -1,152 +1,78 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+  <title>  Plasmonic Materials in MEEP > 1.2 | Bala Juluri
+</title>
+  <link rel="canonical" href="./plasmonic-materials-in-meep-1-2.html">
 
 
-    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
-          href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" href="./theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./theme/css/fontawesome.min.css">
+  <link rel="stylesheet" href="./theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="./theme/css/theme.css">
 
-
-
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-
-
-
-
-  <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
-
-
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-27406008-1', 'auto');
-  ga('send', 'pageview');
-</script>
-
- 
-
-<meta name="author" content="juluribk" />
-<meta name="description" content="Here is how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep &gt;= 1. 2 changed the way materials are defined. Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . Please note that one can still use …" />
-<meta name="keywords" content="electromagnetism, FDTD, MEEP, octave, Plasmonics">
-
-
-  <meta property="og:site_name" content="Bala Juluri"/>
-  <meta property="og:title" content="Plasmonic Materials in MEEP &gt; 1.2"/>
-  <meta property="og:description" content="Here is how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep &gt;= 1. 2 changed the way materials are defined. Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . Please note that one can still use …"/>
-  <meta property="og:locale" content="en_US"/>
-  <meta property="og:url" content="./plasmonic-materials-in-meep-1-2.html"/>
-  <meta property="og:type" content="article"/>
-  <meta property="article:published_time" content="2015-06-13 16:59:00-07:00"/>
-  <meta property="article:modified_time" content=""/>
-  <meta property="article:author" content="./author/juluribk.html">
-  <meta property="article:section" content="Plasmonics"/>
-  <meta property="article:tag" content="electromagnetism"/>
-  <meta property="article:tag" content="FDTD"/>
-  <meta property="article:tag" content="MEEP"/>
-  <meta property="article:tag" content="octave"/>
-  <meta property="article:tag" content="Plasmonics"/>
-  <meta property="og:image" content="">
-
-  <title>Bala Juluri &ndash; Plasmonic Materials in MEEP &gt; 1.2</title>
+  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
+        href="plasmon360.github.io/feeds/all.atom.xml">
+  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
+        href="plasmon360.github.io/feeds/plasmonics.atom.xml">  
+  <meta name="description" content="Here is how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep >= 1. 2 changed the way materials are defined. Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . Please note that one can still use …">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o);
+      a.async = 1;
+      a.src = g;
+      m = s.getElementsByTagName(o)[0];
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-27406008-1', 'auto');
+    ga('send', 'pageview');
+  </script>
 
 
 </head>
-<body class="light-theme">
 
-<aside>
-  <div>
-    <a href="./">
-      <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
-    </a>
-
-    <h1>
-      <a href="./">Bala Juluri</a>
-    </h1>
-
-
-
-
-    <ul class="social">
-      <li>
-        <a class="sc-envelope"
-rel="me"           href="mailto:juluribk@gmail.com"
-           target="_blank">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-github"
-           href="https://github.com/plasmon360"
-           target="_blank">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-linkedin"
-           href="#"
-           target="_blank">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-stack-overflow"
-           href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity"
-           target="_blank">
-          <i class="fa-brands fa-stack-overflow"></i>
-        </a>
-      </li>
-      <li>
-        <a class="sc-google-scholar"
-           href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en"
-           target="_blank">
-          <i class="fa-brands fa-google-scholar"></i>
-        </a>
-      </li>
-    </ul>
+<body>
+  <header class="header">
+    <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <h1 class="title"><a href="./">Bala Juluri</a></h1>
   </div>
-
-</aside>
-  <main>
-
-<nav>
-  <a href="./">Home</a>
-
-  <a href="/archives.html">Archives</a>
-  <a href="/categories.html">Categories</a>
-  <a href="/tags.html">Tags</a>
-
-  <a href="plasmon360.github.io/feeds/all.atom.xml">Atom</a>
-
-</nav>
-
-<article class="single">
-  <header>
-      
-    <h1 id="plasmonic-materials-in-meep-1-2">Plasmonic Materials in MEEP > 1.2</h1>
-    <p>
-      Posted on Sat 13 June 2015 in <a href="./category/plasmonics.html">Plasmonics</a>
-
-    </p>
+</div>    </div>
   </header>
 
-
-  <div>
-    <p><a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP">Here is</a> how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep &gt;= 1. 2 changed the way materials are defined. </p>
+  <div class="main">
+    <div class="container">
+      <h1>  Plasmonic Materials in MEEP > 1.2
+</h1>
+      <hr>
+  <article class="article">
+    <header>
+      <ul class="list-inline">
+        <li class="list-inline-item text-muted" title="2015-06-13T16:59:00-07:00">
+          <i class="fas fa-clock"></i>
+          Sat 13 June 2015
+        </li>
+        <li class="list-inline-item">
+          <i class="fas fa-folder-open"></i>
+          <a href="./category/plasmonics.html">Plasmonics</a>
+        </li>
+          <li class="list-inline-item">
+            <i class="fas fa-tag"></i>
+              <a href="./tag/electromagnetism.html">#electromagnetism</a>,               <a href="./tag/fdtd.html">#FDTD</a>,               <a href="./tag/meep.html">#MEEP</a>,               <a href="./tag/octave.html">#octave</a>,               <a href="./tag/plasmonics.html">#Plasmonics</a>          </li>
+      </ul>
+    </header>
+    <div class="content">
+      <p><a href="http://juluribk.com/2011/04/27/plasmonic-materials-in-meep/" title="Plasmonic materials in MEEP">Here is</a> how I was implementing plasmonic materials in meep 1.1. Unlike Meep 1.1, Meep &gt;= 1. 2 changed the way materials are defined. </p>
 <p>Here I will describe how to change the material definition code from meep1.1 to meep 1.2 . Please note that one can still use the material definition written from Meep &lt;1.2 for Meep &gt;=1.2 but not vice versa.</p>
 <p><strong>Installation of Meep 1.2 on ubuntu</strong></p>
 <p>You can follow instructions given in <a href="http://juluribk.com/2013/07/20/installing-meep-1-2-on-ubuntu/" title="Installing Meep 1.2 on ubuntu">my previous post</a> to compile Meep 1.2 from the source code, but the procedure is outdated and one can use the recently pre-compiled meep packages (which is much easier)</p>
@@ -196,39 +122,26 @@ rel="me"           href="mailto:juluribk@gmail.com"
 </code></pre></div>
 
 <p>This seems to work fine for me. I used this new code to calculate the reflection from a thin silver film (like the way i did in my previous post) and it matches with the analytical calculation.</p>
-  </div>
-  <div class="tag-cloud">
-    <p>
-      <a href="./tag/electromagnetism.html">electromagnetism</a>
-      <a href="./tag/fdtd.html">FDTD</a>
-      <a href="./tag/meep.html">MEEP</a>
-      <a href="./tag/octave.html">octave</a>
-      <a href="./tag/plasmonics.html">Plasmonics</a>
-    </p>
+    </div>
+  </article>
+    </div>
   </div>
 
+  <footer class="footer">
+    <div class="container">
+<div class="row">
+  <ul class="col-sm-6 list-inline">
+    <li class="list-inline-item"><a href="./archives.html">Archives</a></li>
+    <li class="list-inline-item"><a href="./categories.html">Categories</a></li>
+      <li class="list-inline-item"><a href="./tags.html">Tags</a></li>
+  </ul>
+  <p class="col-sm-6 text-sm-right text-muted">
+    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
+    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+  </p>
+</div>    </div>
+  </footer>
 
-
-
-
-
-</article>
-
-<footer>
-<p>&copy;  </p>
-<p>
-Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p></footer>  </main>
-
-<script type="application/ld+json">
-{
-  "@context" : "http://schema.org",
-  "@type" : "Blog",
-  "name": " Bala Juluri ",
-  "url" : ".",
-  "image": "",
-  "description": ""
-}
-</script>
 </body>
+
 </html>
