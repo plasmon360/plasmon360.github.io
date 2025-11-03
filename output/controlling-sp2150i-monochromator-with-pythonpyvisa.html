@@ -6,25 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
+  <meta name="robots" content="" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="./theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
-
-
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
-<!-- Google Analytics -->
+
+  <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+
+
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -34,98 +37,104 @@
   ga('create', 'UA-27406008-1', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
+
+ 
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="Monochromator is used in optics research where a narrow bandwidth of light is required to be illuminated on a sample. I work with Princeton Instruments Acton SP2150i and needed a python program to control it. I found the manual here and on page 9-10, I saw the serial commands for …" />
 <meta name="keywords" content="">
 
 
-<meta property="og:site_name" content="Bala Juluri"/>
-<meta property="og:title" content="Controlling SP2150i monochromator with Python/PyVisa"/>
-<meta property="og:description" content="Monochromator is used in optics research where a narrow bandwidth of light is required to be illuminated on a sample. I work with Princeton Instruments Acton SP2150i and needed a python program to control it. I found the manual here and on page 9-10, I saw the serial commands for …"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./controlling-sp2150i-monochromator-with-pythonpyvisa.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2014-09-19 18:28:00-07:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Electronics"/>
-<meta property="og:image" content="">
+  <meta property="og:site_name" content="Bala Juluri"/>
+  <meta property="og:title" content="Controlling SP2150i monochromator with Python/PyVisa"/>
+  <meta property="og:description" content="Monochromator is used in optics research where a narrow bandwidth of light is required to be illuminated on a sample. I work with Princeton Instruments Acton SP2150i and needed a python program to control it. I found the manual here and on page 9-10, I saw the serial commands for …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="./controlling-sp2150i-monochromator-with-pythonpyvisa.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2014-09-19 18:28:00-07:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="./author/juluribk.html">
+  <meta property="article:section" content="Electronics"/>
+  <meta property="og:image" content="">
 
   <title>Bala Juluri &ndash; Controlling SP2150i monochromator with Python/PyVisa</title>
 
+
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
-      </a>
+<body class="light-theme">
 
-      <h1><a href=".">Bala Juluri</a></h1>
+<aside>
+  <div>
+    <a href="./">
+      <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+    </a>
 
-    
-
-     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
-
-
-      <ul class="social">
-          <li>
-            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="#" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
-            <i class="fab fa-stack-overflow">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="ai ai-google-scholar">
-            </i>
-          </a></li>
-      </ul>
-
-
-    </div>
+    <h1>
+      <a href="./">Bala Juluri</a>
+    </h1>
 
 
 
-  </aside>
+
+    <ul class="social">
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:juluribk@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/plasmon360"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="#"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-stack-overflow"
+           href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity"
+           target="_blank">
+          <i class="fa-brands fa-stack-overflow"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-google-scholar"
+           href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en"
+           target="_blank">
+          <i class="fa-brands fa-google-scholar"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
   <main>
 
-    <nav>
-      <a href=".">    Home
-</a>
+<nav>
+  <a href="./">Home</a>
 
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
 
-      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
-</a>
+  <a href="plasmon360.github.io/feeds/all.atom.xml">Atom</a>
 
-    </nav>
+</nav>
 
 <article class="single">
   <header>
       
     <h1 id="controlling-sp2150i-monochromator-with-pythonpyvisa">Controlling SP2150i monochromator with Python/PyVisa</h1>
     <p>
-          Posted on Fri 19 September 2014 in <a href="./category/electronics.html">Electronics</a>
-
+      Posted on Fri 19 September 2014 in <a href="./category/electronics.html">Electronics</a>
 
     </p>
   </header>
@@ -156,7 +165,7 @@ I downloaded the exe from National Instruments and installed it. This should pro
 <p> <strong>Note: </strong>You can download the code from <a href = "https://gist.github.com/plasmon360/c327e75bcea9f256634c44a36b9fa6b0"> my github account </a></p>
 </div>
 
-<div class="highlight python"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">@author: Bala Krishna Juluri</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -240,7 +249,7 @@ I downloaded the exe from National Instruments and installed it. This should pro
            <span class="n">s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;MONO-?DONE&#39;</span><span class="p">)</span>
            <span class="n">char</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
            <span class="c1">#print &quot;Current wavelength is &quot;+ self.m.ask(&#39;?NM&#39;)</span>
-           <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">)</span>
+           <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">.2</span><span class="p">)</span>
        <span class="nb">print</span> <span class="s2">&quot;Scan done?: &quot;</span><span class="o">+</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;No&#39;</span>
        <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask</span><span class="p">(</span><span class="s1">&#39;MONO-STOP&#39;</span><span class="p">)</span>
        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="o">.</span><span class="n">ask_for_values</span><span class="p">(</span><span class="s1">&#39;?NM&#39;</span><span class="p">)</span>
@@ -296,16 +305,14 @@ I downloaded the exe from National Instruments and installed it. This should pro
 
 
 
+
 </article>
 
-    <footer>
+<footer>
 <p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
-
-
-
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
 
 <script type="application/ld+json">
 {
@@ -317,6 +324,5 @@ I downloaded the exe from National Instruments and installed it. This should pro
   "description": ""
 }
 </script>
-
 </body>
 </html>

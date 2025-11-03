@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "blog"
+version = "0.1.0"
+description = ""
+authors = ["Bala Juluri"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pelican = "^4.8.0"
+markdown = "^3.4.4"
+ghp-import = "^2.1.0"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

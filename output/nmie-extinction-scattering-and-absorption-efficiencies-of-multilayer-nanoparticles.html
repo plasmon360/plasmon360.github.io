@@ -6,25 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
+  <meta name="robots" content="" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="./theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
-
-
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
-<!-- Google Analytics -->
+
+  <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+
+
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -34,103 +37,109 @@
   ga('create', 'UA-27406008-1', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
+
+ 
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. Since 2009, I have been a regular user of Nanohub.org. www.Nanohub.orgis a website that provides …" />
 <meta name="keywords" content="electromagnetism, Free Software, Nanohub.org, Plasmonics, DDSCAT">
 
 
-<meta property="og:site_name" content="Bala Juluri"/>
-<meta property="og:title" content="Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles"/>
-<meta property="og:description" content="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. Since 2009, I have been a regular user of Nanohub.org. www.Nanohub.orgis a website that provides …"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2010-05-11 21:37:00-07:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Plasmonics"/>
-<meta property="article:tag" content="electromagnetism"/>
-<meta property="article:tag" content="Free Software"/>
-<meta property="article:tag" content="Nanohub.org"/>
-<meta property="article:tag" content="Plasmonics"/>
-<meta property="article:tag" content="DDSCAT"/>
-<meta property="og:image" content="">
+  <meta property="og:site_name" content="Bala Juluri"/>
+  <meta property="og:title" content="Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles"/>
+  <meta property="og:description" content="nmie tool on Nanohub.org. This tool calculates the extinction, scattering, and absorption efficiencies of single nanoparticle (1 layer),core-shell nanoparticle (2 layer) and nanomatryushka nanoparticle (3 layer) using MIE formulation. Since 2009, I have been a regular user of Nanohub.org. www.Nanohub.orgis a website that provides …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="./nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2010-05-11 21:37:00-07:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="./author/juluribk.html">
+  <meta property="article:section" content="Plasmonics"/>
+  <meta property="article:tag" content="electromagnetism"/>
+  <meta property="article:tag" content="Free Software"/>
+  <meta property="article:tag" content="Nanohub.org"/>
+  <meta property="article:tag" content="Plasmonics"/>
+  <meta property="article:tag" content="DDSCAT"/>
+  <meta property="og:image" content="">
 
   <title>Bala Juluri &ndash; Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles</title>
 
+
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
-      </a>
+<body class="light-theme">
 
-      <h1><a href=".">Bala Juluri</a></h1>
+<aside>
+  <div>
+    <a href="./">
+      <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+    </a>
 
-    
-
-     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
-
-
-      <ul class="social">
-          <li>
-            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="#" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
-            <i class="fab fa-stack-overflow">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="ai ai-google-scholar">
-            </i>
-          </a></li>
-      </ul>
-
-
-    </div>
+    <h1>
+      <a href="./">Bala Juluri</a>
+    </h1>
 
 
 
-  </aside>
+
+    <ul class="social">
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:juluribk@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/plasmon360"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="#"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-stack-overflow"
+           href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity"
+           target="_blank">
+          <i class="fa-brands fa-stack-overflow"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-google-scholar"
+           href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en"
+           target="_blank">
+          <i class="fa-brands fa-google-scholar"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
   <main>
 
-    <nav>
-      <a href=".">    Home
-</a>
+<nav>
+  <a href="./">Home</a>
 
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
 
-      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
-</a>
+  <a href="plasmon360.github.io/feeds/all.atom.xml">Atom</a>
 
-    </nav>
+</nav>
 
 <article class="single">
   <header>
       
     <h1 id="nmie-extinction-scattering-and-absorption-efficiencies-of-multilayer-nanoparticles">Nmie: Extinction, Scattering and Absorption efficiencies of multilayer nanoparticles</h1>
     <p>
-          Posted on Tue 11 May 2010 in <a href="./category/plasmonics.html">Plasmonics</a>
-
+      Posted on Tue 11 May 2010 in <a href="./category/plasmonics.html">Plasmonics</a>
 
     </p>
   </header>
@@ -147,8 +156,9 @@
 <p>The engine is based on nmie code distributed by Dr. Nikolai Voshchinnikov http://www.astro.spbu.ru/staff/ilin2/SOFTWARE/nmie0.html. The nmie code can take layers more than 3, however I have used the code for three layers which is more common in plasmonics research. The recursive algorithm of Wu &amp; Wang are used. Fore more details see</p>
 <p>1) Wu Z.P., Wang Y.P., Electromagnetic scattering for multilaered spheres using recursive algorithms, Radio Science 1991. V. 26. P. 1393-1401.</p>
 <p>2) Voshchinnikov N.V., Mathis J.S., Calculating Cross Sections of Composite Interstellar Grains, Astrophys. J. 1999. V. 526. 3) Johnson PB, Christy RW (1972) Phys Rev B 6,4370</p>
-<p>The demo for this tool is here:<br>
-<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="src" value="http://www.youtube.com/v/Yp2_N1zj5oU&amp;hl=en_US&amp;fs=1&amp;"></param><param name="allowfullscreen" value="true"></param><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/Yp2_N1zj5oU&amp;hl=en_US&amp;fs=1&amp;" allowscriptaccess="always" allowfullscreen="true"></embed></object></p>
+<p>The demo for this tool is here:  </p>
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="480" height="385" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="src" value="http://www.youtube.com/v/Yp2_N1zj5oU&amp;hl=en_US&amp;fs=1&amp;"></param><param name="allowfullscreen" value="true"></param><embed type="application/x-shockwave-flash" width="480" height="385" src="http://www.youtube.com/v/Yp2_N1zj5oU&amp;hl=en_US&amp;fs=1&amp;" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
 <p>If you have any questions/comments/bugs on this tool, please let me know either at the nanohub website or here in the comments section.</p>
   </div>
   <div class="tag-cloud">
@@ -165,16 +175,14 @@
 
 
 
+
 </article>
 
-    <footer>
+<footer>
 <p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
-
-
-
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
 
 <script type="application/ld+json">
 {
@@ -186,6 +194,5 @@
   "description": ""
 }
 </script>
-
 </body>
 </html>

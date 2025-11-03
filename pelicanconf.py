@@ -8,7 +8,7 @@ SITETITLE = "Bala Juluri"
 SITESUBTITLE = ""
 SITEURL = ''
 PATH = 'content'
-STATIC_PATHS=['images','zip','pdfs']
+STATIC_PATHS=['images','zip','pdfTexts']
 TIMEZONE = 'America/Los_Angeles'
 
 DEFAULT_LANG = 'en'
