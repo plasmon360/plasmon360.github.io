@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Bala Juluri - Electronics</title><link href="plasmon360.github.io/" rel="alternate"></link><link href="plasmon360.github.io/feeds/electronics.atom.xml" rel="self"></link><id>plasmon360.github.io/</id><updated>2019-12-04T18:28:00-08:00</updated><subtitle></subtitle><entry><title>Improving code using getters and setters in Python</title><link href="plasmon360.github.io/Improving%20code%20with%20getters%20and%20setters%20in%20python.html" rel="alternate"></link><published>2019-12-04T18:28:00-08:00</published><updated>2019-12-04T18:28:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2019-12-04:plasmon360.github.io/Improving code with getters and setters in python.html</id><summary type="html">&lt;p&gt;As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a &lt;a href="plasmon360.github.io/controlling-sp2150i-monochromator-with-pythonpyvisa.html"&gt;Princeton Instruments Acton SP2150i Monochromator&lt;/a&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Bala Juluri - Electronics</title><link href="plasmon360.github.io/" rel="alternate"></link><link href="plasmon360.github.io/feeds/electronics.atom.xml" rel="self"></link><id>plasmon360.github.io/</id><updated>2019-12-04T18:28:00-08:00</updated><entry><title>Improving code using getters and setters in Python</title><link href="plasmon360.github.io/Improving%20code%20with%20getters%20and%20setters%20in%20python.html" rel="alternate"></link><published>2019-12-04T18:28:00-08:00</published><updated>2019-12-04T18:28:00-08:00</updated><author><name>juluribk</name></author><id>tag:None,2019-12-04:plasmon360.github.io/Improving code with getters and setters in python.html</id><summary type="html">&lt;p&gt;As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a &lt;a href="plasmon360.github.io/controlling-sp2150i-monochromator-with-pythonpyvisa.html"&gt;Princeton Instruments Acton SP2150i Monochromator&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;As I looked at the code, I noticed methods in the class such as &lt;code&gt;get_nm()&lt;/code&gt; and &lt;code&gt;set_nm()&lt;/code&gt;. I …&lt;/p&gt;</summary><content type="html">&lt;p&gt;As I was migrating blog posts from my wordpress website to pelican based static website, I noticed an old python code written for communicating and controlling a &lt;a href="plasmon360.github.io/controlling-sp2150i-monochromator-with-pythonpyvisa.html"&gt;Princeton Instruments Acton SP2150i Monochromator&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;As I looked at the code, I noticed methods in the class such as &lt;code&gt;get_nm()&lt;/code&gt; and &lt;code&gt;set_nm()&lt;/code&gt;. I was not aware of the functionality of getters and setters in Python when I was writing that code. Since then, I have been using getters and setters occasionally and thought everyone using Python should be knowing about them.&lt;/p&gt;
 &lt;p&gt;Lets simply the original code to only few methods and implement getters and setters functionality.&lt;/p&gt;
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;visa&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;visa&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SP2150i&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -39,7 +39,6 @@
     &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;set_filter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# this applies the 320 nm filter in the beginning&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-
 &lt;p&gt;There are many filters in the instrument and one can get the current filter number or set a different filter number. &lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;get_filter(self)&lt;/code&gt; method returns an attribute &lt;code&gt;self.filter&lt;/code&gt; by calling &lt;code&gt;ask_for_values&lt;/code&gt; pyvisa method. &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;self.filter&lt;/code&gt; holds the current filter value. &lt;code&gt;set_filter(num)&lt;/code&gt; uses pyvisa's 'ask' method (think of ask here as writing to instrument) to set the filter to a different number. In this method I also check to make sure filter 'num' be always less than 6.&lt;/p&gt;
@@ -47,7 +46,7 @@
 &lt;p&gt;It would be better if the user can access the current filter by typing &lt;code&gt;a.filter&lt;/code&gt; and it should return the current filter num. This can be achieved by using a "property" decorator. The "property" decorator makes a method behave like an attribute. So if I added "property" decorator to &lt;code&gt;def filter(self): ...&lt;/code&gt;, then when user prints or accesses &lt;code&gt;a.filter&lt;/code&gt; then it executes &lt;code&gt;a.filter()&lt;/code&gt; method. In this method, we can write our logic to get the current filter in the monochromator.&lt;/p&gt;
 &lt;p&gt;It would be also better if the  user can use &lt;code&gt;self.filter = 3&lt;/code&gt;, which will set the filter to 3. This can be achieved with "filter.setter" decorator on top of &lt;code&gt;def filter(self,num):&lt;/code&gt; method. &lt;/p&gt;
 &lt;p&gt;So the new code is as follows. &lt;/p&gt;
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;visa&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;visa&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;SP2150i&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -87,7 +86,6 @@
     &lt;span class="c1"&gt;# set the filter to unacceptable number&lt;/span&gt;
     &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="c1"&gt;# this will raise an exception.&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
 
 &lt;p&gt;The getters and setters functionality is very useful to protect an attribute (data encapsulation). I don't think in this particular code, we need to declare &lt;code&gt;self._filter&lt;/code&gt; (protected attribute) because the value of &lt;code&gt;self.filter&lt;/code&gt; is always being set by instrument or returned by instrument. User does not have access to it through the object directly. In the case, where we indeed need data protection, we should do &lt;code&gt;self._filter&lt;/code&gt; as suggested &lt;a href="https://stackoverflow.com/a/36943813/1753919"&gt;here on stackoverflow&lt;/a&gt;. In this answer, you can also see an additional deleter decorator being used for a different purpose.&lt;/p&gt;
 &lt;p&gt;There are many areas where the code can be improved. Some of them are:&lt;/p&gt;
@@ -159,7 +157,7 @@ The same code should be uploaded to both remote and doorbell arduino's.
 &lt;strong&gt; Note: &lt;/strong&gt; Download this gist from &lt;a href = "https://gist.github.com/plasmon360/3204dc28deddeefe42d5"&gt; my gihub &lt;/a&gt;
 &lt;/div&gt;
 
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;Created on Sat Dec 21 13:57:32 2013&lt;/span&gt;
 
 &lt;span class="sd"&gt;@author: bjuluri&lt;/span&gt;
@@ -197,7 +195,7 @@ The same code should be uploaded to both remote and doorbell arduino's.
             &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; recieved. An Error occured: &amp;#39;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;reset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;resets the instrument, registers,buffers&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;resets the instrument, registers,buffers&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;*RST&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -220,7 +218,7 @@ The same code should be uploaded to both remote and doorbell arduino's.
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mywrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;:OUTP CH&lt;/span&gt;&lt;span class="si"&gt;{channel}&lt;/span&gt;&lt;span class="s1"&gt;,ON&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;channel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;channel&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;console&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;        opens a console to send commands. See the commands in the user manual.&lt;/span&gt;
 
 &lt;span class="sd"&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
@@ -384,7 +382,7 @@ I downloaded the exe from National Instruments and installed it. This should pro
 &lt;p&gt; &lt;strong&gt;Note: &lt;/strong&gt;You can download the code from &lt;a href = "https://gist.github.com/plasmon360/c327e75bcea9f256634c44a36b9fa6b0"&gt; my github account &lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div class="highlight python"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 &lt;span class="sd"&gt;@author: Bala Krishna Juluri&lt;/span&gt;
 &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
 
@@ -468,7 +466,7 @@ I downloaded the exe from National Instruments and installed it. This should pro
            &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MONO-?DONE&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
            &lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
            &lt;span class="c1"&gt;#print &amp;quot;Current wavelength is &amp;quot;+ self.m.ask(&amp;#39;?NM&amp;#39;)&lt;/span&gt;
-           &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+           &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;.2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
        &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Scan done?: &amp;quot;&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;yes&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;
        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;MONO-STOP&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ask_for_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;?NM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -518,7 +516,7 @@ I downloaded the exe from National Instruments and installed it. This should pro
 &lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/Van_der_Paw_correction_factor-300x300.png"&gt;&lt;/p&gt;
 &lt;p&gt;This figure was produced by the octave code shown below. &lt;/p&gt;
 &lt;p&gt;The raw data can be &lt;a href="plasmon360.github.io/images/van_der_pauw_correction_factor.csv"&gt;downloaded from here&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight matlab"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% This octave/matlab code calculates the correction factor,f as a function&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;% This octave/matlab code calculates the correction factor,f as a function&lt;/span&gt;
 &lt;span class="c"&gt;% of Rmnop/Rnopm. This correcton factor will be used in calculation of sheet&lt;/span&gt;
 &lt;span class="c"&gt;% resistance/resistivity of thin films.&lt;/span&gt;
 
@@ -526,19 +524,19 @@ I downloaded the exe from National Instruments and installed it. This should pro
 &lt;span class="c"&gt;% the resistivity and hall coefficients of Lamellae of arbitrary shape,&lt;/span&gt;
 &lt;span class="c"&gt;% Philips Technical Review, Vol 26, 220.&lt;/span&gt;
 
-&lt;span class="n"&gt;clear &lt;/span&gt;&lt;span class="s"&gt;all&lt;/span&gt;&lt;span class="p"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;close &lt;/span&gt;&lt;span class="s"&gt;all&lt;/span&gt;&lt;span class="p"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt;  &lt;span class="nb"&gt;logspace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;
+&lt;span class="nb"&gt;clear&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;all&lt;/span&gt;
+&lt;span class="nb"&gt;close&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;all&lt;/span&gt;
+&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nb"&gt;logspace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
-&lt;span class="n"&gt;for &lt;/span&gt;&lt;span class="s"&gt;i=1:length(x)&lt;/span&gt;&lt;span class="p"&gt;&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;length&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;Lp&lt;/span&gt;&lt;span class="p"&gt;=@(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nb"&gt;cosh&lt;/span&gt;&lt;span class="p"&gt;(((&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;./&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nb"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nb"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
-&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;fsolve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Lp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;&lt;span class="n"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;end&lt;/span&gt;
+&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;fsolve&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Lp&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mf"&gt;0.5&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
 
-&lt;span class="s"&gt;semilogx(x,F,&amp;#39;-o&amp;#39;)&lt;/span&gt;&lt;span class="p"&gt;&lt;/span&gt;
-&lt;span class="n"&gt;xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;R_{RM,OP}/R_{NO,PM}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Correction Factor (f)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;minor&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;van der Pauw Correction factors for resistivity measurements&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-&lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Van_der_Paw_correction_factor.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-dpng&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-r200&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-S600,600&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nb"&gt;semilogx&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-o&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;xlabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;R_{RM,OP}/R_{NO,PM}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;ylabel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Correction Factor (f)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;grid&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;minor&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;van der Pauw Correction factors for resistivity measurements&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;Van_der_Paw_correction_factor.png&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-dpng&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-r200&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;-S600,600&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Electronics"></category></entry></feed>

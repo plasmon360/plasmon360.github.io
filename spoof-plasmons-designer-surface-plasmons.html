@@ -6,25 +6,28 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="" />
+  <meta name="robots" content="" />
 
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
-  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
-  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
 
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="./theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
   <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
-  <link rel="stylesheet" type="text/css" href="./theme/academicons-1.8.6/css/academicons.min.css">
-
-
-    <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
 
 
 
-<!-- Google Analytics -->
+
+  <link href="plasmon360.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Bala Juluri Atom">
+
+
 <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -34,100 +37,106 @@
   ga('create', 'UA-27406008-1', 'auto');
   ga('send', 'pageview');
 </script>
-<!-- End Google Analytics -->
+
+ 
 
 <meta name="author" content="juluribk" />
 <meta name="description" content="Aim of this article/post: To 1) introduce the concept of Designer surface plasmons or Spoof plasmons and 2) Dispersion relations and Visualization of the fields using MEEP code. (Some of the text/simulations are taken from my paper in the area of DSPs.) Surface Plasmons are electromagnetic waves that …" />
 <meta name="keywords" content="MEEP, FDTD">
 
 
-<meta property="og:site_name" content="Bala Juluri"/>
-<meta property="og:title" content="Spoof Plasmons / Designer Surface Plasmons"/>
-<meta property="og:description" content="Aim of this article/post: To 1) introduce the concept of Designer surface plasmons or Spoof plasmons and 2) Dispersion relations and Visualization of the fields using MEEP code. (Some of the text/simulations are taken from my paper in the area of DSPs.) Surface Plasmons are electromagnetic waves that …"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="./spoof-plasmons-designer-surface-plasmons.html"/>
-<meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2010-10-07 14:28:00-07:00"/>
-<meta property="article:modified_time" content=""/>
-<meta property="article:author" content="./author/juluribk.html">
-<meta property="article:section" content="Plasmonics"/>
-<meta property="article:tag" content="MEEP"/>
-<meta property="article:tag" content="FDTD"/>
-<meta property="og:image" content="">
+  <meta property="og:site_name" content="Bala Juluri"/>
+  <meta property="og:title" content="Spoof Plasmons / Designer Surface Plasmons"/>
+  <meta property="og:description" content="Aim of this article/post: To 1) introduce the concept of Designer surface plasmons or Spoof plasmons and 2) Dispersion relations and Visualization of the fields using MEEP code. (Some of the text/simulations are taken from my paper in the area of DSPs.) Surface Plasmons are electromagnetic waves that …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="./spoof-plasmons-designer-surface-plasmons.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2010-10-07 14:28:00-07:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="./author/juluribk.html">
+  <meta property="article:section" content="Plasmonics"/>
+  <meta property="article:tag" content="MEEP"/>
+  <meta property="article:tag" content="FDTD"/>
+  <meta property="og:image" content="">
 
   <title>Bala Juluri &ndash; Spoof Plasmons / Designer Surface Plasmons</title>
 
+
 </head>
-<body>
-  <aside>
-    <div>
-      <a href=".">
-        <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
-      </a>
+<body class="light-theme">
 
-      <h1><a href=".">Bala Juluri</a></h1>
+<aside>
+  <div>
+    <a href="./">
+      <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+    </a>
 
-    
-
-     <p class="lead">I love tinkering with python, electronics and woodworking. </p>
-
-
-      <ul class="social">
-          <li>
-            <a  class="sc-envelope" href="mailto:juluribk@gmail.com" target="_blank">
-            <i class="fas fa-envelope">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-github" href="https://github.com/plasmon360" target="_blank">
-            <i class="fab fa-github">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-linkedin" href="#" target="_blank">
-            <i class="fab fa-linkedin">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-stack-overflow" href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity" target="_blank">
-            <i class="fab fa-stack-overflow">
-            </i>
-          </a></li>
-          <li>
-            <a  class="sc-google-scholar" href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en" target="_blank">
-            <i class="ai ai-google-scholar">
-            </i>
-          </a></li>
-      </ul>
-
-
-    </div>
+    <h1>
+      <a href="./">Bala Juluri</a>
+    </h1>
 
 
 
-  </aside>
+
+    <ul class="social">
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:juluribk@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/plasmon360"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="#"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-stack-overflow"
+           href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity"
+           target="_blank">
+          <i class="fa-brands fa-stack-overflow"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-google-scholar"
+           href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en"
+           target="_blank">
+          <i class="fa-brands fa-google-scholar"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
   <main>
 
-    <nav>
-      <a href=".">    Home
-</a>
+<nav>
+  <a href="./">Home</a>
 
-      <a href="/archives.html">Archives</a>
-      <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
 
-      <a href="plasmon360.github.io/feeds/all.atom.xml">    Atom
-</a>
+  <a href="plasmon360.github.io/feeds/all.atom.xml">Atom</a>
 
-    </nav>
+</nav>
 
 <article class="single">
   <header>
       
     <h1 id="spoof-plasmons-designer-surface-plasmons">Spoof Plasmons / Designer Surface Plasmons</h1>
     <p>
-          Posted on Thu 07 October 2010 in <a href="./category/plasmonics.html">Plasmonics</a>
-
+      Posted on Thu 07 October 2010 in <a href="./category/plasmonics.html">Plasmonics</a>
 
     </p>
   </header>
@@ -139,8 +148,10 @@
 <p>Structured PEC surfaces and the excited DSPs have recently garnered interest within the photonics community, as a new platform to engineer surface-bound states of a wide frequency range.  An important example is the guiding of terahertz-range radiation  in the form of DSPs. This enables the application of terahertz plasmonics to near-field imaging, sensing, and spectroscopy. A prime advantage of DSP is that, unlike conventional SP, the propagation of these waves can be controlled by engineering the material-independent, perceived group index. PEC structures have been engineered to guide DSPs of speci?c terahertz-range frequencies. To know more about <a href="http://www.esm.psu.edu/wiki/_media/research%3Ajuh17%3Apublication%3Abkjuluri_oe_2009.pdf">DSP's and relevant references, see references in my paper on DSP's here</a>.</p>
 <p>In the figure below, I show how DSP's are excited. I also show numerically calculated dispersion curves and fields. These were obtained using freely available finite difference time domain simulation software, MEEP.</p>
 <p>[caption id="attachment_624" align="aligncenter" width="502"]<a href="http://juluribk.com/wp-content/uploads/2010/10/band_structure.png"><img alt="" class="size-large wp-image-624" height="158" src="http://juluribk.com/wp-content/uploads/2010/10/band_structure-1024x321.png" title="Designer Surface Plasmons" width="502"></a> Schematic shows the excitation of Designer surface plasmons (DSPS) (left). Inset shows the fields (Ey and Ex). Dispersion relationship of these waves (right))[/caption]</p>
-<p><object width="240" height="192" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="src" value="http://www.youtube.com/v/YxaB9wwXJ2g?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6"></param><param name="allowfullscreen" value="true"></param><embed width="240" height="192" type="application/x-shockwave-flash" src="http://www.youtube.com/v/YxaB9wwXJ2g?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6" allowfullscreen="true" allowscriptaccess="always" allowfullscreen="true"></embed></object></p>
-<p><object width="240" height="192" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="src" value="http://www.youtube.com/v/VAM9r8EV1_I?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6"></param><param name="allowfullscreen" value="true"></param><embed width="240" height="192" type="application/x-shockwave-flash" src="http://www.youtube.com/v/VAM9r8EV1_I?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6" allowfullscreen="true" allowscriptaccess="always" allowfullscreen="true"></embed></object></p>
+<object width="240" height="192" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="src" value="http://www.youtube.com/v/YxaB9wwXJ2g?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6"></param><param name="allowfullscreen" value="true"></param><embed width="240" height="192" type="application/x-shockwave-flash" src="http://www.youtube.com/v/YxaB9wwXJ2g?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6" allowfullscreen="true" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
+<object width="240" height="192" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="src" value="http://www.youtube.com/v/VAM9r8EV1_I?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6"></param><param name="allowfullscreen" value="true"></param><embed width="240" height="192" type="application/x-shockwave-flash" src="http://www.youtube.com/v/VAM9r8EV1_I?fs=1&amp;hl=en_US&amp;color1=0x2b405b&amp;color2=0x6b8ab6" allowfullscreen="true" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+
 <p>[Update on May 2 2013:]{style="color: #ff0000;"} (<a href="http://juluribk.com/wp-content/uploads/2010/10/Spoof_plasmons_Two-dimensional-unit-cell.zip">Here is my project file</a>)</p>
   </div>
   <div class="tag-cloud">
@@ -154,16 +165,14 @@
 
 
 
+
 </article>
 
-    <footer>
+<footer>
 <p>&copy;  </p>
-<p>    Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
-</p>    </footer>
-  </main>
-
-
-
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
 
 <script type="application/ld+json">
 {
@@ -175,6 +184,5 @@
   "description": ""
 }
 </script>
-
 </body>
 </html>
