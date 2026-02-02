@@ -1,115 +1,351 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
 
-  <title>  Knowing my GPU | Bala Juluri
-</title>
-  <link rel="canonical" href="./knowing-my-gpu.html">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
 
-  <link rel="stylesheet" href="./theme/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./theme/css/fontawesome.min.css">
-  <link rel="stylesheet" href="./theme/css/pygments/default.min.css">
-  <link rel="stylesheet" href="./theme/css/theme.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="./theme/pygments/github.min.css">
 
-  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
-        href="plasmon360.github.io/feeds/all.atom.xml">
-  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
-        href="plasmon360.github.io/feeds/gpu-c.atom.xml">  
-  <meta name="description" content="It's been quite some time since my last blog post. Work and life have kept me busy, and the rise of GenAI has made things especially hectic at work. Longing for a break from my routine, I decided to try something different and started tinkering with a free gaming PC …">
-  <script>
-    (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o);
-      a.async = 1;
-      a.src = g;
-      m = s.getElementsByTagName(o)[0];
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-27406008-1', 'auto');
-    ga('send', 'pageview');
-  </script>
+
+
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+  <link rel="stylesheet" type="text/css" href="./custom.css">
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Bala Juluri" />
+<meta name="description" content="Free Workstation? 🙋‍♂️ Count me in! I picked the free gaming workstation. Surprise twist—the HDMI output gave me no signal. Of course. The machine was a box of mysteries, but with an NVIDIA sticker on it, so I had a good hunch about the GPU. I wasn&#39;t trying to build …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="Bala Juluri"/>
+  <meta property="og:title" content="Learning CUDA: Workstation from Hell — Adventures with a Free GTX 1070"/>
+  <meta property="og:description" content="Free Workstation? 🙋‍♂️ Count me in! I picked the free gaming workstation. Surprise twist—the HDMI output gave me no signal. Of course. The machine was a box of mysteries, but with an NVIDIA sticker on it, so I had a good hunch about the GPU. I wasn&#39;t trying to build …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="./knowing-my-gpu.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2026-02-01 00:00:00-08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="./author/bala-juluri.html">
+  <meta property="article:section" content="GPU, C/C++"/>
+  <meta property="og:image" content="">
+
+  <title>Bala Juluri &ndash; Learning CUDA: Workstation from Hell — Adventures with a Free GTX 1070</title>
 
 
 </head>
+<body class="light-theme">
 
-<body>
-  <header class="header">
-    <div class="container">
-<div class="row">
-  <div class="col-sm-12">
-    <h1 class="title"><a href="./">Bala Juluri</a></h1>
+<aside>
+  <div>
+    <a href="./">
+      <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+    </a>
+
+    <h1>
+      <a href="./">Bala Juluri</a>
+    </h1>
+
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:juluribk@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/plasmon360"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="#"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-stack-overflow"
+           href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity"
+           target="_blank">
+          <i class="fa-brands fa-stack-overflow"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-google-scholar"
+           href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en"
+           target="_blank">
+          <i class="fa-brands fa-google-scholar"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-</div>    </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="./">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="knowing-my-gpu">Learning CUDA: Workstation from Hell — Adventures with a Free GTX 1070</h1>
+    <p>
+      Posted on Sun 01 February 2026 in <a href="./category/gpu-cc.html">GPU, C/C++</a>
+
+    </p>
   </header>
 
-  <div class="main">
-    <div class="container">
-      <h1>  Knowing my GPU
-</h1>
-      <hr>
-  <article class="article">
-    <header>
-      <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2025-11-01T00:00:00-07:00">
-          <i class="fas fa-clock"></i>
-          Sat 01 November 2025
-        </li>
-        <li class="list-inline-item">
-          <i class="fas fa-folder-open"></i>
-          <a href="./category/gpu-c.html">GPU, C</a>
-        </li>
-      </ul>
-    </header>
-    <div class="content">
-      <p>It's been quite some time since my last blog post. Work and life have kept me busy, and the rise of GenAI has made things especially hectic at work. Longing for a break from my routine, I decided to try something different and started tinkering with a free gaming PC someone gave me.</p>
-<p>The catch? It had display issues. When I connected the HDMI output to my monitor, I got no signal—which explains why it was free! I'm not much of a gamer, but I was curious to see if I could bring the GPU back to life. I managed to get Ubuntu installed and connect to it remotely via SSH. Since the machine sports an NVIDIA logo, I'm guessing it has an NVIDIA GPU inside.</p>
-<p>My goal isn't just to fix the display; it's to finally learn how NVIDIA GPUs work. I've used GPUs blindly within frameworks like PyTorch, never truly understanding their internal mechanics. While diving into CUDA (Compute Unified Device Architecture) programming isn't strictly necessary for learning deep learning or GenAI models, I have an itch I need to scratch!</p>
-<h3>Unveiling the Hardware</h3>
-<p>After successfully getting all the necessary drivers and prerequisites installed on the server, a quick run of nvidia-smi gave me the crucial details:</p>
+
+  <div>
+    <p>Free Workstation? 🙋‍♂️ Count me in! I picked the free gaming workstation. Surprise twist—the HDMI output gave me no signal. Of course. The machine was a box of mysteries, but with an NVIDIA sticker on it, so I had a good hunch about the GPU.</p>
+<p><img alt="" class="center" src="./images/workstation_from_hell.jpg">
+I wasn't trying to build an ML workstation—I'm saturated with models/GenAI at work and wanted something different: a hands-on, low-level tour of how GPUs actually work. I installed Ubuntu, SSH'd in, and started poking around. A quick <code>nvidia-smi</code> confirmed the headline act:</p>
 <p><img alt="" class="center" src="./images/gtx_1070_nvidia_smi.png"></p>
-<p>The output confirms I have a NVIDIA GeForce GTX 1070.</p>
-<p>After some research, I found that the GTX 1070 was launched back in June 2016 as part of NVIDIA’s Pascal architecture. While it's a few years old now, it’s likely overkill for my goal of just learning how GPUs work internally and how to program simple computations.</p>
-<h3>The Architecture: Parallel Power</h3>
-<p>The GTX 1070 features 1920 CUDA cores (shading units or streaming processors), which function as tiny, parallel processing engines designed to crunch numbers and render graphics. These cores are organized into 15 Streaming Multiprocessors (SMs), enabling the card to handle thousands of threads simultaneously. In other words, 1920 CUDA cores are organized as 15 SMs of 128 CUDA cores each.</p>
-<p>This high degree of parallelism (often called data parallelism) is precisely what makes GPUs so powerful for numerical tasks like machine learning workloads. For context, a recent mid-range card like the RTX 5060 boasts an astounding 3840 cores, but for my learning needs, 1920 is more than sufficient!</p>
-<h3>Memory and Bandwidth</h3>
-<p>The card is equipped with 8GB of GDDR5 memory. While this isn't enough to run any large, useful Large Language Models (LLMs), it’s plenty for running smaller deep learning models, such as classification or simple transformer architectures.</p>
-<p>It offers a decent memory bandwidth of 256 GB/s. Memory bandwidth is a critical factor, as it determines how quickly data can move between the GPU's memory and its processing cores—higher is always better. The newer RTX 5060, for comparison, has a bandwidth of 448 GB/s.</p>
-<p>Furthermore, the memory technology in the GTX 1070, GDDR5, is much older than the GDDR7 found in more recent cards like the RTX 5060. Newer memory generations offer significantly faster data rates per pin. For example, GDDR5 typically runs at about 5–8 Gbps, whereas GDDR7 can achieve speeds up to 32 Gbps.</p>
-<h3>Compute</h3>
-<p>The core of any GPU compute task, including our low-level CUDA kernels (functions that run on the core), relies on Single Precision (FP32) performance. IN other words, how fast they crunch floating point numbers. The newer-generation card (RTX 5060) offers a staggering 19.18 TFLOPS of FP32 compute power, nearly three times the capacity of my GTX 1070's 6.463 TFLOPS. For the aspiring CUDA programmer like me, GTX 1070 is still a fantastic learning platform as I really donot need that much compute for my usecases. </p>
-<h3>Tensor Cores</h3>
-<p>GTX 1070 (part of the Pascal generation) does not have Tensor Cores. Tensor cores seems to more of recent addition in RTX series. Tensor Cores are specifically designed to accelerate matrix multiplication and accumulation operations, which are the fundamental building blocks of neural networks (Deep Learning). They seem to achieve massive speed-ups by performing these operations using mixed precision (e.g., multiplying matrices in FP16/BF16 but accumulating the results in FP32 to maintain accuracy).</p>
-<p>The lack of tensor cores is actually a benefit. I will be forced to use the standard CUDA Cores, which is the foundational skill of GPU programming. This gives me a pure, low-level starting point. </p>
-<p>With the hardware mystery solved, my focus is entirely on the next steps: understanding the architecture and immediately launching into programming.</p>
-    </div>
-  </article>
-    </div>
+<p>Yep: a NVIDIA GeForce GTX 1070. That’s a Pascal card from 2016—old enough to have earned its retirement benefits, young enough to be useful for tinkering.</p>
+<h3>Why this card is fine for me</h3>
+<p>The GTX 1070 has 1920 CUDA cores, modern cards double or quadruple that, but for my experiments in CUDA and for writing small numerical kernels, 1070-level parallelism will be more than adequate.</p>
+<p><img alt="" class="center" src="./images/interns_on_gpu.jpg">
+Imagine interns in corporate headquarters, this is the analogy I will use to talk about my GTX specs later on. See below</p>
+<h3>Memory and bandwidth — the boring but important bit</h3>
+<p>It comes with 8 GB of GDDR5 VRAM and about 256 GB/s memory bandwidth. I will tell what they are on later. But for now, it is not enough to host a large LLM, but perfectly fine for my smaller compute experiments, numerical kernels, physics hacks, and generally making the GPU sweat in reasonable doses.</p>
+<p>GDDR5 is old-school compared to the newer GDDR7 used in recent cards. Think of it like SATA vs NVMe: still works, just slower.</p>
+<h3>Compute power — FLOPS you can brag about</h3>
+<p>Single-precision (FP32) throughput for the 1070 sits around 6.5 TFLOPS. This is how many floating point operations per sec it can do. Newer mid-range cards push much higher (19 TFLOPS and up), but raw TFLOPS aren’t everything — memory bandwidth, latency, and how I map a problem to threads mattere more I think while writing efficient kernels.</p>
+<h3>Tensor cores? Not here — and that’s a feature, not a bug</h3>
+<p>The GTX 1070 has no Tensor Cores. That means no magical mixed-precision matrix multiply shortcuts—just good old CUDA cores and manual thinking about memory accesses and parallelism. Since I'm learning the fundamentals, this has been the purest playground.</p>
+<h3>The workstation from hell (a short, tragic saga)</h3>
+<p>I was very happy that the workstation set up the stage with high-end specs on paper. It was built around the Intel i7-3930K (a 6-core/12-thread beast) seated in an <a href="https://techgage.com/article/asus-p9x79-pro-motherboard-review/">Asus P9X79 Pro motherboard</a></p>
+<p>This setup utilized the Intel X79 Express chipset, designed specifically for enthusiast-grade performance of its time. I had 32 GB of DDR3-1600 RAM installed across its eight physical slots, and for parallel processing. However, due to tight space clearance issues within the chassis (see the picture above), the GPU couldn't fit in the primary slot; It was seated in a secondary position that downgraded the connection to PCIe 2.0, even though the hardware was capable of PCIe 3.0.</p>
+<p>Despite those specs, the machine was "Drama Central" from day one. The first red flag was the memory: out of the 32 GB installed, only 24 GB was ever detected. The Asus P9X79 Pro is notorious for being finicky with memory, and mine was clearly sick.</p>
+<p>My back-of-the-envelope calculations for CPU &lt;--&gt; RAM bandwidth never matched the sluggish reality I saw during profiling. On paper, DDR3-1600 in a Quad-Channel configuration should be a monster.</p>
+<p>The math is simple: <span class="math">\(1600 \text{ MT/s} \times 8 \text{ bytes (64-bit)} \times 4 \text{ channels} = \mathbf{51.2 \text{ GB/s theoretical peak}}\)</span></p>
+<p>Accounting for standard overhead, I should have been seeing at least 40 GB/s. Instead, a deep dive with <code>dmidecode</code> revealed a Partition Width of 1. My conclusion (not sure) was the system had retreated into a Single-Channel (64-bit) mode, capping my throughput at a hard 12.8 GB/s ceiling. This explains why my C++ code actually slowed down when I added threads; 12 logical cores were fighting for a single 64-bit "lane," creating massive bus contention that dropped my real-world speeds to a pathetic 8 GB/s.</p>
+<p>I spent weeks limping along on crippled bandwidth, wrestling with the 'usual suspects' of C/C++ masochism. We’re talking about the full, painful syntax experience: References, Pointers, and Pointer-to-Pointers—essentially maps to maps that might lead to data if the memory gods are feeling merciful. Despite the constant threat of a Segmentation Fault ruining my life, I’ve finally hammered out a solid block of CUDA code.</p>
+<p>Then the thing i never imagined happened, the CPU water cooler pump failed suddenly, leading to a very hot, very sudden meltdown. Even before the water pump failed, the sound of the water moving around was annoying enough!. That was the final straw. I did the only thing any reasonable person would do: out of frustration, I tore the PC apart, salvaged the useful bits, and chucked the chassis and motherboard into the trash can 🗑️. Because I was so deep in the "zone" of writing code, most of my recent work wasn't committed to Git—a lesson learned the hard way. </p>
+<p>The disk is still hiding those lost artifacts somewhere; I’ll deal with that disaster movie later. For now, the "workstation from hell" drama is officially closed.</p>
+<p>Side quest: I got my hands on a NVIDIA Jetson AGX Orin. Loved learning about unified memory and the embedded developer experience, but getting neovim to work on Jetson meant updating the jetpack. I dont want to go that rabbit hole for now and focus on learning cuda. So I shelved it for now — but more articles on Jetson to follow later.</p>
+<h3>Moving the GPU and a much nicer dev loop</h3>
+<p>I moved the GTX 1070 to an older Windows box (WSL + drivers) and for my surprise everything worked. I grumbled about Windows, but tooling has come a long way. The workflow felt sane again: Neovim + clangd + fast rebuilds, and I could iterate on CUDA code locally without the awkward remote edit/compile cycle. The only thing i am having hard time getting used to is the windows keyboard shortcuts (a daily Mac user would understand my pain!)</p>
+<p>Using some powershell commands and simple C/C++/CUDA programs, I was able to know more about my rig.</p>
+<h3>RAM details</h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="err">❯</span> <span class="n">wmic</span><span class="o">.</span><span class="n">exe</span> <span class="n">memorychip</span> <span class="n">get</span> <span class="n">manufacturer</span><span class="p">,</span> <span class="n">capacity</span><span class="p">,</span> <span class="n">speed</span><span class="p">,</span> <span class="n">partnumber</span>
+
+<span class="n">Capacity</span>    <span class="n">Manufacturer</span>  <span class="n">PartNumber</span>          <span class="n">Speed</span>
+<span class="mi">8589934592</span>  <span class="mi">859</span><span class="n">B</span>          <span class="n">BLS8G3D1609DS1S00</span><span class="o">.</span>  <span class="mi">1600</span>
+<span class="mi">8589934592</span>  <span class="mi">859</span><span class="n">B</span>          <span class="n">BLS8G3D1609DS1S00</span><span class="o">.</span>  <span class="mi">1600</span>
+<span class="mi">8589934592</span>  <span class="mi">859</span><span class="n">B</span>          <span class="n">BLS8G3D1609DS1S00</span><span class="o">.</span>  <span class="mi">1600</span>
+<span class="mi">8589934592</span>  <span class="mi">859</span><span class="n">B</span>          <span class="n">BLS8G3D1609DS1S00</span><span class="o">.</span>  <span class="mi">1600</span>
+</code></pre></div></td></tr></table></div>
+
+<p>I have 32GB RAM running 1600MhZ (not overclocked or underclocked)</p>
+<div class="highlight"><pre><span></span><code>    #!python
+    ❯ powershell.exe -Command &quot;Get-CimInstance Win32_PhysicalMemory | Select-Object SMBIOSMemoryType, Speed&quot;
+
+    SMBIOSMemoryType Speed
+                  24  1600
+                  24  1600
+                  24  1600
+                  24  1600
+</code></pre></div>
+
+<p>Memory type of 24 indicates that I have DDR3 RAM, </p>
+<h3>CPU details</h3>
+<div class="highlight"><pre><span></span><code>  #!python 
+  ❯ bin/00_know_my_gpu
+  CPU Info
+  CPU Logical Cores: 8
+  CPU model name  : Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
+  Physical Cores: 4
+  -----------------------------------
+</code></pre></div>
+
+<p>I have 4 cores or 8 logical cores running approximately at 3.5GHz (could have been overclocked). I think i7-3770k was a very good processor. </p>
+<h3>GPU details</h3>
+<p>Now lets get the actual business of this blog article by inspecting the GPU properties. </p>
+<div class="highlight"><pre><span></span><code>  #!python
+  --- Device 0: NVIDIA GeForce GTX 1070 ---
+  Compute Capability:    6.1
+  Multiprocessors (SMs): 15 
+  Total CUDA Cores:      1920 
+  Max Threads per SM:    2048 
+  Registers per SM:      65536
+  Registers per Block:   65536
+  Shared Memory per SM:  96 KB
+  Shared Memory / Block: 48 KB
+  Total Global Memory:   8191 MB
+  Memory Bus Width:      256 bits
+  Memory Clock Rate:     4004 MHz
+  Warp Size:             32 threads 
+  L2 Cache Size:         2048 KB
+</code></pre></div>
+
+<h3>Intern Analogy</h3>
+<p><img alt="" class="center" src="./images/gtx_as_office_building.jpeg"></p>
+<p>To understand these specs, I like to imagine my GTX 1070 not as a circuit board, but a massive, highly disciplined corporate headquarters.</p>
+<p>Multiprocessors (15 SMs): The Departments, The building is divided into 15 distinct floors or departments. Each department is self-contained and handles its own workload.</p>
+<p>Total CUDA Cores (1920): The Calculators Across the entire building, there are 1,920 high-speed calculators. Each department (SM) gets 128 calculators to share among its staff.</p>
+<p>Max Threads per SM (2048): The Fire Code This is the maximum number of Interns allowed on a single floor at one time. Even though there are only 128 calculators, we keep up to 2,048 interns in the room. Why? So that the moment one intern stops to wait for data, another is ready to grab their calculator and keep working.</p>
+<p>Warp Size (32): The Team Shift Interns never work alone; they work in synchronized teams of 32. When the manager says "Calculate," all 32 interns in a Warp punch their numbers into 32 calculators at the exact same microsecond. It’s perfect harmony.</p>
+<p>Registers (64K per SM): The Desk Space Registers are like the actual surface area of an intern's desk. It's where they keep the numbers they are working on right now. If the interns have to do "heavy math" with lots of variables, they need more desk space, which might mean we can fit fewer interns on the floor.</p>
+<p>Shared Memory (96 KB per SM): The Department Whiteboard This is a small, incredibly fast whiteboard at the front of the room. All interns on that floor can see it and share notes on it. It’s much faster than walking all the way to the "Basement" (Global Memory) to look something up.</p>
+<p>Total Global Memory (8 GB): The Basement Warehouse This is the massive storage area for the entire building. It holds all the data, but it’s far away. If an intern has to go here to get a piece of paper, it takes them a "long time" (in computer cycles), which is why we try to keep as much as possible on the Whiteboards or the Desks.</p>
+<p>Memory Bus Width (256 bits): The Elevator Capacity This determines how much data can be moved from the Warehouse to the Departments at once. A 256-bit bus is like having a large, wide elevator that can move many boxes of data simultaneously.</p>
+<h3>Memory transfer rate between CPU and RAM</h3>
+<p>coming soon.</p>
+<h3>Memory transfer rate between RAM and VRAM (host-device transfers)</h3>
+<p>coming soon.</p>
+<h3>Memory transfer rate between RAM and VRAM (host-device transfers)</h3>
+<p>coming soon.</p>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true
+  },
+  options: {
+    processHtmlClass: 'arithmatex'
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-<div class="row">
-  <ul class="col-sm-6 list-inline">
-    <li class="list-inline-item"><a href="./archives.html">Archives</a></li>
-    <li class="list-inline-item"><a href="./categories.html">Categories</a></li>
-      <li class="list-inline-item"><a href="./tags.html">Tags</a></li>
-  </ul>
-  <p class="col-sm-6 text-sm-right text-muted">
-    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
-    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
-  </p>
-</div>    </div>
-  </footer>
 
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri ",
+  "url" : ".",
+  "image": "",
+  "description": ""
+}
+</script>
 </body>
-
 </html>
