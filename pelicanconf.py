@@ -1,6 +1,10 @@
 #!/usr/bin/env python
+
 # -*- coding: utf-8 -*- #
+
 from __future__ import unicode_literals
+
+import os
 
 AUTHOR = 'Bala Juluri'
 SITENAME = "Bala Juluri"
@@ -8,63 +12,55 @@ SITETITLE = "Bala Juluri"
 SITESUBTITLE = ""
 SITEURL = ''
 PATH = 'content'
-STATIC_PATHS=['images','zip','pdfTexts']
 TIMEZONE = 'America/Los_Angeles'
-
 DEFAULT_LANG = 'en'
 
-# Feed generation is usually not desired when developing
+# Feed generation
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
-AUTHOR_FEED_ATOM = None
-AUTHOR_FEED_RSS = None
 
-# Blogroll
-# Social widget
+
+
+# Social / UI
 BIO = 'I love tinkering with python, AI, electronics and woodworking.'
-
 HIDE_AUTHORS = True
-
-LINKs = (
-            ('envelope','mailto:juluribk@gmail.com'),
-            ( 'github','https://github.com/plasmon360'),
-          ('linkedin', '#'),
-          ('stack-overflow', 'https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity'),
+SOCIAL = (
+    ('envelope', 'mailto:juluribk@gmail.com'),
+    ('github', 'https://github.com/plasmon360'),
+    ('linkedin', '#'),
+    ('stack-overflow', 'https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity'),
     ('google-scholar', 'https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en'),
-          )
+)
 
+MENUITEMS = (
+    ('Archives', '/archives.html'),
+    ('Categories', '/categories.html'),
+    ('Tags', '/tags.html'),
+)
 
-MENUITEMS = (('Archives', '/archives.html'),
-             ('Categories', '/categories.html'),
-             ('Tags', '/tags.html'),)
 
 DEFAULT_PAGINATION = 10
+MAIN_MENU = True
+THEME = "Flex"
+RELATIVE_URLS = True
+MARKUP = ('md', 'ipynb')
+IGNORE_FILES = [".ipynb_checkpoints"]
+IPYNB_SKIP_CSS = False
+STATIC_PATHS = ['images', 'zip', 'pdfTexts', 'extra']
+EXTRA_PATH_METADATA = {
+    'extra/custom.css': {'path': 'custom.css'},
+}
+CUSTOM_CSS = 'custom.css'
+
+# 1. Markdown logic - keep Arithmatex
 
 MARKDOWN = {
+
     'extension_configs': {
-        'markdown_katex':{'no_inline_svg': 'True'},
-        'markdown.extensions.codehilite': {'css_class': 'highlight', 'linenums':'False'},
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
         'markdown.extensions.extra': {},
         'markdown.extensions.meta': {},
     },
     'output_format': 'html5',
 }
-
-MAIN_MENU = True
-
-# THEME = "Flex"
-THEME = "../pelican-alchemy/alchemy"
-
-#PYGMENTS_STYLE = 'monokai'
-
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
-
-
-MARKUP = ('md', 'ipynb')
-
-# if you create jupyter files in the content dir, snapshots are saved with the same
-# metadata. These need to be ignored.
-IGNORE_FILES = [".ipynb_checkpoints"]
-IPYNB_SKIP_CSS = False
+# ADD MATH JS in the article itself. COULD NOT GET IT WORKING WITH PLUGINS etc

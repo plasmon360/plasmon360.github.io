@@ -1,80 +1,161 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
 
-  <title>  Creating Energy Band Diagrams for Solar cells and LED | Bala Juluri
-</title>
-  <link rel="canonical" href="./Energy-band-diagrams-for-solar-cell-and-led.html">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
 
 
-  <link rel="stylesheet" href="./theme/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./theme/css/fontawesome.min.css">
-  <link rel="stylesheet" href="./theme/css/pygments/default.min.css">
-  <link rel="stylesheet" href="./theme/css/theme.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="./theme/pygments/github.min.css">
 
-  <link rel="alternate" type="application/atom+xml" title="Full Atom Feed"
-        href="plasmon360.github.io/feeds/all.atom.xml">
-  <link rel="alternate" type="application/atom+xml" title="Categories Atom Feed"
-        href="plasmon360.github.io/feeds/misc.atom.xml">  
-  <meta name="description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module. Here's an example on how to use this code. from Band_diagram import metal, semiconductor, plot # Define the metals and …">
-  <script>
-    (function(i, s, o, g, r, a, m) {
-      i['GoogleAnalyticsObject'] = r;
-      i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-      }, i[r].l = 1 * new Date();
-      a = s.createElement(o);
-      a.async = 1;
-      a.src = g;
-      m = s.getElementsByTagName(o)[0];
-      m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-27406008-1', 'auto');
-    ga('send', 'pageview');
-  </script>
+
+
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/solid.css">
+
+  <link rel="stylesheet" type="text/css" href="./custom.css">
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="juluribk" />
+<meta name="description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module. Here&#39;s an example on how to use this code. 1 2 3 4 5 6 7 8 9 10 …" />
+<meta name="keywords" content="Python">
+
+
+  <meta property="og:site_name" content="Bala Juluri"/>
+  <meta property="og:title" content="Creating Energy Band Diagrams for Solar cells and LED"/>
+  <meta property="og:description" content="Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module. Here&#39;s an example on how to use this code. 1 2 3 4 5 6 7 8 9 10 …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="./Energy-band-diagrams-for-solar-cell-and-led.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2017-09-11 10:42:00-07:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="./author/juluribk.html">
+  <meta property="article:section" content="Misc"/>
+  <meta property="article:tag" content="Python"/>
+  <meta property="og:image" content="">
+
+  <title>Bala Juluri &ndash; Creating Energy Band Diagrams for Solar cells and LED</title>
 
 
 </head>
+<body class="light-theme">
 
-<body>
-  <header class="header">
-    <div class="container">
-<div class="row">
-  <div class="col-sm-12">
-    <h1 class="title"><a href="./">Bala Juluri</a></h1>
+<aside>
+  <div>
+    <a href="./">
+      <img src="./theme/img/profile.png" alt="Bala Juluri" title="Bala Juluri">
+    </a>
+
+    <h1>
+      <a href="./">Bala Juluri</a>
+    </h1>
+
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:juluribk@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-github"
+           href="https://github.com/plasmon360"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="#"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-stack-overflow"
+           href="https://stackoverflow.com/users/1753919/plasmon360?tab=topactivity"
+           target="_blank">
+          <i class="fa-brands fa-stack-overflow"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-google-scholar"
+           href="https://scholar.google.com/citations?user=mfyb2u4AAAAJ&hl=en"
+           target="_blank">
+          <i class="fa-brands fa-google-scholar"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-</div>    </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="./">Home</a>
+
+  <a href="/archives.html">Archives</a>
+  <a href="/categories.html">Categories</a>
+  <a href="/tags.html">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="Energy-band-diagrams-for-solar-cell-and-led">Creating Energy Band Diagrams for Solar cells and LED</h1>
+    <p>
+      Posted on Mon 11 September 2017 in <a href="./category/misc.html">Misc</a>
+
+    </p>
   </header>
 
-  <div class="main">
-    <div class="container">
-      <h1>  Creating Energy Band Diagrams for Solar cells and LED
-</h1>
-      <hr>
-  <article class="article">
-    <header>
-      <ul class="list-inline">
-        <li class="list-inline-item text-muted" title="2017-09-11T10:42:00-07:00">
-          <i class="fas fa-clock"></i>
-          Mon 11 September 2017
-        </li>
-        <li class="list-inline-item">
-          <i class="fas fa-folder-open"></i>
-          <a href="./category/misc.html">Misc</a>
-        </li>
-          <li class="list-inline-item">
-            <i class="fas fa-tag"></i>
-              <a href="./tag/python.html">#Python</a>          </li>
-      </ul>
-    </header>
-    <div class="content">
-      <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
+
+  <div>
+    <p>Energy band diagrams are used to visulize the electron and hole transport in Solar cells and LED research. I want to quickly draw them and came up with a python module.</p>
 <p>Here's an example on how to use this code.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">Band_diagram</span> <span class="kn">import</span> <span class="n">metal</span><span class="p">,</span> <span class="n">semiconductor</span><span class="p">,</span> <span class="n">plot</span>
 
 <span class="c1"># Define the metals and semiconductors. Here wf is the work function of metals,</span>
 <span class="c1"># cb is conduction band minimum and vb is valance band maximum wrt to vacuum level</span>
@@ -91,31 +172,41 @@
 
 <span class="c1">## plot the stack and save it  </span>
 <span class="n">plot</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">filepath</span> <span class="o">=</span> <span class="s1">&#39;Images/Stack1.png&#39;</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></td></tr></table></div>
 
 <p>will result in the following plot</p>
 <p><img alt="" class="center" src="./images/energy_band_diagram.png"></p>
 <p>You can download it at my <a href="https://github.com/plasmon360/Energy-Band-diagram">github repository</a>.</p>
-    </div>
-  </article>
-    </div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/python.html">Python</a>
+    </p>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-<div class="row">
-  <ul class="col-sm-6 list-inline">
-    <li class="list-inline-item"><a href="./archives.html">Archives</a></li>
-    <li class="list-inline-item"><a href="./categories.html">Categories</a></li>
-      <li class="list-inline-item"><a href="./tags.html">Tags</a></li>
-  </ul>
-  <p class="col-sm-6 text-sm-right text-muted">
-    Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a>
-    / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
-  </p>
-</div>    </div>
-  </footer>
 
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Bala Juluri ",
+  "url" : ".",
+  "image": "",
+  "description": ""
+}
+</script>
 </body>
-
 </html>
