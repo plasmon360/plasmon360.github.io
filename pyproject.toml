@@ -10,6 +10,8 @@ python = "^3.9"
 pelican = "^4.8.0"
 markdown = "^3.4.4"
 ghp-import = "^2.1.0"
+pymdown-extensions = "^9.7.2"
+pelican-render-math = "^1.0.5"
 
 
 
