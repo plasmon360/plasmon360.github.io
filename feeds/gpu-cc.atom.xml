@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Bala Juluri - GPU, C/C++</title><link href="plasmon360.github.io/" rel="alternate"></link><link href="plasmon360.github.io/feeds/gpu-cc.atom.xml" rel="self"></link><id>plasmon360.github.io/</id><updated>2026-02-01T00:00:00-08:00</updated><entry><title>Learning CUDA: Workstation from Hell — Adventures with a Free GTX 1070</title><link href="plasmon360.github.io/knowing-my-gpu.html" rel="alternate"></link><published>2026-02-01T00:00:00-08:00</published><updated>2026-02-01T00:00:00-08:00</updated><author><name>Bala Juluri</name></author><id>tag:None,2026-02-01:plasmon360.github.io/knowing-my-gpu.html</id><summary type="html">&lt;p&gt;Free Workstation? 🙋‍♂️ Count me in! I picked the free gaming workstation. Surprise twist—the HDMI output gave me no signal. Of course. The machine was a box of mysteries, but with an NVIDIA sticker on it, so I had a good hunch about the GPU.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/workstation_from_hell.jpg"&gt;
+I wasn't trying to build …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Free Workstation? 🙋‍♂️ Count me in! I picked the free gaming workstation. Surprise twist—the HDMI output gave me no signal. Of course. The machine was a box of mysteries, but with an NVIDIA sticker on it, so I had a good hunch about the GPU.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/workstation_from_hell.jpg"&gt;
+I wasn't trying to build an ML workstation—I'm saturated with models/GenAI at work and wanted something different: a hands-on, low-level tour of how GPUs actually work. I installed Ubuntu, SSH'd in, and started poking around. A quick &lt;code&gt;nvidia-smi&lt;/code&gt; confirmed the headline act:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/gtx_1070_nvidia_smi.png"&gt;&lt;/p&gt;
+&lt;p&gt;Yep: a NVIDIA GeForce GTX 1070. That’s a Pascal card from 2016—old enough to have earned its retirement benefits, young enough to be useful for tinkering.&lt;/p&gt;
+&lt;h3&gt;Why this card is fine for me&lt;/h3&gt;
+&lt;p&gt;The GTX 1070 has 1920 CUDA cores, modern cards double or quadruple that, but for my experiments in CUDA and for writing small numerical kernels, 1070-level parallelism will be more than adequate.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/interns_on_gpu.jpg"&gt;
+Imagine interns in corporate headquarters, this is the analogy I will use to talk about my GTX specs later on. See below&lt;/p&gt;
+&lt;h3&gt;Memory and bandwidth — the boring but important bit&lt;/h3&gt;
+&lt;p&gt;It comes with 8 GB of GDDR5 VRAM and about 256 GB/s memory bandwidth. I will tell what they are on later. But for now, it is not enough to host a large LLM, but perfectly fine for my smaller compute experiments, numerical kernels, physics hacks, and generally making the GPU sweat in reasonable doses.&lt;/p&gt;
+&lt;p&gt;GDDR5 is old-school compared to the newer GDDR7 used in recent cards. Think of it like SATA vs NVMe: still works, just slower.&lt;/p&gt;
+&lt;h3&gt;Compute power — FLOPS you can brag about&lt;/h3&gt;
+&lt;p&gt;Single-precision (FP32) throughput for the 1070 sits around 6.5 TFLOPS. This is how many floating point operations per sec it can do. Newer mid-range cards push much higher (19 TFLOPS and up), but raw TFLOPS aren’t everything — memory bandwidth, latency, and how I map a problem to threads mattere more I think while writing efficient kernels.&lt;/p&gt;
+&lt;h3&gt;Tensor cores? Not here — and that’s a feature, not a bug&lt;/h3&gt;
+&lt;p&gt;The GTX 1070 has no Tensor Cores. That means no magical mixed-precision matrix multiply shortcuts—just good old CUDA cores and manual thinking about memory accesses and parallelism. Since I'm learning the fundamentals, this has been the purest playground.&lt;/p&gt;
+&lt;h3&gt;The workstation from hell (a short, tragic saga)&lt;/h3&gt;
+&lt;p&gt;I was very happy that the workstation set up the stage with high-end specs on paper. It was built around the Intel i7-3930K (a 6-core/12-thread beast) seated in an &lt;a href="https://techgage.com/article/asus-p9x79-pro-motherboard-review/"&gt;Asus P9X79 Pro motherboard&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This setup utilized the Intel X79 Express chipset, designed specifically for enthusiast-grade performance of its time. I had 32 GB of DDR3-1600 RAM installed across its eight physical slots, and for parallel processing. However, due to tight space clearance issues within the chassis (see the picture above), the GPU couldn't fit in the primary slot; It was seated in a secondary position that downgraded the connection to PCIe 2.0, even though the hardware was capable of PCIe 3.0.&lt;/p&gt;
+&lt;p&gt;Despite those specs, the machine was "Drama Central" from day one. The first red flag was the memory: out of the 32 GB installed, only 24 GB was ever detected. The Asus P9X79 Pro is notorious for being finicky with memory, and mine was clearly sick.&lt;/p&gt;
+&lt;p&gt;My back-of-the-envelope calculations for CPU &amp;lt;--&amp;gt; RAM bandwidth never matched the sluggish reality I saw during profiling. On paper, DDR3-1600 in a Quad-Channel configuration should be a monster.&lt;/p&gt;
+&lt;p&gt;The math is simple: &lt;span class="math"&gt;\(1600 \text{ MT/s} \times 8 \text{ bytes (64-bit)} \times 4 \text{ channels} = \mathbf{51.2 \text{ GB/s theoretical peak}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Accounting for standard overhead, I should have been seeing at least 40 GB/s. Instead, a deep dive with &lt;code&gt;dmidecode&lt;/code&gt; revealed a Partition Width of 1. My conclusion (not sure) was the system had retreated into a Single-Channel (64-bit) mode, capping my throughput at a hard 12.8 GB/s ceiling. This explains why my C++ code actually slowed down when I added threads; 12 logical cores were fighting for a single 64-bit "lane," creating massive bus contention that dropped my real-world speeds to a pathetic 8 GB/s.&lt;/p&gt;
+&lt;p&gt;I spent weeks limping along on crippled bandwidth, wrestling with the 'usual suspects' of C/C++ masochism. We’re talking about the full, painful syntax experience: References, Pointers, and Pointer-to-Pointers—essentially maps to maps that might lead to data if the memory gods are feeling merciful. Despite the constant threat of a Segmentation Fault ruining my life, I’ve finally hammered out a solid block of CUDA code.&lt;/p&gt;
+&lt;p&gt;Then the thing i never imagined happened, the CPU water cooler pump failed suddenly, leading to a very hot, very sudden meltdown. Even before the water pump failed, the sound of the water moving around was annoying enough!. That was the final straw. I did the only thing any reasonable person would do: out of frustration, I tore the PC apart, salvaged the useful bits, and chucked the chassis and motherboard into the trash can 🗑️. Because I was so deep in the "zone" of writing code, most of my recent work wasn't committed to Git—a lesson learned the hard way. &lt;/p&gt;
+&lt;p&gt;The disk is still hiding those lost artifacts somewhere; I’ll deal with that disaster movie later. For now, the "workstation from hell" drama is officially closed.&lt;/p&gt;
+&lt;p&gt;Side quest: I got my hands on a NVIDIA Jetson AGX Orin. Loved learning about unified memory and the embedded developer experience, but getting neovim to work on Jetson meant updating the jetpack. I dont want to go that rabbit hole for now and focus on learning cuda. So I shelved it for now — but more articles on Jetson to follow later.&lt;/p&gt;
+&lt;h3&gt;Moving the GPU and a much nicer dev loop&lt;/h3&gt;
+&lt;p&gt;I moved the GTX 1070 to an older Windows box (WSL + drivers) and for my surprise everything worked. I grumbled about Windows, but tooling has come a long way. The workflow felt sane again: Neovim + clangd + fast rebuilds, and I could iterate on CUDA code locally without the awkward remote edit/compile cycle. The only thing i am having hard time getting used to is the windows keyboard shortcuts (a daily Mac user would understand my pain!)&lt;/p&gt;
+&lt;p&gt;Using some powershell commands and simple C/C++/CUDA programs, I was able to know more about my rig.&lt;/p&gt;
+&lt;h3&gt;RAM details&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;&lt;span class="normal"&gt;1&lt;/span&gt;
+&lt;span class="normal"&gt;2&lt;/span&gt;
+&lt;span class="normal"&gt;3&lt;/span&gt;
+&lt;span class="normal"&gt;4&lt;/span&gt;
+&lt;span class="normal"&gt;5&lt;/span&gt;
+&lt;span class="normal"&gt;6&lt;/span&gt;
+&lt;span class="normal"&gt;7&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;wmic&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exe&lt;/span&gt; &lt;span class="n"&gt;memorychip&lt;/span&gt; &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;manufacturer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;capacity&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;speed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;partnumber&lt;/span&gt;
+
+&lt;span class="n"&gt;Capacity&lt;/span&gt;    &lt;span class="n"&gt;Manufacturer&lt;/span&gt;  &lt;span class="n"&gt;PartNumber&lt;/span&gt;          &lt;span class="n"&gt;Speed&lt;/span&gt;
+&lt;span class="mi"&gt;8589934592&lt;/span&gt;  &lt;span class="mi"&gt;859&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;          &lt;span class="n"&gt;BLS8G3D1609DS1S00&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="mi"&gt;1600&lt;/span&gt;
+&lt;span class="mi"&gt;8589934592&lt;/span&gt;  &lt;span class="mi"&gt;859&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;          &lt;span class="n"&gt;BLS8G3D1609DS1S00&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="mi"&gt;1600&lt;/span&gt;
+&lt;span class="mi"&gt;8589934592&lt;/span&gt;  &lt;span class="mi"&gt;859&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;          &lt;span class="n"&gt;BLS8G3D1609DS1S00&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="mi"&gt;1600&lt;/span&gt;
+&lt;span class="mi"&gt;8589934592&lt;/span&gt;  &lt;span class="mi"&gt;859&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;          &lt;span class="n"&gt;BLS8G3D1609DS1S00&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;  &lt;span class="mi"&gt;1600&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+
+&lt;p&gt;I have 32GB RAM running 1600MhZ (not overclocked or underclocked)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    #!python
+    ❯ powershell.exe -Command &amp;quot;Get-CimInstance Win32_PhysicalMemory | Select-Object SMBIOSMemoryType, Speed&amp;quot;
+
+    SMBIOSMemoryType Speed
+                  24  1600
+                  24  1600
+                  24  1600
+                  24  1600
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Memory type of 24 indicates that I have DDR3 RAM, &lt;/p&gt;
+&lt;h3&gt;CPU details&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;  #!python 
+  ❯ bin/00_know_my_gpu
+  CPU Info
+  CPU Logical Cores: 8
+  CPU model name  : Intel(R) Core(TM) i7-3770K CPU @ 3.50GHz
+  Physical Cores: 4
+  -----------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I have 4 cores or 8 logical cores running approximately at 3.5GHz (could have been overclocked). I think i7-3770k was a very good processor. &lt;/p&gt;
+&lt;h3&gt;GPU details&lt;/h3&gt;
+&lt;p&gt;Now lets get the actual business of this blog article by inspecting the GPU properties. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;  #!python
+  --- Device 0: NVIDIA GeForce GTX 1070 ---
+  Compute Capability:    6.1
+  Multiprocessors (SMs): 15 
+  Total CUDA Cores:      1920 
+  Max Threads per SM:    2048 
+  Registers per SM:      65536
+  Registers per Block:   65536
+  Shared Memory per SM:  96 KB
+  Shared Memory / Block: 48 KB
+  Total Global Memory:   8191 MB
+  Memory Bus Width:      256 bits
+  Memory Clock Rate:     4004 MHz
+  Warp Size:             32 threads 
+  L2 Cache Size:         2048 KB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Intern Analogy&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="" class="center" src="plasmon360.github.io/images/gtx_as_office_building.jpeg"&gt;&lt;/p&gt;
+&lt;p&gt;To understand these specs, I like to imagine my GTX 1070 not as a circuit board, but a massive, highly disciplined corporate headquarters.&lt;/p&gt;
+&lt;p&gt;Multiprocessors (15 SMs): The Departments, The building is divided into 15 distinct floors or departments. Each department is self-contained and handles its own workload.&lt;/p&gt;
+&lt;p&gt;Total CUDA Cores (1920): The Calculators Across the entire building, there are 1,920 high-speed calculators. Each department (SM) gets 128 calculators to share among its staff.&lt;/p&gt;
+&lt;p&gt;Max Threads per SM (2048): The Fire Code This is the maximum number of Interns allowed on a single floor at one time. Even though there are only 128 calculators, we keep up to 2,048 interns in the room. Why? So that the moment one intern stops to wait for data, another is ready to grab their calculator and keep working.&lt;/p&gt;
+&lt;p&gt;Warp Size (32): The Team Shift Interns never work alone; they work in synchronized teams of 32. When the manager says "Calculate," all 32 interns in a Warp punch their numbers into 32 calculators at the exact same microsecond. It’s perfect harmony.&lt;/p&gt;
+&lt;p&gt;Registers (64K per SM): The Desk Space Registers are like the actual surface area of an intern's desk. It's where they keep the numbers they are working on right now. If the interns have to do "heavy math" with lots of variables, they need more desk space, which might mean we can fit fewer interns on the floor.&lt;/p&gt;
+&lt;p&gt;Shared Memory (96 KB per SM): The Department Whiteboard This is a small, incredibly fast whiteboard at the front of the room. All interns on that floor can see it and share notes on it. It’s much faster than walking all the way to the "Basement" (Global Memory) to look something up.&lt;/p&gt;
+&lt;p&gt;Total Global Memory (8 GB): The Basement Warehouse This is the massive storage area for the entire building. It holds all the data, but it’s far away. If an intern has to go here to get a piece of paper, it takes them a "long time" (in computer cycles), which is why we try to keep as much as possible on the Whiteboards or the Desks.&lt;/p&gt;
+&lt;p&gt;Memory Bus Width (256 bits): The Elevator Capacity This determines how much data can be moved from the Warehouse to the Departments at once. A 256-bit bus is like having a large, wide elevator that can move many boxes of data simultaneously.&lt;/p&gt;
+&lt;h3&gt;Memory transfer rate between CPU and RAM&lt;/h3&gt;
+&lt;p&gt;coming soon.&lt;/p&gt;
+&lt;h3&gt;Memory transfer rate between RAM and VRAM (host-device transfers)&lt;/h3&gt;
+&lt;p&gt;coming soon.&lt;/p&gt;
+&lt;h3&gt;Memory transfer rate between RAM and VRAM (host-device transfers)&lt;/h3&gt;
+&lt;p&gt;coming soon.&lt;/p&gt;
+&lt;script&gt;
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$']],
+    processEscapes: true
+  },
+  options: {
+    processHtmlClass: 'arithmatex'
+  }
+};
+&lt;/script&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="GPU, C/C++"></category></entry></feed>
